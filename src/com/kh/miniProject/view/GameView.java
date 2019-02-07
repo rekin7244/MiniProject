@@ -1,0 +1,193 @@
+package com.kh.miniProject.view;
+
+import java.awt.Color;
+import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+
+import com.kh.miniProject.model.dao.OrderDao;
+import com.kh.miniProject.model.vo.member.Member;
+import com.kh.miniProject.model.vo.menu.MenuOrder;
+import com.kh.miniProject.run.Run;
+
+public class GameView extends JPanel{
+	private int equipPanelySize = 250;			//장비 패널 세로크기
+
+	//패널 동시 사용을 위해 전역 선언
+	public MainFrame mf;
+	public GuestPanel gP;
+	public MenuPanel mP;
+	public EquipmentPanel eP;
+	//타이머 클래스 (테스트) & Back 버튼
+	private JPanel gView;
+	private TimerTest gameTimer;
+	private JButton backButton;
+	private Image backButtonImage;
+	//음식 수 저장용 변수
+	private int drinksNo;
+	private int friedNo;
+	private int tbkNo;
+	private int odengNo;
+	private int sundeNo;
+	private Member m;
+	//스테이지별 골드 변수
+	private int stageGold=0;
+	JButton gold;
+	OrderDao orderDao;
+	//cons
+	public GameView(MainFrame mf,Member m) {
+		orderDao = new OrderDao();
+		this.gView = this;
+		this.mf = mf;
+		this.m = m;
+		this.setLayout(null);
+		this.setSize(Run.SCREEN_WIDTH,Run.SCREEN_HEIGHT);
+		
+		//Timer
+		gameTimer = new TimerTest();
+		this.add(gameTimer);
+
+		//backButton
+		backButton = new JButton();
+		backButtonImage = new ImageIcon("images/backButton.png").getImage().getScaledInstance(50,50,0);
+		backButton.setIcon(new ImageIcon(backButtonImage));
+		backButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String[] command = {"확인","취소"};
+				int result;
+
+				result = JOptionPane.showOptionDialog(null,
+						"정말 그만두시겠습니까 ? ",
+						"부글부글분식",JOptionPane.YES_NO_OPTION, 
+						JOptionPane.INFORMATION_MESSAGE, null, command, command[0]);
+
+				if(result==0) {				
+					ChangePanel.changePanel(mf, gView, new StageView(mf,m));
+				}
+			}		
+		});
+		backButton.setBounds(950,0,50,50);
+		backButton.setContentAreaFilled(false);
+		this.add(backButton);
+
+		//게스트 패널 추가
+		gP = new GuestPanel(new ImageIcon("images/스크린샷-2017-09-24-오전-6.00.47.png")
+				.getImage().getScaledInstance(1024, 318, 0),orderDao);
+		gP.setLayout(null);
+		gP.setSize(Run.SCREEN_WIDTH,318);
+		this.add(gP);
+
+		//골드 출력
+		JButton gold = new JButton("골드");
+		gold.setEnabled(false);
+		gold.setBackground(Color.yellow);
+		gold.setBounds(0,0,200,30);
+		gold.setText("GOLD : "+m.getGold()+"G");
+		this.add(gold);
+		
+		//메뉴 패널 추가
+		mP = new MenuPanel();
+		mP.setting(mP,drinksNo,tbkNo,friedNo);
+		this.add(mP);
+
+		//장비 패널 추가
+		eP = new EquipmentPanel();
+		eP.equipsSetting(eP);
+		this.add(eP);
+
+
+		//ActionListener setting
+		JButton[] equips = eP.getEquips();
+		for (int i = 0; i < equips.length; i++) {
+			equips[i].addActionListener(new Event_Cook());
+		}		
+		JButton[] menuButton = mP.getMenuButton();
+		for(int i=0; i<menuButton.length;i++) {
+			menuButton[i].addActionListener(new Event_Cook());
+		}
+
+	}
+
+	//btn Action
+	class Event_Cook implements ActionListener{
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			JButton[] equips = eP.getEquips();
+			if(e.getActionCommand().equals("떡볶이기계")) {
+				System.out.println("떡볶이기계");
+				if(tbkNo<4) {
+					equips[1].setEnabled(false);
+					tbkNo++;
+					equips[1].setEnabled(true);
+				}else {
+					System.out.println("떡볶이가 최대 충전입니다.");
+				}
+				refreshMenuTable();
+				System.out.println("떡볶이 충전 잔여 개수"+tbkNo);
+			}		
+			if(e.getActionCommand().equals("순대기계")) {
+				System.out.println("순대기계");
+			}
+			if(e.getActionCommand().equals("자판기")) {
+				System.out.println("자판기");
+				if(drinksNo<3) {
+					drinksNo++;
+				}else {
+					System.out.println("음료수가 최대 충전입니다.");
+				}
+				refreshMenuTable();
+				System.out.println("음료수 충전 잔여 개수"+drinksNo);
+			}
+			if(e.getActionCommand().equals("오뎅기계")) {
+				System.out.println("오뎅기계");
+			}
+			if(e.getActionCommand().equals("튀김기")) {
+				System.out.println("튀김기");
+				if(friedNo<4) {
+					friedNo++;
+				}else {
+					System.out.println("튀김이 최대 충전입니다.");
+				}
+				refreshMenuTable();
+				System.out.println("튀김 충전 잔여 개수"+friedNo);
+			}
+			//System.out.println("MenuListener actionPerformed() -> " + orderDao.getOrderList().size());
+			if(e.getActionCommand().equals("떡볶이")) {
+				if(orderDao.searchOrder(new MenuOrder("떡볶이"))) {
+					tbkNo--;
+					System.out.println("떡볶이 잔여 개수 : " + tbkNo);
+					mP.setting(mP,drinksNo,tbkNo,friedNo);
+				}else {
+					System.out.println("주문된 떡볶이가 없습니다.");
+				}
+			}
+			if(e.getActionCommand().equals("튀김")) {
+				if(orderDao.searchOrder(new MenuOrder("튀김"))) {
+					friedNo--;
+					System.out.println("튀김 잔여 개수 : " + friedNo);
+					mP.setting(mP,drinksNo,tbkNo,friedNo);
+				}else {
+					System.out.println("주문된 튀김이 없습니다.");
+				}
+			}if(e.getActionCommand().equals("음료수")) {
+				if(orderDao.searchOrder(new MenuOrder("음료수"))) {
+					drinksNo--;
+					System.out.println("음료수 잔여 개수 : " + drinksNo);
+					mP.setting(mP,drinksNo,tbkNo,friedNo);
+				}else {
+					System.out.println("주문된 음료수가 없습니다.");
+				}
+			}
+		}
+		public void refreshMenuTable() {
+			//자판기, 떡볶이, 튀김
+			mP.setting(mP,drinksNo,tbkNo,friedNo);
+		}
+	}
+}
