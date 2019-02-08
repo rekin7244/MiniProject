@@ -20,8 +20,10 @@ public class MainFrame extends JFrame{
 		Member guest = new Member("guest","p","e");
 		guest.setGold(2000);
 		//test용이므로 StageView를 초기화면으로 해둠
-		this.add(new StageView(this,guest));
+		//this.add(new StageView(this,guest));
 		//this.add(new GameView());
+		this.add(new LoginPanel(this,guest));
+		
 		
 		this.setVisible(true);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
