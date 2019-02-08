@@ -10,6 +10,7 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import com.kh.miniProject.controller.CookingTime;
 import com.kh.miniProject.model.dao.OrderDao;
 import com.kh.miniProject.model.vo.member.Member;
 import com.kh.miniProject.model.vo.menu.MenuOrder;
@@ -24,6 +25,7 @@ public class GameView extends JPanel{
 	public MenuPanel mP;
 	public EquipmentPanel eP;
 	//타이머 클래스 (테스트) & Back 버튼
+	private CookingTime cookTimer;
 	private JPanel gView;
 	private TimerTest gameTimer;
 	private JButton backButton;
@@ -34,11 +36,14 @@ public class GameView extends JPanel{
 	private int tbkNo;
 	private int odengNo;
 	private int sundeNo;
+	//Member 정보 입출력위해
 	private Member m;
 	//스테이지별 골드 변수
 	private int stageGold=0;
 	JButton gold;
+	//주문 내역 관리
 	OrderDao orderDao;
+	
 	//cons
 	public GameView(MainFrame mf,Member m) {
 		orderDao = new OrderDao();			//스테이지 당 orderDao 생성 단한번만!!
@@ -125,8 +130,9 @@ public class GameView extends JPanel{
 				System.out.println("떡볶이기계");
 				if(tbkNo<4) {
 					equips[1].setEnabled(false);
+					cookTimer = new CookingTime(equips[1],m,4,"떡볶이");
+					gView.add(cookTimer);
 					tbkNo++;
-					equips[1].setEnabled(true);
 				}else {
 					System.out.println("떡볶이가 최대 충전입니다.");
 				}
@@ -139,6 +145,9 @@ public class GameView extends JPanel{
 			if(e.getActionCommand().equals("자판기")) {
 				System.out.println("자판기");
 				if(drinksNo<3) {
+					equips[0].setEnabled(false);
+					cookTimer = new CookingTime(equips[0],m,5,"음료수");
+					gView.add(cookTimer);
 					drinksNo++;
 				}else {
 					System.out.println("음료수가 최대 충전입니다.");
@@ -152,6 +161,9 @@ public class GameView extends JPanel{
 			if(e.getActionCommand().equals("튀김기")) {
 				System.out.println("튀김기");
 				if(friedNo<4) {
+					equips[4].setEnabled(false);
+					cookTimer = new CookingTime(equips[4],m,10,"튀김");
+					gView.add(cookTimer);
 					friedNo++;
 				}else {
 					System.out.println("튀김이 최대 충전입니다.");
