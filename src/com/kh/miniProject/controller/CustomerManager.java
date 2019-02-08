@@ -100,6 +100,8 @@ public class CustomerManager {
 		for (int i = 0; i < orderLabel.length; i++) {
 			if(orderLabel[i]!=null) {
 				gP.remove(orderLabel[i]);
+				orderDao.removeOrder(i);
+				
 			}
 		}
 		cTimer.timerStop();
