@@ -1,5 +1,6 @@
 package com.kh.miniProject.controller;
 
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -14,7 +15,6 @@ import com.kh.miniProject.run.Run;
 public class CookingTime extends JPanel{
 	private JLabel timerLabel;
 	private Timer timer;
-	private boolean isTimer;
 	private Member m;
 	private int cooktime;
 	private JButton btn;
@@ -26,16 +26,17 @@ public class CookingTime extends JPanel{
 		
 		timerLabel = new JLabel();
 		timer = new Timer(1000, new TimerStart());
-		isTimer = false;
 		
+		timerLabel.setSize(70, 40);
+		timerLabel.setFont(new Font("Elephant", Font.BOLD, 20));
 		this.add(timerLabel);
 		this.setVisible(true);
 		if(menuName.equals("¶±ººÀÌ")) {
-			this.setBounds(200,Run.SCREEN_HEIGHT-250,50, 30);
+			this.setBounds(200,Run.SCREEN_HEIGHT-250,70, 40);
 		}else if(menuName.equals("À½·á¼ö")) {
-			this.setBounds(Run.SCREEN_WIDTH-150,Run.SCREEN_HEIGHT-250,50, 30);
+			this.setBounds(Run.SCREEN_WIDTH-150,Run.SCREEN_HEIGHT-250,70, 40);
 		}else if(menuName.equals("Æ¢±è")) {
-			this.setBounds(500,Run.SCREEN_HEIGHT-250,50, 30);
+			this.setBounds(500,Run.SCREEN_HEIGHT-250,70, 40);
 		}
 		
 		

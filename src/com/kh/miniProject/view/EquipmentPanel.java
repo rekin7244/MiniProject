@@ -14,7 +14,7 @@ public class EquipmentPanel extends JPanel{
 
 	private int panelSize = 250;			//장비 패널 세로크기
 
-	private String[] name = {"자판기","떡볶이기계","순대기계","오뎅기계","튀김기"};	//장비명
+	private String[] name = {"자판기","떡볶이기계","라면기계","오뎅기계","튀김기"};	//장비명
 
 	//이미지들 배열
 	private Image[] images = {new ImageIcon("images/equip0.png")
@@ -44,18 +44,17 @@ public class EquipmentPanel extends JPanel{
 		int[] equipsLv = m.getEquipsLv();
 		//Equipments setting
 		for (int i = 0; i < images.length; i++) {
-			if(equipsLv[i]>0) {
 				equips[i] = new JButton(name[i]);
 				equips[i].setBounds(xlocation[i],0,xSize[i],panelSize);
 				equips[i].setIcon(new ImageIcon(images[i]));
 				panel.add(equips[i]);
+				if(equipsLv[i]==0) {
+					equips[i].setEnabled(false);
+				}
 			}
 		}
-	}
 	//btn getter
 	public JButton[] getEquips() {
 		return equips;
 	}
-
-
 }

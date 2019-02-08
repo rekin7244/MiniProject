@@ -4,10 +4,11 @@ public class Member {
 	private String memberId;
 	private String memberPwd;
 	private String memberEmail;
-	private int maxStage;
-	private int gold;
+	private int maxStage=1;		//초기 세팅 1스테이지
+	private int gold;			//초기 금액 0
 	
-	private int[] equipsLv = {1,1,1,1,1};
+	//조리기구 레벨 초기 세팅 {자판기/떡볶이/라면기계/오뎅기계/튀김기}
+	private int[] equipsLv = {1,1,0,0,0};
 	
 	//cons
 	public Member(String memberId, String memberPwd, String memberEmail) {

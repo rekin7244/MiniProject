@@ -4,10 +4,10 @@ import java.util.ArrayList;
 
 import com.kh.miniProject.model.vo.menu.MenuOrder;
 import com.kh.miniProject.view.GameView;
+import com.kh.miniProject.view.GuestPanel;
 
 public class OrderDao {
 	private ArrayList<MenuOrder> orderList;	//LinkedList로 바꾸자 (속도 개선의 효과를 보기위해)
-	private int orderCount;
 	private int stageGold;
 	private GameView gameView;
 	
@@ -17,19 +17,18 @@ public class OrderDao {
 		this.gameView = gameView;
 	}
 	
-
 	public void addOrder(MenuOrder menu) {
 		orderList.add(menu);
 	}
 	
-	public boolean searchOrder(MenuOrder menu) {
+	public int searchOrder(MenuOrder menu) {
 		for (MenuOrder menuOrder : orderList) {
 			if(menuOrder.getMenuName().equals(menu.getMenuName())){
 				removeOrder(menuOrder.getOrderNo());
-				return true;
+				return menuOrder.getOrderNo();
 			}
 		}
-		return false;
+		return -1;
 	}
 	
 	public void removeOrder(int no) {
@@ -42,6 +41,7 @@ public class OrderDao {
 			}
 		}
 	}
+	
 	public ArrayList<MenuOrder> getOrderList() {
 		return orderList;
 	}

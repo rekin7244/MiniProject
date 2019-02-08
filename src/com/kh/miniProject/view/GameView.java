@@ -11,7 +11,10 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import com.kh.miniProject.controller.CookingTime;
+import com.kh.miniProject.controller.CustomerManager;
+import com.kh.miniProject.controller.CustomerTimer;
 import com.kh.miniProject.model.dao.OrderDao;
+import com.kh.miniProject.model.vo.Customer;
 import com.kh.miniProject.model.vo.member.Member;
 import com.kh.miniProject.model.vo.menu.MenuOrder;
 import com.kh.miniProject.run.Run;
@@ -22,6 +25,7 @@ public class GameView extends JPanel{
 	public GuestPanel gP;
 	public MenuPanel mP;
 	public EquipmentPanel eP;
+	public CustomerManager cm;
 	//Å¸ÀÌ¸Ó Å¬·¡½º (Å×½ºÆ®) & Back ¹öÆ°
 	private CookingTime cookTimer;
 	private JPanel gView;
@@ -36,11 +40,12 @@ public class GameView extends JPanel{
 	private int ramenNo;	//¶ó¸é°³¼ö
 	//Member Á¤º¸ ÀÔÃâ·ÂÀ§ÇØ
 	private Member m;
-
-	JButton gold;
+	//stage º¯¼ö °ü¸®
+	private int stageLv;
+	private JButton gold;
 	//ÁÖ¹® ³»¿ª °ü¸®
-	OrderDao orderDao;
-	
+	private OrderDao orderDao;
+
 	//cons
 	public GameView(MainFrame mf,Member m) {
 		orderDao = new OrderDao(this);			//½ºÅ×ÀÌÁö ´ç orderDao »ý¼º ´ÜÇÑ¹ø¸¸!!
@@ -50,10 +55,18 @@ public class GameView extends JPanel{
 		this.setLayout(null);
 		this.setSize(Run.SCREEN_WIDTH,Run.SCREEN_HEIGHT);
 
-		//Timer
-		gameTimer = new TimerTest();
-		this.add(gameTimer);
+		//°í°´ ÆÐ³Î Ãß°¡
+		gP = new GuestPanel(new ImageIcon("images/½ºÅ©¸°¼¦-2017-09-24-¿ÀÀü-6.00.47.png")
+				.getImage().getScaledInstance(1024, 318, 0),orderDao);
+		gP.setLayout(null);
+		gP.setSize(Run.SCREEN_WIDTH,318);
+		this.add(gP);
 
+		//°í°´¸Å´ÏÀú ½ÇÇà
+		cm = new CustomerManager(gP,orderDao);
+		//Timer
+		gameTimer = new TimerTest(gP,cm);
+		this.add(gameTimer);
 
 		//backButton
 		backButton = new JButton();
@@ -80,19 +93,13 @@ public class GameView extends JPanel{
 		backButton.setContentAreaFilled(false);
 		this.add(backButton);
 
-		//°Ô½ºÆ® ÆÐ³Î Ãß°¡
-		gP = new GuestPanel(new ImageIcon("images/½ºÅ©¸°¼¦-2017-09-24-¿ÀÀü-6.00.47.png")
-				.getImage().getScaledInstance(1024, 318, 0),orderDao);
-		gP.setLayout(null);
-		gP.setSize(Run.SCREEN_WIDTH,318);
-		this.add(gP);
 
 		//°ñµå Ãâ·Â
 		gold = new JButton("°ñµå");
 		gold.setEnabled(false);
 		gold.setBackground(Color.yellow);
 		gold.setBounds(0,0,200,30);
-		gold.setText("GOLD : "+m.getGold()+"G");
+		gold.setText(0 + "¿ø");
 		this.add(gold);
 
 		//¸Þ´º ÆÐ³Î Ãß°¡
@@ -116,11 +123,15 @@ public class GameView extends JPanel{
 			menuButton[i].addActionListener(new Event_Cook());
 		}
 	}
+	public void updateGold(int stageGold) {
+		gold.setText(stageGold + "¿ø");
+	}
 
 	//btn Action
 	class Event_Cook implements ActionListener{
 		@Override
 		public void actionPerformed(ActionEvent e) {
+			//Equips Panel ActionListener
 			JButton[] equips = eP.getEquips();
 			if(e.getActionCommand().equals("¶±ººÀÌ±â°è")) {
 				System.out.println("¶±ººÀÌ±â°è");
@@ -167,10 +178,14 @@ public class GameView extends JPanel{
 				refreshMenuTable();
 				System.out.println("Æ¢±è ÃæÀü ÀÜ¿© °³¼ö"+friedNo);
 			}
-			//System.out.println("MenuListener actionPerformed() -> " + orderDao.getOrderList().size());
+
+
+			//MenuPanel ActionListener
+			int temp;
 			if(e.getActionCommand().equals("¶±ººÀÌ")) {
 				if(tbkNo>0) {
-					if(orderDao.searchOrder(new MenuOrder("¶±ººÀÌ"))) {
+					if((temp=orderDao.searchOrder(new MenuOrder("¶±ººÀÌ")))>=0) {
+						cm.deleteLabel(temp);
 						tbkNo--;
 						System.out.println("¶±ººÀÌ ÀÜ¿© °³¼ö : " + tbkNo);
 						mP.setting(mP,drinksNo,tbkNo,friedNo);
@@ -183,7 +198,8 @@ public class GameView extends JPanel{
 			}
 			if(e.getActionCommand().equals("Æ¢±è")) {
 				if(friedNo>0) {
-					if(orderDao.searchOrder(new MenuOrder("Æ¢±è"))) {
+					if((temp=orderDao.searchOrder(new MenuOrder("Æ¢±è")))>=0) {
+						cm.deleteLabel(temp);
 						friedNo--;
 						System.out.println("Æ¢±è ÀÜ¿© °³¼ö : " + friedNo);
 						mP.setting(mP,drinksNo,tbkNo,friedNo);
@@ -196,7 +212,9 @@ public class GameView extends JPanel{
 			}
 			if(e.getActionCommand().equals("À½·á¼ö")) {
 				if(drinksNo>0) {
-					if(orderDao.searchOrder(new MenuOrder("À½·á¼ö"))) {
+					if((temp=orderDao.searchOrder(new MenuOrder("À½·á¼ö")))>=0) {
+						System.out.println("temp:"+temp);
+						cm.deleteLabel(temp);
 						drinksNo--;
 						System.out.println("À½·á¼ö ÀÜ¿© °³¼ö : " + drinksNo);
 						mP.setting(mP,drinksNo,tbkNo,friedNo);
@@ -212,9 +230,5 @@ public class GameView extends JPanel{
 	public void refreshMenuTable() {
 		//ÀÚÆÇ±â, ¶±ººÀÌ, Æ¢±è
 		mP.setting(mP,drinksNo,tbkNo,friedNo);
-	}
-	
-	public void updateGold(int stageGold) {
-		gold.setText(stageGold + "¿ø");
 	}
 }

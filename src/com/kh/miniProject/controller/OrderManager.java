@@ -23,7 +23,7 @@ public class OrderManager {
 	}
 
 	public void addGuest() {
-	
+		
 	}
 	//메뉴 생성
 	public int createOrder(int level) {
