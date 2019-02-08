@@ -14,20 +14,17 @@ import com.kh.miniProject.view.GuestPanel;
 
 public class CustomerTimer extends JPanel{
 	private JLabel timerLabel;
-	private GuestPanel gP;
+	private int customerNo;
 	private CustomerManager cm;
 	private Timer timer;
-	private Customer customer;
 	private double waitingTime;
-	private int orderNo;
 	
-	public CustomerTimer(GuestPanel gP,CustomerManager cm,Customer c,int orderNo) {
-		this.gP = gP;
+	public CustomerTimer(CustomerManager cm,int maxOrderNo,int customerNo) {
 		this.cm = cm;
-		this.customer = c;
-		this.waitingTime = c.getWaitingTime();
-		this.orderNo = orderNo;
-
+		this.waitingTime = 10;
+		this.customerNo = customerNo;
+		
+		//게스트 타이머 시작
 		timerLabel = new JLabel();
 		timer = new Timer(100, new TimerStart());
 
@@ -35,10 +32,9 @@ public class CustomerTimer extends JPanel{
 		timerLabel.setFont(new Font("Elephant", Font.BOLD, 20));
 		this.add(timerLabel);
 		this.setVisible(true);
-		this.setBounds(864,150,70, 40);
+		this.setBounds((3-customerNo)*300-56,150,70,40);
 
 		timer.start();
-		cm.guest();
 	}
 	public void timerStop() {
 		timer.stop();
@@ -51,7 +47,7 @@ public class CustomerTimer extends JPanel{
 			gameTime-=0.1;
 			
 			if(gameTime<=0) {
-				cm.deleteCustomer(0);
+				cm.deleteCustomer(customerNo);
 				timer.stop();
 			}
 			//시간 표시

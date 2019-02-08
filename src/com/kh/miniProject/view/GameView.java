@@ -12,7 +12,9 @@ import javax.swing.JPanel;
 
 import com.kh.miniProject.controller.CookingTime;
 import com.kh.miniProject.controller.CustomerManager;
+import com.kh.miniProject.controller.CustomerTimer;
 import com.kh.miniProject.model.dao.OrderDao;
+import com.kh.miniProject.model.vo.Customer;
 import com.kh.miniProject.model.vo.member.Member;
 import com.kh.miniProject.model.vo.menu.MenuOrder;
 import com.kh.miniProject.run.Run;
@@ -38,11 +40,12 @@ public class GameView extends JPanel{
 	private int ramenNo;	//라면개수
 	//Member 정보 입출력위해
 	private Member m;
-
-	JButton gold;
+	//stage 변수 관리
+	private int stageLv;
+	private JButton gold;
 	//주문 내역 관리
-	OrderDao orderDao;
-	
+	private OrderDao orderDao;
+
 	//cons
 	public GameView(MainFrame mf,Member m) {
 		orderDao = new OrderDao(this);			//스테이지 당 orderDao 생성 단한번만!!
@@ -52,10 +55,18 @@ public class GameView extends JPanel{
 		this.setLayout(null);
 		this.setSize(Run.SCREEN_WIDTH,Run.SCREEN_HEIGHT);
 
-		//Timer
-		gameTimer = new TimerTest();
-		this.add(gameTimer);
+		//고객 패널 추가
+		gP = new GuestPanel(new ImageIcon("images/스크린샷-2017-09-24-오전-6.00.47.png")
+				.getImage().getScaledInstance(1024, 318, 0),orderDao);
+		gP.setLayout(null);
+		gP.setSize(Run.SCREEN_WIDTH,318);
+		this.add(gP);
 
+		//고객매니저 실행
+		cm = new CustomerManager(gP,orderDao);
+		//Timer
+		gameTimer = new TimerTest(gP,cm);
+		this.add(gameTimer);
 
 		//backButton
 		backButton = new JButton();
@@ -82,15 +93,7 @@ public class GameView extends JPanel{
 		backButton.setContentAreaFilled(false);
 		this.add(backButton);
 
-		//고객 패널 추가
-		gP = new GuestPanel(new ImageIcon("images/스크린샷-2017-09-24-오전-6.00.47.png")
-				.getImage().getScaledInstance(1024, 318, 0),orderDao);
-		gP.setLayout(null);
-		gP.setSize(Run.SCREEN_WIDTH,318);
-		this.add(gP);
-		//고객매니저 실행
-		cm = new CustomerManager(gP,orderDao);
-		
+
 		//골드 출력
 		gold = new JButton("골드");
 		gold.setEnabled(false);
@@ -119,6 +122,9 @@ public class GameView extends JPanel{
 		for(int i=0; i<menuButton.length;i++) {
 			menuButton[i].addActionListener(new Event_Cook());
 		}
+	}
+	public void updateGold(int stageGold) {
+		gold.setText(stageGold + "원");
 	}
 
 	//btn Action
@@ -172,8 +178,8 @@ public class GameView extends JPanel{
 				refreshMenuTable();
 				System.out.println("튀김 충전 잔여 개수"+friedNo);
 			}
-			
-			
+
+
 			//MenuPanel ActionListener
 			int temp;
 			if(e.getActionCommand().equals("떡볶이")) {
@@ -224,9 +230,5 @@ public class GameView extends JPanel{
 	public void refreshMenuTable() {
 		//자판기, 떡볶이, 튀김
 		mP.setting(mP,drinksNo,tbkNo,friedNo);
-	}
-	
-	public void updateGold(int stageGold) {
-		gold.setText(stageGold + "원");
 	}
 }
