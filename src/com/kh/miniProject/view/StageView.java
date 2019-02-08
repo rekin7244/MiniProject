@@ -67,7 +67,7 @@ public class StageView extends JPanel{
 		toMarket.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				new ChangePanel().changePanel(mf, sView, new MarketPanel(m));
+				new ChangePanel().changePanel(mf, sView, new MarketPanel(mf,m));
 			}
 		});
 	}	

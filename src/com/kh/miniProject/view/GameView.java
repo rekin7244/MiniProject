@@ -41,16 +41,17 @@ public class GameView extends JPanel{
 	OrderDao orderDao;
 	//cons
 	public GameView(MainFrame mf,Member m) {
-		orderDao = new OrderDao();
+		orderDao = new OrderDao();			//½ºÅ×ÀÌÁö ´ç orderDao »ý¼º ´ÜÇÑ¹ø¸¸!!
 		this.gView = this;
 		this.mf = mf;
 		this.m = m;
 		this.setLayout(null);
 		this.setSize(Run.SCREEN_WIDTH,Run.SCREEN_HEIGHT);
-		
+
 		//Timer
 		gameTimer = new TimerTest();
 		this.add(gameTimer);
+
 
 		//backButton
 		backButton = new JButton();
@@ -67,7 +68,8 @@ public class GameView extends JPanel{
 						"ºÎ±ÛºÎ±ÛºÐ½Ä",JOptionPane.YES_NO_OPTION, 
 						JOptionPane.INFORMATION_MESSAGE, null, command, command[0]);
 
-				if(result==0) {				
+				if(result==0) {
+					gameTimer.timerStop();
 					ChangePanel.changePanel(mf, gView, new StageView(mf,m));
 				}
 			}		
@@ -90,7 +92,7 @@ public class GameView extends JPanel{
 		gold.setBounds(0,0,200,30);
 		gold.setText("GOLD : "+m.getGold()+"G");
 		this.add(gold);
-		
+
 		//¸Þ´º ÆÐ³Î Ãß°¡
 		mP = new MenuPanel();
 		mP.setting(mP,drinksNo,tbkNo,friedNo);
@@ -159,35 +161,48 @@ public class GameView extends JPanel{
 			}
 			//System.out.println("MenuListener actionPerformed() -> " + orderDao.getOrderList().size());
 			if(e.getActionCommand().equals("¶±ººÀÌ")) {
-				if(orderDao.searchOrder(new MenuOrder("¶±ººÀÌ"))) {
-					tbkNo--;
-					System.out.println("¶±ººÀÌ ÀÜ¿© °³¼ö : " + tbkNo);
-					mP.setting(mP,drinksNo,tbkNo,friedNo);
+				if(tbkNo>0) {
+					if(orderDao.searchOrder(new MenuOrder("¶±ººÀÌ"))) {
+						tbkNo--;
+						System.out.println("¶±ººÀÌ ÀÜ¿© °³¼ö : " + tbkNo);
+						mP.setting(mP,drinksNo,tbkNo,friedNo);
+					}else {
+						System.out.println("ÁÖ¹®µÈ ¶±ººÀÌ°¡ ¾ø½À´Ï´Ù.");
+					}
 				}else {
-					System.out.println("ÁÖ¹®µÈ ¶±ººÀÌ°¡ ¾ø½À´Ï´Ù.");
+					System.out.println("¶±ººÀÌ°¡ ¾ø½À´Ï´Ù.");
 				}
 			}
 			if(e.getActionCommand().equals("Æ¢±è")) {
-				if(orderDao.searchOrder(new MenuOrder("Æ¢±è"))) {
-					friedNo--;
-					System.out.println("Æ¢±è ÀÜ¿© °³¼ö : " + friedNo);
-					mP.setting(mP,drinksNo,tbkNo,friedNo);
+				if(friedNo>0) {
+					if(orderDao.searchOrder(new MenuOrder("Æ¢±è"))) {
+						friedNo--;
+						System.out.println("Æ¢±è ÀÜ¿© °³¼ö : " + friedNo);
+						mP.setting(mP,drinksNo,tbkNo,friedNo);
+					}else {
+						System.out.println("ÁÖ¹®µÈ Æ¢±èÀÌ ¾ø½À´Ï´Ù.");
+					}
 				}else {
-					System.out.println("ÁÖ¹®µÈ Æ¢±èÀÌ ¾ø½À´Ï´Ù.");
+					System.out.println("Æ¢±èÀÌ ¾ø½À´Ï´Ù.");
 				}
-			}if(e.getActionCommand().equals("À½·á¼ö")) {
-				if(orderDao.searchOrder(new MenuOrder("À½·á¼ö"))) {
-					drinksNo--;
-					System.out.println("À½·á¼ö ÀÜ¿© °³¼ö : " + drinksNo);
-					mP.setting(mP,drinksNo,tbkNo,friedNo);
+			}
+			if(e.getActionCommand().equals("À½·á¼ö")) {
+				if(drinksNo>0) {
+					if(orderDao.searchOrder(new MenuOrder("À½·á¼ö"))) {
+						drinksNo--;
+						System.out.println("À½·á¼ö ÀÜ¿© °³¼ö : " + drinksNo);
+						mP.setting(mP,drinksNo,tbkNo,friedNo);
+					}else {
+						System.out.println("ÁÖ¹®µÈ À½·á¼ö°¡ ¾ø½À´Ï´Ù.");
+					}
 				}else {
-					System.out.println("ÁÖ¹®µÈ À½·á¼ö°¡ ¾ø½À´Ï´Ù.");
+					System.out.println("À½·á¼ö°¡ ¾ø½À´Ï´Ù.");
 				}
 			}
 		}
-		public void refreshMenuTable() {
-			//ÀÚÆÇ±â, ¶±ººÀÌ, Æ¢±è
-			mP.setting(mP,drinksNo,tbkNo,friedNo);
-		}
+	}
+	public void refreshMenuTable() {
+		//ÀÚÆÇ±â, ¶±ººÀÌ, Æ¢±è
+		mP.setting(mP,drinksNo,tbkNo,friedNo);
 	}
 }

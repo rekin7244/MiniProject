@@ -12,7 +12,7 @@ public class TimerTest extends JPanel {
 
 	
 	public TimerTest() {
-		timerLabel = new JLabel("10√ ");
+		timerLabel = new JLabel("60√ ");
 		timer = new Timer(1000, new TimerStart());
 		isTimer = false;
 		
@@ -23,9 +23,12 @@ public class TimerTest extends JPanel {
 		
 		timer.start();
 	}
+	public void timerStop() {
+		timer.stop();
+	}
 	
 	class TimerStart implements ActionListener {
-		private int gameTime = 10;
+		private int gameTime = 60;
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
@@ -43,9 +46,9 @@ public class TimerTest extends JPanel {
 				
 			}
 	}
-	
+	/*
 	public static void main(String[] args) {
 		TimerTest tt = new TimerTest();
 	}
-	
+	*/
 }
