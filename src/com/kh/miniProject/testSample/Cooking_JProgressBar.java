@@ -1,4 +1,4 @@
-package com.kh.miniProject.view;
+package com.kh.miniProject.testSample;
 
 import java.awt.Panel;
 
