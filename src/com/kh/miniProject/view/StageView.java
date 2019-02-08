@@ -13,7 +13,7 @@ public class StageView extends JPanel{
 	private int stagexSize = 180;		//stage버튼 가로크기
 	private int stageySize = 150;		//stage버튼 세로크기
 	private JPanel sView;
-	private JButton[] stageBtn = new JButton[10];
+	private JButton[] stageBtn = new JButton[10];	//1~10스테이지 버튼
 	private Member m;
 	
 	public StageView(MainFrame mf,Member m) {
