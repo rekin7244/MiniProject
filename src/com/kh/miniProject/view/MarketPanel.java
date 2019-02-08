@@ -13,14 +13,17 @@ import javax.swing.JPanel;
 import com.kh.miniProject.model.vo.member.Member;
 
 public class MarketPanel extends JPanel {
-
+	//¹Þ¾Æ¿Ã ÇÊµå
+	MainFrame mf;
+	Member m;
+	//»ç¿ë ÇÊµå
 	private int tbkLv = 1;
 	JButton mo = new JButton("¶±ººÀÌ±â±¸");
 	private int tkLv = 1;
 	JButton mo1 = new JButton("Æ¢±è±â±¸");
 	JPanel mPanel;
 	private int[] equipsLv;
-	private equipSetting e = new equipSetting();
+	private EquipSetting e;
 
 	private Image[] equipsImages = { new ImageIcon("images/1Lvtbk.jpg").getImage().getScaledInstance(200, 200, 0),
 			new ImageIcon("images/2Lvtbk.jpg").getImage().getScaledInstance(200, 200, 0) };
@@ -28,8 +31,10 @@ public class MarketPanel extends JPanel {
 	private Image[] equipsImages1 = { new ImageIcon("images/1Lvfried.jpg").getImage().getScaledInstance(200, 200, 0),
 			new ImageIcon("images/2Lvfried.jpg").getImage().getScaledInstance(200, 200, 0) };
 
-	public MarketPanel(Member m) {
-		
+	public MarketPanel(MainFrame mf, Member m) {
+		e = new EquipSetting();
+		this.mf = mf;
+		this.m = m;
 		this.equipsLv = m.getEquipsLv();
 		this.setLayout(null);
 		this.setBounds(110, 50, 800, 650);
@@ -42,7 +47,7 @@ public class MarketPanel extends JPanel {
 		gold.setBounds(0, 0, 200, 30);
 		gold.setText("¼ÒÁö±Ý: " + 0 + "G");
 		this.add(gold);
-		
+
 		// µ¹¾Æ°¡±â
 		JButton returnBtn = new JButton("µ¹¾Æ°¡±â");
 		returnBtn.setBounds(660, 620, 140, 30);
@@ -52,19 +57,8 @@ public class MarketPanel extends JPanel {
 
 		// Action
 		mPanel = this;
-		returnBtn.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				/*
-				 * new ChangePanel().changePanel(Run.myFrame,mPanel,new StageView(Run.myFrame));
-				 */
-
-			}
-		});
-
+		returnBtn.addActionListener(new EquipSetting());
 	}
-	
 	public void setting(JPanel panel) {
 		//¶±ººÀÌ
 		if (equipsLv[0] == 1) {
@@ -75,7 +69,7 @@ public class MarketPanel extends JPanel {
 		mo.setBounds(200, 200, 200, 200);
 		mo.removeActionListener(e);
 		mo.addActionListener(e);
-		
+
 		//Æ¢±è
 		if (equipsLv[1] == 1) {
 			mo1.setIcon(new ImageIcon(equipsImages1[0]));
@@ -90,7 +84,7 @@ public class MarketPanel extends JPanel {
 		panel.add(mo1);
 	}
 
-	class equipSetting implements ActionListener {
+	class EquipSetting implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -102,7 +96,8 @@ public class MarketPanel extends JPanel {
 					System.out.println("lv max error");
 				}
 				refresh();
-			} else if (e.getActionCommand().equals("Æ¢±è±â±¸")) {
+			}
+			if (e.getActionCommand().equals("Æ¢±è±â±¸")) {
 				System.out.println("tk");
 				if (equipsLv[1] == 1) {
 					equipsLv[1] += 1;
@@ -111,9 +106,10 @@ public class MarketPanel extends JPanel {
 				}
 				refresh();
 			}
-
+			if (e.getActionCommand().equals("µ¹¾Æ°¡±â")) {
+				new ChangePanel().changePanel(mf,mPanel,new StageView(mf,m));
+			};
 		}
-
 		public void refresh() {
 			setting(mPanel);
 		}
