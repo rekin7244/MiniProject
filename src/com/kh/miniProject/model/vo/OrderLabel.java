@@ -17,6 +17,4 @@ public class OrderLabel extends JLabel {
 		this.orderNo = orderNo;
 	}
 	
-	
-	
 }

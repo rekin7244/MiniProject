@@ -13,7 +13,6 @@ public class TimerTest extends JPanel {
 	private JLabel timerLabel;
 	private Timer timer;
 	private GuestPanel gP;
-	private CustomerTimer cTimer;
 	private CustomerManager cm;
 	
 	public TimerTest(GuestPanel gP,CustomerManager cm) {

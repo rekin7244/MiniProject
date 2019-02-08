@@ -12,9 +12,7 @@ import javax.swing.JPanel;
 
 import com.kh.miniProject.controller.CookingTime;
 import com.kh.miniProject.controller.CustomerManager;
-import com.kh.miniProject.controller.CustomerTimer;
 import com.kh.miniProject.model.dao.OrderDao;
-import com.kh.miniProject.model.vo.Customer;
 import com.kh.miniProject.model.vo.member.Member;
 import com.kh.miniProject.model.vo.menu.MenuOrder;
 import com.kh.miniProject.run.Run;
@@ -66,7 +64,7 @@ public class GameView extends JPanel{
 		cm = new CustomerManager(gP,orderDao);
 		//Timer
 		gameTimer = new TimerTest(gP,cm);
-		this.add(gameTimer);
+		gP.add(gameTimer);
 
 		//backButton
 		backButton = new JButton();
@@ -100,7 +98,7 @@ public class GameView extends JPanel{
 		gold.setBackground(Color.yellow);
 		gold.setBounds(0,0,200,30);
 		gold.setText(0 + "원");
-		this.add(gold);
+		gP.add(gold);
 
 		//메뉴 패널 추가
 		mP = new MenuPanel();
