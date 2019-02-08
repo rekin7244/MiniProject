@@ -45,12 +45,13 @@ public class MarketPanel extends JPanel {
 		gold.setEnabled(false);
 		gold.setBackground(Color.yellow);
 		gold.setBounds(0, 0, 200, 30);
-		gold.setText("소지금: " + 0 + "G");
+		gold.setText("소지금: " + m.getGold() + "G");
 		this.add(gold);
 
 		// 돌아가기
 		JButton returnBtn = new JButton("돌아가기");
 		returnBtn.setBounds(660, 620, 140, 30);
+		this.add(returnBtn);
 
 		// 상점 버튼 및 기능 구현
 		setting(this);
