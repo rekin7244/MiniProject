@@ -44,7 +44,7 @@ public class TimerTest extends JPanel {
 				gameTime--;
 				
 				//guest»ý¼º
-				if(gameTime%8==0) {
+				if(gameTime%6==0) {
 				cm.guest(3);
 				}
 				
@@ -52,7 +52,7 @@ public class TimerTest extends JPanel {
 					timer.stop();
 				}
 				timerLabel.setText(gameTime+"ÃÊ");
-				
+				gP.repaint();
 			}
 	}
 }

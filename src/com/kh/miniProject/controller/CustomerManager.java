@@ -40,16 +40,19 @@ public class CustomerManager {
 				.getImage().getScaledInstance(120, 200, 0); // 손님 이미지
 		customer[customerNo] = new JLabel(new ImageIcon(icon)); // 손님라벨
 
-		addOrder(maxOrderNo); 			//음식 주문
+					
 		customerOrderNo[0]=maxOrderNo;
-		
+		//음식 주문
 		//손님 객체 존재시 (1,2,3번 자리 지정)
 		if(customerNo==0) {
 			customer[customerNo].setBounds(744, 0, 120, 200); // 손님 위치 설정
+			addOrder(maxOrderNo,744); 
 		}else if(customerNo==1) {
 			customer[customerNo].setBounds(444, 0, 120, 200);
+			addOrder(maxOrderNo,444); 
 		}else {
 			customer[customerNo].setBounds(144, 0, 120, 200); 
+			addOrder(maxOrderNo,144); 
 		}
 		gP.add(customer[customerNo]); // 패널에 손님라벨 추가
 		int temp = customerNo;
@@ -61,7 +64,7 @@ public class CustomerManager {
 		}
 	}
 
-	public void addOrder(int menuNo) {
+	public void addOrder(int menuNo,int x) {
 		y = 15;	//y축 초기화
 
 		for (int i = 0; i < menuNo; i++) {				//메뉴 개수에 따라 반복
@@ -83,7 +86,7 @@ public class CustomerManager {
 						.getImage().getScaledInstance(50, 40, 0);
 			}
 			orderLabel[orderNo].setIcon(new ImageIcon(food));
-			orderLabel[orderNo].setBounds(x, y, 100, 30);
+			orderLabel[orderNo].setBounds(x+120, y, 100, 30);
 			y += 40;
 			gP.add(orderLabel[orderNo]);
 			if(orderNo!=maxOrderNo*3-1) {
