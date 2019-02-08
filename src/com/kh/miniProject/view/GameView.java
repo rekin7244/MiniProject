@@ -38,15 +38,14 @@ public class GameView extends JPanel{
 	private int sundeNo;
 	//Member 정보 입출력위해
 	private Member m;
-	//스테이지별 골드 변수
-	private int stageGold=0;
+
 	JButton gold;
 	//주문 내역 관리
 	OrderDao orderDao;
 	
 	//cons
 	public GameView(MainFrame mf,Member m) {
-		orderDao = new OrderDao();			//스테이지 당 orderDao 생성 단한번만!!
+		orderDao = new OrderDao(this);			//스테이지 당 orderDao 생성 단한번만!!
 		this.gView = this;
 		this.mf = mf;
 		this.m = m;
@@ -91,7 +90,7 @@ public class GameView extends JPanel{
 		this.add(gP);
 
 		//골드 출력
-		JButton gold = new JButton("골드");
+		gold = new JButton("골드");
 		gold.setEnabled(false);
 		gold.setBackground(Color.yellow);
 		gold.setBounds(0,0,200,30);
@@ -216,5 +215,9 @@ public class GameView extends JPanel{
 	public void refreshMenuTable() {
 		//자판기, 떡볶이, 튀김
 		mP.setting(mP,drinksNo,tbkNo,friedNo);
+	}
+	
+	public void updateGold(int stageGold) {
+		gold.setText(stageGold + "원");
 	}
 }
