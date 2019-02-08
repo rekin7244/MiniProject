@@ -17,8 +17,6 @@ import com.kh.miniProject.model.vo.menu.MenuOrder;
 import com.kh.miniProject.run.Run;
 
 public class GameView extends JPanel{
-	private int equipPanelySize = 250;			//장비 패널 세로크기
-
 	//패널 동시 사용을 위해 전역 선언
 	public MainFrame mf;
 	public GuestPanel gP;
@@ -31,11 +29,11 @@ public class GameView extends JPanel{
 	private JButton backButton;
 	private Image backButtonImage;
 	//음식 수 저장용 변수
-	private int drinksNo;
-	private int friedNo;
-	private int tbkNo;
-	private int odengNo;
-	private int sundeNo;
+	private int drinksNo;	//음료개수
+	private int friedNo;	//튀김개수
+	private int tbkNo;		//떡볶이개수
+	private int odengNo;	//오뎅개수
+	private int ramenNo;	//라면개수
 	//Member 정보 입출력위해
 	private Member m;
 	//스테이지별 골드 변수
@@ -105,7 +103,7 @@ public class GameView extends JPanel{
 
 		//장비 패널 추가
 		eP = new EquipmentPanel();
-		eP.equipsSetting(eP);
+		eP.equipsSetting(eP,m);
 		this.add(eP);
 
 
@@ -118,7 +116,6 @@ public class GameView extends JPanel{
 		for(int i=0; i<menuButton.length;i++) {
 			menuButton[i].addActionListener(new Event_Cook());
 		}
-
 	}
 
 	//btn Action

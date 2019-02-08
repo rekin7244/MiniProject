@@ -7,6 +7,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import com.kh.miniProject.model.vo.member.Member;
 import com.kh.miniProject.run.Run;
 
 public class EquipmentPanel extends JPanel{
@@ -39,13 +40,16 @@ public class EquipmentPanel extends JPanel{
 		this.setBackground(Color.GRAY);
 	}
 
-	public void equipsSetting(JPanel panel) {
+	public void equipsSetting(JPanel panel,Member m) {
+		int[] equipsLv = m.getEquipsLv();
 		//Equipments setting
 		for (int i = 0; i < images.length; i++) {
-			equips[i] = new JButton(name[i]);
-			equips[i].setBounds(xlocation[i],0,xSize[i],panelSize);
-			equips[i].setIcon(new ImageIcon(images[i]));
-			panel.add(equips[i]);
+			if(equipsLv[i]>0) {
+				equips[i] = new JButton(name[i]);
+				equips[i].setBounds(xlocation[i],0,xSize[i],panelSize);
+				equips[i].setIcon(new ImageIcon(images[i]));
+				panel.add(equips[i]);
+			}
 		}
 	}
 	//btn getter
