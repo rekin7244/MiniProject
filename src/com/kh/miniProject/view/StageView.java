@@ -90,6 +90,13 @@ public class StageView extends JPanel{
 					System.out.println("오뎅기계가 필요합니다.");
 				}
 			}
+			if(e.getActionCommand().equals("STAGE 4")) {
+				if(equipsLv[3]>0) {
+					new ChangePanel().changePanel(mf,sView,new GameView(mf,m,4));
+				}else {
+					System.out.println("라면기계가 필요합니다.");
+				}
+			}
 			if(e.getActionCommand().equals("상점으로")) {
 				new ChangePanel().changePanel(mf, sView, new MarketPanel(mf,m));
 			}

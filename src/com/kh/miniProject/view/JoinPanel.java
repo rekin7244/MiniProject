@@ -26,21 +26,19 @@ import com.kh.miniProject.view.LoginPanel.guest;
 
 public class JoinPanel extends JPanel {
 	private BufferedImage img = null;
-	private JTextField IDText; //아이디필드
-	private JPasswordField passText; //패스워드필드
-	private JTextField EmailText; //이메일 필드
-	private JButton joinbt; //가입하기버튼
-	private JButton cancelbt; //가입취소 버튼
-	private JButton IDCheck; //아이디 중복확인
-	private JButton EmailCheck; //이메일 중복확인
-	private JButton ok;
-	private JButton no;
+	private JTextField IDText; 			//아이디필드
+	private JPasswordField passText; 	//패스워드필드
+	private JTextField EmailText; 		//이메일 필드
+	private JButton joinbt; 			//가입하기버튼
+	private JButton cancelbt; 			//가입취소 버튼
+	private JButton IDCheck; 			//아이디 중복확인
+	private JButton EmailCheck; 		//이메일 중복확인
 
 	private MainFrame mf;
 	private JPanel jView;
 	private Dialog dialog;
 	private MemberDao memberDao = new MemberDao();
-	
+
 
 	public JoinPanel(MainFrame mf) {
 		this.mf = mf;
@@ -108,11 +106,11 @@ public class JoinPanel extends JPanel {
 		// 가입취소 버튼 추가
 		cancelbt = new JButton("가입 취소");
 		cancelbt.setBounds(510, 510, 90, 30);
-		
+
 		//아이디 중복확인 버튼
 		IDCheck = new JButton("확인");
 		IDCheck.setBounds(615, 370, 70, 30);
-		
+
 		//이메일 중복확인 버튼
 		EmailCheck = new JButton("확인");
 		EmailCheck.setBounds(614, 470, 70, 30);
@@ -151,32 +149,40 @@ public class JoinPanel extends JPanel {
 
 			//아이디 중복확인
 			if(e.getSource() == IDCheck) {
-				if(memberDao.checkID(IDText.getText())) {
-					System.out.println("사용 가능한 아이디 입니다.");
+				if(!IDText.getText().equals("")) {
+					if(memberDao.checkID(IDText.getText())&&!IDText.getText().equals("guest")) {	//ID 중복 체크 및 guest 가 아닌지 확인
+						dialog = new Dialog(mf);
+						dialog.setBounds(150, 150, 150, 150);
+						JOptionPane.showMessageDialog(null, "사용가능한 아이디 입니다."); 
+
+					} else {
+						dialog = new Dialog(mf);
+						dialog.setBounds(150, 150, 150, 150);
+						JOptionPane.showMessageDialog(null, "이미 존재하는 아이디입니다.");
+					}
+				}else {
 					dialog = new Dialog(mf);
 					dialog.setBounds(150, 150, 150, 150);
-					JOptionPane.showMessageDialog(null, "사용가능한 아이디 입니다."); 
-					
-				} else {
-					dialog = new Dialog(mf);
-					dialog.setBounds(150, 150, 150, 150);
-					JOptionPane.showMessageDialog(null, "이미 존재하는 아이디입니다.");
-					System.out.println("이미 존재하는 아이디 입니다.");
+					JOptionPane.showMessageDialog(null, "아이디를 입력해주세요.");
 				}
 			}
-			
+
 			//이메일 중복확인
 			if(e.getSource() == EmailCheck) {
-				if(memberDao.checkEmail(EmailText.getText())) {
-					System.out.println("사용 가능한 이메일 입니다.");
+				if(!EmailText.getText().equals("")) {
+					if(memberDao.checkEmail(EmailText.getText())) {
+						dialog = new Dialog(mf);
+						dialog.setBounds(150, 150, 150, 150);
+						JOptionPane.showMessageDialog(null, "사용가능한 이메일 입니다."); 
+					} else {
+						dialog = new Dialog(mf);
+						dialog.setBounds(150, 150, 150, 150);
+						JOptionPane.showMessageDialog(null, "이미 존재하는 이메일입니다."); 
+					}
+				}else {
 					dialog = new Dialog(mf);
 					dialog.setBounds(150, 150, 150, 150);
-					JOptionPane.showMessageDialog(null, "사용가능한 이메일 입니다."); 
-				} else {
-					dialog = new Dialog(mf);
-					dialog.setBounds(150, 150, 150, 150);
-					JOptionPane.showMessageDialog(null, "이미 존재하는 이메일입니다."); 
-					System.out.println("이미 존재하는 이메일 입니다.");
+					JOptionPane.showMessageDialog(null, "이메일을 입력해주세요.");
 				}
 			}
 			//가입하기
@@ -194,7 +200,6 @@ public class JoinPanel extends JPanel {
 					dialog = new Dialog(mf);
 					dialog.setBounds(150, 150, 150, 150);
 					JOptionPane.showMessageDialog(null, "아이디/이메일 중복확인을 해주세요");
-					System.out.println("이미 존재하는 아이디 입니다.");
 				}
 
 			}

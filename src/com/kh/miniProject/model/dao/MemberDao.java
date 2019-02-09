@@ -30,6 +30,7 @@ public class MemberDao {
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
+		printMember();
 	}
 	
 	public void addMember(Member member) {
@@ -97,6 +98,7 @@ public class MemberDao {
 		for (Member member : memberList) {
 			if(member.getMemberId().equals(memberId) && member.getMemberPwd().equals(memberPwd)) {
 				memberList.remove(member);
+				saveMemberList();
 				return;
 			}			//¸â¹ö »èÁ¦
 		}

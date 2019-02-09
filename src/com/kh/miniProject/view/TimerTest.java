@@ -7,17 +7,19 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 
 import com.kh.miniProject.controller.CustomerManager;
-import com.kh.miniProject.controller.CustomerTimer;
 
 public class TimerTest extends JPanel {
 	private JLabel timerLabel;
 	private Timer timer;
 	private GuestPanel gP;
 	private CustomerManager cm;
+	private GameView gView;
 	
-	public TimerTest(GuestPanel gP,CustomerManager cm) {
+	public TimerTest(GuestPanel gP,CustomerManager cm,GameView gView) {
 		this.gP = gP;
 		this.cm = cm;
+		this.gView = gView;
+		
 		timerLabel = new JLabel("60段");
 		timer = new Timer(1000, new TimerStart());
 		
@@ -44,11 +46,12 @@ public class TimerTest extends JPanel {
 				
 				//guest持失
 				if(gameTime%6==0) {
-				cm.guest(3);
+				cm.guest();
 				}
 				
 				if(gameTime<=0) {
 					timer.stop();
+					gView.endStage();
 				}
 				timerLabel.setText(gameTime+"段");
 				gP.repaint();
