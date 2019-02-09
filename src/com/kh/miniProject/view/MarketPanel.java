@@ -207,7 +207,7 @@ public class MarketPanel extends JPanel {
 		label2.setBounds(450,160,200,200);
 		panel.add(label2);
 		JLabel label3=new JLabel();
-		label3.setText("라면 업그레이드");
+		label3.setText("라면 ");
 		label3.setBounds(630,160,200,200);
 		panel.add(label3);
 		//		panel.setVisible(true);
