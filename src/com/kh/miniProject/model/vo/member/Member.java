@@ -22,9 +22,9 @@ public class Member implements Serializable{
 		this.memberId = memberId;
 		this.memberPwd = memberPwd;
 		this.memberEmail = memberEmail;
-		if(memberId.equals("test")) {
-			maxStage=2;
-			gold=10000;
+		if(memberId.equals("test")) {	//test¿ë
+			maxStage=3;
+			gold=30000;
 		};
 	}
 	

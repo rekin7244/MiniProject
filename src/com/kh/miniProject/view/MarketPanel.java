@@ -222,7 +222,7 @@ public class MarketPanel extends JPanel {
 			if (e.getActionCommand().equals("¶±ººÀÌ±â±¸")) {
 				System.out.println("tbk");
 				if (equipsLv[0] == 1) {
-					if(m.getGold()>50000) {
+					if(m.getGold()>=50000) {
 						equipsLv[0] += 1;
 						m.setGold(m.getGold()-50000);
 					}else {
@@ -231,12 +231,11 @@ public class MarketPanel extends JPanel {
 				} else {
 					System.out.println("lv max error");
 				}
-				refresh();
 			}
 			if (e.getActionCommand().equals("Æ¢±è±â±¸")) {
 				System.out.println("tk");
 				if (equipsLv[1] == 0) {
-					if(m.getGold()>20000) {
+					if(m.getGold()>=20000) {
 						equipsLv[1] += 1;
 						m.setGold(m.getGold()-20000);
 					}else {
@@ -245,7 +244,6 @@ public class MarketPanel extends JPanel {
 				} else {
 					System.out.println("lv max error");
 				}
-				refresh();
 			}
 			if(e.getActionCommand().equals("¿Àµ­±â±¸")) {
 				System.out.println("od");
@@ -254,7 +252,6 @@ public class MarketPanel extends JPanel {
 				}else {
 					System.out.println("lv max error");
 				}
-				refresh();
 			}
 			if(e.getActionCommand().equals("¶ó¸é±â±¸")) {
 				System.out.println("rm");
@@ -262,8 +259,7 @@ public class MarketPanel extends JPanel {
 					equipsLv[3]+=1;
 				}else {
 					System.out.println("lv max error");
-				}
-				refresh();				
+				}				
 			}
 			if(e.getActionCommand().equals("¶±ººÀÌÆÇ ¾÷±Û")) {
 				System.out.println("tbkup");
@@ -272,7 +268,6 @@ public class MarketPanel extends JPanel {
 				}else {
 					System.out.println("lv max error");
 				}
-				refresh();
 			}
 			if(e.getActionCommand().equals("Æ¢±èÆÇ ¾÷±Û")) {
 				System.out.println("tkup");
@@ -281,7 +276,6 @@ public class MarketPanel extends JPanel {
 				}else {
 					System.out.println("lv max error");
 				}
-				refresh();
 			}
 			if(e.getActionCommand().equals("¿Àµ­ÆÇ ¾÷±Û")) {
 				System.out.println("odup");
@@ -290,7 +284,6 @@ public class MarketPanel extends JPanel {
 				}else {
 					System.out.println("lv max error");
 				}
-				refresh();
 			}
 			if(e.getActionCommand().equals("¶ó¸éÆÇ ¾÷±Û")) {
 				System.out.println("rmup");
@@ -299,8 +292,8 @@ public class MarketPanel extends JPanel {
 				}else {
 					System.out.println("lv max error");
 				}
-				refresh();
 			}
+			refresh();
 			if (e.getActionCommand().equals("µ¹¾Æ°¡±â")) {
 				new ChangePanel().changePanel(mf,mPanel,new StageView(mf,m));
 			};

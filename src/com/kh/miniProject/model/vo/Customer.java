@@ -6,7 +6,7 @@ public class Customer {
 	
 	//cons
 	public Customer(int lv) {
-		this.waitingTime = 10-(0.5*lv);
+		this.waitingTime = 12-(0.5*lv);
 	}
 
 	//get,set

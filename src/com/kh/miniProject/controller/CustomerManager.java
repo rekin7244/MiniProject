@@ -12,29 +12,30 @@ import com.kh.miniProject.model.vo.menu.MenuOrder;
 import com.kh.miniProject.view.GuestPanel;
 
 public class CustomerManager {
-	private int x = 864; //주문 이미지 위치
-	private int y = 15; //주문 이미지 위치
-
 	private GuestPanel gP;
 	private OrderDao orderDao;
 	private CustomerTimer[] cTimer = new CustomerTimer[3];
 
-	private int maxOrderNo=3;		//주문하는 메뉴의 최대 수
+	private int stageLv;		//stageLv
+	private int maxOrderNo;		//주문하는 메뉴의 최대 수
 	private int orderNo;			//주문 번호
 	private int customerNo=0;			//손님 번호
 	private OrderLabel[] orderLabel;				//주문 이미지
 	private JLabel[] customer = new JLabel[3];		//customer수
 	private int[] customerOrderNo = new int[3];		//customer남은 주문수
-
-
-	public CustomerManager(GuestPanel gP,OrderDao orderDao) {
+	
+	//cons
+	public CustomerManager(GuestPanel gP,OrderDao orderDao,int maxOrderNo,int stageLv) {
 		orderLabel = new OrderLabel[100];	//초기화
 		this.gP = gP;
 		this.orderDao = orderDao;
+		this.maxOrderNo = maxOrderNo;
+		this.stageLv = stageLv;
 	}
-
-	public void guest(int maxOrderNo) {
-		cTimer[customerNo] = new CustomerTimer(this,12,customerNo);
+	
+	//손님 생성
+	public void guest() {
+		cTimer[customerNo] = new CustomerTimer(this,12-(0.5*stageLv),customerNo);	//각 손님별 타이머 설정
 		gP.add(cTimer[customerNo]);
 		Image icon = new ImageIcon("images/guest.PNG")
 				.getImage().getScaledInstance(120, 200, 0); // 손님 이미지
@@ -56,8 +57,9 @@ public class CustomerManager {
 		}
 		gP.add(customer[customerNo]); // 패널에 손님라벨 추가
 		int temp = customerNo;
-
-		if(customerNo!=maxOrderNo-1) {
+		
+		//손님 No 설정
+		if(customerNo!=2) {
 			customerNo++;
 		}else {
 			customerNo=0;
@@ -65,16 +67,29 @@ public class CustomerManager {
 	}
 
 	public void addOrder(int menuNo,int x) {
-		y = 15;	//y축 초기화
+		int y = 15;	//y축 초기화
 
 		for (int i = 0; i < menuNo; i++) {				//메뉴 개수에 따라 반복
-			int random = new Random().nextInt(2);		//1스테이지 한정 2가지
+			int random=0;
+			if(stageLv==1) {
+				random = new Random().nextInt(2);		//1스테이지 한정 2가지
+			}else if(stageLv==2) {
+				random = new Random().nextInt(3);		//2스테이지 한정 3가지
+			}
 			if (random == 0) {
-				orderDao.addOrder(new MenuOrder("떡볶이", 2000, orderNo));
+				orderDao.addOrder(new MenuOrder("떡볶이", 2200, orderNo));
 			} else if (random == 1) {
 				orderDao.addOrder(new MenuOrder("음료수", 1000, orderNo));
+			} else if (random == 2) {
+				orderDao.addOrder(new MenuOrder("튀김", 1800, orderNo));
+			} else if (random == 3) {
+				orderDao.addOrder(new MenuOrder("오뎅", 2000, orderNo));
+			} else if (random == 4) {
+				orderDao.addOrder(new MenuOrder("라면", 3000, orderNo));
 			}
-			orderLabel[orderNo] = new OrderLabel(orderNo);
+			orderLabel[orderNo] = new OrderLabel(orderNo);	//order Label 추가
+			
+			//이미지 추가
 			//랜덤값 0일 경우 떡볶이
 			Image food = null;
 			if (random == 0) {
@@ -84,11 +99,18 @@ public class CustomerManager {
 			} else if (random == 1) {
 				food = new ImageIcon("images/drinkImage.jpg")
 						.getImage().getScaledInstance(50, 40, 0);
+			} else if (random == 2) {
+				food = new ImageIcon("images/friedImage.jpeg")
+						.getImage().getScaledInstance(50, 40, 0);
 			}
+			
+			//위치 설정
 			orderLabel[orderNo].setIcon(new ImageIcon(food));
 			orderLabel[orderNo].setBounds(x+120, y, 100, 30);
 			y += 40;
 			gP.add(orderLabel[orderNo]);
+			
+			//orderNo설정
 			if(orderNo!=maxOrderNo*3-1) {
 				orderNo++;
 			}else {
@@ -97,7 +119,7 @@ public class CustomerManager {
 		}
 	}
 
-	public void deleteLabel(int orderNo) {		//주문내역 삭제 및 모든 주문 전달 완료시 손님(+타이머) 삭제
+	public void deleteLabel(int orderNo) {			//주문내역 삭제 및 모든 주문 전달 완료시 손님(+타이머) 삭제
 		gP.remove(orderLabel[orderNo]);
 		//손님에 따라 손님 주문수 감소
 		if(orderNo<maxOrderNo*1) {
@@ -120,7 +142,7 @@ public class CustomerManager {
 		gP.repaint();
 	}
 	public void deleteCustomer(int customerNo) {		//시간 만료시 주문내역과 손님(+타이머) 삭제
-		for (int i = 3*customerNo; i < 3*customerNo+3; i++) {
+		for (int i = maxOrderNo*customerNo; i < maxOrderNo*customerNo+maxOrderNo; i++) {
 			if(orderLabel[i]!=null) {
 				gP.remove(orderLabel[i]);
 				orderDao.removeOrder(i);
