@@ -37,44 +37,44 @@ public class LoginPanel extends JPanel {
 	private MemberDao memberDao;
 	private Member m;
 	
-	// »ı¼ºÀÚ
+	// ìƒì„±ì
 	public LoginPanel(MainFrame mf) {
 		this.mf = mf;
 		this.lView = this;
-		memberDao = new MemberDao();		//¸â¹öDao ½ÇÇà (»ı¼ºÀÚ¿¡ ÀÇÇØ ÀúÀåµÈ ¸â¹ö ´Ù ºÒ·¯¿È)
+		memberDao = new MemberDao();		//ë©¤ë²„Dao ì‹¤í–‰ (ìƒì„±ìì— ì˜í•´ ì €ì¥ëœ ë©¤ë²„ ë‹¤ ë¶ˆëŸ¬ì˜´)
 		
-		//»ùÇÃ µ¥ÀÌÅÍ ÀÔ·Â
+		//ìƒ˜í”Œ ë°ì´í„° ì…ë ¥
 		//memberDao.addMember(new Member("test","pass","email"));
-		memberDao.printMember();	//ÀúÀåÈ®ÀÎ
+		memberDao.printMember();	//ì €ì¥í™•ì¸
 
 		setSize(1024, 768);
-		// ·¹ÀÌ¾Æ¿ô ¼³Á¤
+		// ë ˆì´ì•„ì›ƒ ì„¤ì •
 		setLayout(null);
 		JLayeredPane layeredPane = new JLayeredPane();
 		layeredPane.setBounds(0, 0, 1024, 768);
 		layeredPane.setLayout(null);
 
-		// ÀÌ¹ÌÁö ¹Ş¾Æ¿À±â
+		// ì´ë¯¸ì§€ ë°›ì•„ì˜¤ê¸°
 		try {
 			img = ImageIO.read(new File("images/LoguinFrame01_01.jpg"));
 		} catch (IOException e) {
-			System.out.println("ÀÌ¹ÌÁö ºÒ·¯¿À±â ½ÇÆĞ");
+			System.out.println("ì´ë¯¸ì§€ ë¶ˆëŸ¬ì˜¤ê¸° ì‹¤íŒ¨");
 			System.exit(0);
 		}
 
 		MyPanel panel = new MyPanel();
 		panel.setBounds(0, 0, 1024, 768);
 
-		// ·Î±×ÀÎ ¶ó¹ë
-		JLabel ID = new JLabel("¾ÆÀÌµğ :");
+		// ë¡œê·¸ì¸ ë¼ë°¸
+		JLabel ID = new JLabel("ì•„ì´ë”” :");
 		ID.setBounds(346, 200, 200, 370);
 
 		IDText = new JTextField(15);
 		IDText.setBounds(400, 370, 200, 30);
 		IDText.setForeground(Color.BLACK);
 		IDText.setBackground(Color.WHITE);
-		// ÆĞ½º¿öµå ¶óº§
-		JLabel Pass = new JLabel("ºñ¹Ğ¹øÈ£:");
+		// íŒ¨ìŠ¤ì›Œë“œ ë¼ë²¨
+		JLabel Pass = new JLabel("ë¹„ë°€ë²ˆí˜¸:");
 		Pass.setBounds(346, 250, 200, 370);
 
 		passText = new JPasswordField(15);
@@ -83,17 +83,17 @@ public class LoginPanel extends JPanel {
 		passText.setBackground(Color.white);
 		
 		
-		// ·Î±×ÀÎ¹öÆ° Ãß°¡
-		loginbt = new JButton("·Î±×ÀÎ");
+		// ë¡œê·¸ì¸ë²„íŠ¼ ì¶”ê°€
+		loginbt = new JButton("ë¡œê·¸ì¸");
 		loginbt.setBounds(400, 460, 200, 30);
 
 		guestbt= new JButton("guest");
 		guestbt.setBounds(510, 510, 90, 30); 
 				
-		Joinbt = new JButton("È¸¿ø°¡ÀÔ");
+		Joinbt = new JButton("íšŒì›ê°€ì…");
 		Joinbt.setBounds(400, 510, 90, 30);
 		
-		// ¸¶Áö¸· Ãß°¡µé
+		// ë§ˆì§€ë§‰ ì¶”ê°€ë“¤
 		layeredPane.add(panel);
 		this.add(ID);
 		this.add(Pass);
@@ -102,8 +102,10 @@ public class LoginPanel extends JPanel {
 		this.add(loginbt);
 		this.add(guestbt); 
 		this.add(Joinbt);
-		loginbt.addActionListener(new BtnAction()); 
+    loginbt.addActionListener(new BtnAction()); 
 		guestbt.addActionListener(new BtnAction());
+		Joinbt.addActionListener(new BtnAction());
+		layeredPane.add(panel);
 		add(layeredPane);
 	}
 
@@ -128,11 +130,15 @@ public class LoginPanel extends JPanel {
 				if((m=memberDao.loginMember(inputId, inputPass))!=null) {
 					new ChangePanel().changePanel(mf, lView, new StageView(mf,m));					
 				}else {
-					System.out.println("Àß¸øµÈ Á¤º¸ÀÔ´Ï´Ù.");
+					System.out.println("ì˜ëª»ëœ ì •ë³´ì…ë‹ˆë‹¤.");
 				}
 			}
 			if(e.getSource() == guestbt) {
 				new ChangePanel().changePanel(mf, lView, new StageView(mf,new Member("guest","pass","email")));
+			}
+      //íšŒì›ê°€ì…
+      if(e.getSource() == Joinbt) {
+				new ChangePanel().changePanel(mf, lView, new JoinPanel(mf,m));
 			}
 		}
 	}
