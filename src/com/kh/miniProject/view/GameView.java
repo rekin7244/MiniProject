@@ -45,11 +45,12 @@ public class GameView extends JPanel{
 	private OrderDao orderDao;
 
 	//cons
-	public GameView(MainFrame mf,Member m) {
+	public GameView(MainFrame mf,Member m,int stageLv) {
 		orderDao = new OrderDao(this);			//스테이지 당 orderDao 생성 단한번만!!
 		this.gView = this;
 		this.mf = mf;
 		this.m = m;
+		this.stageLv = stageLv;
 		this.setLayout(null);
 		this.setSize(Run.SCREEN_WIDTH,Run.SCREEN_HEIGHT);
 
@@ -176,7 +177,6 @@ public class GameView extends JPanel{
 				refreshMenuTable();
 				System.out.println("튀김 충전 잔여 개수"+friedNo);
 			}
-
 
 			//MenuPanel ActionListener
 			int temp;
