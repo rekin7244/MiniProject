@@ -37,6 +37,35 @@ public class MemberDao {
 		saveMemberList();
 	}
 	
+	public boolean checkMember(String memberId, String memberEmail) {
+		for(Member m : memberList) {
+			if(m.getMemberId().equals(memberId) || m.getMemberEmail().equals(memberEmail)) {
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	//아이디 중복확인
+	public boolean checkID(String memberId) {
+		for(Member m : memberList) {
+			if(m.getMemberId().equals(memberId)) {
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	//이메일 중복확인
+	public boolean checkEmail(String memberEmail) {
+		for(Member m : memberList) {
+			if(m.getMemberEmail().equals(memberEmail)) {
+				return false;
+			}
+		}
+		return true;
+	}
+	
 	//실험용 : 저장된 회원 출력
 	public void printMember() {
 		for (Member member : memberList) {
