@@ -43,7 +43,7 @@ public class EquipmentPanel extends JPanel{
 	public void equipsSetting(JPanel panel,Member m) {
 		int[] equipsLv = m.getEquipsLv();
 		//Equipments setting
-		for (int i = 0; i < images.length; i++) {
+		for (int i = 0; i < images.length-1; i++) {
 				equips[i] = new JButton(name[i]);
 				equips[i].setBounds(xlocation[i],0,xSize[i],panelSize);
 				equips[i].setIcon(new ImageIcon(images[i]));

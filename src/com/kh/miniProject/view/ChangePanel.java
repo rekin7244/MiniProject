@@ -11,5 +11,6 @@ public class ChangePanel {
 		//컴포넌트를 다시 그리는 메소드
 		mf.repaint();
 	}
-	
+
+
 }

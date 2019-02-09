@@ -53,6 +53,19 @@ public class MemberDao {
 		return null;	//로그인 실패
 	}
 	
+	
+	
+	//회원 가입 메소드 
+	public Boolean JoinMember(String memberId, String memberEmail) {
+		for(Member member:memberList) {
+			if(member.getMemberId().equals(memberId) || member.getMemberEmail().equals(memberEmail)){
+				return false; //회원가입 실패
+			}
+		}
+		return true; 		  //회원 가입 성공
+	}
+	
+	
 
 	public Member searchMember(String memberEmail) {
 		for (Member member : memberList) {

@@ -1,6 +1,8 @@
 package com.kh.miniProject.view;
 
 import java.awt.Color;
+import java.awt.Dialog;
+import java.awt.Frame;
 import java.awt.Graphics;
 import java.awt.Panel;
 import java.awt.event.ActionEvent;
@@ -31,9 +33,13 @@ public class LoginPanel extends JPanel {
 	String inputId;
 	JPasswordField passText;
 	String inputPass;
+	
+	
+	
 	JButton loginbt;
 	JButton Joinbt;
 	JButton guestbt;
+	
 	private MemberDao memberDao;
 	private Member m;
 
@@ -105,7 +111,7 @@ public class LoginPanel extends JPanel {
 		loginbt.addActionListener(new BtnAction()); 
 		guestbt.addActionListener(new BtnAction());
 		Joinbt.addActionListener(new BtnAction());
-		layeredPane.add(panel);
+		//layeredPane.add(panel);
 		add(layeredPane);
 	}
 
@@ -130,7 +136,42 @@ public class LoginPanel extends JPanel {
 				if((m=memberDao.loginMember(inputId, inputPass))!=null) {
 					new ChangePanel().changePanel(mf, lView, new StageView(mf,m));					
 				}else {
-					System.out.println("잘못된 정보입니다.");
+					
+					JFrame 	fr;
+					Dialog  da;
+					JPanel  pa; 
+					
+					fr=new JFrame("로그인 실퍠");
+					fr.setBounds(325, 600, 350, 90);
+					
+					pa=new JPanel();
+					pa.setBounds(400,200 , 300, 300);
+					
+					JButton join =new JButton("회원 가입");
+					join.setBounds(150, 250, 30, 30); 
+					
+					JButton search=new JButton("계정 찾기");
+					search.setBounds(100, 250, 30, 30); 
+					
+					
+					
+					
+					da=new Dialog(fr);
+					
+					
+					
+					fr.add(pa);
+					
+					pa.add(join);
+					pa.add(search);
+					
+					
+					fr.setVisible(true);
+				
+					
+					
+					
+					
 				}
 			}
 			if(e.getSource() == guestbt) {
@@ -142,4 +183,16 @@ public class LoginPanel extends JPanel {
 			}
 		}
 	}
+	private class tnAction implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			// TODO Auto-generated method stub
+			
+		}
+		
+	}
+
+
 }
+

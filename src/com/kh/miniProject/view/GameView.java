@@ -114,7 +114,7 @@ public class GameView extends JPanel{
 
 		//ActionListener setting
 		JButton[] equips = eP.getEquips();
-		for (int i = 0; i < equips.length; i++) {
+		for (int i = 0; i < equips.length-1; i++) {
 			equips[i].addActionListener(new Event_Cook());
 		}		
 		JButton[] menuButton = mP.getMenuButton();
