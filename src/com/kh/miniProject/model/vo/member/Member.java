@@ -15,6 +15,16 @@ public class Member implements Serializable{
 	//∏ﬁ¥∫≈◊¿Ã∫Ì ∑π∫ß √ ±‚ ºº∆√ {∂±∫∫¿Ã/∆¢±Ë/ø¿µ≠/∂Û∏È}
 	private int[] tableLv = {1,1,1,1};
 	
+	public int[] getTableLv() {
+		return tableLv;
+	}
+
+
+	public void setTableLv(int[] tableLv) {
+		this.tableLv = tableLv;
+	}
+
+
 	//cons
 	public Member(String memberId, String memberPwd, String memberEmail) {
 		super();
