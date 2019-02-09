@@ -35,16 +35,11 @@ public class JoinPanel extends JPanel {
 	
 	private MainFrame mf;
 	private JPanel mainPage;
-	private Member m;
 	private JPanel jView;
 	
-	
-	
-	
 
-	public JoinPanel(MainFrame mf, Member m) {
+	public JoinPanel(MainFrame mf) {
 		this.mf = mf;
-		this.m = m;
 		this.jView = this;
 		
 					
@@ -133,14 +128,6 @@ public class JoinPanel extends JPanel {
 		cancelbt.addActionListener(new Cancel());
 		layeredPane.add(panel);
 		add(layeredPane);
-		
-		
-		
-		 
-		
-		
-		
-	
 	}
 
 	class joinimg extends JPanel {
@@ -165,7 +152,7 @@ public class JoinPanel extends JPanel {
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
 			if(e.getSource() == joinbt) {
-				new ChangePanel().changePanel(mf, jView, new LoginPanel(mf,m));
+				new ChangePanel().changePanel(mf, jView, new LoginPanel(mf));
 			}
 		}
 		
@@ -178,7 +165,7 @@ public class JoinPanel extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				if(e.getSource() == cancelbt) {
-					new ChangePanel().changePanel(mf, jView, new LoginPanel(mf,m));
+					new ChangePanel().changePanel(mf, jView, new LoginPanel(mf));
 				}
 			}
 			
