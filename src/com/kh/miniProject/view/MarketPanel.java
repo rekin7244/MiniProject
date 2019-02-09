@@ -40,6 +40,7 @@ public class MarketPanel extends JPanel {
 	
 	JPanel mPanel;
 	private int[] equipsLv;
+	private int[] tableLv;
 	private EquipSetting e;
 	
 	
@@ -72,6 +73,7 @@ public class MarketPanel extends JPanel {
 		this.mf = mf;
 		this.m = m;
 		this.equipsLv = m.getEquipsLv();
+		this.tableLv = m.getTableLv();
 		this.setLayout(null);
 		this.setBounds(110, 50, 800, 650);
 		this.setBackground(Color.orange);
@@ -138,9 +140,9 @@ public class MarketPanel extends JPanel {
 		mo3.addActionListener(e);
 		
 		//¶±ººÀÌÆÇ
-		if(equipsLv[4]==1) {
+		if(tableLv[0]==1) {
 			mo4.setIcon(new ImageIcon(equipsImages4[0]));
-		}else if(equipsLv[4]==2) {
+		}else if(tableLv[0]==2) {
 			mo4.setIcon(new ImageIcon(equipsImages4[1]));
 		}
 		mo4.setBounds(20,360, 180,180);
@@ -231,8 +233,8 @@ public class MarketPanel extends JPanel {
 			}
 			if(e.getActionCommand().equals("¶±ººÀÌÆÇ ¾÷±Û")) {
 				System.out.println("tbkup");
-				if(equipsLv[4]==1) {
-					equipsLv[4]+=1;
+				if(tableLv[0]==1) {
+					tableLv[0]+=1;
 				}else {
 					System.out.println("lv max error");
 				}
@@ -240,8 +242,8 @@ public class MarketPanel extends JPanel {
 			}
 			if(e.getActionCommand().equals("Æ¢±èÆÇ ¾÷±Û")) {
 				System.out.println("tkup");
-				if(equipsLv[5]==1) {
-					equipsLv[5]+=1;
+				if(tableLv[1]==1) {
+					tableLv[1]+=1;
 				}else {
 					System.out.println("lv max error");
 				}

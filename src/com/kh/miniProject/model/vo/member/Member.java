@@ -10,10 +10,10 @@ public class Member implements Serializable{
 	private int maxStage=1;		//초기 세팅 1스테이지
 	private int gold;			//초기 금액 0
 	
-	//조리기구 레벨 초기 세팅 {자판기/떡볶이/라면기계/오뎅기계/튀김기}
-	private int[] equipsLv = {1,1,0,0,0};
-	//메뉴테이블 레벨 초기 세팅 {자판기/떡볶이/라면/오뎅/튀김}
-	private int[] tableLv = {1,1,1,1,1};
+	//조리기구 레벨 초기 세팅 {떡볶이/튀김기/오뎅기계/라면기계}
+	private int[] equipsLv = {1,0,0,0};
+	//메뉴테이블 레벨 초기 세팅 {떡볶이/튀김/오뎅/라면}
+	private int[] tableLv = {1,1,1,1};
 	
 	//cons
 	public Member(String memberId, String memberPwd, String memberEmail) {
@@ -64,6 +64,12 @@ public class Member implements Serializable{
 	}
 	public void setEquipsLv(int[] equipsLv) {
 		this.equipsLv = equipsLv;
+	}
+	public int[] getTableLv() {
+		return tableLv;
+	}
+	public void setTableLv(int[] tableLv) {
+		this.tableLv = tableLv;
 	}
 
 
