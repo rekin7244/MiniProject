@@ -94,7 +94,6 @@ public class LoginPanel extends JPanel {
 		Joinbt.setBounds(400, 510, 90, 30);
 
 		// 마지막 추가들
-		layeredPane.add(panel);
 		this.add(ID);
 		this.add(Pass);
 		layeredPane.add(IDText);
@@ -136,9 +135,9 @@ public class LoginPanel extends JPanel {
 			if(e.getSource() == guestbt) {
 				new ChangePanel().changePanel(mf, lView, new StageView(mf,new Member("guest","pass","email")));
 			}
-			//회원가입
 			if(e.getSource() == Joinbt) {
 				new ChangePanel().changePanel(mf, lView, new JoinPanel(mf));
+				
 			}
 		}
 	}
