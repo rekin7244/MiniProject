@@ -62,7 +62,7 @@ public class GameView extends JPanel{
 
 		//고객매니저 실행
 		cm = new CustomerManager(gP,orderDao);
-		//Timer
+		//스테이지 Timer
 		gameTimer = new TimerTest(gP,cm);
 		gP.add(gameTimer);
 
@@ -89,7 +89,7 @@ public class GameView extends JPanel{
 		});
 		backButton.setBounds(950,0,50,50);
 		backButton.setContentAreaFilled(false);
-		this.add(backButton);
+		gP.add(backButton);
 
 
 		//골드 출력

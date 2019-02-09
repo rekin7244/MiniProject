@@ -19,7 +19,7 @@ public class CustomerManager {
 	private OrderDao orderDao;
 	private CustomerTimer[] cTimer = new CustomerTimer[3];
 
-	private int maxOrderNo = 3;		//주문하는 메뉴의 최대 수
+	private int maxOrderNo=3;		//주문하는 메뉴의 최대 수
 	private int orderNo;			//주문 번호
 	private int customerNo=0;			//손님 번호
 	private OrderLabel[] orderLabel;				//주문 이미지
@@ -34,7 +34,7 @@ public class CustomerManager {
 	}
 
 	public void guest(int maxOrderNo) {
-		cTimer[customerNo] = new CustomerTimer(this,3,customerNo);
+		cTimer[customerNo] = new CustomerTimer(this,12,customerNo);
 		gP.add(cTimer[customerNo]);
 		Image icon = new ImageIcon("images/guest.PNG")
 				.getImage().getScaledInstance(120, 200, 0); // 손님 이미지

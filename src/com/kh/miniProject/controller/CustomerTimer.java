@@ -19,9 +19,9 @@ public class CustomerTimer extends JPanel{
 	private Timer timer;
 	private double waitingTime;
 	
-	public CustomerTimer(CustomerManager cm,int maxOrderNo,int customerNo) {
+	public CustomerTimer(CustomerManager cm,int waitingTime,int customerNo) {
 		this.cm = cm;
-		this.waitingTime = 15;
+		this.waitingTime = waitingTime;
 		this.customerNo = customerNo;
 		
 		//게스트 타이머 시작
