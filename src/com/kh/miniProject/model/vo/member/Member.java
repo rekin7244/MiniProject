@@ -14,15 +14,6 @@ public class Member implements Serializable{
 	private int[] equipsLv = {1,0,0,0};
 	//∏ﬁ¥∫≈◊¿Ã∫Ì ∑π∫ß √ ±‚ ºº∆√ {∂±∫∫¿Ã/∆¢±Ë/ø¿µ≠/∂Û∏È}
 	private int[] tableLv = {1,1,1,1};
-	
-	public int[] getTableLv() {
-		return tableLv;
-	}
-
-
-	public void setTableLv(int[] tableLv) {
-		this.tableLv = tableLv;
-	}
 
 
 	//cons
@@ -36,7 +27,6 @@ public class Member implements Serializable{
 			gold=10000;
 		};
 	}
-	
 	
 	//get,set
 	public String getMemberId() {
