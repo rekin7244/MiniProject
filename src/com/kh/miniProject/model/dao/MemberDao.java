@@ -22,7 +22,7 @@ public class MemberDao {
 				memberList.add((Member)oIn.readObject());
 			}
 		}catch (FileNotFoundException e) {
-			System.out.println("첫 회원입니다.");
+			System.out.println("저장된 회원이 없습니다.");
 		} catch (EOFException e) {
 			System.out.println("저장된 정보를 읽어왔습니다.");
 		} catch (IOException e) {
@@ -37,15 +37,23 @@ public class MemberDao {
 		saveMemberList();
 	}
 	
-	public boolean loginMember(String memberId,String memberPwd) {
+	//실험용 : 저장된 회원 출력
+	public void printMember() {
 		for (Member member : memberList) {
-			if(member.getMemberId().equals(memberId) && member.getMemberPwd().equals(memberPwd)) {
-				return true;
-			}			//로그인 성공
+			System.out.println(member);
 		}
-		return false;	//로그인 실패
 	}
 	
+	public Member loginMember(String memberId,String memberPwd) {
+		for (Member member : memberList) {
+			if(member.getMemberId().equals(memberId) && member.getMemberPwd().equals(memberPwd)) {
+				return member;
+			}			//로그인 성공
+		}
+		return null;	//로그인 실패
+	}
+	
+
 	public Member searchMember(String memberEmail) {
 		for (Member member : memberList) {
 			if(member.getMemberEmail().equals(memberEmail)) {

@@ -15,14 +15,12 @@ public class MainFrame extends JFrame{
 		this.setResizable(false);
 		this.setBackground(Color.pink);
 		
+		//loginPanel로 이동
+		this.add(new LoginPanel(this));
 		
-		//test 용으로 guestLogin 처리
-		Member guest = new Member("guest","p","e");
-		guest.setGold(2000);
-		//test용이므로 StageView를 초기화면으로 해둠
-		//this.add(new StageView(this,guest));
-		//this.add(new GameView());
-		this.add(new LoginPanel(this,guest));
+		/*test용이므로 StageView를 초기화면으로 해둠
+		this.add(new StageView(this,guest));
+		this.add(new GameView());*/
 		
 		
 		this.setVisible(true);

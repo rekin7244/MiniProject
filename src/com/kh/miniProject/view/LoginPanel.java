@@ -19,30 +19,34 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import com.kh.miniProject.model.dao.MemberDao;
 import com.kh.miniProject.model.vo.member.Member;
 
 public class LoginPanel extends JPanel {
+	private MainFrame mf;
+	private LoginPanel lView;
 
 	BufferedImage img = null;
 	JTextField IDText;
+	String inputId;
 	JPasswordField passText;
+	String inputPass;
 	JButton loginbt;
 	JButton Joinbt;
 	JButton guestbt;
-	private MainFrame mf;
-	private JPanel mainPage;
+	private MemberDao memberDao;
 	private Member m;
-	private JPanel lView;
-
-	 
 	
 	// 생성자
-	public LoginPanel(MainFrame mf, Member m) {
+	public LoginPanel(MainFrame mf) {
 		this.mf = mf;
-		this.m = m;
 		this.lView = this;
-		//this.lView = this;
-					
+		memberDao = new MemberDao();		//멤버Dao 실행 (생성자에 의해 저장된 멤버 다 불러옴)
+		
+		//샘플 데이터 입력
+		//memberDao.addMember(new Member("test","pass","email"));
+		memberDao.printMember();	//저장확인
+
 		setSize(1024, 768);
 		// 레이아웃 설정
 		setLayout(null);
@@ -50,7 +54,6 @@ public class LoginPanel extends JPanel {
 		layeredPane.setBounds(0, 0, 1024, 768);
 		layeredPane.setLayout(null);
 
-		// 패널1
 		// 이미지 받아오기
 		try {
 			img = ImageIO.read(new File("images/LoguinFrame01_01.jpg"));
@@ -62,94 +65,36 @@ public class LoginPanel extends JPanel {
 		MyPanel panel = new MyPanel();
 		panel.setBounds(0, 0, 1024, 768);
 
-		// 로그인 필드
-		/*
-		 * loginTextField = new JTextField(15);
-		 * loginTextField.setBounds(348,150,681,369); layeredPane.add(loginTextField);
-		 * loginTextField.setOpaque(false); loginTextField.setForeground(Color.black);
-		 * loginTextField.setBorder(javax.swing.BorderFactory.createEmptyBorder());
-		 */
 		// 로그인 라밸
 		JLabel ID = new JLabel("아이디 :");
-		// ID.setLocation(100, 200);
 		ID.setBounds(346, 200, 200, 370);
-
-		/*this.add(ID);*/
 
 		IDText = new JTextField(15);
 		IDText.setBounds(400, 370, 200, 30);
-		/*layeredPane.add(IDText);*/
-		//IDText.setOpaque(false);
 		IDText.setForeground(Color.BLACK);
-		IDText.setBackground(Color.WHITE); 
-		//IDText.setBorder(javax.swing.BorderFactory.createEmptyBorder());
-
+		IDText.setBackground(Color.WHITE);
 		// 패스워드 라벨
 		JLabel Pass = new JLabel("비밀번호:");
-		// Pass.setLocation(100, 200);
 		Pass.setBounds(346, 250, 200, 370);
-
-		/*this.add(Pass);*/
 
 		passText = new JPasswordField(15);
 		passText.setBounds(400, 420, 200, 30);
-		/*layeredPane.add(passText);*/
-		//passText.setOpaque(false);
 		passText.setForeground(Color.BLACK);
 		passText.setBackground(Color.white);
-		//passText.setBorder(javax.swing.BorderFactory.createEmptyBorder());
-
-		// 패스워드
-		/*
-		 * passwordField = new JPasswordField(15);
-		 * passwordField.setBounds(345,200,677,466); passwordField.setOpaque(false);
-		 * passwordField.setForeground(Color.black);
-		 * passwordField.setBorder(javax.swing.BorderFactory.createEmptyBorder());
-		 * layeredPane.add(passwordField);
-		 */
-
+		
+		
 		// 로그인버튼 추가
 		loginbt = new JButton("로그인");
-		// loginbt.setLocation(85, 85);
 		loginbt.setBounds(400, 460, 200, 30);
 
-		
 		guestbt= new JButton("guest");
 		guestbt.setBounds(510, 510, 90, 30); 
-		
-		
+				
 		Joinbt = new JButton("회원가입");
 		Joinbt.setBounds(400, 510, 90, 30);
 		
-		
-		
-		
-		
-		
-		
-		
-			
-		/*this.add(loginbt);
-		loginbt.addActionListener(new Login());*/
-
-		// 회원 가입 버튼 추가
-
-		// 게스트 버튼 추가
-
-		/*
-		 * loginbt.setBounds(50,300,676,536); this.add(loginbt);
-		 * 
-		 * loginbt.addActionListener(new Login());
-		 */
-
-		// 버튼 투명처리
-		/*
-		 * loginbt.setBorderPainted(false); loginbt.setFocusPainted(false);
-		 * loginbt.setContentAreaFilled(false);
-		 */
-		// layeredPane.add(loginbt);
-
 		// 마지막 추가들
+		layeredPane.add(panel);
 		this.add(ID);
 		this.add(Pass);
 		layeredPane.add(IDText);
@@ -157,11 +102,9 @@ public class LoginPanel extends JPanel {
 		this.add(loginbt);
 		this.add(guestbt); 
 		this.add(Joinbt);
-		loginbt.addActionListener(new Login()); 
-		guestbt.addActionListener(new guest());
-		layeredPane.add(panel);
+		loginbt.addActionListener(new BtnAction()); 
+		guestbt.addActionListener(new BtnAction());
 		add(layeredPane);
-
 	}
 
 	class MyPanel extends JPanel {
@@ -170,31 +113,27 @@ public class LoginPanel extends JPanel {
 		}
 	}
 
-	private class Login implements ActionListener {
-
+	private class BtnAction implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			System.out.println("로그인 버튼 클릭 성공");
 			if(e.getSource() == loginbt) {
-				new ChangePanel().changePanel(mf, lView, new StageView(mf,m));
+				inputId = IDText.getText();
+				inputPass = "";
+				char[] pass = passText.getPassword();
+				for (int i = 0; i < pass.length; i++) {
+					inputPass += pass[i];
+				}
+				System.out.println("inputId : "+inputId);
+				System.out.println("inputPass : "+inputPass);
+				if((m=memberDao.loginMember(inputId, inputPass))!=null) {
+					new ChangePanel().changePanel(mf, lView, new StageView(mf,m));					
+				}else {
+					System.out.println("잘못된 정보입니다.");
+				}
 			}
-			
-			
-
+			if(e.getSource() == guestbt) {
+				new ChangePanel().changePanel(mf, lView, new StageView(mf,new Member("guest","pass","email")));
+			}
 		}
-
 	}
-	
-	private class guest implements ActionListener{
-
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
-			
-			
-		}
-		
-	}
-	
-	
 }
