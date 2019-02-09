@@ -40,6 +40,7 @@ public class MarketPanel extends JPanel {
 	
 	JPanel mPanel;
 	private int[] equipsLv;
+	private int[] tableLv;
 	private EquipSetting e;
 	
 	
@@ -57,21 +58,26 @@ public class MarketPanel extends JPanel {
 			new ImageIcon("images/¶ó¸éLv2.jpg").getImage().getScaledInstance(200, 200, 0) };
 	
 	//¶±ººÀÌ ÆÇ
-	private Image[] equipsImages4= {new ImageIcon("images/tbk1.png").getImage().getScaledInstance(200,200,0),
+	private Image[] tableImages= {new ImageIcon("images/tbk1.png").getImage().getScaledInstance(200,200,0),
 			new ImageIcon("images/tbk2.png").getImage().getScaledInstance(200,200,0) };
 	//Æ¢±è ÆÇ
-	private Image[] equipsImages5= {new ImageIcon("images/fried1.png").getImage().getScaledInstance(200,200,0),
+	private Image[] tableImages1= {new ImageIcon("images/fried1.png").getImage().getScaledInstance(200,200,0),
 			new ImageIcon("images/fried2.png").getImage().getScaledInstance(200,200,0)};
 	
 	//¿Àµ­ ÆÇ
+	private Image[] tableImages2= {new ImageIcon("images/fried1.png").getImage().getScaledInstance(200,200,0),
+			new ImageIcon("images/fried2.png").getImage().getScaledInstance(200,200,0)};
 	
 	//¶ó¸é ÆÇ
+	private Image[] tableImages3= {new ImageIcon("images/fried1.png").getImage().getScaledInstance(200,200,0),
+			new ImageIcon("images/fried2.png").getImage().getScaledInstance(200,200,0)};
 
 	public MarketPanel(MainFrame mf, Member m) {
 		e = new EquipSetting();
 		this.mf = mf;
 		this.m = m;
 		this.equipsLv = m.getEquipsLv();
+		this.tableLv=m.getTableLv();
 		this.setLayout(null);
 		this.setBounds(110, 50, 800, 650);
 		this.setBackground(Color.orange);
@@ -138,24 +144,44 @@ public class MarketPanel extends JPanel {
 		mo3.addActionListener(e);
 		
 		//¶±ººÀÌÆÇ
-		if(equipsLv[4]==1) {
-			mo4.setIcon(new ImageIcon(equipsImages4[0]));
-		}else if(equipsLv[4]==2) {
-			mo4.setIcon(new ImageIcon(equipsImages4[1]));
+		if(tableLv[0]==1) {
+			mo4.setIcon(new ImageIcon(tableImages[0]));
+		}else if(equipsLv[0]==2) {
+			mo4.setIcon(new ImageIcon(tableImages[1]));
 		}
 		mo4.setBounds(20,360, 180,180);
 		mo4.removeActionListener(e);
 		mo4.addActionListener(e);
 		
 		//Æ¢±è ÆÇ		
-		/*if(equipsLv[5]==1) {
-			mo5.setIcon(new ImageIcon(equipsImages5[0]));
-		}else if(equipsLv[5]==2) {
-			mo5.setIcon(new ImageIcon(equipsImages5[1]));
+		if(tableLv[1]==1) {
+			mo5.setIcon(new ImageIcon(tableImages1[0]));
+		}else if(tableLv[1]==2) {
+			mo5.setIcon(new ImageIcon(tableImages1[1]));
 		}
 		mo5.setBounds(220,360, 180,180);
 		mo5.removeActionListener(e);
-		mo5.addActionListener(e);*/
+		mo5.addActionListener(e);
+		
+		//¿Àµ­ ÆÇ
+		if(tableLv[2]==1) {
+			mo6.setIcon(new ImageIcon(tableImages2[0]));
+		}else if(tableLv[2]==2) {
+			mo6.setIcon(new ImageIcon(tableImages2[1]));
+		}
+		mo6.setBounds(420,360, 180,180);
+		mo6.removeActionListener(e);
+		mo6.addActionListener(e);
+		
+		//¶ó¸é ÆÇ
+		if(tableLv[3]==1) {
+			mo7.setIcon(new ImageIcon(tableImages3[0]));
+		}else if(tableLv[3]==2) {
+			mo7.setIcon(new ImageIcon(tableImages3[1]));
+		}
+		mo7.setBounds(620,360, 180,180);
+		mo7.removeActionListener(e);
+		mo7.addActionListener(e);
 		
 
 		panel.add(mo);
@@ -196,7 +222,12 @@ public class MarketPanel extends JPanel {
 			if (e.getActionCommand().equals("¶±ººÀÌ±â±¸")) {
 				System.out.println("tbk");
 				if (equipsLv[0] == 1) {
-					equipsLv[0] += 1;
+					if(m.getGold()>50000) {
+						equipsLv[0] += 1;
+						m.setGold(m.getGold()-50000);
+					}else {
+						System.out.println("money more");
+					}
 				} else {
 					System.out.println("lv max error");
 				}
@@ -204,8 +235,13 @@ public class MarketPanel extends JPanel {
 			}
 			if (e.getActionCommand().equals("Æ¢±è±â±¸")) {
 				System.out.println("tk");
-				if (equipsLv[1] == 1) {
-					equipsLv[1] += 1;
+				if (equipsLv[1] == 0) {
+					if(m.getGold()>20000) {
+						equipsLv[1] += 1;
+						m.setGold(m.getGold()-20000);
+					}else {
+						System.out.println("money more");
+					}
 				} else {
 					System.out.println("lv max error");
 				}
@@ -231,8 +267,8 @@ public class MarketPanel extends JPanel {
 			}
 			if(e.getActionCommand().equals("¶±ººÀÌÆÇ ¾÷±Û")) {
 				System.out.println("tbkup");
-				if(equipsLv[4]==1) {
-					equipsLv[4]+=1;
+				if(tableLv[0]==1) {
+					tableLv[0]+=1;
 				}else {
 					System.out.println("lv max error");
 				}
@@ -240,8 +276,26 @@ public class MarketPanel extends JPanel {
 			}
 			if(e.getActionCommand().equals("Æ¢±èÆÇ ¾÷±Û")) {
 				System.out.println("tkup");
-				if(equipsLv[5]==1) {
-					equipsLv[5]+=1;
+				if(tableLv[1]==1) {
+					tableLv[1]+=1;
+				}else {
+					System.out.println("lv max error");
+				}
+				refresh();
+			}
+			if(e.getActionCommand().equals("¿Àµ­ÆÇ ¾÷±Û")) {
+				System.out.println("odup");
+				if(tableLv[2]==1) {
+					tableLv[2]+=1;
+				}else {
+					System.out.println("lv max error");
+				}
+				refresh();
+			}
+			if(e.getActionCommand().equals("¶ó¸éÆÇ ¾÷±Û")) {
+				System.out.println("rmup");
+				if(tableLv[3]==1) {
+					tableLv[3]+=1;
 				}else {
 					System.out.println("lv max error");
 				}
@@ -253,6 +307,8 @@ public class MarketPanel extends JPanel {
 		}
 		public void refresh() {
 			setting(mPanel);
+			m.setEquipsLv(equipsLv);
+			m.setTableLv(tableLv);
 		}
 	}
 }//class

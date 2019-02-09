@@ -15,6 +15,16 @@ public class Member implements Serializable{
 	//메뉴테이블 레벨 초기 세팅 {자판기/떡볶이/라면/오뎅/튀김}
 	private int[] tableLv = {1,1,1,1,1};
 	
+	public int[] getTableLv() {
+		return tableLv;
+	}
+
+
+	public void setTableLv(int[] tableLv) {
+		this.tableLv = tableLv;
+	}
+
+
 	//cons
 	public Member(String memberId, String memberPwd, String memberEmail) {
 		super();
