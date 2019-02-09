@@ -159,6 +159,7 @@ public class LoginPanel extends JPanel {
 		this.add(Joinbt);
 		loginbt.addActionListener(new Login()); 
 		guestbt.addActionListener(new guest());
+		Joinbt.addActionListener(new join() );
 		layeredPane.add(panel);
 		add(layeredPane);
 
@@ -196,5 +197,17 @@ public class LoginPanel extends JPanel {
 		
 	}
 	
-	
+	private  class join implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			
+			//호원가입
+			if(e.getSource() == Joinbt) {
+				new ChangePanel().changePanel(mf, lView, new JoinPanel(mf,m));
+			}
+		}
+		
+	}
 }
