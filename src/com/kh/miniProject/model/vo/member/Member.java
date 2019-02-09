@@ -1,6 +1,9 @@
 package com.kh.miniProject.model.vo.member;
 
-public class Member {
+import java.io.Serializable;
+import java.util.Arrays;
+
+public class Member implements Serializable{
 	private String memberId;
 	private String memberPwd;
 	private String memberEmail;
@@ -18,6 +21,10 @@ public class Member {
 		this.memberId = memberId;
 		this.memberPwd = memberPwd;
 		this.memberEmail = memberEmail;
+		if(memberId.equals("test")) {
+			maxStage=2;
+			gold=10000;
+		};
 	}
 	
 	
@@ -58,4 +65,13 @@ public class Member {
 	public void setEquipsLv(int[] equipsLv) {
 		this.equipsLv = equipsLv;
 	}
+
+
+	@Override
+	public String toString() {
+		return "Member [memberId=" + memberId + ", memberPwd=" + memberPwd + ", memberEmail=" + memberEmail
+				+ ", maxStage=" + maxStage + ", gold=" + gold + ", equipsLv=" + Arrays.toString(equipsLv) + ", tableLv="
+				+ Arrays.toString(tableLv) + "]";
+	}
+	
 }
