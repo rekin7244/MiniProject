@@ -77,11 +77,12 @@ public class LoginPanel extends JPanel {
 		/*this.add(ID);*/
 
 		IDText = new JTextField(15);
-		IDText.setBounds(400, 200, 666, 372);
+		IDText.setBounds(400, 370, 200, 30);
 		/*layeredPane.add(IDText);*/
-		IDText.setOpaque(false);
+		//IDText.setOpaque(false);
 		IDText.setForeground(Color.BLACK);
-		IDText.setBorder(javax.swing.BorderFactory.createEmptyBorder());
+		IDText.setBackground(Color.WHITE); 
+		//IDText.setBorder(javax.swing.BorderFactory.createEmptyBorder());
 
 		// 패스워드 라벨
 		JLabel Pass = new JLabel("비밀번호:");
@@ -91,11 +92,12 @@ public class LoginPanel extends JPanel {
 		/*this.add(Pass);*/
 
 		passText = new JPasswordField(15);
-		passText.setBounds(400, 250, 666, 372);
+		passText.setBounds(400, 420, 200, 30);
 		/*layeredPane.add(passText);*/
-		passText.setOpaque(false);
+		//passText.setOpaque(false);
 		passText.setForeground(Color.BLACK);
-		passText.setBorder(javax.swing.BorderFactory.createEmptyBorder());
+		passText.setBackground(Color.white);
+		//passText.setBorder(javax.swing.BorderFactory.createEmptyBorder());
 
 		// 패스워드
 		/*
@@ -109,15 +111,15 @@ public class LoginPanel extends JPanel {
 		// 로그인버튼 추가
 		loginbt = new JButton("로그인");
 		// loginbt.setLocation(85, 85);
-		loginbt.setBounds(400, 450, 90, 30);
+		loginbt.setBounds(400, 460, 200, 30);
 
 		
 		guestbt= new JButton("guest");
-		guestbt.setBounds(300, 450, 90, 30); 
+		guestbt.setBounds(510, 510, 90, 30); 
 		
 		
 		Joinbt = new JButton("회원가입");
-		Joinbt.setBounds(500, 450, 90, 30);
+		Joinbt.setBounds(400, 510, 90, 30);
 		
 		
 		
@@ -159,7 +161,6 @@ public class LoginPanel extends JPanel {
 		guestbt.addActionListener(new guest());
 		layeredPane.add(panel);
 		add(layeredPane);
-		setVisible(true);
 
 	}
 

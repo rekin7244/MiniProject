@@ -34,6 +34,7 @@ public class MemberDao {
 	
 	public void addMember(Member member) {
 		memberList.add(member);
+		saveMemberList();
 	}
 	
 	public boolean loginMember(String memberId,String memberPwd) {
@@ -75,7 +76,7 @@ public class MemberDao {
 	
 	public void saveMemberList() {							//ArrayList 전체 파일에 저장
 		try {
-			ObjectOutputStream oOut = new ObjectOutputStream(new FileOutputStream("board_list.dat"));
+			ObjectOutputStream oOut = new ObjectOutputStream(new FileOutputStream("members.dat"));
 			for (Member member : memberList) {
 				oOut.writeObject(member);
 			}
