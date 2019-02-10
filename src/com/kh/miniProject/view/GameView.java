@@ -13,6 +13,7 @@ import javax.swing.JPanel;
 
 import com.kh.miniProject.controller.CookingTime;
 import com.kh.miniProject.controller.CustomerManager;
+import com.kh.miniProject.model.dao.MemberDao;
 import com.kh.miniProject.model.dao.OrderDao;
 import com.kh.miniProject.model.vo.member.Member;
 import com.kh.miniProject.model.vo.menu.MenuOrder;
@@ -45,7 +46,7 @@ public class GameView extends JPanel{
 	private JButton gold;
 	//ÁÖ¹® ³»¿ª °ü¸®
 	private OrderDao orderDao;
-	
+
 	//¸Þ´ºº° °³¼ö ÆÇÁ¤
 	private int[] tableLv;
 
@@ -144,8 +145,12 @@ public class GameView extends JPanel{
 		dialog.setBounds(150, 150, 150, 150);
 		JOptionPane.showMessageDialog(null, "STAGE "+stageLv+" CLEAR!!\n Earned Gold : "+stageGold);
 		m.setGold(m.getGold()+stageGold);
-		m.setMaxStage(stageLv+1);
+		if(m.getMaxStage()==stageLv) {
+			m.setMaxStage(stageLv+1);
+		}
 		new ChangePanel().changePanel(mf, gView, new StageView(mf,m));
+		MemberDao mDao = new MemberDao();
+		mDao.saveMember(m);
 	}
 	//btn Action
 	class Event_Cook implements ActionListener{
@@ -156,7 +161,7 @@ public class GameView extends JPanel{
 			if(e.getActionCommand().equals("¶±ººÀÌ±â°è")) {
 				System.out.println("¶±ººÀÌ±â°è");
 				if(tbkNo<4) {
-					
+
 					if(tableLv[0]==1 && tbkNo<1) {
 						judgeLv("¶±ººÀÌ",equips);					
 					}else if(tableLv[0]==2 && tbkNo<2) {
@@ -266,7 +271,7 @@ public class GameView extends JPanel{
 		//ÀÚÆÇ±â, ¶±ººÀÌ, Æ¢±è
 		mP.setting(mP,drinksNo,tbkNo,friedNo);
 	}
-	
+
 	public void judgeLv(String menuName,JButton[] equips) {
 		if(menuName.equals("¶±ººÀÌ")) {
 			equips[1].setEnabled(false);

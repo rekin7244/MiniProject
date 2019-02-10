@@ -45,7 +45,7 @@ public class LoginPanel extends JPanel {
 		this.mf = mf;
 		this.lView = this;
 		memberDao = new MemberDao();		//멤버Dao 실행 (생성자에 의해 저장된 멤버 다 불러옴)
-		//memberDao.removeMember("test", "pass");
+		//memberDao.removeMember("master", "1234");
 		//memberDao.addMember(new Member("test","pass","email"));
 
 		setSize(1024, 768);
@@ -148,8 +148,6 @@ public class LoginPanel extends JPanel {
 						} else {
 						JOptionPane.showMessageDialog(null, "아이디 : " + tempM.getMemberId()+ "\n" + "비밀번호 : " + tempM.getMemberPwd());
 						}
-						
-						
 					}
 				}
 			}

@@ -50,7 +50,7 @@ public class StageView extends JPanel{
 
 		//저장 후 (회원이면)랭킹 출력
 		/*if(Member)*/	//회원인지 판별
-		JButton save_Ranking = new JButton("저장 및 랭킹 출력");
+		JButton save_Ranking = new JButton("랭킹 출력 및 종료");
 		save_Ranking.setBounds(700,550,200,70);
 		this.add(save_Ranking);
 
@@ -104,7 +104,7 @@ public class StageView extends JPanel{
 				new ChangePanel().changePanel(mf, sView, mPanel=new MarketPanel(mf,m));
 				mPanel.setting(mPanel);
 			}
-			if(e.getActionCommand().equals("저장 및 랭킹 출력")) {
+			if(e.getActionCommand().equals("랭킹 출력 및 종료")) {
 				new ChangePanel().changePanel(mf, sView, new RankingPanel(mf));
 			}
 		}

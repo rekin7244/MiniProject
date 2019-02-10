@@ -8,7 +8,7 @@ public class Member implements Serializable{
 	private String memberPwd;
 	private String memberEmail;
 	private int maxStage=1;				//초기 세팅 1스테이지
-	private int gold=9999999;			//초기 금액 0
+	private int gold=0;			//초기 금액 0
 
 	//조리기구 레벨 초기 세팅 {떡볶이/튀김기/오뎅기계/라면기계}
 	private int[] equipsLv = {1,0,0,0};
@@ -22,10 +22,6 @@ public class Member implements Serializable{
 		this.memberId = memberId;
 		this.memberPwd = memberPwd;
 		this.memberEmail = memberEmail;
-		if(memberId.equals("test")) {	//test용
-			maxStage=3;
-			gold=30000;
-		};
 	}
 
 	//get,set
