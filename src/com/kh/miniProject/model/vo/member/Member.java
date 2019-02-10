@@ -7,12 +7,12 @@ public class Member implements Serializable{
 	private String memberId;
 	private String memberPwd;
 	private String memberEmail;
-	private int maxStage=1;		//ÃÊ±â ¼¼ÆÃ 1½ºÅ×ÀÌÁö
-	private int gold;			//ÃÊ±â ±İ¾× 0
+	private int maxStage=1;		//ì´ˆê¸° ì„¸íŒ… 1ìŠ¤í…Œì´ì§€
+	private int gold=999999999;			//ì´ˆê¸° ê¸ˆì•¡ 0
 	
-	//Á¶¸®±â±¸ ·¹º§ ÃÊ±â ¼¼ÆÃ {¶±ººÀÌ/Æ¢±è±â/¿Àµ­±â°è/¶ó¸é±â°è}
+	//ì¡°ë¦¬ê¸°êµ¬ ë ˆë²¨ ì´ˆê¸° ì„¸íŒ… {ë–¡ë³¶ì´/íŠ€ê¹€ê¸°/ì˜¤ë…ê¸°ê³„/ë¼ë©´ê¸°ê³„}
 	private int[] equipsLv = {1,0,0,0};
-	//¸Ş´ºÅ×ÀÌºí ·¹º§ ÃÊ±â ¼¼ÆÃ {¶±ººÀÌ/Æ¢±è/¿Àµ­/¶ó¸é}
+	//ë©”ë‰´í…Œì´ë¸” ë ˆë²¨ ì´ˆê¸° ì„¸íŒ… {ë–¡ë³¶ì´/íŠ€ê¹€/ì˜¤ë…/ë¼ë©´}
 	private int[] tableLv = {1,1,1,1};
 
 
@@ -22,7 +22,7 @@ public class Member implements Serializable{
 		this.memberId = memberId;
 		this.memberPwd = memberPwd;
 		this.memberEmail = memberEmail;
-		if(memberId.equals("test")) {	//test¿ë
+		if(memberId.equals("test")) {	//testìš©
 			maxStage=3;
 			gold=30000;
 		};
