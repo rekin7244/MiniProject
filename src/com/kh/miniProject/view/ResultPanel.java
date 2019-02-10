@@ -36,6 +36,8 @@ public class ResultPanel extends JPanel{
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				m.setStageGold(0);
+				
+				
 			}	
 		});
 		

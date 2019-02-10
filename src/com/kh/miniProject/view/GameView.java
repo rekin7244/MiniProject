@@ -17,6 +17,7 @@ import com.kh.miniProject.model.dao.MemberDao;
 import com.kh.miniProject.model.dao.OrderDao;
 import com.kh.miniProject.model.vo.member.Member;
 import com.kh.miniProject.model.vo.menu.MenuOrder;
+import com.kh.miniProject.music.Music;
 import com.kh.miniProject.run.Run;
 
 public class GameView extends JPanel{
@@ -61,6 +62,14 @@ public class GameView extends JPanel{
 		this.setLayout(null);
 		this.setSize(Run.SCREEN_WIDTH,Run.SCREEN_HEIGHT);
 
+		Music temp = (Music) mf.getTitleMusic();
+		temp.close();
+		
+		Music buttonEnteredMusic = new Music("inGameMusic.mp3",false);
+		buttonEnteredMusic.start();
+		
+		
+		
 		//°í°´ ÆÐ³Î Ãß°¡
 		gP = new GuestPanel(new ImageIcon("images/½ºÅ©¸°¼¦-2017-09-24-¿ÀÀü-6.00.47.png")
 				.getImage().getScaledInstance(1024, 318, 0),orderDao);
@@ -175,8 +184,10 @@ public class GameView extends JPanel{
 			if(e.getActionCommand().equals("¶±ººÀÌ±â°è")) {
 				System.out.println("¶±ººÀÌ±â°è");
 				if(tbkNo<4) {
-
+					Music buttonEnteredMusic = new Music("cook1.mp3",false);
+					buttonEnteredMusic.start();
 					if(tableLv[0]==1 && tbkNo<1) {
+						
 						judgeLv("¶±ººÀÌ",equips);					
 					}else if(tableLv[0]==2 && tbkNo<2) {
 						judgeLv("¶±ººÀÌ",equips);			
@@ -196,6 +207,8 @@ public class GameView extends JPanel{
 			}
 			if(e.getActionCommand().equals("ÀÚÆÇ±â")) {
 				System.out.println("ÀÚÆÇ±â");
+				Music buttonEnteredMusic = new Music("decision9.mp3",false);
+				buttonEnteredMusic.start();
 				if(drinksNo<3) {
 					if(tableLv[1]==1 && drinksNo<1) {
 						judgeLv("À½·á¼ö",equips);					
@@ -218,6 +231,8 @@ public class GameView extends JPanel{
 			if(e.getActionCommand().equals("Æ¢±è±â")) {
 				System.out.println("Æ¢±è±â");
 				if(friedNo<4) {
+					Music buttonEnteredMusic = new Music("fried.mp3",false);
+					buttonEnteredMusic.start();
 					if(tableLv[2]==1 && friedNo<1) {
 						judgeLv("Æ¢±è",equips);					
 					}else if(tableLv[2]==2 && friedNo<2) {
@@ -239,6 +254,8 @@ public class GameView extends JPanel{
 			if(e.getActionCommand().equals("¶±ººÀÌ")) {
 				if(tbkNo>0) {
 					if((temp=orderDao.searchOrder(new MenuOrder("¶±ººÀÌ")))>=0) {
+						Music buttonEnteredMusic = new Music("cancel4.mp3",false);
+						buttonEnteredMusic.start();
 						cm.deleteLabel(temp);
 						tbkNo--;
 						System.out.println("¶±ººÀÌ ÀÜ¿© °³¼ö : " + tbkNo);
@@ -253,6 +270,8 @@ public class GameView extends JPanel{
 			if(e.getActionCommand().equals("Æ¢±è")) {
 				if(friedNo>0) {
 					if((temp=orderDao.searchOrder(new MenuOrder("Æ¢±è")))>=0) {
+						Music buttonEnteredMusic = new Music("cancel4.mp3",false);
+						buttonEnteredMusic.start();
 						cm.deleteLabel(temp);
 						friedNo--;
 						System.out.println("Æ¢±è ÀÜ¿© °³¼ö : " + friedNo);
@@ -267,6 +286,8 @@ public class GameView extends JPanel{
 			if(e.getActionCommand().equals("À½·á¼ö")) {
 				if(drinksNo>0) {
 					if((temp=orderDao.searchOrder(new MenuOrder("À½·á¼ö")))>=0) {
+						Music buttonEnteredMusic = new Music("decision11.mp3",false);
+						buttonEnteredMusic.start();
 						System.out.println("temp:"+temp);
 						cm.deleteLabel(temp);
 						drinksNo--;
@@ -293,13 +314,13 @@ public class GameView extends JPanel{
 			gView.add(cookTimer);
 			tbkNo++;		
 		}else if(menuName.equals("À½·á¼ö")) {
-			equips[0].setEnabled(false);
-			cookTimer = new CookingTime(equips[0],5,"À½·á¼ö");
+			equips[2].setEnabled(false);
+			cookTimer = new CookingTime(equips[2],5,"À½·á¼ö");
 			gView.add(cookTimer);
 			drinksNo++;
 		}else if(menuName.equals("Æ¢±è")) {
-			equips[2].setEnabled(false);
-			cookTimer = new CookingTime(equips[2],10,"Æ¢±è");
+			equips[0].setEnabled(false);
+			cookTimer = new CookingTime(equips[0],10,"Æ¢±è");
 			gView.add(cookTimer);
 			friedNo++;
 		}

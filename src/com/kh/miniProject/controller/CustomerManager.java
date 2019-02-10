@@ -9,6 +9,7 @@ import javax.swing.JLabel;
 import com.kh.miniProject.model.dao.OrderDao;
 import com.kh.miniProject.model.vo.OrderLabel;
 import com.kh.miniProject.model.vo.menu.MenuOrder;
+import com.kh.miniProject.music.Music;
 import com.kh.miniProject.view.GuestPanel;
 
 public class CustomerManager {
@@ -130,6 +131,7 @@ public class CustomerManager {
 
 	public void deleteLabel(int orderNo) {			//주문내역 삭제 및 모든 주문 전달 완료시 손님(+타이머) 삭제
 		gP.remove(orderLabel[orderNo]);
+	
 		//손님에 따라 손님 주문수 감소
 		if(orderNo<maxOrderNo*1) {
 			customerOrderNo[0]-=1;
@@ -149,6 +151,8 @@ public class CustomerManager {
 			}
 		}
 		gP.repaint();
+		Music buttonEnteredMusic = new Music("coins_5.mp3",false);
+		buttonEnteredMusic.start();
 	}
 	public void deleteCustomer(int customerNo) {		//시간 만료시 주문내역과 손님(+타이머) 삭제
 		for (int i = maxOrderNo*customerNo; i < maxOrderNo*customerNo+maxOrderNo; i++) {
