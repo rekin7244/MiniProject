@@ -21,14 +21,19 @@ public class MarketPanel extends JPanel {
 	Member m;
 	
 	// 사용 필드
+	//업글비용
+	private int level1=25000;
+	private int level2=50000;
+	private int level3=100000;
+	
 	//기구
 	private int tbkLv = 1;
 	JButton mo = new JButton("떡볶이기구");
-	private int tkLv = 1;
+	private int tkLv = 0;
 	JButton mo1 = new JButton("튀김기구");
-	private int odLv = 1;
+	private int odLv = 0;
 	JButton mo2 = new JButton("오뎅기구");
-	private int rmLv = 1;
+	private int rmLv = 0;
 	JButton mo3 = new JButton("라면기구");
 	
 	//판
@@ -73,19 +78,19 @@ public class MarketPanel extends JPanel {
 			new ImageIcon("images/MAX.jpg").getImage().getScaledInstance(200, 200, 0) };
 
 	// 튀김 판
-	private Image[] tableImages1 = { new ImageIcon("images/튀1.jpg").getImage().getScaledInstance(200, 200, 0),
+	private Image[] tableImages1 = { /*new ImageIcon("images/튀1.jpg").getImage().getScaledInstance(200, 200, 0),*/
 			new ImageIcon("images/튀2.jpg").getImage().getScaledInstance(200, 200, 0),
 			new ImageIcon("images/튀3.jpg").getImage().getScaledInstance(200, 200, 0),
 			new ImageIcon("images/MAX.jpg").getImage().getScaledInstance(200, 200, 0) };
 
 	// 오뎅 판
-	private Image[] tableImages2 = { new ImageIcon("images/오1.jpg").getImage().getScaledInstance(200, 200, 0),
+	private Image[] tableImages2 = { /*new ImageIcon("images/오1.jpg").getImage().getScaledInstance(200, 200, 0),*/
 			new ImageIcon("images/오2.jpg").getImage().getScaledInstance(200, 200, 0),
 			new ImageIcon("images/오3.jpg").getImage().getScaledInstance(200, 200, 0),
 			new ImageIcon("images/MAX.jpg").getImage().getScaledInstance(200, 200, 0) };
 
 	// 라면 판
-	private Image[] tableImages3 = { new ImageIcon("images/라1.jpg").getImage().getScaledInstance(200, 200, 0),
+	private Image[] tableImages3 = { /*new ImageIcon("images/라1.jpg").getImage().getScaledInstance(200, 200, 0),*/
 			new ImageIcon("images/라2.jpg").getImage().getScaledInstance(200, 200, 0),
 			new ImageIcon("images/라3.jpg").getImage().getScaledInstance(200, 200, 0),
 			new ImageIcon("images/MAX.jpg").getImage().getScaledInstance(200, 200, 0) };
@@ -124,13 +129,14 @@ public class MarketPanel extends JPanel {
 		// 골드 출력
 		gold.setText("소지금: " + m.getGold() + "G");
 		panel.add(gold);
+		
 		// 떡볶이 기구
 		if (equipsLv[0] == 1) {
 			mo.setIcon(new ImageIcon(equipsImages[0]));
 		} else if (equipsLv[0] == 2) {
 			mo.setIcon(new ImageIcon(equipsImages[1]));
 		} else {
-			mo.setIcon(new ImageIcon(equipsImages3[3]));
+			mo.setIcon(new ImageIcon(equipsImages[2]));
 		}
 		mo.setBounds(20, 60, 180, 180);
 		mo.removeActionListener(e);
@@ -144,7 +150,7 @@ public class MarketPanel extends JPanel {
 		} else if (equipsLv[1] == 2) {
 			mo1.setIcon(new ImageIcon(equipsImages1[2]));
 		} else {
-			mo1.setIcon(new ImageIcon(equipsImages3[3]));
+			mo1.setIcon(new ImageIcon(equipsImages1[3]));
 		}
 		mo1.setBounds(210, 60, 180, 180);
 		mo1.removeActionListener(e);
@@ -158,7 +164,7 @@ public class MarketPanel extends JPanel {
 		} else if (equipsLv[2] == 2) {
 			mo2.setIcon(new ImageIcon(equipsImages2[2]));
 		} else {
-			mo2.setIcon(new ImageIcon(equipsImages3[3]));
+			mo2.setIcon(new ImageIcon(equipsImages2[3]));
 		}
 		mo2.setBounds(400, 60, 180, 180);
 		mo2.removeActionListener(e);
@@ -179,59 +185,65 @@ public class MarketPanel extends JPanel {
 		mo3.addActionListener(e);
 
 		// 떡볶이판
-		if (tableLv[0] == 1) {
+		if(tableLv[0]==1) {
 			mo4.setIcon(new ImageIcon(tableImages[0]));
-		} else if (tableLv[0] == 2) {
+		}else if(tableLv[0]==2) {
 			mo4.setIcon(new ImageIcon(tableImages[1]));
-		} else {
+		}else {
 			mo4.setIcon(new ImageIcon(tableImages[2]));
-		}
+		}		
 
 		mo4.setBounds(20, 360, 180, 180);
 		mo4.removeActionListener(e);
 		mo4.addActionListener(e);
 
 		// 튀김 판
-		if (tableLv[1] == 0) {
+		mo5.setVisible(false);
+		if(equipsLv[1]==1) {
+			mo5.setVisible(true);
+		
+		if(tableLv[1]==1) {
 			mo5.setIcon(new ImageIcon(tableImages1[0]));
-		} else if (tableLv[1] == 1) {
+		}else if(tableLv[1]==2) {
 			mo5.setIcon(new ImageIcon(tableImages1[1]));
-		} else if (tableLv[1] == 2) {
+		}else {
 			mo5.setIcon(new ImageIcon(tableImages1[2]));
-		} else {
-			mo5.setIcon(new ImageIcon(tableImages1[3]));
+		}		
 		}
-
 		mo5.setBounds(210, 360, 180, 180);
 		mo5.removeActionListener(e);
 		mo5.addActionListener(e);
 
 		// 오뎅 판
-		if (tableLv[2] == 0) {
+		mo6.setVisible(false);
+		if(equipsLv[2]==1) {
+			mo6.setVisible(true);
+		
+		if(tableLv[2]==1) {
 			mo6.setIcon(new ImageIcon(tableImages2[0]));
-		} else if (tableLv[2] == 1) {
+		}else if(tableLv[2]==2) {
 			mo6.setIcon(new ImageIcon(tableImages2[1]));
-		} else if (tableLv[2] == 2) {
+		}else {
 			mo6.setIcon(new ImageIcon(tableImages2[2]));
-		} else {
-			mo6.setIcon(new ImageIcon(tableImages2[3]));
+		}		
 		}
-
 		mo6.setBounds(400, 360, 180, 180);
 		mo6.removeActionListener(e);
 		mo6.addActionListener(e);
 
 		// 라면 판
-		if (tableLv[3] == 0) {
+		mo7.setVisible(false);
+		if(equipsLv[3]==1) {
+			mo7.setVisible(true);
+		
+		if(tableLv[3]==1) {
 			mo7.setIcon(new ImageIcon(tableImages3[0]));
-		} else if (tableLv[3] == 1) {
+		}else if(tableLv[3]==2) {
 			mo7.setIcon(new ImageIcon(tableImages3[1]));
-		} else if (tableLv[3] == 2) {
+		}else {
 			mo7.setIcon(new ImageIcon(tableImages3[2]));
-		} else {
-			mo7.setIcon(new ImageIcon(tableImages3[3]));
+		}		
 		}
-
 		mo7.setBounds(590, 360, 180, 180);
 		mo7.removeActionListener(e);
 		mo7.addActionListener(e);
@@ -279,7 +291,7 @@ public class MarketPanel extends JPanel {
 		label7.setBounds(630, 460, 200, 200);
 		panel.add(label7);
 		
-		//this.repaint();
+//		this.repaint();
 	}//setting
 
 	class EquipSetting implements ActionListener {
@@ -290,16 +302,16 @@ public class MarketPanel extends JPanel {
 			if (e.getActionCommand().equals("떡볶이기구")) {
 				System.out.println("tbk");
 				if (equipsLv[0] == 1) {
-					if (m.getGold() > 500000) {
+					if (m.getGold() >= level2) {
 						equipsLv[0] += 1;
-						m.setGold(m.getGold() - 500000);
+						m.setGold(m.getGold() - level2);
 					} else {
 						System.out.println("그돈으론 어림없지~");
 					}
 				} else if (equipsLv[0] == 2) {
-					if (m.getGold() > 1000000) {
+					if (m.getGold() >= level3) {
 						equipsLv[0] += 1;
-						m.setGold(m.getGold() - 1000000);
+						m.setGold(m.getGold() - level3);
 					} else {
 						System.out.println("그돈으론 어림없지~");
 					}
@@ -311,23 +323,23 @@ public class MarketPanel extends JPanel {
 			if (e.getActionCommand().equals("튀김기구")) {
 				System.out.println("tk");
 				if (equipsLv[1] == 0) {
-					if (m.getGold() > 250000) {
+					if (m.getGold() >= level1) {
 						equipsLv[1] += 1;
-						m.setGold(m.getGold() - 250000);
+						m.setGold(m.getGold() - level1);
 					} else {
 						System.out.println("그돈으론 어림없지~");
 					}
 				} else if (equipsLv[1] == 1) {
-					if (m.getGold() > 500000) {
+					if (m.getGold() >= level2) {
 						equipsLv[1] += 1;
-						m.setGold(m.getGold() - 500000);
+						m.setGold(m.getGold() - level2);
 					} else {
 						System.out.println("그돈으론 어림없지~");
 					}
 				} else if (equipsLv[1] == 2) {
-					if (m.getGold() > 1000000) {
+					if (m.getGold() >= level3) {
 						equipsLv[1] += 1;
-						m.setGold(m.getGold() - 1000000);
+						m.setGold(m.getGold() - level3);
 					} else {
 						System.out.println("그돈으론 어림없지~");
 					}
@@ -340,23 +352,23 @@ public class MarketPanel extends JPanel {
 			if (e.getActionCommand().equals("오뎅기구")) {
 				System.out.println("od");
 				if (equipsLv[2] == 0) {
-					if (m.getGold() > 250000) {
+					if (m.getGold() >= level1) {
 						equipsLv[2] += 1;
-						m.setGold(m.getGold() - 250000);
+						m.setGold(m.getGold() - level1);
 					} else {
 						System.out.println("그돈으론 어림없지~");
 					}
 				} else if (equipsLv[2] == 1) {
-					if (m.getGold() > 500000) {
+					if (m.getGold() >= level2) {
 						equipsLv[2] += 1;
-						m.setGold(m.getGold() - 500000);
+						m.setGold(m.getGold() - level2);
 					} else {
 						System.out.println("그돈으론 어림없지~");
 					}
 				} else if (equipsLv[2] == 2) {
-					if (m.getGold() > 1000000) {
+					if (m.getGold() >= level3) {
 						equipsLv[2] += 1;
-						m.setGold(m.getGold() - 1000000);
+						m.setGold(m.getGold() - level3);
 					} else {
 						System.out.println("그돈으론 어림없지~");
 					}
@@ -369,23 +381,23 @@ public class MarketPanel extends JPanel {
 			if (e.getActionCommand().equals("라면기구")) {
 				System.out.println("rm");
 				if (equipsLv[3] == 0) {
-					if (m.getGold() > 250000) {
+					if (m.getGold() >= level1) {
 						equipsLv[3] += 1;
-						m.setGold(m.getGold() - 250000);
+						m.setGold(m.getGold() - level1);
 					} else {
 						System.out.println("그돈으론 어림없지~");
 					}
 				} else if (equipsLv[3] == 1) {
-					if (m.getGold() > 500000) {
+					if (m.getGold() >= level2) {
 						equipsLv[3] += 1;
-						m.setGold(m.getGold() - 500000);
+						m.setGold(m.getGold() - level2);
 					} else {
 						System.out.println("그돈으론 어림없지~");
 					}
 				} else if (equipsLv[3] == 2) {
-					if (m.getGold() > 1000000) {
+					if (m.getGold() >= level3) {
 						equipsLv[3] += 1;
-						m.setGold(m.getGold() - 1000000);
+						m.setGold(m.getGold() - level3);
 					} else {
 						System.out.println("그돈으론 어림없지~");
 					}
@@ -398,17 +410,17 @@ public class MarketPanel extends JPanel {
 			if (e.getActionCommand().equals("떡볶이판 업글")) {
 				System.out.println("tbkup");
 				if (tableLv[0] == 1) {
-					if (m.getGold() > 500000) {
+					if (m.getGold() >= level2) {
 						tableLv[0] += 1;
-						m.setGold(m.getGold() - 500000);
+						m.setGold(m.getGold() - level2);
 					} else {
 						System.out.println("그돈으론 어림없지~");
 					}
 
 				} else if (tableLv[0] == 2) {
-					if (m.getGold() > 1000000) {
+					if (m.getGold() >= level3) {
 						tableLv[0] += 1;
-						m.setGold(m.getGold() - 1000000);
+						m.setGold(m.getGold() - level3);
 					} else {
 						System.out.println("그돈으론 어림없지~");
 					}
@@ -420,23 +432,23 @@ public class MarketPanel extends JPanel {
 			if (e.getActionCommand().equals("튀김판 업글")) {
 				System.out.println("tkup");
 				if (tableLv[1] == 0) {
-					if (m.getGold() > 250000) {
+					if (m.getGold() >= level1) {
 						tableLv[1] += 1;
-						m.setGold(m.getGold() - 250000);
+						m.setGold(m.getGold() - level1);
 					} else {
 						System.out.println("그돈으론 어림없지~");
 					}
 				} else if (tableLv[1] == 1) {
-					if (m.getGold() > 500000) {
+					if (m.getGold() >= level2) {
 						tableLv[1] += 1;
-						m.setGold(m.getGold() - 500000);
+						m.setGold(m.getGold() - level2);
 					} else {
 						System.out.println("그돈으론 어림없지~");
 					}
 				} else if (tableLv[1] == 2) {
-					if (m.getGold() > 1000000) {
+					if (m.getGold() >= level3) {
 						tableLv[1] += 1;
-						m.setGold(m.getGold() - 1000000);
+						m.setGold(m.getGold() - level3);
 					} else {
 						System.out.println("그돈으론 어림없지~");
 					}
@@ -449,23 +461,23 @@ public class MarketPanel extends JPanel {
 			if (e.getActionCommand().equals("오뎅판 업글")) {
 				System.out.println("odup");
 				if (tableLv[2] == 0) {
-					if (m.getGold() > 250000) {
+					if (m.getGold() >= level1) {
 						tableLv[2] += 1;
-						m.setGold(m.getGold() - 250000);
+						m.setGold(m.getGold() - level1);
 					} else {
 						System.out.println("그돈으론 어림없지~");
 					}
 				} else if (tableLv[2] == 1) {
-					if (m.getGold() > 500000) {
+					if (m.getGold() >= level2) {
 						tableLv[2] += 1;
-						m.setGold(m.getGold() - 500000);
+						m.setGold(m.getGold() - level2);
 					} else {
 						System.out.println("그돈으론 어림없지~");
 					}
 				} else if (tableLv[2] == 2) {
-					if (m.getGold() > 1000000) {
+					if (m.getGold() >= level3) {
 						tableLv[2] += 1;
-						m.setGold(m.getGold() - 1000000);
+						m.setGold(m.getGold() - level3);
 					} else {
 						System.out.println("그돈으론 어림없지~");
 					}
@@ -478,23 +490,23 @@ public class MarketPanel extends JPanel {
 			if (e.getActionCommand().equals("라면판 업글")) {
 				System.out.println("rmup");
 				if (tableLv[3] == 0) {
-					if (m.getGold() > 250000) {
+					if (m.getGold() >= level1) {
 						tableLv[3] += 1;
-						m.setGold(m.getGold() - 250000);
+						m.setGold(m.getGold() - level1);
 					} else {
 						System.out.println("그돈으론 어림없지~");
 					}
 				} else if (tableLv[3] == 1) {
-					if (m.getGold() > 500000) {
+					if (m.getGold() >= level2) {
 						tableLv[3] += 1;
-						m.setGold(m.getGold() - 500000);
+						m.setGold(m.getGold() - level2);
 					} else {
 						System.out.println("그돈으론 어림없지~");
 					}
 				} else if (tableLv[3] == 2) {
-					if (m.getGold() > 1000000) {
+					if (m.getGold() >= level3) {
 						tableLv[3] += 1;
-						m.setGold(m.getGold() - 1000000);
+						m.setGold(m.getGold() - level3);
 					} else {
 						System.out.println("그돈으론 어림없지~");
 					}
