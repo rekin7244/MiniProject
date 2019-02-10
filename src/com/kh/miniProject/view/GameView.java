@@ -171,7 +171,7 @@ public class GameView extends JPanel{
 				}
 				refreshMenuTable();
 				System.out.println("¶±ººÀÌ ÃæÀü ÀÜ¿© °³¼ö"+tbkNo);
-			}		
+			}
 			if(e.getActionCommand().equals("¼ø´ë±â°è")) {
 				System.out.println("¼ø´ë±â°è");
 			}
@@ -270,17 +270,17 @@ public class GameView extends JPanel{
 	public void judgeLv(String menuName,JButton[] equips) {
 		if(menuName.equals("¶±ººÀÌ")) {
 			equips[1].setEnabled(false);
-			cookTimer = new CookingTime(equips[1],m,6,"¶±ººÀÌ");
+			cookTimer = new CookingTime(equips[1],6,"¶±ººÀÌ");
 			gView.add(cookTimer);
 			tbkNo++;		
 		}else if(menuName.equals("À½·á¼ö")) {
 			equips[0].setEnabled(false);
-			cookTimer = new CookingTime(equips[0],m,5,"À½·á¼ö");
+			cookTimer = new CookingTime(equips[0],5,"À½·á¼ö");
 			gView.add(cookTimer);
 			drinksNo++;
 		}else if(menuName.equals("Æ¢±è")) {
 			equips[2].setEnabled(false);
-			cookTimer = new CookingTime(equips[2],m,10,"Æ¢±è");
+			cookTimer = new CookingTime(equips[2],10,"Æ¢±è");
 			gView.add(cookTimer);
 			friedNo++;
 		}
