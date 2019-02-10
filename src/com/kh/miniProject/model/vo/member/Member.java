@@ -8,12 +8,12 @@ public class Member implements Serializable{
 	private String memberPwd;
 	private String memberEmail;
 	private int maxStage=1;		//초기 세팅 1스테이지
-	private int gold;			//초기 금액 0
+	private int gold=999999999;			//초기 금액 0
 	
 	//조리기구 레벨 초기 세팅 {자판기/떡볶이/라면기계/오뎅기계/튀김기}
-	private int[] equipsLv = {1,1,0,0,0};
+	private int[] equipsLv = {1,0,0,0,0};
 	//메뉴테이블 레벨 초기 세팅 {자판기/떡볶이/라면/오뎅/튀김}
-	private int[] tableLv = {1,1,1,1,1};
+	private int[] tableLv = {1,0,0,0,0};
 	
 	public int[] getTableLv() {
 		return tableLv;
