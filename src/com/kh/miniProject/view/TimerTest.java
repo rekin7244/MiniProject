@@ -37,7 +37,7 @@ public class TimerTest extends JPanel {
 	}
 	
 	class TimerStart implements ActionListener {
-		private int gameTime = 60;
+		private int gameTime = 3;
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				System.out.println(gameTime);

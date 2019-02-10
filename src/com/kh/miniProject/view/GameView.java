@@ -140,12 +140,25 @@ public class GameView extends JPanel{
 		//하트 3개 소진시 gameover
 	}
 	public void endStage() {
+		String[] command = {"결과보기","스테이지로 이동"};
+		int result;
+		
 		Dialog dialog = new Dialog(mf);
-		dialog.setBounds(150, 150, 150, 150);
-		JOptionPane.showMessageDialog(null, "STAGE "+stageLv+" CLEAR!!\n Earned Gold : "+stageGold);
+		dialog.setBounds(150, 150, 200, 200);
+		m.setStageGold(stageGold);
 		m.setGold(m.getGold()+stageGold);
 		m.setMaxStage(stageLv+1);
-		new ChangePanel().changePanel(mf, gView, new StageView(mf,m));
+		
+		result = JOptionPane.showOptionDialog(null,
+				"STAGE "+stageLv+" CLEAR!!\n Earned Gold : "+stageGold,
+				"부글부글분식",JOptionPane.YES_NO_OPTION, 
+				JOptionPane.INFORMATION_MESSAGE, null, command, command[0]);
+
+		if(result==0) {
+			ChangePanel.changePanel(mf, gView, new ResultPanel(mf,m));
+		}else {
+			ChangePanel.changePanel(mf, gView, new StageView(mf,m));
+		}
 	}
 	//btn Action
 	class Event_Cook implements ActionListener{
