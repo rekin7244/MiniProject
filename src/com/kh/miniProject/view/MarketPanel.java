@@ -10,6 +10,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import com.kh.miniProject.model.dao.MemberDao;
 import com.kh.miniProject.model.vo.member.Member;
 
 public class MarketPanel extends JPanel {
@@ -506,9 +507,12 @@ public class MarketPanel extends JPanel {
 		public void refresh() {
 			m.setEquipsLv(equipsLv);
 			m.setTableLv(tableLv);
+			MemberDao mDao = new MemberDao();
+			mDao.saveMember(m);
 			MarketPanel temp;
 			new ChangePanel().changePanel(mf,mPanel, temp=new MarketPanel(mf,m));
 			temp.setting(temp);
+			mPanel=temp;
 		}
 	}
 }// class

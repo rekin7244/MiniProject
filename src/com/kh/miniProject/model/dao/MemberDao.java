@@ -38,6 +38,19 @@ public class MemberDao {
 		saveMemberList();
 	}
 	
+	public void saveMember(Member member) {
+		for (Member m : memberList) {
+			if(m.getMemberId().equals(member.getMemberId())) {
+				m.setGold(member.getGold());
+				m.setMaxStage(member.getMaxStage());
+				m.setEquipsLv(member.getEquipsLv());
+				m.setTableLv(member.getTableLv());
+				saveMemberList();
+				System.out.println("ภ๚ภๅตส");
+			}
+		}
+	}
+	
 	public boolean checkMember(String memberId, String memberEmail) {
 		for(Member m : memberList) {
 			if(m.getMemberId().equals(memberId) || m.getMemberEmail().equals(memberEmail)) {
