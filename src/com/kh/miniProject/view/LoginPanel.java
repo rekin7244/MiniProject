@@ -141,6 +141,15 @@ public class LoginPanel extends JPanel {
 						//이메일 입력받는 창
 						//이메일 입력하면 orderDao.searchMember() 수행하여 member객체 불러옴
 						//불러온 member객체로부터 id,pass 출력
+						String str = JOptionPane.showInputDialog("이메일을 입력하세요");
+						Member tempM = memberDao.searchMember(str);
+						if(tempM == null) {
+							JOptionPane.showMessageDialog(null, "가입한 회원이 아닙니다.");
+						} else {
+						JOptionPane.showMessageDialog(null, "아이디 : " + tempM.getMemberId()+ "\n" + "비밀번호 : " + tempM.getMemberPwd());
+						}
+						
+						
 					}
 				}
 			}
