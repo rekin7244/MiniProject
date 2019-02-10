@@ -1,3 +1,4 @@
+
 package com.kh.miniProject.model.vo.member;
 
 import java.io.Serializable;
@@ -11,12 +12,13 @@ public class Member implements Serializable{
 	private String memberId;
 	private String memberPwd;
 	private String memberEmail;
-	private int maxStage=1;				//ì´ˆê¸° ì„¸íŒ… 1ìŠ¤í…Œì´ì§€
+	private int maxStage=1;				//ÃÊ±â ¼¼ÆÃ 1½ºÅ×ÀÌÁö
+	private int gold;
 	private int stageGold;
 
-	//ì¡°ë¦¬ê¸°êµ¬ ë ˆë²¨ ì´ˆê¸° ì„¸íŒ… {ë–¡ë³¶ì´/íŠ€ê¹€ê¸°/ì˜¤ë…ê¸°ê³„/ë¼ë©´ê¸°ê³„}
+	//Á¶¸®±â±¸ ·¹º§ ÃÊ±â ¼¼ÆÃ {¶±ººÀÌ/Æ¢±è±â/¿Àµ­±â°è/¶ó¸é±â°è}
 	private int[] equipsLv = {1,0,0,0};
-	//ë©”ë‰´í…Œì´ë¸” ë ˆë²¨ ì´ˆê¸° ì„¸íŒ… {ë–¡ë³¶ì´/íŠ€ê¹€/ì˜¤ë…/ë¼ë©´}
+	//¸Ş´ºÅ×ÀÌºí ·¹º§ ÃÊ±â ¼¼ÆÃ {¶±ººÀÌ/Æ¢±è/¿Àµ­/¶ó¸é}
 	private int[] tableLv = {1,1,1,1};
 
 

@@ -20,39 +20,39 @@ import com.kh.miniProject.model.vo.menu.MenuOrder;
 import com.kh.miniProject.run.Run;
 
 public class GameView extends JPanel{
-	//íŒ¨ë„ ë™ì‹œ ì‚¬ìš©ì„ ìœ„í•´ ì „ì—­ ì„ ì–¸
+	//ÆĞ³Î µ¿½Ã »ç¿ëÀ» À§ÇØ Àü¿ª ¼±¾ğ
 	public MainFrame mf;
 	public GuestPanel gP;
 	public MenuPanel mP;
 	public EquipmentPanel eP;
 	public CustomerManager cm;
-	//íƒ€ì´ë¨¸ í´ë˜ìŠ¤ (í…ŒìŠ¤íŠ¸) & Back ë²„íŠ¼
+	//Å¸ÀÌ¸Ó Å¬·¡½º (Å×½ºÆ®) & Back ¹öÆ°
 	private CookingTime cookTimer;
 	private JPanel gView;
 	private TimerTest gameTimer;
 	private JButton backButton;
 	private Image backButtonImage;
-	//ìŒì‹ ìˆ˜ ì €ì¥ìš© ë³€ìˆ˜
-	private int drinksNo;	//ìŒë£Œê°œìˆ˜
-	private int friedNo;	//íŠ€ê¹€ê°œìˆ˜
-	private int tbkNo;		//ë–¡ë³¶ì´ê°œìˆ˜
-	private int odengNo;	//ì˜¤ë…ê°œìˆ˜
-	private int ramenNo;	//ë¼ë©´ê°œìˆ˜
-	//Member ì •ë³´ ì…ì¶œë ¥ìœ„í•´
+	//À½½Ä ¼ö ÀúÀå¿ë º¯¼ö
+	private int drinksNo;	//À½·á°³¼ö
+	private int friedNo;	//Æ¢±è°³¼ö
+	private int tbkNo;		//¶±ººÀÌ°³¼ö
+	private int odengNo;	//¿Àµ­°³¼ö
+	private int ramenNo;	//¶ó¸é°³¼ö
+	//Member Á¤º¸ ÀÔÃâ·ÂÀ§ÇØ
 	private Member m;
-	//stage ë³€ìˆ˜ ê´€ë¦¬
+	//stage º¯¼ö °ü¸®
 	private int stageLv;
 	private int stageGold;
 	private JButton gold;
-	//ì£¼ë¬¸ ë‚´ì—­ ê´€ë¦¬
+	//ÁÖ¹® ³»¿ª °ü¸®
 	private OrderDao orderDao;
 
-	//ë©”ë‰´ë³„ ê°œìˆ˜ íŒì •
+	//¸Ş´ºº° °³¼ö ÆÇÁ¤
 	private int[] tableLv;
 
 	//cons
 	public GameView(MainFrame mf,Member m,int stageLv) {
-		orderDao = new OrderDao(this);			//ìŠ¤í…Œì´ì§€ ë‹¹ orderDao ìƒì„± ë‹¨í•œë²ˆë§Œ!!
+		orderDao = new OrderDao(this);			//½ºÅ×ÀÌÁö ´ç orderDao »ı¼º ´ÜÇÑ¹ø¸¸!!
 		this.gView = this;
 		this.mf = mf;
 		this.m = m;
@@ -61,20 +61,20 @@ public class GameView extends JPanel{
 		this.setLayout(null);
 		this.setSize(Run.SCREEN_WIDTH,Run.SCREEN_HEIGHT);
 
-		//ê³ ê° íŒ¨ë„ ì¶”ê°€
-		gP = new GuestPanel(new ImageIcon("images/ìŠ¤í¬ë¦°ìƒ·-2017-09-24-ì˜¤ì „-6.00.47.png")
+		//°í°´ ÆĞ³Î Ãß°¡
+		gP = new GuestPanel(new ImageIcon("images/½ºÅ©¸°¼¦-2017-09-24-¿ÀÀü-6.00.47.png")
 				.getImage().getScaledInstance(1024, 318, 0),orderDao);
 		gP.setLayout(null);
 		gP.setSize(Run.SCREEN_WIDTH,318);
 		this.add(gP);
 
-		//ê³ ê°ë§¤ë‹ˆì € ì‹¤í–‰
+		//°í°´¸Å´ÏÀú ½ÇÇà
 		if(stageLv<3) {
 			cm = new CustomerManager(gP,orderDao,2,stageLv);
 		}else {
 			cm = new CustomerManager(gP,orderDao,3,stageLv);
 		}
-		//ìŠ¤í…Œì´ì§€ Timer
+		//½ºÅ×ÀÌÁö Timer
 		gameTimer = new TimerTest(gP,cm,this);
 		gP.add(gameTimer);
 
@@ -85,12 +85,12 @@ public class GameView extends JPanel{
 		backButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				String[] command = {"í™•ì¸","ì·¨ì†Œ"};
+				String[] command = {"È®ÀÎ","Ãë¼Ò"};
 				int result;
 
 				result = JOptionPane.showOptionDialog(null,
-						"ì •ë§ ê·¸ë§Œë‘ì‹œê² ìŠµë‹ˆê¹Œ ? ",
-						"ë¶€ê¸€ë¶€ê¸€ë¶„ì‹",JOptionPane.YES_NO_OPTION, 
+						"Á¤¸» ±×¸¸µÎ½Ã°Ú½À´Ï±î ? ",
+						"ºÎ±ÛºÎ±ÛºĞ½Ä",JOptionPane.YES_NO_OPTION, 
 						JOptionPane.INFORMATION_MESSAGE, null, command, command[0]);
 
 				if(result==0) {
@@ -104,20 +104,20 @@ public class GameView extends JPanel{
 		gP.add(backButton);
 
 
-		//ê³¨ë“œ ì¶œë ¥
-		gold = new JButton("ê³¨ë“œ");
+		//°ñµå Ãâ·Â
+		gold = new JButton("°ñµå");
 		gold.setEnabled(false);
 		gold.setBackground(Color.yellow);
 		gold.setBounds(0,0,200,30);
-		gold.setText(0 + "ì›");
+		gold.setText(0 + "¿ø");
 		gP.add(gold);
 
-		//ë©”ë‰´ íŒ¨ë„ ì¶”ê°€
+		//¸Ş´º ÆĞ³Î Ãß°¡
 		mP = new MenuPanel(m);
 		mP.setting(mP,drinksNo,tbkNo,friedNo);
 		this.add(mP);
 
-		//ì¥ë¹„ íŒ¨ë„ ì¶”ê°€
+		//Àåºñ ÆĞ³Î Ãß°¡
 		eP = new EquipmentPanel();
 		eP.equipsSetting(eP,m);
 		this.add(eP);
@@ -135,36 +135,36 @@ public class GameView extends JPanel{
 	}
 	public void updateGold(int stageGold) {
 		this.stageGold = stageGold;
-		gold.setText(stageGold + "ì›");
+		gold.setText(stageGold + "¿ø");
 	}
 	public void gameOver() {
-		//í•˜íŠ¸ 3ê°œ ì†Œì§„ì‹œ gameover
+		//ÇÏÆ® 3°³ ¼ÒÁø½Ã gameover
 	}
 	public void endStage() {
-		String[] command = {"ê²°ê³¼ë³´ê¸°","ìŠ¤í…Œì´ì§€ë¡œ ì´ë™"};
+		String[] command = {"°á°úº¸±â","½ºÅ×ÀÌÁö·Î ÀÌµ¿"};
 		int result;
-		
+
 		Dialog dialog = new Dialog(mf);
 		dialog.setBounds(150, 150, 200, 200);
 		m.setStageGold(stageGold);
 		m.setGold(m.getGold()+stageGold);
 		m.setMaxStage(stageLv+1);
-		
+
 		result = JOptionPane.showOptionDialog(null,
 				"STAGE "+stageLv+" CLEAR!!\n Earned Gold : "+stageGold,
-				"ë¶€ê¸€ë¶€ê¸€ë¶„ì‹",JOptionPane.YES_NO_OPTION, 
+				"ºÎ±ÛºÎ±ÛºĞ½Ä",JOptionPane.YES_NO_OPTION, 
 				JOptionPane.INFORMATION_MESSAGE, null, command, command[0]);
 
 		if(result==0) {
 			ChangePanel.changePanel(mf, gView, new ResultPanel(mf,m));
-      MemberDao mDao = new MemberDao();
-		mDao.saveMember(m);
+			MemberDao mDao = new MemberDao();
+			mDao.saveMember(m);
 		}else {
 			ChangePanel.changePanel(mf, gView, new StageView(mf,m));
-      MemberDao mDao = new MemberDao();
-		mDao.saveMember(m);
+			MemberDao mDao = new MemberDao();
+			mDao.saveMember(m);
 		}
-		
+
 	}
 	//btn Action
 	class Event_Cook implements ActionListener{
@@ -172,134 +172,134 @@ public class GameView extends JPanel{
 		public void actionPerformed(ActionEvent e) {
 			//Equips Panel ActionListener
 			JButton[] equips = eP.getEquips();
-			if(e.getActionCommand().equals("ë–¡ë³¶ì´ê¸°ê³„")) {
-				System.out.println("ë–¡ë³¶ì´ê¸°ê³„");
+			if(e.getActionCommand().equals("¶±ººÀÌ±â°è")) {
+				System.out.println("¶±ººÀÌ±â°è");
 				if(tbkNo<4) {
 
 					if(tableLv[0]==1 && tbkNo<1) {
-						judgeLv("ë–¡ë³¶ì´",equips);					
+						judgeLv("¶±ººÀÌ",equips);					
 					}else if(tableLv[0]==2 && tbkNo<2) {
-						judgeLv("ë–¡ë³¶ì´",equips);			
+						judgeLv("¶±ººÀÌ",equips);			
 					}else if(tableLv[0]==3 && tbkNo<3) {
-						judgeLv("ë–¡ë³¶ì´",equips);	
+						judgeLv("¶±ººÀÌ",equips);	
 					}else if(tableLv[0]==4 && tbkNo<4) {
-						judgeLv("ë–¡ë³¶ì´",equips);	
+						judgeLv("¶±ººÀÌ",equips);	
 					}
 				}else {
-					System.out.println("ë–¡ë³¶ì´ê°€ ìµœëŒ€ ì¶©ì „ì…ë‹ˆë‹¤.");
+					System.out.println("¶±ººÀÌ°¡ ÃÖ´ë ÃæÀüÀÔ´Ï´Ù.");
 				}
 				refreshMenuTable();
-				System.out.println("ë–¡ë³¶ì´ ì¶©ì „ ì”ì—¬ ê°œìˆ˜"+tbkNo);
+				System.out.println("¶±ººÀÌ ÃæÀü ÀÜ¿© °³¼ö"+tbkNo);
 			}
-			if(e.getActionCommand().equals("ìˆœëŒ€ê¸°ê³„")) {
-				System.out.println("ìˆœëŒ€ê¸°ê³„");
+			if(e.getActionCommand().equals("¼ø´ë±â°è")) {
+				System.out.println("¼ø´ë±â°è");
 			}
-			if(e.getActionCommand().equals("ìíŒê¸°")) {
-				System.out.println("ìíŒê¸°");
+			if(e.getActionCommand().equals("ÀÚÆÇ±â")) {
+				System.out.println("ÀÚÆÇ±â");
 				if(drinksNo<3) {
 					if(tableLv[1]==1 && drinksNo<1) {
-						judgeLv("ìŒë£Œìˆ˜",equips);					
+						judgeLv("À½·á¼ö",equips);					
 					}else if(tableLv[1]==2 && drinksNo<2) {
-						judgeLv("ìŒë£Œìˆ˜",equips);			
+						judgeLv("À½·á¼ö",equips);			
 					}else if(tableLv[1]==3 && drinksNo<3) {
-						judgeLv("ìŒë£Œìˆ˜",equips);	
+						judgeLv("À½·á¼ö",equips);	
 					}else if(tableLv[1]==4 && drinksNo<4) {
-						judgeLv("ìŒë£Œìˆ˜",equips);	
+						judgeLv("À½·á¼ö",equips);	
 					}
 				}else {
-					System.out.println("ìŒë£Œìˆ˜ê°€ ìµœëŒ€ ì¶©ì „ì…ë‹ˆë‹¤.");
+					System.out.println("À½·á¼ö°¡ ÃÖ´ë ÃæÀüÀÔ´Ï´Ù.");
 				}
 				refreshMenuTable();
-				System.out.println("ìŒë£Œìˆ˜ ì¶©ì „ ì”ì—¬ ê°œìˆ˜"+drinksNo);
+				System.out.println("À½·á¼ö ÃæÀü ÀÜ¿© °³¼ö"+drinksNo);
 			}
-			if(e.getActionCommand().equals("ì˜¤ë…ê¸°ê³„")) {
-				System.out.println("ì˜¤ë…ê¸°ê³„");
+			if(e.getActionCommand().equals("¿Àµ­±â°è")) {
+				System.out.println("¿Àµ­±â°è");
 			}
-			if(e.getActionCommand().equals("íŠ€ê¹€ê¸°")) {
-				System.out.println("íŠ€ê¹€ê¸°");
+			if(e.getActionCommand().equals("Æ¢±è±â")) {
+				System.out.println("Æ¢±è±â");
 				if(friedNo<4) {
 					if(tableLv[2]==1 && friedNo<1) {
-						judgeLv("íŠ€ê¹€",equips);					
+						judgeLv("Æ¢±è",equips);					
 					}else if(tableLv[2]==2 && friedNo<2) {
-						judgeLv("íŠ€ê¹€",equips);			
+						judgeLv("Æ¢±è",equips);			
 					}else if(tableLv[2]==3 && friedNo<3) {
-						judgeLv("íŠ€ê¹€",equips);	
+						judgeLv("Æ¢±è",equips);	
 					}else if(tableLv[2]==4 && friedNo<4) {
-						judgeLv("íŠ€ê¹€",equips);	
+						judgeLv("Æ¢±è",equips);	
 					}
 				}else {
-					System.out.println("íŠ€ê¹€ì´ ìµœëŒ€ ì¶©ì „ì…ë‹ˆë‹¤.");
+					System.out.println("Æ¢±èÀÌ ÃÖ´ë ÃæÀüÀÔ´Ï´Ù.");
 				}
 				refreshMenuTable();
-				System.out.println("íŠ€ê¹€ ì¶©ì „ ì”ì—¬ ê°œìˆ˜"+friedNo);
+				System.out.println("Æ¢±è ÃæÀü ÀÜ¿© °³¼ö"+friedNo);
 			}
 
 			//MenuPanel ActionListener
 			int temp;
-			if(e.getActionCommand().equals("ë–¡ë³¶ì´")) {
+			if(e.getActionCommand().equals("¶±ººÀÌ")) {
 				if(tbkNo>0) {
-					if((temp=orderDao.searchOrder(new MenuOrder("ë–¡ë³¶ì´")))>=0) {
+					if((temp=orderDao.searchOrder(new MenuOrder("¶±ººÀÌ")))>=0) {
 						cm.deleteLabel(temp);
 						tbkNo--;
-						System.out.println("ë–¡ë³¶ì´ ì”ì—¬ ê°œìˆ˜ : " + tbkNo);
+						System.out.println("¶±ººÀÌ ÀÜ¿© °³¼ö : " + tbkNo);
 						mP.setting(mP,drinksNo,tbkNo,friedNo);
 					}else {
-						System.out.println("ì£¼ë¬¸ëœ ë–¡ë³¶ì´ê°€ ì—†ìŠµë‹ˆë‹¤.");
+						System.out.println("ÁÖ¹®µÈ ¶±ººÀÌ°¡ ¾ø½À´Ï´Ù.");
 					}
 				}else {
-					System.out.println("ë–¡ë³¶ì´ê°€ ì—†ìŠµë‹ˆë‹¤.");
+					System.out.println("¶±ººÀÌ°¡ ¾ø½À´Ï´Ù.");
 				}
 			}
-			if(e.getActionCommand().equals("íŠ€ê¹€")) {
+			if(e.getActionCommand().equals("Æ¢±è")) {
 				if(friedNo>0) {
-					if((temp=orderDao.searchOrder(new MenuOrder("íŠ€ê¹€")))>=0) {
+					if((temp=orderDao.searchOrder(new MenuOrder("Æ¢±è")))>=0) {
 						cm.deleteLabel(temp);
 						friedNo--;
-						System.out.println("íŠ€ê¹€ ì”ì—¬ ê°œìˆ˜ : " + friedNo);
+						System.out.println("Æ¢±è ÀÜ¿© °³¼ö : " + friedNo);
 						mP.setting(mP,drinksNo,tbkNo,friedNo);
 					}else {
-						System.out.println("ì£¼ë¬¸ëœ íŠ€ê¹€ì´ ì—†ìŠµë‹ˆë‹¤.");
+						System.out.println("ÁÖ¹®µÈ Æ¢±èÀÌ ¾ø½À´Ï´Ù.");
 					}
 				}else {
-					System.out.println("íŠ€ê¹€ì´ ì—†ìŠµë‹ˆë‹¤.");
+					System.out.println("Æ¢±èÀÌ ¾ø½À´Ï´Ù.");
 				}
 			}
-			if(e.getActionCommand().equals("ìŒë£Œìˆ˜")) {
+			if(e.getActionCommand().equals("À½·á¼ö")) {
 				if(drinksNo>0) {
-					if((temp=orderDao.searchOrder(new MenuOrder("ìŒë£Œìˆ˜")))>=0) {
+					if((temp=orderDao.searchOrder(new MenuOrder("À½·á¼ö")))>=0) {
 						System.out.println("temp:"+temp);
 						cm.deleteLabel(temp);
 						drinksNo--;
-						System.out.println("ìŒë£Œìˆ˜ ì”ì—¬ ê°œìˆ˜ : " + drinksNo);
+						System.out.println("À½·á¼ö ÀÜ¿© °³¼ö : " + drinksNo);
 						mP.setting(mP,drinksNo,tbkNo,friedNo);
 					}else {
-						System.out.println("ì£¼ë¬¸ëœ ìŒë£Œìˆ˜ê°€ ì—†ìŠµë‹ˆë‹¤.");
+						System.out.println("ÁÖ¹®µÈ À½·á¼ö°¡ ¾ø½À´Ï´Ù.");
 					}
 				}else {
-					System.out.println("ìŒë£Œìˆ˜ê°€ ì—†ìŠµë‹ˆë‹¤.");
+					System.out.println("À½·á¼ö°¡ ¾ø½À´Ï´Ù.");
 				}
 			}
 		}
 	}
 	public void refreshMenuTable() {
-		//ìíŒê¸°, ë–¡ë³¶ì´, íŠ€ê¹€
+		//ÀÚÆÇ±â, ¶±ººÀÌ, Æ¢±è
 		mP.setting(mP,drinksNo,tbkNo,friedNo);
 	}
 
 	public void judgeLv(String menuName,JButton[] equips) {
-		if(menuName.equals("ë–¡ë³¶ì´")) {
+		if(menuName.equals("¶±ººÀÌ")) {
 			equips[1].setEnabled(false);
-			cookTimer = new CookingTime(equips[1],6,"ë–¡ë³¶ì´");
+			cookTimer = new CookingTime(equips[1],6,"¶±ººÀÌ");
 			gView.add(cookTimer);
 			tbkNo++;		
-		}else if(menuName.equals("ìŒë£Œìˆ˜")) {
+		}else if(menuName.equals("À½·á¼ö")) {
 			equips[0].setEnabled(false);
-			cookTimer = new CookingTime(equips[0],5,"ìŒë£Œìˆ˜");
+			cookTimer = new CookingTime(equips[0],5,"À½·á¼ö");
 			gView.add(cookTimer);
 			drinksNo++;
-		}else if(menuName.equals("íŠ€ê¹€")) {
+		}else if(menuName.equals("Æ¢±è")) {
 			equips[2].setEnabled(false);
-			cookTimer = new CookingTime(equips[2],10,"íŠ€ê¹€");
+			cookTimer = new CookingTime(equips[2],10,"Æ¢±è");
 			gView.add(cookTimer);
 			friedNo++;
 		}
