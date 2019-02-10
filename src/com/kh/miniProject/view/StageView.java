@@ -69,6 +69,8 @@ public class StageView extends JPanel{
 		}
 		//상점으로 버튼
 		toMarket.addActionListener(new MyAction());
+		//저장 및 랭킹 버튼
+		save_Ranking.addActionListener(new MyAction());
 	}	
 	class MyAction implements ActionListener {
 		@Override
@@ -99,6 +101,9 @@ public class StageView extends JPanel{
 			}
 			if(e.getActionCommand().equals("상점으로")) {
 				new ChangePanel().changePanel(mf, sView, new MarketPanel(mf,m));
+			}
+			if(e.getActionCommand().equals("저장 및 랭킹 출력")) {
+				new ChangePanel().changePanel(mf, sView, new RankingPanel(mf));
 			}
 		}
 	}
