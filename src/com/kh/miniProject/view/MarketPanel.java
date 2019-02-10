@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import com.kh.miniProject.model.vo.member.Member;
@@ -125,10 +126,12 @@ public class MarketPanel extends JPanel {
 			mo.setIcon(new ImageIcon(equipsImages[1]));
 		} else {
 			mo.setIcon(new ImageIcon(equipsImages[2]));
+			mo.setEnabled(false);
 		}
 		mo.setBounds(20, 60, 180, 180);
 		mo.removeActionListener(e);
 		mo.addActionListener(e);
+		
 
 		// 튀김 기구
 		if (equipsLv[1] == 0) {
@@ -139,6 +142,7 @@ public class MarketPanel extends JPanel {
 			mo1.setIcon(new ImageIcon(equipsImages1[2]));
 		} else {
 			mo1.setIcon(new ImageIcon(equipsImages1[3]));
+			mo1.setEnabled(false);
 		}
 		mo1.setBounds(210, 60, 180, 180);
 		mo1.removeActionListener(e);
@@ -153,6 +157,7 @@ public class MarketPanel extends JPanel {
 			mo2.setIcon(new ImageIcon(equipsImages2[2]));
 		} else {
 			mo2.setIcon(new ImageIcon(equipsImages2[3]));
+			mo2.setEnabled(false);
 		}
 		mo2.setBounds(400, 60, 180, 180);
 		mo2.removeActionListener(e);
@@ -167,6 +172,7 @@ public class MarketPanel extends JPanel {
 			mo3.setIcon(new ImageIcon(equipsImages3[2]));
 		} else {
 			mo3.setIcon(new ImageIcon(equipsImages3[3]));
+			mo3.setEnabled(false);
 		}
 		mo3.setBounds(590, 60, 180, 180);
 		mo3.removeActionListener(e);
@@ -179,6 +185,7 @@ public class MarketPanel extends JPanel {
 			mo4.setIcon(new ImageIcon(tableImages[1]));
 		}else {
 			mo4.setIcon(new ImageIcon(tableImages[2]));
+			mo4.setEnabled(false);
 		}
 		mo4.setBounds(20, 360, 180, 180);
 		mo4.removeActionListener(e);
@@ -195,6 +202,7 @@ public class MarketPanel extends JPanel {
 			mo5.setIcon(new ImageIcon(tableImages1[1]));
 		}else {
 			mo5.setIcon(new ImageIcon(tableImages1[2]));
+			mo5.setEnabled(false);
 		}
 		mo5.setBounds(210, 360, 180, 180);
 		mo5.removeActionListener(e);
@@ -211,6 +219,7 @@ public class MarketPanel extends JPanel {
 			mo6.setIcon(new ImageIcon(tableImages2[1]));
 		}else {
 			mo6.setIcon(new ImageIcon(tableImages2[2]));
+			mo6.setEnabled(false);
 		}		
 		mo6.setBounds(400, 360, 180, 180);
 		mo6.removeActionListener(e);
@@ -227,6 +236,7 @@ public class MarketPanel extends JPanel {
 			mo7.setIcon(new ImageIcon(tableImages3[1]));
 		}else {
 			mo7.setIcon(new ImageIcon(tableImages3[2]));
+			mo7.setEnabled(false);
 		}
 		mo7.setBounds(590, 360, 180, 180);
 		mo7.removeActionListener(e);
@@ -246,31 +256,50 @@ public class MarketPanel extends JPanel {
 		label.setText("떡볶이 업그레이드");
 		label.setBounds(50, 160, 200, 200);
 		mPanel.add(label);
+		
 		JLabel label1 = new JLabel();
 		label1.setText("튀김 업그레이드");
 		label1.setBounds(250, 160, 200, 200);
 		mPanel.add(label1);
+		
 		JLabel label2 = new JLabel();
 		label2.setText("오뎅 업그레이드");
 		label2.setBounds(450, 160, 200, 200);
 		mPanel.add(label2);
+		
 		JLabel label3 = new JLabel();
 		label3.setText("라면 업그레이드");
 		label3.setBounds(630, 160, 200, 200);
 		mPanel.add(label3);
+		
 		JLabel label4 = new JLabel();
 		label4.setText("떡볶이판 업그레이드");
 		label4.setBounds(50, 460, 200, 200);
 		mPanel.add(label4);
+		
 		JLabel label5 = new JLabel();
+		label5.setVisible(false);
+		if(equipsLv[1]>0) {
+			label5.setVisible(true);
+		}		
 		label5.setText("튀김판 업그레이드");
 		label5.setBounds(250, 460, 200, 200);
 		mPanel.add(label5);
+		
 		JLabel label6 = new JLabel();
+		label6.setVisible(false);
+		if(equipsLv[2]>0) {
+			label6.setVisible(true);
+		}
 		label6.setText("오뎅판 업그레이드");
 		label6.setBounds(440, 460, 200, 200);
 		mPanel.add(label6);
+		
 		JLabel label7 = new JLabel();
+		label7.setVisible(false);
+		if(equipsLv[3]>0) {
+			label7.setVisible(true);
+		}
 		label7.setText("라면판 업그레이드");
 		label7.setBounds(630, 460, 200, 200);
 		mPanel.add(label7);
@@ -289,16 +318,19 @@ public class MarketPanel extends JPanel {
 						equipsLv[0] += 1;
 						m.setGold(m.getGold() - level2);
 					} else {
-						System.out.println("그돈으론 어림없지~");
+						JOptionPane.showMessageDialog(null, "그 돈으론 어림없지~");
+						/*System.out.println("그돈으론 어림없지~");*/
 					}
 				} else if (equipsLv[0] == 2) {
 					if (m.getGold() >= level3) {
 						equipsLv[0] += 1;
 						m.setGold(m.getGold() - level3);
 					} else {
-						System.out.println("그돈으론 어림없지~");
+						JOptionPane.showMessageDialog(null, "그 돈으론 어림없지~");
+						/*System.out.println("그돈으론 어림없지~");*/
 					}
 				} else {
+					
 					System.out.println("레벨 만땅~");
 				}
 			}
@@ -310,21 +342,24 @@ public class MarketPanel extends JPanel {
 						equipsLv[1] += 1;
 						m.setGold(m.getGold() - level1);
 					} else {
-						System.out.println("그돈으론 어림없지~");
+						JOptionPane.showMessageDialog(null, "그 돈으론 어림없지~");
+						/*System.out.println("그돈으론 어림없지~");*/
 					}
 				} else if (equipsLv[1] == 1) {
 					if (m.getGold() >= level2) {
 						equipsLv[1] += 1;
 						m.setGold(m.getGold() - level2);
 					} else {
-						System.out.println("그돈으론 어림없지~");
+						JOptionPane.showMessageDialog(null, "그 돈으론 어림없지~");
+						/*System.out.println("그돈으론 어림없지~");*/
 					}
 				} else if (equipsLv[1] == 2) {
 					if (m.getGold() >= level3) {
 						equipsLv[1] += 1;
 						m.setGold(m.getGold() - level3);
 					} else {
-						System.out.println("그돈으론 어림없지~");
+						JOptionPane.showMessageDialog(null, "그 돈으론 어림없지~");
+						/*System.out.println("그돈으론 어림없지~");*/
 					}
 				} else {
 					System.out.println("레벨 만땅~");
@@ -339,21 +374,24 @@ public class MarketPanel extends JPanel {
 						equipsLv[2] += 1;
 						m.setGold(m.getGold() - level1);
 					} else {
-						System.out.println("그돈으론 어림없지~");
+						JOptionPane.showMessageDialog(null, "그 돈으론 어림없지~");
+						/*System.out.println("그돈으론 어림없지~");*/
 					}
 				} else if (equipsLv[2] == 1) {
 					if (m.getGold() >= level2) {
 						equipsLv[2] += 1;
 						m.setGold(m.getGold() - level2);
 					} else {
-						System.out.println("그돈으론 어림없지~");
+						JOptionPane.showMessageDialog(null, "그 돈으론 어림없지~");
+						/*System.out.println("그돈으론 어림없지~");*/
 					}
 				} else if (equipsLv[2] == 2) {
 					if (m.getGold() >= level3) {
 						equipsLv[2] += 1;
 						m.setGold(m.getGold() - level3);
 					} else {
-						System.out.println("그돈으론 어림없지~");
+						JOptionPane.showMessageDialog(null, "그 돈으론 어림없지~");
+						/*System.out.println("그돈으론 어림없지~");*/
 					}
 				} else {
 					System.out.println("레벨 만땅~");
@@ -368,21 +406,24 @@ public class MarketPanel extends JPanel {
 						equipsLv[3] += 1;
 						m.setGold(m.getGold() - level1);
 					} else {
-						System.out.println("그돈으론 어림없지~");
+						JOptionPane.showMessageDialog(null, "그 돈으론 어림없지~");
+						/*System.out.println("그돈으론 어림없지~");*/
 					}
 				} else if (equipsLv[3] == 1) {
 					if (m.getGold() >= level2) {
 						equipsLv[3] += 1;
 						m.setGold(m.getGold() - level2);
 					} else {
-						System.out.println("그돈으론 어림없지~");
+						JOptionPane.showMessageDialog(null, "그 돈으론 어림없지~");
+						/*System.out.println("그돈으론 어림없지~");*/
 					}
 				} else if (equipsLv[3] == 2) {
 					if (m.getGold() >= level3) {
 						equipsLv[3] += 1;
 						m.setGold(m.getGold() - level3);
 					} else {
-						System.out.println("그돈으론 어림없지~");
+						JOptionPane.showMessageDialog(null, "그 돈으론 어림없지~");
+						/*System.out.println("그돈으론 어림없지~");*/
 					}
 				} else {
 					System.out.println("레벨 만땅~");
@@ -397,7 +438,8 @@ public class MarketPanel extends JPanel {
 						tableLv[0] += 1;
 						m.setGold(m.getGold() - level2);
 					} else {
-						System.out.println("그돈으론 어림없지~");
+						JOptionPane.showMessageDialog(null, "그 돈으론 어림없지~");
+						/*System.out.println("그돈으론 어림없지~");*/
 					}
 
 				} else if (tableLv[0] == 2) {
@@ -405,7 +447,8 @@ public class MarketPanel extends JPanel {
 						tableLv[0] += 1;
 						m.setGold(m.getGold() - level3);
 					} else {
-						System.out.println("그돈으론 어림없지~");
+						JOptionPane.showMessageDialog(null, "그 돈으론 어림없지~");
+						/*System.out.println("그돈으론 어림없지~");*/
 					}
 				} else {
 					System.out.println("레벨 만땅~");
@@ -419,21 +462,24 @@ public class MarketPanel extends JPanel {
 						tableLv[1] += 1;
 						m.setGold(m.getGold() - level1);
 					} else {
-						System.out.println("그돈으론 어림없지~");
+						JOptionPane.showMessageDialog(null, "그 돈으론 어림없지~");
+						/*System.out.println("그돈으론 어림없지~");*/
 					}
 				} else if (tableLv[1] == 1) {
 					if (m.getGold() >= level2) {
 						tableLv[1] += 1;
 						m.setGold(m.getGold() - level2);
 					} else {
-						System.out.println("그돈으론 어림없지~");
+						JOptionPane.showMessageDialog(null, "그 돈으론 어림없지~");
+						/*System.out.println("그돈으론 어림없지~");*/
 					}
 				} else if (tableLv[1] == 2) {
 					if (m.getGold() >= level3) {
 						tableLv[1] += 1;
 						m.setGold(m.getGold() - level3);
 					} else {
-						System.out.println("그돈으론 어림없지~");
+						JOptionPane.showMessageDialog(null, "그 돈으론 어림없지~");
+						/*System.out.println("그돈으론 어림없지~");*/
 					}
 				} else {
 					System.out.println("레벨 만땅~");
@@ -448,21 +494,24 @@ public class MarketPanel extends JPanel {
 						tableLv[2] += 1;
 						m.setGold(m.getGold() - level1);
 					} else {
-						System.out.println("그돈으론 어림없지~");
+						JOptionPane.showMessageDialog(null, "그 돈으론 어림없지~");
+						/*System.out.println("그돈으론 어림없지~");*/
 					}
 				} else if (tableLv[2] == 1) {
 					if (m.getGold() >= level2) {
 						tableLv[2] += 1;
 						m.setGold(m.getGold() - level2);
 					} else {
-						System.out.println("그돈으론 어림없지~");
+						JOptionPane.showMessageDialog(null, "그 돈으론 어림없지~");
+						/*System.out.println("그돈으론 어림없지~");*/
 					}
 				} else if (tableLv[2] == 2) {
 					if (m.getGold() >= level3) {
 						tableLv[2] += 1;
 						m.setGold(m.getGold() - level3);
 					} else {
-						System.out.println("그돈으론 어림없지~");
+						JOptionPane.showMessageDialog(null, "그 돈으론 어림없지~");
+						/*System.out.println("그돈으론 어림없지~");*/
 					}
 				} else {
 					System.out.println("레벨 만땅~");
@@ -477,21 +526,24 @@ public class MarketPanel extends JPanel {
 						tableLv[3] += 1;
 						m.setGold(m.getGold() - level1);
 					} else {
-						System.out.println("그돈으론 어림없지~");
+						JOptionPane.showMessageDialog(null, "그 돈으론 어림없지~");
+						/*System.out.println("그돈으론 어림없지~");*/
 					}
 				} else if (tableLv[3] == 1) {
 					if (m.getGold() >= level2) {
 						tableLv[3] += 1;
 						m.setGold(m.getGold() - level2);
 					} else {
-						System.out.println("그돈으론 어림없지~");
+						JOptionPane.showMessageDialog(null, "그 돈으론 어림없지~");
+						/*System.out.println("그돈으론 어림없지~");*/
 					}
 				} else if (tableLv[3] == 2) {
 					if (m.getGold() >= level3) {
 						tableLv[3] += 1;
 						m.setGold(m.getGold() - level3);
 					} else {
-						System.out.println("그돈으론 어림없지~");
+						JOptionPane.showMessageDialog(null, "그 돈으론 어림없지~");
+						/*System.out.println("그돈으론 어림없지~");*/
 					}
 				} else {
 					System.out.println("레벨 만땅~");
