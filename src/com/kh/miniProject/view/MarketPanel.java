@@ -97,6 +97,10 @@ public class MarketPanel extends JPanel {
 		this.equipsLv = m.getEquipsLv();
 		this.tableLv = m.getTableLv();
 		
+		this.setLayout(null);
+		this.setBounds(110, 50, 800, 650);
+		this.setBackground(Color.orange);
+		
 		//°ñµå Ãâ·Â
 		gold = new JButton("°ñµå");
 		gold.setEnabled(false);
@@ -118,9 +122,6 @@ public class MarketPanel extends JPanel {
 	}//marketpanel
 
 	public void setting(JPanel panel) {
-		panel.setLayout(null);
-		panel.setBounds(110, 50, 800, 650);
-		this.setBackground(Color.orange);
 		// °ñµå Ãâ·Â
 		gold.setText("¼ÒÁö±Ý: " + m.getGold() + "G");
 		panel.add(gold);
@@ -186,7 +187,6 @@ public class MarketPanel extends JPanel {
 		} else {
 			mo4.setIcon(new ImageIcon(tableImages[2]));
 		}
-
 		mo4.setBounds(20, 360, 180, 180);
 		mo4.removeActionListener(e);
 		mo4.addActionListener(e);
@@ -201,7 +201,6 @@ public class MarketPanel extends JPanel {
 		} else {
 			mo5.setIcon(new ImageIcon(tableImages1[3]));
 		}
-
 		mo5.setBounds(210, 360, 180, 180);
 		mo5.removeActionListener(e);
 		mo5.addActionListener(e);
@@ -216,7 +215,6 @@ public class MarketPanel extends JPanel {
 		} else {
 			mo6.setIcon(new ImageIcon(tableImages2[3]));
 		}
-
 		mo6.setBounds(400, 360, 180, 180);
 		mo6.removeActionListener(e);
 		mo6.addActionListener(e);
@@ -231,7 +229,6 @@ public class MarketPanel extends JPanel {
 		} else {
 			mo7.setIcon(new ImageIcon(tableImages3[3]));
 		}
-
 		mo7.setBounds(590, 360, 180, 180);
 		mo7.removeActionListener(e);
 		mo7.addActionListener(e);
@@ -500,7 +497,6 @@ public class MarketPanel extends JPanel {
 					}
 				} else {
 					System.out.println("·¹º§ ¸¸¶¥~");
-
 				}
 			}
 			refresh();

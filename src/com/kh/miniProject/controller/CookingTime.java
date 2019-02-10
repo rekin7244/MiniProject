@@ -15,13 +15,11 @@ import com.kh.miniProject.run.Run;
 public class CookingTime extends JPanel{
 	private JLabel timerLabel;
 	private Timer timer;
-	private Member m;
 	private int cooktime;
 	private JButton btn;
 	
-	public CookingTime(JButton btn, Member m,int cooktime,String menuName) {
+	public CookingTime(JButton btn,int cooktime,String menuName) {
 		this.btn = btn;
-		this.m = m;
 		this.cooktime = cooktime;
 		
 		timerLabel = new JLabel();
