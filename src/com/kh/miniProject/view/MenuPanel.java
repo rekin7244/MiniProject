@@ -4,6 +4,8 @@ import java.awt.*;
 
 
 import javax.swing.*;
+
+import com.kh.miniProject.model.vo.member.Member;
 import com.kh.miniProject.run.*;
 
 public class MenuPanel extends JPanel{
@@ -38,7 +40,7 @@ public class MenuPanel extends JPanel{
 
 
 
-	public MenuPanel() {
+	public MenuPanel(Member m) {
 		menuButton = new JButton[menu.length];
 		this.setLayout(null);
 		this.setBounds(0,318,Run.SCREEN_WIDTH,PNANEL_HIGHT);
@@ -56,6 +58,7 @@ public class MenuPanel extends JPanel{
 	}
 
 	public void setting(JPanel mp, int drinksNo,int tbkNo,int friedNo) {
+		
 		if(drinksNo==3) {
 			menuButton[3].setIcon(new ImageIcon(drinksImage[2]));
 		}else if(drinksNo==2) {
@@ -92,6 +95,8 @@ public class MenuPanel extends JPanel{
 		else{
 			menuButton[1].setIcon(null);
 		}
+
+
 	}
 
 
