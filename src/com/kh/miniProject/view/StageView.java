@@ -13,6 +13,7 @@ public class StageView extends JPanel{
 	private int stagexSize = 180;		//stage버튼 가로크기
 	private int stageySize = 150;		//stage버튼 세로크기
 	private JPanel sView;
+	private MarketPanel mPanel;
 	private MainFrame mf;
 	private JButton[] stageBtn = new JButton[10];	//1~10스테이지 버튼
 	private Member m;
@@ -49,7 +50,7 @@ public class StageView extends JPanel{
 
 		//저장 후 (회원이면)랭킹 출력
 		/*if(Member)*/	//회원인지 판별
-		JButton save_Ranking = new JButton("저장 및 랭킹 출력");
+		JButton save_Ranking = new JButton("랭킹 출력 및 종료");
 		save_Ranking.setBounds(700,550,200,70);
 		this.add(save_Ranking);
 
@@ -69,6 +70,8 @@ public class StageView extends JPanel{
 		}
 		//상점으로 버튼
 		toMarket.addActionListener(new MyAction());
+		//저장 및 랭킹 버튼
+		save_Ranking.addActionListener(new MyAction());
 	}	
 	class MyAction implements ActionListener {
 		@Override
@@ -98,7 +101,11 @@ public class StageView extends JPanel{
 				}
 			}
 			if(e.getActionCommand().equals("상점으로")) {
-				new ChangePanel().changePanel(mf, sView, new MarketPanel(mf,m));
+				new ChangePanel().changePanel(mf, sView, mPanel=new MarketPanel(mf,m));
+				mPanel.setting(mPanel);
+			}
+			if(e.getActionCommand().equals("랭킹 출력 및 종료")) {
+				new ChangePanel().changePanel(mf, sView, new RankingPanel(mf));
 			}
 		}
 	}

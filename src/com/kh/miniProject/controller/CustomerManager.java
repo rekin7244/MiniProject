@@ -75,9 +75,13 @@ public class CustomerManager {
 				random = new Random().nextInt(2);		//1스테이지 한정 2가지
 			}else if(stageLv==2) {
 				random = new Random().nextInt(3);		//2스테이지 한정 3가지
+			}else if(stageLv==3) {
+				random = new Random().nextInt(4);		//3스테이지 한정 4가지
+			}else {
+				random = new Random().nextInt(5);		//4스테이지 이후 5가지
 			}
 			if (random == 0) {
-				orderDao.addOrder(new MenuOrder("떡볶이", 2200, orderNo));
+				orderDao.addOrder(new MenuOrder("떡볶이", 2300, orderNo));
 			} else if (random == 1) {
 				orderDao.addOrder(new MenuOrder("음료수", 1000, orderNo));
 			} else if (random == 2) {
@@ -85,22 +89,27 @@ public class CustomerManager {
 			} else if (random == 3) {
 				orderDao.addOrder(new MenuOrder("오뎅", 2000, orderNo));
 			} else if (random == 4) {
-				orderDao.addOrder(new MenuOrder("라면", 3000, orderNo));
+				orderDao.addOrder(new MenuOrder("라면", 3500, orderNo));
 			}
 			orderLabel[orderNo] = new OrderLabel(orderNo);	//order Label 추가
 			
 			//이미지 추가
-			//랜덤값 0일 경우 떡볶이
+			//랜덤값에 따라 떡볶이,음료수,튀김,오뎅,라면
 			Image food = null;
 			if (random == 0) {
 				food = new ImageIcon("images/떡볶이순대.jpg")
 						.getImage().getScaledInstance(50, 40, 0);
-				//랜덤값 1일경우 라면
 			} else if (random == 1) {
 				food = new ImageIcon("images/drinkImage.jpg")
 						.getImage().getScaledInstance(50, 40, 0);
 			} else if (random == 2) {
 				food = new ImageIcon("images/friedImage.jpeg")
+						.getImage().getScaledInstance(50, 40, 0);
+			} else if (random == 3) {
+				food = new ImageIcon("images/오뎅Lv1.jpg")
+						.getImage().getScaledInstance(50, 40, 0);
+			} else if (random == 4) {
+				food = new ImageIcon("images/ramen.png")
 						.getImage().getScaledInstance(50, 40, 0);
 			}
 			
