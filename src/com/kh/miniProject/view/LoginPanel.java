@@ -1,6 +1,7 @@
 package com.kh.miniProject.view;
 
 import java.awt.Color;
+import java.awt.Dialog;
 import java.awt.Graphics;
 import java.awt.Panel;
 import java.awt.event.ActionEvent;
@@ -15,6 +16,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -34,18 +36,17 @@ public class LoginPanel extends JPanel {
 	JButton loginbt;
 	JButton Joinbt;
 	JButton guestbt;
+	Dialog dialog;
 	private MemberDao memberDao;
 	private Member m;
-	
+
 	// 생성자
 	public LoginPanel(MainFrame mf) {
 		this.mf = mf;
 		this.lView = this;
 		memberDao = new MemberDao();		//멤버Dao 실행 (생성자에 의해 저장된 멤버 다 불러옴)
-		
-		//샘플 데이터 입력
+		//memberDao.removeMember("test", "pass");
 		//memberDao.addMember(new Member("test","pass","email"));
-		memberDao.printMember();	//저장확인
 
 		setSize(1024, 768);
 		// 레이아웃 설정
@@ -81,20 +82,19 @@ public class LoginPanel extends JPanel {
 		passText.setBounds(400, 420, 200, 30);
 		passText.setForeground(Color.BLACK);
 		passText.setBackground(Color.white);
-		
-		
+
+
 		// 로그인버튼 추가
 		loginbt = new JButton("로그인");
 		loginbt.setBounds(400, 460, 200, 30);
 
 		guestbt= new JButton("guest");
 		guestbt.setBounds(510, 510, 90, 30); 
-				
+
 		Joinbt = new JButton("회원가입");
 		Joinbt.setBounds(400, 510, 90, 30);
-		
+
 		// 마지막 추가들
-		layeredPane.add(panel);
 		this.add(ID);
 		this.add(Pass);
 		layeredPane.add(IDText);
@@ -104,6 +104,8 @@ public class LoginPanel extends JPanel {
 		this.add(Joinbt);
 		loginbt.addActionListener(new BtnAction()); 
 		guestbt.addActionListener(new BtnAction());
+		Joinbt.addActionListener(new BtnAction());
+		layeredPane.add(panel);
 		add(layeredPane);
 	}
 
@@ -128,11 +130,26 @@ public class LoginPanel extends JPanel {
 				if((m=memberDao.loginMember(inputId, inputPass))!=null) {
 					new ChangePanel().changePanel(mf, lView, new StageView(mf,m));					
 				}else {
-					System.out.println("잘못된 정보입니다.");
+					String[] command = {"회원가입","아이디, 비밀번호 찾기"};
+					int result;
+
+					result = JOptionPane.showOptionDialog(null,"아이디, 비밀번호를 확인해주세요","부글부글분식",
+							JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE, null, command, command[0]);
+					if(result==0) {
+						ChangePanel.changePanel(mf, lView, new JoinPanel(mf));
+					}else if(result==1){
+						//이메일 입력받는 창
+						//이메일 입력하면 orderDao.searchMember() 수행하여 member객체 불러옴
+						//불러온 member객체로부터 id,pass 출력
+					}
 				}
 			}
 			if(e.getSource() == guestbt) {
-				new ChangePanel().changePanel(mf, lView, new StageView(mf,new Member("guest","pass","email")));
+				new ChangePanel().changePanel(mf, lView, new StageView(mf,new Member("guest","guestpass","guestemail")));
+			}
+			if(e.getSource() == Joinbt) {
+				new ChangePanel().changePanel(mf, lView, new JoinPanel(mf));
+				
 			}
 		}
 	}

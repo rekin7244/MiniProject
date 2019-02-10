@@ -19,7 +19,7 @@ public class CustomerTimer extends JPanel{
 	private Timer timer;
 	private double waitingTime;
 	
-	public CustomerTimer(CustomerManager cm,int waitingTime,int customerNo) {
+	public CustomerTimer(CustomerManager cm,double waitingTime,int customerNo) {
 		this.cm = cm;
 		this.waitingTime = waitingTime;
 		this.customerNo = customerNo;

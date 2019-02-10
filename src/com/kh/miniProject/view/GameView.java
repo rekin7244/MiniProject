@@ -1,6 +1,7 @@
 package com.kh.miniProject.view;
 
 import java.awt.Color;
+import java.awt.Dialog;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -40,16 +41,18 @@ public class GameView extends JPanel{
 	private Member m;
 	//stage º¯¼ö °ü¸®
 	private int stageLv;
+	private int stageGold;
 	private JButton gold;
 	//ÁÖ¹® ³»¿ª °ü¸®
 	private OrderDao orderDao;
 
 	//cons
-	public GameView(MainFrame mf,Member m) {
+	public GameView(MainFrame mf,Member m,int stageLv) {
 		orderDao = new OrderDao(this);			//½ºÅ×ÀÌÁö ´ç orderDao »ý¼º ´ÜÇÑ¹ø¸¸!!
 		this.gView = this;
 		this.mf = mf;
 		this.m = m;
+		this.stageLv = stageLv;
 		this.setLayout(null);
 		this.setSize(Run.SCREEN_WIDTH,Run.SCREEN_HEIGHT);
 
@@ -61,9 +64,13 @@ public class GameView extends JPanel{
 		this.add(gP);
 
 		//°í°´¸Å´ÏÀú ½ÇÇà
-		cm = new CustomerManager(gP,orderDao);
+		if(stageLv<3) {
+			cm = new CustomerManager(gP,orderDao,2,stageLv);
+		}else {
+			cm = new CustomerManager(gP,orderDao,3,stageLv);
+		}
 		//½ºÅ×ÀÌÁö Timer
-		gameTimer = new TimerTest(gP,cm);
+		gameTimer = new TimerTest(gP,cm,this);
 		gP.add(gameTimer);
 
 		//backButton
@@ -122,9 +129,20 @@ public class GameView extends JPanel{
 		}
 	}
 	public void updateGold(int stageGold) {
+		this.stageGold = stageGold;
 		gold.setText(stageGold + "¿ø");
 	}
-
+	public void gameOver() {
+		//ÇÏÆ® 3°³ ¼ÒÁø½Ã gameover
+	}
+	public void endStage() {
+		Dialog dialog = new Dialog(mf);
+		dialog.setBounds(150, 150, 150, 150);
+		JOptionPane.showMessageDialog(null, "STAGE "+stageLv+" CLEAR!!\n Earned Gold : "+stageGold);
+		m.setGold(m.getGold()+stageGold);
+		m.setMaxStage(stageLv+1);
+		new ChangePanel().changePanel(mf, gView, new StageView(mf,m));
+	}
 	//btn Action
 	class Event_Cook implements ActionListener{
 		@Override
@@ -135,7 +153,7 @@ public class GameView extends JPanel{
 				System.out.println("¶±ººÀÌ±â°è");
 				if(tbkNo<4) {
 					equips[1].setEnabled(false);
-					cookTimer = new CookingTime(equips[1],m,4,"¶±ººÀÌ");
+					cookTimer = new CookingTime(equips[1],m,6,"¶±ººÀÌ");
 					gView.add(cookTimer);
 					tbkNo++;
 				}else {
@@ -166,8 +184,8 @@ public class GameView extends JPanel{
 			if(e.getActionCommand().equals("Æ¢±è±â")) {
 				System.out.println("Æ¢±è±â");
 				if(friedNo<4) {
-					equips[4].setEnabled(false);
-					cookTimer = new CookingTime(equips[4],m,10,"Æ¢±è");
+					equips[2].setEnabled(false);
+					cookTimer = new CookingTime(equips[2],m,10,"Æ¢±è");
 					gView.add(cookTimer);
 					friedNo++;
 				}else {
@@ -176,7 +194,6 @@ public class GameView extends JPanel{
 				refreshMenuTable();
 				System.out.println("Æ¢±è ÃæÀü ÀÜ¿© °³¼ö"+friedNo);
 			}
-
 
 			//MenuPanel ActionListener
 			int temp;

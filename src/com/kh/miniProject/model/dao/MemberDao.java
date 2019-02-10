@@ -30,11 +30,41 @@ public class MemberDao {
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
+		printMember();
 	}
 	
 	public void addMember(Member member) {
 		memberList.add(member);
 		saveMemberList();
+	}
+	
+	public boolean checkMember(String memberId, String memberEmail) {
+		for(Member m : memberList) {
+			if(m.getMemberId().equals(memberId) || m.getMemberEmail().equals(memberEmail)) {
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	//아이디 중복확인
+	public boolean checkID(String memberId) {
+		for(Member m : memberList) {
+			if(m.getMemberId().equals(memberId)) {
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	//이메일 중복확인
+	public boolean checkEmail(String memberEmail) {
+		for(Member m : memberList) {
+			if(m.getMemberEmail().equals(memberEmail)) {
+				return false;
+			}
+		}
+		return true;
 	}
 	
 	//실험용 : 저장된 회원 출력
@@ -68,6 +98,7 @@ public class MemberDao {
 		for (Member member : memberList) {
 			if(member.getMemberId().equals(memberId) && member.getMemberPwd().equals(memberPwd)) {
 				memberList.remove(member);
+				saveMemberList();
 				return;
 			}			//멤버 삭제
 		}

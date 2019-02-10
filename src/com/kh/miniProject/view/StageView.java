@@ -74,13 +74,27 @@ public class StageView extends JPanel{
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if(e.getActionCommand().equals("STAGE 1")) {
-				new ChangePanel().changePanel(mf,sView,new GameView(mf,m));
+				new ChangePanel().changePanel(mf,sView,new GameView(mf,m,1));
 			}
 			if(e.getActionCommand().equals("STAGE 2")) {
-				if(equipsLv[4]>0) {
-					new ChangePanel().changePanel(mf,sView,new GameView(mf,m));
+				if(equipsLv[1]>0) {
+					new ChangePanel().changePanel(mf,sView,new GameView(mf,m,2));
 				}else {
 					System.out.println("튀김기가 필요합니다.");
+				}
+			}
+			if(e.getActionCommand().equals("STAGE 3")) {
+				if(equipsLv[2]>0) {
+					new ChangePanel().changePanel(mf,sView,new GameView(mf,m,3));
+				}else {
+					System.out.println("오뎅기계가 필요합니다.");
+				}
+			}
+			if(e.getActionCommand().equals("STAGE 4")) {
+				if(equipsLv[3]>0) {
+					new ChangePanel().changePanel(mf,sView,new GameView(mf,m,4));
+				}else {
+					System.out.println("라면기계가 필요합니다.");
 				}
 			}
 			if(e.getActionCommand().equals("상점으로")) {
