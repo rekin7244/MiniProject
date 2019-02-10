@@ -109,12 +109,8 @@ public class MarketPanel extends JPanel {
 		returnBtn.addActionListener(e);
 
 		// 상점 버튼 및 기능 구현
-		setting(this);
-
-		// Action
 		mPanel = this;
-		
-		mf.add(this);
+		//setting(mPanel);
 	}//marketpanel
 
 	public void setting(MarketPanel mPanel) {
@@ -190,7 +186,7 @@ public class MarketPanel extends JPanel {
 
 		// 튀김 판
 		mo5.setVisible(false);
-		if(equipsLv[1]==1) {
+		if(equipsLv[1]>0) {
 			mo5.setVisible(true);
 		}
 		if(tableLv[1]==1) {
@@ -206,7 +202,7 @@ public class MarketPanel extends JPanel {
 
 		// 오뎅 판
 		mo6.setVisible(false);
-		if(equipsLv[2]==1) {
+		if(equipsLv[2]>0) {
 			mo6.setVisible(true);
 		}
 		if(tableLv[2]==1) {
@@ -222,7 +218,7 @@ public class MarketPanel extends JPanel {
 
 		// 라면 판
 		mo7.setVisible(false);
-		if(equipsLv[3]==1) {
+		if(equipsLv[3]>0) {
 			mo7.setVisible(true);
 		}
 		if(tableLv[3]==1) {
@@ -508,9 +504,11 @@ public class MarketPanel extends JPanel {
 		}
 
 		public void refresh() {
-			setting(mPanel);
 			m.setEquipsLv(equipsLv);
 			m.setTableLv(tableLv);
+			MarketPanel temp;
+			new ChangePanel().changePanel(mf,mPanel, temp=new MarketPanel(mf,m));
+			temp.setting(temp);
 		}
 	}
 }// class
