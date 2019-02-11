@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 
 import com.kh.miniProject.model.vo.member.Member;
+import com.kh.miniProject.music.Music;
 import com.kh.miniProject.run.Run;
 
 public class StageView extends JPanel{
@@ -18,12 +19,15 @@ public class StageView extends JPanel{
 	private JButton[] stageBtn = new JButton[10];	//1~10스테이지 버튼
 	private Member m;
 	private int[] equipsLv;
+	private Music music;
 
 	public StageView(MainFrame mf,Member m) {
 		this.m = m;
 		this.mf = mf;
 		this.equipsLv = m.getEquipsLv();
-
+		music = new Music("inGameMusic.mp3",false);
+		music.start();
+		
 		this.setLayout(null);
 		this.setSize(Run.SCREEN_WIDTH,Run.SCREEN_HEIGHT);
 
@@ -76,6 +80,7 @@ public class StageView extends JPanel{
 	class MyAction implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
+			music.close();
 			if(e.getActionCommand().equals("STAGE 1")) {
 				new ChangePanel().changePanel(mf,sView,new GameView(mf,m,1));
 			}

@@ -2,6 +2,8 @@ package com.kh.miniProject.view;
 
 import javax.swing.*;
 
+import com.kh.miniProject.music.Music;
+
 public class ChangePanel {
 	
 	public static void changePanel(JFrame mf, JPanel op, JPanel np) {

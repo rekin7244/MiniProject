@@ -50,6 +50,8 @@ public class GameView extends JPanel{
 
 	//메뉴별 개수 판정
 	private int[] tableLv;
+	
+	private Music music;
 
 	//cons
 	public GameView(MainFrame mf,Member m,int stageLv) {
@@ -62,11 +64,9 @@ public class GameView extends JPanel{
 		this.setLayout(null);
 		this.setSize(Run.SCREEN_WIDTH,Run.SCREEN_HEIGHT);
 
-		Music temp = (Music) mf.getTitleMusic();
-		temp.close();
-		
-		Music buttonEnteredMusic = new Music("inGameMusic.mp3",false);
-		buttonEnteredMusic.start();
+
+		music = new Music("inGameMusic.mp3",false);
+		music.start();
 		
 		
 		
@@ -105,6 +105,7 @@ public class GameView extends JPanel{
 				if(result==0) {
 					gameTimer.timerStop();
 					ChangePanel.changePanel(mf, gView, new StageView(mf,m));
+					music.close();
 				}
 			}		
 		});
@@ -168,10 +169,13 @@ public class GameView extends JPanel{
 			ChangePanel.changePanel(mf, gView, new ResultPanel(mf,m));
 			MemberDao mDao = new MemberDao();
 			mDao.saveMember(m);
+			music.close();
+			
 		}else {
 			ChangePanel.changePanel(mf, gView, new StageView(mf,m));
 			MemberDao mDao = new MemberDao();
 			mDao.saveMember(m);
+			music.close();
 		}
 
 	}

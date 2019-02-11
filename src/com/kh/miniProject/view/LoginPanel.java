@@ -42,6 +42,7 @@ public class LoginPanel extends JPanel {
 	Dialog dialog;
 	private MemberDao memberDao;
 	private Member m;
+	private Music titleMusic;
 
 	// 생성자
 	public LoginPanel(MainFrame mf) {
@@ -51,6 +52,8 @@ public class LoginPanel extends JPanel {
 		memberDao = new MemberDao();		//멤버Dao 실행 (생성자에 의해 저장된 멤버 다 불러옴)
 		//memberDao.removeMember("master", "1234");
 		//memberDao.addMember(new Member("test","pass","email"));
+		titleMusic = new Music("TitleMusic.mp3",false);
+				titleMusic.start();
 		
 
 		setSize(1024, 768);
@@ -139,7 +142,8 @@ public class LoginPanel extends JPanel {
 				System.out.println("inputId : "+inputId);
 				System.out.println("inputPass : "+inputPass);
 				if((m=memberDao.loginMember(inputId, inputPass))!=null) {
-					new ChangePanel().changePanel(mf, lView, new StageView(mf,m));					
+					new ChangePanel().changePanel(mf, lView, new StageView(mf,m));		
+					titleMusic.close();
 				}else {
 					String[] command = {"회원가입","아이디, 비밀번호 찾기"};
 					int result;
@@ -164,10 +168,11 @@ public class LoginPanel extends JPanel {
 			}
 			if(e.getSource() == guestbt) {
 				ChangePanel.changePanel(mf, lView, new StageView(mf,new Member("guest","guestpass","guestemail")));
+				titleMusic.close();
 			}
 			if(e.getSource() == Joinbt) {
 				ChangePanel.changePanel(mf, lView, new JoinPanel(mf));
-				
+				titleMusic.close();
 			}
 		}
 		
