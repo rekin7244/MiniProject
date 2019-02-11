@@ -13,6 +13,7 @@ import javax.swing.JPanel;
 
 import com.kh.miniProject.model.dao.MemberDao;
 import com.kh.miniProject.model.vo.member.Member;
+import com.kh.miniProject.music.Music;
 
 public class MarketPanel extends JPanel {
 
@@ -21,6 +22,7 @@ public class MarketPanel extends JPanel {
 	Member m;
 
 	// 사용 필드
+	private Music marketMusic;
 	// 업글비용
 	private int level1 = 25000;
 	private int level2 = 50000;
@@ -97,6 +99,9 @@ public class MarketPanel extends JPanel {
 		this.setLayout(null);
 		this.setBounds(110, 50, 800, 650);
 		this.setBackground(Color.orange);
+
+		marketMusic = new Music("intro3.mp3",false);
+		marketMusic.start();
 
 		// 골드 출력
 		gold = new JButton("골드");
@@ -705,7 +710,9 @@ public class MarketPanel extends JPanel {
 			}
 			refresh();
 			if (e.getActionCommand().equals("돌아가기")) {
-				new ChangePanel().changePanel(mf, mPanel, new StageView(mf, m));
+				marketMusic.close();
+				marketMusic.interrupt();
+				ChangePanel.changePanel(mf, mPanel, new StageView(mf, m));
 			};
 		}
 
@@ -719,5 +726,8 @@ public class MarketPanel extends JPanel {
 			temp.setting(temp);
 			mPanel = temp;
 		}
+	}
+	public Music getMarketMusic() {
+		return marketMusic;
 	}
 }// class

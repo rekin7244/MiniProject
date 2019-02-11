@@ -35,7 +35,7 @@ public class GameView extends JPanel{
 	private JButton backButton;
 	private Image backButtonImage;
 	//Music
-	Music buttonEnteredMusic;
+	private Music music;
 	//음식 수 저장용 변수
 	private int drinksNo;	//음료개수
 	private int friedNo;	//튀김개수
@@ -64,11 +64,8 @@ public class GameView extends JPanel{
 		this.setLayout(null);
 		this.setSize(Run.SCREEN_WIDTH,Run.SCREEN_HEIGHT);
 
-		Music temp = (Music) mf.getTitleMusic();
-		temp.close();
-
-		buttonEnteredMusic = new Music("inGameMusic.mp3",false);
-		buttonEnteredMusic.start();
+		music = new Music("inGameMusic.mp3",false);
+		music.start();
 
 
 
@@ -106,10 +103,9 @@ public class GameView extends JPanel{
 
 				if(result==0) {
 					gameTimer.timerStop();
-					ChangePanel.changePanel(mf, gView, sView=new StageView(mf,m));
-					sView.musicOn();
+					ChangePanel.changePanel(mf, gView, new StageView(mf,m));
+					music.close();
 					cm.endCustomer();
-					buttonEnteredMusic.close();
 				}
 			}		
 		});
@@ -164,7 +160,7 @@ public class GameView extends JPanel{
 		//게임 종료
 		cm.endCustomer();
 		//뮤직 종료
-		buttonEnteredMusic.close();
+		music.close();
 
 		String[] command = {"결과보기","스테이지로 이동"};
 		int result;
@@ -181,7 +177,6 @@ public class GameView extends JPanel{
 			mDao.saveMember(m);
 		}else {
 			ChangePanel.changePanel(mf, gView, sView=new StageView(mf,m));
-			sView.musicOn();
 			MemberDao mDao = new MemberDao();
 			mDao.saveMember(m);
 		}

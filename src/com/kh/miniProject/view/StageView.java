@@ -20,7 +20,7 @@ public class StageView extends JPanel{
 	private Member m;
 	private int[] equipsLv;
 	//Music
-	private Music titleMusic;
+	private Music music;
 	private boolean firstPlay = true;
 	
 	public StageView(MainFrame mf,Member m) {
@@ -30,7 +30,10 @@ public class StageView extends JPanel{
 
 		this.setLayout(null);
 		this.setSize(Run.SCREEN_WIDTH,Run.SCREEN_HEIGHT);
-
+		
+		music = new Music("inGameMusic.mp3",false);
+		music.start();
+		
 		//스테이지1~5
 		for(int i=0;i<5;i++) {
 			stageBtn[i] = new JButton("STAGE "+ (i+1));
@@ -77,26 +80,17 @@ public class StageView extends JPanel{
 		//저장 및 랭킹 버튼
 		save_Ranking.addActionListener(new MyAction());
 	}	
-	public void musicOn() {
-		firstPlay=false;
-		titleMusic = new Music("TitleMusic.mp3",false);
-		titleMusic.start();
-	}
 	class MyAction implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if(e.getActionCommand().equals("STAGE 1")) {
 				new ChangePanel().changePanel(mf,sView,new GameView(mf,m,1));
-				if(!firstPlay) {
-					titleMusic.close();
-				}
+				music.close();
 			}
 			if(e.getActionCommand().equals("STAGE 2")) {
 				if(equipsLv[1]>0) {
 					new ChangePanel().changePanel(mf,sView,new GameView(mf,m,2));
-					if(!firstPlay) {
-						titleMusic.close();
-					}
+					music.close();
 				}else {
 					System.out.println("튀김기가 필요합니다.");
 				}
@@ -104,9 +98,7 @@ public class StageView extends JPanel{
 			if(e.getActionCommand().equals("STAGE 3")) {
 				if(equipsLv[2]>0) {
 					new ChangePanel().changePanel(mf,sView,new GameView(mf,m,3));
-					if(!firstPlay) {
-						titleMusic.close();
-					}
+					music.close();
 				}else {
 					System.out.println("오뎅기계가 필요합니다.");
 				}
@@ -114,9 +106,7 @@ public class StageView extends JPanel{
 			if(e.getActionCommand().equals("STAGE 4")) {
 				if(equipsLv[3]>0) {
 					new ChangePanel().changePanel(mf,sView,new GameView(mf,m,4));
-					if(!firstPlay) {
-						titleMusic.close();
-					}
+					music.close();
 				}else {
 					System.out.println("라면기계가 필요합니다.");
 				}
@@ -125,9 +115,12 @@ public class StageView extends JPanel{
 			if(e.getActionCommand().equals("상점으로")) {
 				new ChangePanel().changePanel(mf, sView, mPanel=new MarketPanel(mf,m));
 				mPanel.setting(mPanel);
+				music.close();
+
 			}
 			if(e.getActionCommand().equals("랭킹 출력 및 종료")) {
 				new ChangePanel().changePanel(mf, sView, new RankingPanel(mf));
+				music.close();
 			}
 		}
 	}
