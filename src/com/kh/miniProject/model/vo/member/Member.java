@@ -13,7 +13,7 @@ public class Member implements Serializable{
 	private String memberPwd;
 	private String memberEmail;
 	private int maxStage=1;				//초기 세팅 1스테이지
-	private int gold;
+	private int gold=9999999;
 	private int stageGold;
 
 	//조리기구 레벨 초기 세팅 {떡볶이/튀김기/오뎅기계/라면기계}
