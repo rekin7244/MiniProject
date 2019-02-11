@@ -3,12 +3,9 @@ package com.kh.miniProject.view;
 import java.awt.Graphics;
 import java.awt.Image;
 
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import com.kh.miniProject.controller.CustomerManager;
-import com.kh.miniProject.controller.OrderManager;
 import com.kh.miniProject.model.dao.OrderDao;
 
 

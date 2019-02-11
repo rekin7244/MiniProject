@@ -79,15 +79,13 @@ public class MenuPanel extends JPanel{
 
 		if(tbkNo==4) {
 			menuButton[1].setIcon(new ImageIcon(tbkImage[3]));
-		}		
-		else if(tbkNo==3) {
+		}else if(tbkNo==3) {
 			menuButton[1].setIcon(new ImageIcon(tbkImage[2]));
 		}else if(tbkNo==2) {
 			menuButton[1].setIcon(new ImageIcon(tbkImage[1]));
 		}else if(tbkNo==1) {
 			menuButton[1].setIcon(new ImageIcon(tbkImage[0]));
-		}
-		else{
+		}else{
 			menuButton[1].setIcon(null);
 		}
 
@@ -99,37 +97,33 @@ public class MenuPanel extends JPanel{
 			menuButton[2].setIcon(new ImageIcon(friedImage[1]));
 		}else if(friedNo==1) {
 			menuButton[2].setIcon(new ImageIcon(friedImage[0]));
-		}	
-		else{
+		}else{
 			menuButton[2].setIcon(null);
 		}
 		
 		if(odengNo==4) {
 			menuButton[3].setIcon(new ImageIcon(odengImage[3]));
-		}else if(friedNo==3) {
+		}else if(odengNo==3) {
 			menuButton[3].setIcon(new ImageIcon(odengImage[2]));
-		}else if(friedNo==2) {
+		}else if(odengNo==2) {
 			menuButton[3].setIcon(new ImageIcon(odengImage[1]));
-		}else if(friedNo==1) {
+		}else if(odengNo==1) {
 			menuButton[3].setIcon(new ImageIcon(odengImage[0]));
-		}	
-		else{
+		}else{
 			menuButton[3].setIcon(null);
 		}
 		
 		if(ramenNo==4) {
 			menuButton[4].setIcon(new ImageIcon(friedImage[3]));
-		}else if(friedNo==3) {
+		}else if(ramenNo==3) {
 			menuButton[4].setIcon(new ImageIcon(friedImage[2]));
-		}else if(friedNo==2) {
+		}else if(ramenNo==2) {
 			menuButton[4].setIcon(new ImageIcon(friedImage[1]));
-		}else if(friedNo==1) {
+		}else if(ramenNo==1) {
 			menuButton[4].setIcon(new ImageIcon(friedImage[0]));
-		}	
-		else{
+		}else{
 			menuButton[4].setIcon(null);
 		}
-
 	}
 
 

@@ -42,15 +42,16 @@ public class GameView extends JPanel{
 	private int tbkNo;		//¶±ººÀÌ°³¼ö
 	private int odengNo;	//¿Àµ­°³¼ö
 	private int ramenNo;	//¶ó¸é°³¼ö
-	//Member Á¤º¸ ÀÔÃâ·ÂÀ§ÇØ
-	private Member m;
 	//stage º¯¼ö °ü¸®
 	private int stageLv;
 	private int stageGold;
 	private JButton gold;
 	//ÁÖ¹® ³»¿ª °ü¸®
 	private OrderDao orderDao;
-	//¸Þ´ºº° °³¼ö ÆÇÁ¤
+	//Member Á¤º¸ ÀÔÃâ·ÂÀ§ÇØ
+	private Member m;
+	//Àåºñ ·¹º§
+	private int[] equipLv;
 	private int[] tableLv;
 
 	//cons
@@ -60,6 +61,7 @@ public class GameView extends JPanel{
 		this.mf = mf;
 		this.m = m;
 		this.stageLv = stageLv;
+		this.equipLv = m.getEquipsLv();
 		this.tableLv = m.getTableLv();
 		this.setLayout(null);
 		this.setSize(Run.SCREEN_WIDTH,Run.SCREEN_HEIGHT);
@@ -205,13 +207,7 @@ public class GameView extends JPanel{
 				if(tbkNo<4) {
 					Music buttonEnteredMusic = new Music("cook1.mp3",false);
 					buttonEnteredMusic.start();
-					if(tableLv[0]==1 && tbkNo<1) {
-						judgeLv("¶±ººÀÌ",equips);					
-					}else if(tableLv[0]==2 && tbkNo<2) {
-						judgeLv("¶±ººÀÌ",equips);			
-					}else if(tableLv[0]==3 && tbkNo<3) {
-						judgeLv("¶±ººÀÌ",equips);	
-					}else if(tableLv[0]==4 && tbkNo<4) {
+					if(tbkNo<tableLv[0]) {
 						judgeLv("¶±ººÀÌ",equips);	
 					}
 				}else {
@@ -225,14 +221,8 @@ public class GameView extends JPanel{
 				if(friedNo<4) {
 					Music buttonEnteredMusic = new Music("fried.mp3",false);
 					buttonEnteredMusic.start();
-					if(tableLv[1]==1 && friedNo<1) {
-						judgeLv("Æ¢±è",equips);					
-					}else if(tableLv[1]==2 && friedNo<2) {
-						judgeLv("Æ¢±è",equips);			
-					}else if(tableLv[1]==3 && friedNo<3) {
-						judgeLv("Æ¢±è",equips);	
-					}else if(tableLv[1]==4 && friedNo<4) {
-						judgeLv("Æ¢±è",equips);	
+					if(friedNo<tableLv[1]) {
+						judgeLv("Æ¢±è",equips);
 					}
 				}else {
 					System.out.println("Æ¢±èÀÌ ÃÖ´ë ÃæÀüÀÔ´Ï´Ù.");
@@ -245,14 +235,8 @@ public class GameView extends JPanel{
 				if(odengNo<4) {
 					Music buttonEnteredMusic = new Music("cook1.mp3",false);
 					buttonEnteredMusic.start();
-					if(tableLv[2]==1 && odengNo<1) {
-						judgeLv("¿Àµ­",equips);					
-					}else if(tableLv[2]==2 && odengNo<2) {
-						judgeLv("¿Àµ­",equips);			
-					}else if(tableLv[2]==3 && odengNo<3) {
-						judgeLv("¿Àµ­",equips);	
-					}else if(tableLv[2]==4 && odengNo<4) {
-						judgeLv("¿Àµ­",equips);	
+					if(odengNo<tableLv[2]) {
+						judgeLv("¿Àµ­",equips);
 					}
 				}else {
 					System.out.println("¿Àµ­ÀÌ ÃÖ´ë ÃæÀüÀÔ´Ï´Ù.");
@@ -265,14 +249,8 @@ public class GameView extends JPanel{
 				if(ramenNo<4) {
 					Music buttonEnteredMusic = new Music("cook1.mp3",false);
 					buttonEnteredMusic.start();
-					if(tableLv[3]==1 && ramenNo<1) {
-						judgeLv("¶ó¸é",equips);					
-					}else if(tableLv[3]==2 && ramenNo<2) {
-						judgeLv("¶ó¸é",equips);			
-					}else if(tableLv[3]==3 && ramenNo<3) {
-						judgeLv("¶ó¸é",equips);	
-					}else if(tableLv[3]==4 && ramenNo<4) {
-						judgeLv("¶ó¸é",equips);	
+					if(ramenNo<tableLv[3]) {
+						judgeLv("¶ó¸é",equips);
 					}
 				}else {
 					System.out.println("¶ó¸éÀÌ ÃÖ´ë ÃæÀüÀÔ´Ï´Ù.");
@@ -366,22 +344,22 @@ public class GameView extends JPanel{
 			drinksNo++;
 		}else if(menuName.equals("¶±ººÀÌ")) {
 			equips[1].setEnabled(false);
-			cookTimer = new CookingTime(equips[1],6,"¶±ººÀÌ");
+			cookTimer = new CookingTime(equips[1],7-(int)(equipLv[0]*1.5),"¶±ººÀÌ");
 			gView.add(cookTimer);
 			tbkNo++;	
 		}else if(menuName.equals("Æ¢±è")) {
 			equips[2].setEnabled(false);
-			cookTimer = new CookingTime(equips[2],10,"Æ¢±è");
+			cookTimer = new CookingTime(equips[2],10-(int)(equipLv[1]*1.5),"Æ¢±è");
 			gView.add(cookTimer);
 			friedNo++;
 		}else if(menuName.equals("¿Àµ­")) {
 			equips[3].setEnabled(false);
-			cookTimer = new CookingTime(equips[3],8,"¿Àµ­");
+			cookTimer = new CookingTime(equips[3],8-(int)(equipLv[2]*1.5),"¿Àµ­");
 			gView.add(cookTimer);
 			odengNo++;
 		}else if(menuName.equals("¶ó¸é")) {
 			equips[4].setEnabled(false);
-			cookTimer = new CookingTime(equips[4],15,"¶ó¸é");
+			cookTimer = new CookingTime(equips[4],15-equipLv[3]*2,"¶ó¸é");
 			gView.add(cookTimer);
 			ramenNo++;
 		}
