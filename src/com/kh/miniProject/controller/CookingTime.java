@@ -30,13 +30,16 @@ public class CookingTime extends JPanel{
 		this.add(timerLabel);
 		this.setVisible(true);
 		if(menuName.equals("¶±ººÀÌ")) {
-			this.setBounds(200,Run.SCREEN_HEIGHT-250,70, 40);
+			this.setBounds(200,Run.SCREEN_HEIGHT-250,70,40);
 		}else if(menuName.equals("À½·á¼ö")) {
-			this.setBounds(Run.SCREEN_WIDTH-150,Run.SCREEN_HEIGHT-250,70, 40);
+			this.setBounds(Run.SCREEN_WIDTH-150,Run.SCREEN_HEIGHT-250,70,40);
 		}else if(menuName.equals("Æ¢±è")) {
-			this.setBounds(500,Run.SCREEN_HEIGHT-250,70, 40);
+			this.setBounds(500,Run.SCREEN_HEIGHT-250,70,40);
+		}else if(menuName.equals("¿Àµ­")) {
+			this.setBounds(0,Run.SCREEN_HEIGHT-250,70,40);
+		}else if(menuName.equals("¶ó¸é")) {
+			this.setBounds(Run.SCREEN_WIDTH-345,Run.SCREEN_HEIGHT-250,70,40);
 		}
-		
 		
 		timer.start();
 	}
@@ -48,8 +51,6 @@ public class CookingTime extends JPanel{
 		private int gameTime = cooktime;
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.out.println(gameTime);
-				
 				gameTime--;
 					
 				if(gameTime<=0) {

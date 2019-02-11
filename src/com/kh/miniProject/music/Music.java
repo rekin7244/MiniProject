@@ -21,7 +21,6 @@ public class Music extends Thread {
 			bis = new BufferedInputStream(fis);
 			player = new Player(bis);
 		} catch (FileNotFoundException | JavaLayerException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
