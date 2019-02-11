@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -27,7 +28,6 @@ public class GameView extends JPanel{
 	private MenuPanel mP;
 	private EquipmentPanel eP;
 	private CustomerManager cm;
-	private StageView sView;
 	//타이머 클래스 & Back 버튼
 	private CookingTime cookTimer;
 	private JPanel gView;
@@ -46,6 +46,8 @@ public class GameView extends JPanel{
 	private int stageLv;
 	private int stageGold;
 	private JButton gold;
+	private int credit=3;		//목숨
+	private JLabel[] heart=new JLabel[3];
 	//주문 내역 관리
 	private OrderDao orderDao;
 	//Member 정보 입출력위해
@@ -66,9 +68,9 @@ public class GameView extends JPanel{
 		this.setLayout(null);
 		this.setSize(Run.SCREEN_WIDTH,Run.SCREEN_HEIGHT);
 
+		//음악
 		music = new Music("inGameMusic.mp3",false);
 		music.start();
-
 
 
 		//고객 패널 추가
@@ -78,11 +80,19 @@ public class GameView extends JPanel{
 		gP.setSize(Run.SCREEN_WIDTH,318);
 		this.add(gP);
 
+		//하트 설정
+		for (int i = 0; i < heart.length; i++) {
+			heart[i]=new JLabel(new ImageIcon(new ImageIcon("images/heart.png")
+					.getImage().getScaledInstance(40, 40, 0)));
+			heart[i].setBounds(40+i*45,270,40,40);
+			gP.add(heart[i]);
+		}
+		
 		//고객매니저 실행
 		if(stageLv<3) {
-			cm = new CustomerManager(gP,orderDao,2,stageLv);
+			cm = new CustomerManager(this,gP,orderDao,2,stageLv);
 		}else {
-			cm = new CustomerManager(gP,orderDao,3,stageLv);
+			cm = new CustomerManager(this,gP,orderDao,3,stageLv);
 		}
 		//스테이지 Timer
 		gameTimer = new TimerTest(gP,cm,this);
@@ -150,7 +160,23 @@ public class GameView extends JPanel{
 		gold.setText(stageGold + "원");
 	}
 	public void gameOver() {
+		credit--;
+		gP.remove(heart[credit]);
 		//하트 3개 소진시 gameover
+		if(credit==0) {
+			//게임 종료
+			gameTimer.timerStop();
+			cm.endCustomer();
+			//뮤직 종료
+			music.close();
+			
+			Dialog dialog = new Dialog(mf);
+			dialog.setBounds(150,150,200,200);
+			JOptionPane.showMessageDialog(mf, "GAME OVER!!");
+			ChangePanel.changePanel(mf, gView, new StageView(mf,m));
+			return;
+		}
+		//gP.repaint();
 	}
 	public void endStage() {
 		//저장
@@ -166,9 +192,7 @@ public class GameView extends JPanel{
 
 		String[] command = {"결과보기","스테이지로 이동"};
 		int result;
-		Dialog dialog = new Dialog(mf);
-		dialog.setBounds(150, 150, 200, 200);
-		result = JOptionPane.showOptionDialog(null,
+		result = JOptionPane.showOptionDialog(mf,
 				"STAGE "+stageLv+" CLEAR!!\n Earned Gold : "+stageGold,
 				"부글부글분식",JOptionPane.YES_NO_OPTION, 
 				JOptionPane.INFORMATION_MESSAGE, null, command, command[0]);
@@ -178,7 +202,7 @@ public class GameView extends JPanel{
 			MemberDao mDao = new MemberDao();
 			mDao.saveMember(m);
 		}else {
-			ChangePanel.changePanel(mf, gView, sView=new StageView(mf,m));
+			ChangePanel.changePanel(mf, gView, new StageView(mf,m));
 			MemberDao mDao = new MemberDao();
 			mDao.saveMember(m);
 		}

@@ -20,9 +20,7 @@ import javax.swing.JTextField;
 
 import com.kh.miniProject.model.dao.MemberDao;
 import com.kh.miniProject.model.vo.member.Member;
-/*import com.kh.miniProject.view.LoginPanel.Login;
-import com.kh.miniProject.view.LoginPanel.guest;
- */
+
 
 public class JoinPanel extends JPanel {
 	private BufferedImage img = null;
@@ -153,17 +151,17 @@ public class JoinPanel extends JPanel {
 					if(memberDao.checkID(IDText.getText())&&!IDText.getText().equals("guest")) {	//ID 중복 체크 및 guest 가 아닌지 확인
 						dialog = new Dialog(mf);
 						dialog.setBounds(150, 150, 150, 150);
-						JOptionPane.showMessageDialog(null, "사용가능한 아이디 입니다."); 
+						JOptionPane.showMessageDialog(mf, "사용가능한 아이디 입니다."); 
 
 					} else {
 						dialog = new Dialog(mf);
 						dialog.setBounds(150, 150, 150, 150);
-						JOptionPane.showMessageDialog(null, "이미 존재하는 아이디입니다.");
+						JOptionPane.showMessageDialog(mf, "이미 존재하는 아이디입니다.");
 					}
 				}else {
 					dialog = new Dialog(mf);
 					dialog.setBounds(150, 150, 150, 150);
-					JOptionPane.showMessageDialog(null, "아이디를 입력해주세요.");
+					JOptionPane.showMessageDialog(mf, "아이디를 입력해주세요.");
 				}
 			}
 
@@ -173,16 +171,16 @@ public class JoinPanel extends JPanel {
 					if(memberDao.checkEmail(EmailText.getText())) {
 						dialog = new Dialog(mf);
 						dialog.setBounds(150, 150, 150, 150);
-						JOptionPane.showMessageDialog(null, "사용가능한 이메일 입니다."); 
+						JOptionPane.showMessageDialog(mf, "사용가능한 이메일 입니다."); 
 					} else {
 						dialog = new Dialog(mf);
 						dialog.setBounds(150, 150, 150, 150);
-						JOptionPane.showMessageDialog(null, "이미 존재하는 이메일입니다."); 
+						JOptionPane.showMessageDialog(mf, "이미 존재하는 이메일입니다."); 
 					}
 				}else {
 					dialog = new Dialog(mf);
 					dialog.setBounds(150, 150, 150, 150);
-					JOptionPane.showMessageDialog(null, "이메일을 입력해주세요.");
+					JOptionPane.showMessageDialog(mf, "이메일을 입력해주세요.");
 				}
 			}
 			//가입하기
@@ -199,7 +197,7 @@ public class JoinPanel extends JPanel {
 				} else {
 					dialog = new Dialog(mf);
 					dialog.setBounds(150, 150, 150, 150);
-					JOptionPane.showMessageDialog(null, "아이디/이메일 중복확인을 해주세요");
+					JOptionPane.showMessageDialog(mf, "아이디/이메일 중복확인을 해주세요");
 				}
 
 			}

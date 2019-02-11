@@ -50,8 +50,10 @@ public class LoginPanel extends JPanel {
 		this.lView = this;
 		
 		memberDao = new MemberDao();		//멤버Dao 실행 (생성자에 의해 저장된 멤버 다 불러옴)
+		//test용
 		//memberDao.removeMember("master", "1234");
 		//memberDao.addMember(new Member("test","pass","email"));
+		
 		titleMusic = new Music("TitleMusic.mp3",false);
 		titleMusic.start();
 
@@ -123,12 +125,8 @@ public class LoginPanel extends JPanel {
 	}
 
 	private class BtnAction implements MouseListener {
-
-	
-
 		@Override
 		public void mousePressed(MouseEvent e) {
-			// TODO Auto-generated method stub
 			if(e.getSource() == loginbt) {
 				Music buttonEnteredMusic = new Music("decision8.mp3",false);
 				buttonEnteredMusic.start();
@@ -147,7 +145,7 @@ public class LoginPanel extends JPanel {
 					String[] command = {"회원가입","아이디, 비밀번호 찾기"};
 					int result;
 
-					result = JOptionPane.showOptionDialog(null,"아이디, 비밀번호를 확인해주세요","부글부글분식",
+					result = JOptionPane.showOptionDialog(mf,"아이디, 비밀번호를 확인해주세요","부글부글분식",
 							JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE, null, command, command[0]);
 					if(result==0) {
 						ChangePanel.changePanel(mf, lView, new JoinPanel(mf));
@@ -155,12 +153,12 @@ public class LoginPanel extends JPanel {
 						//이메일 입력받는 창
 						//이메일 입력하면 orderDao.searchMember() 수행하여 member객체 불러옴
 						//불러온 member객체로부터 id,pass 출력
-						String str = JOptionPane.showInputDialog("이메일을 입력하세요");
+						String str = JOptionPane.showInputDialog(mf,"이메일을 입력하세요");
 						Member tempM = memberDao.searchMember(str);
 						if(tempM == null) {
-							JOptionPane.showMessageDialog(null, "가입한 회원이 아닙니다.");
+							JOptionPane.showMessageDialog(mf, "가입한 회원이 아닙니다.");
 						} else {
-						JOptionPane.showMessageDialog(null, "아이디 : " + tempM.getMemberId()+ "\n" + "비밀번호 : " + tempM.getMemberPwd());
+						JOptionPane.showMessageDialog(mf, "아이디 : " + tempM.getMemberId()+ "\n" + "비밀번호 : " + tempM.getMemberPwd());
 						}
 					}
 				}
@@ -174,41 +172,20 @@ public class LoginPanel extends JPanel {
 				titleMusic.close();
 			}
 		}
-		
-
 
 		@Override
 		public void mouseEntered(MouseEvent e) {
-			// TODO Auto-generated method stub
 			Music buttonEnteredMusic = new Music("cursor7.mp3",false);
 			buttonEnteredMusic.start();
 		}
-
-
-
 		@Override
 		public void mouseClicked(MouseEvent e) {
-			// TODO Auto-generated method stub
-			
 		}
-
-
-
 		@Override
 		public void mouseReleased(MouseEvent e) {
-			// TODO Auto-generated method stub
-			
 		}
-
-
-
 		@Override
 		public void mouseExited(MouseEvent e) {
-			// TODO Auto-generated method stub
-			
 		}
-
-	
-		
 	}
 }
