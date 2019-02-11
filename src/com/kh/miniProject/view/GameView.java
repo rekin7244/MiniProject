@@ -314,13 +314,13 @@ public class GameView extends JPanel{
 			gView.add(cookTimer);
 			tbkNo++;		
 		}else if(menuName.equals("À½·á¼ö")) {
-			equips[2].setEnabled(false);
-			cookTimer = new CookingTime(equips[2],5,"À½·á¼ö");
+			equips[0].setEnabled(false);
+			cookTimer = new CookingTime(equips[0],5,"À½·á¼ö");
 			gView.add(cookTimer);
 			drinksNo++;
 		}else if(menuName.equals("Æ¢±è")) {
-			equips[0].setEnabled(false);
-			cookTimer = new CookingTime(equips[0],10,"Æ¢±è");
+			equips[2].setEnabled(false);
+			cookTimer = new CookingTime(equips[2],10,"Æ¢±è");
 			gView.add(cookTimer);
 			friedNo++;
 		}

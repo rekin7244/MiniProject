@@ -21,6 +21,9 @@ public class CustomerManager {
 	private int maxOrderNo;		//주문하는 메뉴의 최대 수
 	private int orderNo;			//주문 번호
 	private int customerNo=0;			//손님 번호
+	private int count=0 ; 				//히든 손님 조건   
+	
+	
 	private OrderLabel[] orderLabel;				//주문 이미지
 	private JLabel[] customer = new JLabel[3];		//customer수
 	private int[] customerOrderNo = new int[3];		//customer남은 주문수
@@ -48,14 +51,20 @@ public class CustomerManager {
 		//손님 객체 존재시 (1,2,3번 자리 지정)
 		if(customerNo==0) {
 			customer[customerNo].setBounds(744, 0, 120, 200); // 손님 위치 설정
+			
 			addOrder(maxOrderNo,744); 
 		}else if(customerNo==1) {
 			customer[customerNo].setBounds(444, 0, 120, 200);
+			
 			addOrder(maxOrderNo,444); 
 		}else {
 			customer[customerNo].setBounds(144, 0, 120, 200); 
-			addOrder(maxOrderNo,144); 
+			
+			addOrder(maxOrderNo,144 ); 
 		}
+		
+		
+		
 		gP.add(customer[customerNo]); // 패널에 손님라벨 추가
 		int temp = customerNo;
 		
