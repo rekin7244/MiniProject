@@ -6,6 +6,8 @@ import java.awt.Graphics;
 import java.awt.Panel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -23,6 +25,7 @@ import javax.swing.JTextField;
 
 import com.kh.miniProject.model.dao.MemberDao;
 import com.kh.miniProject.model.vo.member.Member;
+import com.kh.miniProject.music.Music;
 
 public class LoginPanel extends JPanel {
 	private MainFrame mf;
@@ -44,9 +47,11 @@ public class LoginPanel extends JPanel {
 	public LoginPanel(MainFrame mf) {
 		this.mf = mf;
 		this.lView = this;
+		
 		memberDao = new MemberDao();		//멤버Dao 실행 (생성자에 의해 저장된 멤버 다 불러옴)
 		//memberDao.removeMember("master", "1234");
 		//memberDao.addMember(new Member("test","pass","email"));
+		
 
 		setSize(1024, 768);
 		// 레이아웃 설정
@@ -102,9 +107,9 @@ public class LoginPanel extends JPanel {
 		this.add(loginbt);
 		this.add(guestbt); 
 		this.add(Joinbt);
-		loginbt.addActionListener(new BtnAction()); 
-		guestbt.addActionListener(new BtnAction());
-		Joinbt.addActionListener(new BtnAction());
+		loginbt.addMouseListener(new BtnAction());; 
+		guestbt.addMouseListener(new BtnAction());
+		Joinbt.addMouseListener(new BtnAction());
 		layeredPane.add(panel);
 		add(layeredPane);
 	}
@@ -115,10 +120,16 @@ public class LoginPanel extends JPanel {
 		}
 	}
 
-	private class BtnAction implements ActionListener {
+	private  class BtnAction implements MouseListener {
+
+	
+
 		@Override
-		public void actionPerformed(ActionEvent e) {
+		public void mousePressed(MouseEvent e) {
+			// TODO Auto-generated method stub
 			if(e.getSource() == loginbt) {
+				Music buttonEnteredMusic = new Music("decision8.mp3",false);
+				buttonEnteredMusic.start();
 				inputId = IDText.getText();
 				inputPass = "";
 				char[] pass = passText.getPassword();
@@ -152,12 +163,48 @@ public class LoginPanel extends JPanel {
 				}
 			}
 			if(e.getSource() == guestbt) {
-				new ChangePanel().changePanel(mf, lView, new StageView(mf,new Member("guest","guestpass","guestemail")));
+				ChangePanel.changePanel(mf, lView, new StageView(mf,new Member("guest","guestpass","guestemail")));
 			}
 			if(e.getSource() == Joinbt) {
-				new ChangePanel().changePanel(mf, lView, new JoinPanel(mf));
+				ChangePanel.changePanel(mf, lView, new JoinPanel(mf));
 				
 			}
 		}
+		
+
+
+		@Override
+		public void mouseEntered(MouseEvent e) {
+			// TODO Auto-generated method stub
+			Music buttonEnteredMusic = new Music("cursor7.mp3",false);
+			buttonEnteredMusic.start();
+		}
+
+
+
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+
+
+		@Override
+		public void mouseReleased(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+
+
+		@Override
+		public void mouseExited(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+	
+		
 	}
 }
