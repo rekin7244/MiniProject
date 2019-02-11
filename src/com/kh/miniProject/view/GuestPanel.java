@@ -17,10 +17,6 @@ public class GuestPanel extends JPanel {
 		this.img = img;
 		
 	}
-	//음식 이미지 삭제 메소드
-	public void deleteImage(int menuNo) {
-		
-	}
 
 	@Override
 	public void paintComponent(Graphics g) {

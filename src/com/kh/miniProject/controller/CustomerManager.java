@@ -10,13 +10,15 @@ import com.kh.miniProject.model.dao.OrderDao;
 import com.kh.miniProject.model.vo.OrderLabel;
 import com.kh.miniProject.model.vo.menu.MenuOrder;
 import com.kh.miniProject.music.Music;
+import com.kh.miniProject.view.GameView;
 import com.kh.miniProject.view.GuestPanel;
 
 public class CustomerManager {
 	private GuestPanel gP;
 	private OrderDao orderDao;
 	public CustomerTimer[] cTimer = new CustomerTimer[3];
-
+	private GameView gView;
+	
 	private int stageLv;		//stageLv
 	private int maxOrderNo;		//주문하는 메뉴의 최대 수
 	private int orderNo;			//주문 번호
@@ -26,8 +28,9 @@ public class CustomerManager {
 	private int[] customerOrderNo = new int[3];		//customer남은 주문수
 
 	//cons
-	public CustomerManager(GuestPanel gP,OrderDao orderDao,int maxOrderNo,int stageLv) {
+	public CustomerManager(GameView gView,GuestPanel gP,OrderDao orderDao,int maxOrderNo,int stageLv) {
 		orderLabel = new OrderLabel[100];	//초기화
+		this.gView = gView;
 		this.gP = gP;
 		this.orderDao = orderDao;
 		this.maxOrderNo = maxOrderNo;
@@ -161,6 +164,7 @@ public class CustomerManager {
 				orderDao.removeOrder(i);
 			}
 		}
+		gView.gameOver();
 		cTimer[customerNo].timerStop();
 		gP.remove(cTimer[customerNo]);
 		gP.remove(customer[customerNo]);
