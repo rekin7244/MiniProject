@@ -21,10 +21,14 @@ public class MarketPanel extends JPanel {
 	Member m;
 
 	// 사용 필드
-	// 업글비용
+	// 기구 업글비용
 	private int level1 = 25000;
 	private int level2 = 50000;
 	private int level3 = 100000;
+	// 판 업글비용
+	private int plevel2 = 30000;
+	private int plevel3 = 60000;
+	private int plevel4 = 100000;
 
 	// 기구
 	JButton mo = new JButton("떡볶이기구");
@@ -67,24 +71,25 @@ public class MarketPanel extends JPanel {
 	// 떡볶이 판
 	private Image[] tableImages = { new ImageIcon("images/떡2.jpg").getImage().getScaledInstance(200, 200, 0),
 			new ImageIcon("images/떡3.jpg").getImage().getScaledInstance(200, 200, 0),
-			new ImageIcon("images/MAX.jpg").getImage().getScaledInstance(200, 200, 0) };
+			new ImageIcon("images/떡4.jpg").getImage().getScaledInstance(200, 200, 0),
+			new ImageIcon("images/MAX.jpg").getImage().getScaledInstance(200, 200, 0), };
 
 	// 튀김 판
-	private Image[] tableImages1 = { 
-			new ImageIcon("images/튀2.jpg").getImage().getScaledInstance(200, 200, 0),
+	private Image[] tableImages1 = { new ImageIcon("images/튀2.jpg").getImage().getScaledInstance(200, 200, 0),
 			new ImageIcon("images/튀3.jpg").getImage().getScaledInstance(200, 200, 0),
+			new ImageIcon("images/튀4.jpg").getImage().getScaledInstance(200, 200, 0),
 			new ImageIcon("images/MAX.jpg").getImage().getScaledInstance(200, 200, 0) };
 
 	// 오뎅 판
-	private Image[] tableImages2 = { 
-			new ImageIcon("images/오2.jpg").getImage().getScaledInstance(200, 200, 0),
+	private Image[] tableImages2 = { new ImageIcon("images/오2.jpg").getImage().getScaledInstance(200, 200, 0),
 			new ImageIcon("images/오3.jpg").getImage().getScaledInstance(200, 200, 0),
+			new ImageIcon("images/오4.jpg").getImage().getScaledInstance(200, 200, 0),
 			new ImageIcon("images/MAX.jpg").getImage().getScaledInstance(200, 200, 0) };
 
 	// 라면 판
-	private Image[] tableImages3 = { 
-			new ImageIcon("images/라2.jpg").getImage().getScaledInstance(200, 200, 0),
+	private Image[] tableImages3 = { new ImageIcon("images/라2.jpg").getImage().getScaledInstance(200, 200, 0),
 			new ImageIcon("images/라3.jpg").getImage().getScaledInstance(200, 200, 0),
+			new ImageIcon("images/라4.jpg").getImage().getScaledInstance(200, 200, 0),
 			new ImageIcon("images/MAX.jpg").getImage().getScaledInstance(200, 200, 0) };
 
 	public MarketPanel(MainFrame mf, Member m) {
@@ -134,6 +139,10 @@ public class MarketPanel extends JPanel {
 		mo.addActionListener(e);
 
 		// 튀김 기구
+		mo1.setVisible(false);
+		if (equipsLv[0] >= 2) {
+			mo1.setVisible(true);
+		}
 		if (equipsLv[1] == 0) {
 			mo1.setIcon(new ImageIcon(equipsImages1[0]));
 		} else if (equipsLv[1] == 1) {
@@ -149,6 +158,10 @@ public class MarketPanel extends JPanel {
 		mo1.addActionListener(e);
 
 		// 오뎅 기구
+		mo2.setVisible(false);
+		if (equipsLv[1] >= 1) {
+			mo2.setVisible(true);
+		}
 		if (equipsLv[2] == 0) {
 			mo2.setIcon(new ImageIcon(equipsImages2[0]));
 		} else if (equipsLv[2] == 1) {
@@ -164,6 +177,10 @@ public class MarketPanel extends JPanel {
 		mo2.addActionListener(e);
 
 		// 라면 기구
+		mo3.setVisible(false);
+		if (equipsLv[2] >= 1) {
+			mo3.setVisible(true);
+		}
 		if (equipsLv[3] == 0) {
 			mo3.setIcon(new ImageIcon(equipsImages3[0]));
 		} else if (equipsLv[3] == 1) {
@@ -180,13 +197,16 @@ public class MarketPanel extends JPanel {
 
 		// 떡볶이판
 		if (tableLv[0] == 1) {
-			mo4.setIcon(new ImageIcon(tableImages[0]));
+			mo4.setIcon(new ImageIcon(tableImages[0])); // 판렙2 렙2이미지
 		} else if (tableLv[0] == 2) {
-			mo4.setIcon(new ImageIcon(tableImages[1]));
+			mo4.setIcon(new ImageIcon(tableImages[1])); // 판렙3 렙3이미지
+		} else if (tableLv[0] == 3) {
+			mo4.setIcon(new ImageIcon(tableImages[2])); // 판렙4 렙4이미지
 		} else {
-			mo4.setIcon(new ImageIcon(tableImages[2]));
+			mo4.setIcon(new ImageIcon(tableImages[3])); // 만렙이미지
 			mo4.setEnabled(false);
 		}
+
 		mo4.setBounds(20, 360, 180, 180);
 		mo4.removeActionListener(e);
 		mo4.addActionListener(e);
@@ -197,13 +217,16 @@ public class MarketPanel extends JPanel {
 			mo5.setVisible(true);
 		}
 		if (tableLv[1] == 1) {
-			mo5.setIcon(new ImageIcon(tableImages1[0]));
+			mo5.setIcon(new ImageIcon(tableImages1[0])); // 판렙2 렙2이미지
 		} else if (tableLv[1] == 2) {
-			mo5.setIcon(new ImageIcon(tableImages1[1]));
+			mo5.setIcon(new ImageIcon(tableImages1[1])); // 판렙3 렙3이미지
+		} else if (tableLv[1] == 3) {
+			mo5.setIcon(new ImageIcon(tableImages1[2])); // 판렙4 렙4이미지
 		} else {
-			mo5.setIcon(new ImageIcon(tableImages1[2]));
+			mo5.setIcon(new ImageIcon(tableImages1[3])); // 만렙이미지
 			mo5.setEnabled(false);
 		}
+
 		mo5.setBounds(210, 360, 180, 180);
 		mo5.removeActionListener(e);
 		mo5.addActionListener(e);
@@ -214,13 +237,16 @@ public class MarketPanel extends JPanel {
 			mo6.setVisible(true);
 		}
 		if (tableLv[2] == 1) {
-			mo6.setIcon(new ImageIcon(tableImages2[0]));
+			mo6.setIcon(new ImageIcon(tableImages2[0])); // 판렙2 렙2이미지
 		} else if (tableLv[2] == 2) {
-			mo6.setIcon(new ImageIcon(tableImages2[1]));
+			mo6.setIcon(new ImageIcon(tableImages2[1])); // 판렙3 렙3이미지
+		} else if (tableLv[2] == 3) {
+			mo6.setIcon(new ImageIcon(tableImages2[2])); // 판렙4 렙4이미지
 		} else {
-			mo6.setIcon(new ImageIcon(tableImages2[2]));
+			mo6.setIcon(new ImageIcon(tableImages2[3])); // 만렙이미지
 			mo6.setEnabled(false);
 		}
+
 		mo6.setBounds(400, 360, 180, 180);
 		mo6.removeActionListener(e);
 		mo6.addActionListener(e);
@@ -231,13 +257,16 @@ public class MarketPanel extends JPanel {
 			mo7.setVisible(true);
 		}
 		if (tableLv[3] == 1) {
-			mo7.setIcon(new ImageIcon(tableImages3[0]));
+			mo7.setIcon(new ImageIcon(tableImages3[0])); // 판렙2 렙2이미지
 		} else if (tableLv[3] == 2) {
-			mo7.setIcon(new ImageIcon(tableImages3[1]));
+			mo7.setIcon(new ImageIcon(tableImages3[1])); // 판렙3 렙3이미지
+		} else if (tableLv[3] == 3) {
+			mo7.setIcon(new ImageIcon(tableImages3[2])); // 판렙4 렙4이미지
 		} else {
-			mo7.setIcon(new ImageIcon(tableImages3[2]));
+			mo7.setIcon(new ImageIcon(tableImages3[3])); // 만렙이미지
 			mo7.setEnabled(false);
 		}
+
 		mo7.setBounds(590, 360, 180, 180);
 		mo7.removeActionListener(e);
 		mo7.addActionListener(e);
@@ -252,6 +281,7 @@ public class MarketPanel extends JPanel {
 		mPanel.add(mo7);
 
 		// 라벨
+		// 떡볶이 라벨
 		JLabel label = new JLabel();
 		label.setText("떡볶이 업그레이드");
 		label.setBounds(50, 160, 200, 200);
@@ -276,112 +306,131 @@ public class MarketPanel extends JPanel {
 		mPanel.add(tbkwon1);
 		mPanel.add(tbkwon2);
 
+		// 튀김 라벨
 		JLabel label1 = new JLabel();
-		label1.setText("튀김 업그레이드");
-		label1.setBounds(250, 160, 200, 200);
+		label1.setVisible(false);
+		if (equipsLv[0] > 1) {
+			label1.setVisible(true);
 
-		JLabel tkwon = new JLabel();
-		if (equipsLv[1] == 0) {
-			tkwon.setText("25,000원");
-		} else {
-			tkwon.setVisible(false);
+			label1.setText("튀김 업그레이드");
+			label1.setBounds(250, 160, 200, 200);
+
+			JLabel tkwon = new JLabel();
+			if (equipsLv[1] == 0) {
+				tkwon.setText("25,000원");
+			} else {
+				tkwon.setVisible(false);
+			}
+			tkwon.setBounds(270, 180, 200, 200);
+
+			JLabel tkwon1 = new JLabel();
+			if (equipsLv[1] == 1) {
+				tkwon1.setText("50,000원");
+			} else {
+				tkwon1.setVisible(false);
+			}
+			tkwon1.setBounds(270, 180, 200, 200);
+
+			JLabel tkwon2 = new JLabel();
+			if (equipsLv[1] == 2) {
+				tkwon2.setText("100,000원");
+			} else {
+				tkwon2.setVisible(false);
+			}
+			tkwon2.setBounds(270, 180, 200, 200);
+
+			mPanel.add(label1);
+			mPanel.add(tkwon);
+			mPanel.add(tkwon1);
+			mPanel.add(tkwon2);
 		}
-		tkwon.setBounds(270, 180, 200, 200);
 
-		JLabel tkwon1 = new JLabel();
-		if (equipsLv[1] == 1) {
-			tkwon1.setText("50,000원");
-		} else {
-			tkwon1.setVisible(false);
-		}
-		tkwon1.setBounds(270, 180, 200, 200);
-
-		JLabel tkwon2 = new JLabel();
-		if (equipsLv[1] == 2) {
-			tkwon2.setText("100,000원");
-		} else {
-			tkwon2.setVisible(false);
-		}
-		tkwon2.setBounds(270, 180, 200, 200);
-
-		mPanel.add(label1);
-		mPanel.add(tkwon);
-		mPanel.add(tkwon1);
-		mPanel.add(tkwon2);
-
+		// 오뎅 라벨
 		JLabel label2 = new JLabel();
-		label2.setText("오뎅 업그레이드");
-		label2.setBounds(450, 160, 200, 200);
+		label2.setVisible(false);
+		if (equipsLv[1] > 0) {
+			label2.setVisible(true);
 
-		JLabel odwon = new JLabel();
-		if (equipsLv[2] == 0) {
-			odwon.setText("25,000원");
-		} else {
-			odwon.setVisible(false);
+			label2.setText("오뎅 업그레이드");
+			label2.setBounds(450, 160, 200, 200);
+
+			JLabel odwon = new JLabel();
+			if (equipsLv[2] == 0) {
+				odwon.setText("25,000원");
+			} else {
+				odwon.setVisible(false);
+			}
+			odwon.setBounds(470, 180, 200, 200);
+
+			JLabel odwon1 = new JLabel();
+			if (equipsLv[2] == 1) {
+				odwon1.setText("50,000원");
+			} else {
+				odwon1.setVisible(false);
+			}
+			odwon1.setBounds(470, 180, 200, 200);
+
+			JLabel odwon2 = new JLabel();
+			if (equipsLv[2] == 2) {
+				odwon2.setText("100,000원");
+			} else {
+				odwon2.setVisible(false);
+			}
+			odwon2.setBounds(470, 180, 200, 200);
+
+			mPanel.add(label2);
+			mPanel.add(odwon);
+			mPanel.add(odwon1);
+			mPanel.add(odwon2);
 		}
-		odwon.setBounds(470, 180, 200, 200);
 
-		JLabel odwon1 = new JLabel();
-		if (equipsLv[2] == 1) {
-			odwon1.setText("50,000원");
-		} else {
-			odwon1.setVisible(false);
-		}
-		odwon1.setBounds(470, 180, 200, 200);
-
-		JLabel odwon2 = new JLabel();
-		if (equipsLv[2] == 2) {
-			odwon2.setText("100,000원");
-		} else {
-			odwon2.setVisible(false);
-		}
-		odwon2.setBounds(470, 180, 200, 200);
-
-		mPanel.add(label2);
-		mPanel.add(odwon);
-		mPanel.add(odwon1);
-		mPanel.add(odwon2);
-
+		// 라면 라벨
 		JLabel label3 = new JLabel();
-		label3.setText("라면 업그레이드");
-		label3.setBounds(630, 160, 200, 200);
+		label3.setVisible(false);
+		if (equipsLv[2] > 0) {
+			label3.setVisible(true);
 
-		JLabel rmwon = new JLabel();
-		if (equipsLv[3] == 0) {
-			rmwon.setText("25,000원");
-		} else {
-			rmwon.setVisible(false);
+			label3.setText("라면 업그레이드");
+			label3.setBounds(630, 160, 200, 200);
+
+			JLabel rmwon = new JLabel();
+			if (equipsLv[3] == 0) {
+				rmwon.setText("25,000원");
+			} else {
+				rmwon.setVisible(false);
+			}
+			rmwon.setBounds(650, 180, 200, 200);
+
+			JLabel rmwon1 = new JLabel();
+			if (equipsLv[3] == 1) {
+				rmwon1.setText("50,000원");
+			} else {
+				rmwon1.setVisible(false);
+			}
+			rmwon1.setBounds(650, 180, 200, 200);
+
+			JLabel rmwon2 = new JLabel();
+			if (equipsLv[3] == 2) {
+				rmwon2.setText("100,000원");
+			} else {
+				rmwon2.setVisible(false);
+			}
+			rmwon2.setBounds(650, 180, 200, 200);
+
+			mPanel.add(label3);
+			mPanel.add(rmwon);
+			mPanel.add(rmwon1);
+			mPanel.add(rmwon2);
 		}
-		rmwon.setBounds(650, 180, 200, 200);
 
-		JLabel rmwon1 = new JLabel();
-		if (equipsLv[3] == 1) {
-			rmwon1.setText("50,000원");
-		} else {
-			rmwon1.setVisible(false);
-		}
-		rmwon1.setBounds(650, 180, 200, 200);
-
-		JLabel rmwon2 = new JLabel();
-		if (equipsLv[3] == 2) {
-			rmwon2.setText("100,000원");
-		} else {
-			rmwon2.setVisible(false);
-		}
-		rmwon2.setBounds(650, 180, 200, 200);
-
-		mPanel.add(label3);
-		mPanel.add(rmwon);
-		mPanel.add(rmwon1);
-		mPanel.add(rmwon2);
-
+		// 떡볶이판 라벨
 		JLabel label4 = new JLabel();
 		label4.setText("떡볶이판 업그레이드");
 		label4.setBounds(50, 460, 200, 200);
 
 		JLabel tbkupwon1 = new JLabel();
 		if (tableLv[0] == 1) {
-			tbkupwon1.setText("50,000원");
+			tbkupwon1.setText("30,000원");
 		} else {
 			tbkupwon1.setVisible(false);
 		}
@@ -389,16 +438,26 @@ public class MarketPanel extends JPanel {
 
 		JLabel tbkupwon2 = new JLabel();
 		if (tableLv[0] == 2) {
-			tbkupwon2.setText("100,000원");
+			tbkupwon2.setText("60,000원");
 		} else {
 			tbkupwon2.setVisible(false);
 		}
 		tbkupwon2.setBounds(80, 480, 200, 200);
 
+		JLabel tbkupwon3 = new JLabel();
+		if (tableLv[0] == 3) {
+			tbkupwon3.setText("100,000원");
+		} else {
+			tbkupwon3.setVisible(false);
+		}
+		tbkupwon3.setBounds(80, 480, 200, 200);
+
 		mPanel.add(label4);
 		mPanel.add(tbkupwon1);
 		mPanel.add(tbkupwon2);
+		mPanel.add(tbkupwon3);
 
+		// 튀김판 라벨
 		JLabel label5 = new JLabel();
 		label5.setVisible(false);
 		if (equipsLv[1] > 0) {
@@ -408,7 +467,7 @@ public class MarketPanel extends JPanel {
 
 			JLabel tkupwon1 = new JLabel();
 			if (tableLv[1] == 1) {
-				tkupwon1.setText("50,000원");
+				tkupwon1.setText("30,000원");
 			} else {
 				tkupwon1.setVisible(false);
 			}
@@ -416,18 +475,28 @@ public class MarketPanel extends JPanel {
 
 			JLabel tkupwon2 = new JLabel();
 			if (tableLv[1] == 2) {
-				tkupwon2.setText("100,000원");
+				tkupwon2.setText("60,000원");
 			} else {
 				tkupwon2.setVisible(false);
 			}
 			tkupwon2.setBounds(270, 480, 200, 200);
 
+			JLabel tkupwon3 = new JLabel();
+			if (tableLv[1] == 3) {
+				tkupwon3.setText("100,000원");
+			} else {
+				tkupwon3.setVisible(false);
+			}
+			tkupwon3.setBounds(270, 480, 200, 200);
+
 			mPanel.add(label5);
 			mPanel.add(tkupwon1);
 			mPanel.add(tkupwon2);
+			mPanel.add(tkupwon3);
 
 		}
 
+		// 오뎅판 라벨
 		JLabel label6 = new JLabel();
 		label6.setVisible(false);
 		if (equipsLv[2] > 0) {
@@ -437,7 +506,7 @@ public class MarketPanel extends JPanel {
 
 			JLabel odupwon1 = new JLabel();
 			if (tableLv[2] == 1) {
-				odupwon1.setText("50,000원");
+				odupwon1.setText("30,000원");
 			} else {
 				odupwon1.setVisible(false);
 			}
@@ -445,18 +514,28 @@ public class MarketPanel extends JPanel {
 
 			JLabel odupwon2 = new JLabel();
 			if (tableLv[2] == 2) {
-				odupwon2.setText("100,000원");
+				odupwon2.setText("60,000원");
 			} else {
 				odupwon2.setVisible(false);
 			}
 			odupwon2.setBounds(460, 480, 200, 200);
 
+			JLabel odupwon3 = new JLabel();
+			if (tableLv[2] == 3) {
+				odupwon3.setText("100,000원");
+			} else {
+				odupwon3.setVisible(false);
+			}
+			odupwon3.setBounds(460, 480, 200, 200);
+
 			mPanel.add(label6);
 			mPanel.add(odupwon1);
 			mPanel.add(odupwon2);
+			mPanel.add(odupwon3);
 
 		}
 
+		// 라면판 라벨
 		JLabel label7 = new JLabel();
 		label7.setVisible(false);
 		if (equipsLv[3] > 0) {
@@ -466,7 +545,7 @@ public class MarketPanel extends JPanel {
 
 			JLabel rmupwon1 = new JLabel();
 			if (tableLv[3] == 1) {
-				rmupwon1.setText("50,000원");
+				rmupwon1.setText("30,000원");
 			} else {
 				rmupwon1.setVisible(false);
 			}
@@ -474,15 +553,24 @@ public class MarketPanel extends JPanel {
 
 			JLabel rmupwon2 = new JLabel();
 			if (tableLv[3] == 2) {
-				rmupwon2.setText("100,000원");
+				rmupwon2.setText("60,000원");
 			} else {
 				rmupwon2.setVisible(false);
 			}
 			rmupwon2.setBounds(650, 480, 200, 200);
 
+			JLabel rmupwon3 = new JLabel();
+			if (tableLv[3] == 3) {
+				rmupwon3.setText("100,000원");
+			} else {
+				rmupwon3.setVisible(false);
+			}
+			rmupwon3.setBounds(650, 480, 200, 200);
+
 			mPanel.add(label7);
 			mPanel.add(rmupwon1);
 			mPanel.add(rmupwon2);
+			mPanel.add(rmupwon3);
 
 		}
 
@@ -493,6 +581,7 @@ public class MarketPanel extends JPanel {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 
+			// 떡볶이기구 액션리스너
 			if (e.getActionCommand().equals("떡볶이기구")) {
 				System.out.println("tbk");
 				if (equipsLv[0] == 1) {
@@ -500,204 +589,224 @@ public class MarketPanel extends JPanel {
 						equipsLv[0] += 1;
 						m.setGold(m.getGold() - level2);
 					} else {
-						JOptionPane.showMessageDialog(null, "그 돈으론 어림없지~");						
+						JOptionPane.showMessageDialog(null, "그 돈으론 어림없지~");
 					}
 				} else if (equipsLv[0] == 2) {
 					if (m.getGold() >= level3) {
 						equipsLv[0] += 1;
 						m.setGold(m.getGold() - level3);
 					} else {
-						JOptionPane.showMessageDialog(null, "그 돈으론 어림없지~");						
+						JOptionPane.showMessageDialog(null, "그 돈으론 어림없지~");
 					}
 				} else {
 					System.out.println("레벨 만땅~");
 				}
 			}
 
+			// 튀김기구 액션리스너
 			if (e.getActionCommand().equals("튀김기구")) {
 				System.out.println("tk");
+
 				if (equipsLv[1] == 0) {
 					if (m.getGold() >= level1) {
 						equipsLv[1] += 1;
 						m.setGold(m.getGold() - level1);
 					} else {
-						JOptionPane.showMessageDialog(null, "그 돈으론 어림없지~");						
+						JOptionPane.showMessageDialog(null, "그 돈으론 어림없지~");
 					}
 				} else if (equipsLv[1] == 1) {
 					if (m.getGold() >= level2) {
 						equipsLv[1] += 1;
 						m.setGold(m.getGold() - level2);
 					} else {
-						JOptionPane.showMessageDialog(null, "그 돈으론 어림없지~");						
+						JOptionPane.showMessageDialog(null, "그 돈으론 어림없지~");
 					}
 				} else if (equipsLv[1] == 2) {
 					if (m.getGold() >= level3) {
 						equipsLv[1] += 1;
 						m.setGold(m.getGold() - level3);
 					} else {
-						JOptionPane.showMessageDialog(null, "그 돈으론 어림없지~");						
+						JOptionPane.showMessageDialog(null, "그 돈으론 어림없지~");
 					}
 				} else {
 					System.out.println("레벨 만땅~");
 				}
 			}
 
+			// 오뎅기구 액션리스너
 			if (e.getActionCommand().equals("오뎅기구")) {
 				System.out.println("od");
+
 				if (equipsLv[2] == 0) {
 					if (m.getGold() >= level1) {
 						equipsLv[2] += 1;
 						m.setGold(m.getGold() - level1);
 					} else {
-						JOptionPane.showMessageDialog(null, "그 돈으론 어림없지~");						
+						JOptionPane.showMessageDialog(null, "그 돈으론 어림없지~");
 					}
 				} else if (equipsLv[2] == 1) {
 					if (m.getGold() >= level2) {
 						equipsLv[2] += 1;
 						m.setGold(m.getGold() - level2);
 					} else {
-						JOptionPane.showMessageDialog(null, "그 돈으론 어림없지~");						
+						JOptionPane.showMessageDialog(null, "그 돈으론 어림없지~");
 					}
 				} else if (equipsLv[2] == 2) {
 					if (m.getGold() >= level3) {
 						equipsLv[2] += 1;
 						m.setGold(m.getGold() - level3);
 					} else {
-						JOptionPane.showMessageDialog(null, "그 돈으론 어림없지~");						
+						JOptionPane.showMessageDialog(null, "그 돈으론 어림없지~");
 					}
 				} else {
 					System.out.println("레벨 만땅~");
 				}
 			}
 
+			// 라면기구 액션리스너
 			if (e.getActionCommand().equals("라면기구")) {
 				System.out.println("rm");
+
 				if (equipsLv[3] == 0) {
 					if (m.getGold() >= level1) {
 						equipsLv[3] += 1;
 						m.setGold(m.getGold() - level1);
 					} else {
-						JOptionPane.showMessageDialog(null, "그 돈으론 어림없지~");						
+						JOptionPane.showMessageDialog(null, "그 돈으론 어림없지~");
 					}
 				} else if (equipsLv[3] == 1) {
 					if (m.getGold() >= level2) {
 						equipsLv[3] += 1;
 						m.setGold(m.getGold() - level2);
 					} else {
-						JOptionPane.showMessageDialog(null, "그 돈으론 어림없지~");						
+						JOptionPane.showMessageDialog(null, "그 돈으론 어림없지~");
 					}
 				} else if (equipsLv[3] == 2) {
 					if (m.getGold() >= level3) {
 						equipsLv[3] += 1;
 						m.setGold(m.getGold() - level3);
 					} else {
-						JOptionPane.showMessageDialog(null, "그 돈으론 어림없지~");						
+						JOptionPane.showMessageDialog(null, "그 돈으론 어림없지~");
 					}
 				} else {
 					System.out.println("레벨 만땅~");
 				}
 			}
 
+			// 떡볶이판 액션리스너
 			if (e.getActionCommand().equals("떡볶이판 업글")) {
 				System.out.println("tbkup");
 				if (tableLv[0] == 1) {
-					if (m.getGold() >= level2) {
+					if (m.getGold() >= plevel2) {
 						tableLv[0] += 1;
-						m.setGold(m.getGold() - level2);
+						m.setGold(m.getGold() - plevel2);
 					} else {
-						JOptionPane.showMessageDialog(null, "그 돈으론 어림없지~");						
+						JOptionPane.showMessageDialog(null, "그 돈으론 어림없지~");
 					}
 
 				} else if (tableLv[0] == 2) {
-					if (m.getGold() >= level3) {
+					if (m.getGold() >= plevel3) {
 						tableLv[0] += 1;
-						m.setGold(m.getGold() - level3);
+						m.setGold(m.getGold() - plevel3);
 					} else {
-						JOptionPane.showMessageDialog(null, "그 돈으론 어림없지~");						
+						JOptionPane.showMessageDialog(null, "그 돈으론 어림없지~");
+					}
+				} else if (tableLv[0] == 3) {
+					if (m.getGold() >= plevel4) {
+						tableLv[0] += 1;
+						m.setGold(m.getGold() - plevel4);
+					} else {
+						JOptionPane.showMessageDialog(null, "그 돈으론 어림없지~");
 					}
 				} else {
 					System.out.println("레벨 만땅~");
+
 				}
 			}
 
+			// 튀김판 액션리스너
 			if (e.getActionCommand().equals("튀김판 업글")) {
 				System.out.println("tkup");
-				if (tableLv[1] == 0) {
-					if (m.getGold() >= level1) {
+				if (tableLv[1] == 1) {
+					if (m.getGold() >= plevel2) {
 						tableLv[1] += 1;
-						m.setGold(m.getGold() - level1);
+						m.setGold(m.getGold() - plevel2);
 					} else {
-						JOptionPane.showMessageDialog(null, "그 돈으론 어림없지~");						
+						JOptionPane.showMessageDialog(null, "그 돈으론 어림없지~");
 					}
-				} else if (tableLv[1] == 1) {
-					if (m.getGold() >= level2) {
-						tableLv[1] += 1;
-						m.setGold(m.getGold() - level2);
-					} else {
-						JOptionPane.showMessageDialog(null, "그 돈으론 어림없지~");						
-					}
+
 				} else if (tableLv[1] == 2) {
-					if (m.getGold() >= level3) {
+					if (m.getGold() >= plevel3) {
 						tableLv[1] += 1;
-						m.setGold(m.getGold() - level3);
+						m.setGold(m.getGold() - plevel3);
 					} else {
-						JOptionPane.showMessageDialog(null, "그 돈으론 어림없지~");						
+						JOptionPane.showMessageDialog(null, "그 돈으론 어림없지~");
+					}
+				} else if (tableLv[1] == 3) {
+					if (m.getGold() >= plevel4) {
+						tableLv[1] += 1;
+						m.setGold(m.getGold() - plevel4);
+					} else {
+						JOptionPane.showMessageDialog(null, "그 돈으론 어림없지~");
 					}
 				} else {
 					System.out.println("레벨 만땅~");
+
 				}
 			}
 
+			// 오뎅판 액션리스너
 			if (e.getActionCommand().equals("오뎅판 업글")) {
 				System.out.println("odup");
-				if (tableLv[2] == 0) {
-					if (m.getGold() >= level1) {
+				if (tableLv[2] == 1) {
+					if (m.getGold() >= plevel2) {
 						tableLv[2] += 1;
-						m.setGold(m.getGold() - level1);
+						m.setGold(m.getGold() - plevel2);
 					} else {
-						JOptionPane.showMessageDialog(null, "그 돈으론 어림없지~");						
-					}
-				} else if (tableLv[2] == 1) {
-					if (m.getGold() >= level2) {
-						tableLv[2] += 1;
-						m.setGold(m.getGold() - level2);
-					} else {
-						JOptionPane.showMessageDialog(null, "그 돈으론 어림없지~");						
+						JOptionPane.showMessageDialog(null, "그 돈으론 어림없지~");
 					}
 				} else if (tableLv[2] == 2) {
-					if (m.getGold() >= level3) {
+					if (m.getGold() >= plevel3) {
 						tableLv[2] += 1;
-						m.setGold(m.getGold() - level3);
+						m.setGold(m.getGold() - plevel3);
 					} else {
-						JOptionPane.showMessageDialog(null, "그 돈으론 어림없지~");						
+						JOptionPane.showMessageDialog(null, "그 돈으론 어림없지~");
+					}
+				} else if (tableLv[2] == 3) {
+					if (m.getGold() >= plevel4) {
+						tableLv[2] += 1;
+						m.setGold(m.getGold() - plevel4);
+					} else {
+						JOptionPane.showMessageDialog(null, "그 돈으론 어림없지~");
 					}
 				} else {
 					System.out.println("레벨 만땅~");
 				}
 			}
 
+			// 라면판 액션리스너
 			if (e.getActionCommand().equals("라면판 업글")) {
 				System.out.println("rmup");
-				if (tableLv[3] == 0) {
-					if (m.getGold() >= level1) {
+				if (tableLv[3] == 1) {
+					if (m.getGold() >= plevel2) {
 						tableLv[3] += 1;
-						m.setGold(m.getGold() - level1);
+						m.setGold(m.getGold() - plevel2);
 					} else {
-						JOptionPane.showMessageDialog(null, "그 돈으론 어림없지~");						
-					}
-				} else if (tableLv[3] == 1) {
-					if (m.getGold() >= level2) {
-						tableLv[3] += 1;
-						m.setGold(m.getGold() - level2);
-					} else {
-						JOptionPane.showMessageDialog(null, "그 돈으론 어림없지~");						
+						JOptionPane.showMessageDialog(null, "그 돈으론 어림없지~");
 					}
 				} else if (tableLv[3] == 2) {
-					if (m.getGold() >= level3) {
+					if (m.getGold() >= plevel3) {
 						tableLv[3] += 1;
-						m.setGold(m.getGold() - level3);
+						m.setGold(m.getGold() - plevel3);
 					} else {
-						JOptionPane.showMessageDialog(null, "그 돈으론 어림없지~");						
+						JOptionPane.showMessageDialog(null, "그 돈으론 어림없지~");
+					}
+				} else if (tableLv[3] == 3) {
+					if (m.getGold() >= plevel4) {
+						tableLv[3] += 1;
+						m.setGold(m.getGold() - plevel4);
+					} else {
+						JOptionPane.showMessageDialog(null, "그 돈으론 어림없지~");
 					}
 				} else {
 					System.out.println("레벨 만땅~");
@@ -706,7 +815,8 @@ public class MarketPanel extends JPanel {
 			refresh();
 			if (e.getActionCommand().equals("돌아가기")) {
 				new ChangePanel().changePanel(mf, mPanel, new StageView(mf, m));
-			};
+			}
+			;
 		}
 
 		public void refresh() {
