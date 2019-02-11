@@ -22,17 +22,20 @@ import com.kh.miniProject.run.Run;
 
 public class GameView extends JPanel{
 	//패널 동시 사용을 위해 전역 선언
-	public MainFrame mf;
-	public GuestPanel gP;
-	public MenuPanel mP;
-	public EquipmentPanel eP;
-	public CustomerManager cm;
-	//타이머 클래스 (테스트) & Back 버튼
+	private MainFrame mf;
+	private GuestPanel gP;
+	private MenuPanel mP;
+	private EquipmentPanel eP;
+	private CustomerManager cm;
+	private StageView sView;
+	//타이머 클래스 & Back 버튼
 	private CookingTime cookTimer;
 	private JPanel gView;
 	private TimerTest gameTimer;
 	private JButton backButton;
 	private Image backButtonImage;
+	//Music
+	Music buttonEnteredMusic;
 	//음식 수 저장용 변수
 	private int drinksNo;	//음료개수
 	private int friedNo;	//튀김개수
@@ -47,7 +50,6 @@ public class GameView extends JPanel{
 	private JButton gold;
 	//주문 내역 관리
 	private OrderDao orderDao;
-
 	//메뉴별 개수 판정
 	private int[] tableLv;
 
@@ -64,12 +66,12 @@ public class GameView extends JPanel{
 
 		Music temp = (Music) mf.getTitleMusic();
 		temp.close();
-		
-		Music buttonEnteredMusic = new Music("inGameMusic.mp3",false);
+
+		buttonEnteredMusic = new Music("inGameMusic.mp3",false);
 		buttonEnteredMusic.start();
-		
-		
-		
+
+
+
 		//고객 패널 추가
 		gP = new GuestPanel(new ImageIcon("images/스크린샷-2017-09-24-오전-6.00.47.png")
 				.getImage().getScaledInstance(1024, 318, 0),orderDao);
@@ -104,7 +106,10 @@ public class GameView extends JPanel{
 
 				if(result==0) {
 					gameTimer.timerStop();
-					ChangePanel.changePanel(mf, gView, new StageView(mf,m));
+					ChangePanel.changePanel(mf, gView, sView=new StageView(mf,m));
+					sView.musicOn();
+					cm.endCustomer();
+					buttonEnteredMusic.close();
 				}
 			}		
 		});
@@ -123,7 +128,7 @@ public class GameView extends JPanel{
 
 		//메뉴 패널 추가
 		mP = new MenuPanel(m);
-		mP.setting(mP,drinksNo,tbkNo,friedNo);
+		mP.setting(mP,drinksNo,tbkNo,friedNo,odengNo,ramenNo);
 		this.add(mP);
 
 		//장비 패널 추가
@@ -150,15 +155,21 @@ public class GameView extends JPanel{
 		//하트 3개 소진시 gameover
 	}
 	public void endStage() {
-		String[] command = {"결과보기","스테이지로 이동"};
-		int result;
-
-		Dialog dialog = new Dialog(mf);
-		dialog.setBounds(150, 150, 200, 200);
+		//저장
 		m.setStageGold(stageGold);
 		m.setGold(m.getGold()+stageGold);
-		m.setMaxStage(stageLv+1);
+		if(m.getMaxStage()==stageLv) {
+			m.setMaxStage(stageLv+1);
+		}
+		//게임 종료
+		cm.endCustomer();
+		//뮤직 종료
+		buttonEnteredMusic.close();
 
+		String[] command = {"결과보기","스테이지로 이동"};
+		int result;
+		Dialog dialog = new Dialog(mf);
+		dialog.setBounds(150, 150, 200, 200);
 		result = JOptionPane.showOptionDialog(null,
 				"STAGE "+stageLv+" CLEAR!!\n Earned Gold : "+stageGold,
 				"부글부글분식",JOptionPane.YES_NO_OPTION, 
@@ -169,25 +180,37 @@ public class GameView extends JPanel{
 			MemberDao mDao = new MemberDao();
 			mDao.saveMember(m);
 		}else {
-			ChangePanel.changePanel(mf, gView, new StageView(mf,m));
+			ChangePanel.changePanel(mf, gView, sView=new StageView(mf,m));
+			sView.musicOn();
 			MemberDao mDao = new MemberDao();
 			mDao.saveMember(m);
 		}
-
 	}
+
 	//btn Action
 	class Event_Cook implements ActionListener{
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			//Equips Panel ActionListener
 			JButton[] equips = eP.getEquips();
+			if(e.getActionCommand().equals("자판기")) {
+				System.out.println("자판기");
+				Music buttonEnteredMusic = new Music("decision9.mp3",false);
+				buttonEnteredMusic.start();
+				if(drinksNo<3) {
+					judgeLv("음료수",equips);	
+				}else {
+					System.out.println("음료수가 최대 충전입니다.");
+				}
+				refreshMenuTable();
+				System.out.println("음료수 충전 잔여 개수"+drinksNo);
+			}
 			if(e.getActionCommand().equals("떡볶이기계")) {
 				System.out.println("떡볶이기계");
 				if(tbkNo<4) {
 					Music buttonEnteredMusic = new Music("cook1.mp3",false);
 					buttonEnteredMusic.start();
 					if(tableLv[0]==1 && tbkNo<1) {
-						
 						judgeLv("떡볶이",equips);					
 					}else if(tableLv[0]==2 && tbkNo<2) {
 						judgeLv("떡볶이",equips);			
@@ -202,44 +225,18 @@ public class GameView extends JPanel{
 				refreshMenuTable();
 				System.out.println("떡볶이 충전 잔여 개수"+tbkNo);
 			}
-			if(e.getActionCommand().equals("순대기계")) {
-				System.out.println("순대기계");
-			}
-			if(e.getActionCommand().equals("자판기")) {
-				System.out.println("자판기");
-				Music buttonEnteredMusic = new Music("decision9.mp3",false);
-				buttonEnteredMusic.start();
-				if(drinksNo<3) {
-					if(tableLv[1]==1 && drinksNo<1) {
-						judgeLv("음료수",equips);					
-					}else if(tableLv[1]==2 && drinksNo<2) {
-						judgeLv("음료수",equips);			
-					}else if(tableLv[1]==3 && drinksNo<3) {
-						judgeLv("음료수",equips);	
-					}else if(tableLv[1]==4 && drinksNo<4) {
-						judgeLv("음료수",equips);	
-					}
-				}else {
-					System.out.println("음료수가 최대 충전입니다.");
-				}
-				refreshMenuTable();
-				System.out.println("음료수 충전 잔여 개수"+drinksNo);
-			}
-			if(e.getActionCommand().equals("오뎅기계")) {
-				System.out.println("오뎅기계");
-			}
 			if(e.getActionCommand().equals("튀김기")) {
 				System.out.println("튀김기");
 				if(friedNo<4) {
 					Music buttonEnteredMusic = new Music("fried.mp3",false);
 					buttonEnteredMusic.start();
-					if(tableLv[2]==1 && friedNo<1) {
+					if(tableLv[1]==1 && friedNo<1) {
 						judgeLv("튀김",equips);					
-					}else if(tableLv[2]==2 && friedNo<2) {
+					}else if(tableLv[1]==2 && friedNo<2) {
 						judgeLv("튀김",equips);			
-					}else if(tableLv[2]==3 && friedNo<3) {
+					}else if(tableLv[1]==3 && friedNo<3) {
 						judgeLv("튀김",equips);	
-					}else if(tableLv[2]==4 && friedNo<4) {
+					}else if(tableLv[1]==4 && friedNo<4) {
 						judgeLv("튀김",equips);	
 					}
 				}else {
@@ -248,9 +245,67 @@ public class GameView extends JPanel{
 				refreshMenuTable();
 				System.out.println("튀김 충전 잔여 개수"+friedNo);
 			}
+			if(e.getActionCommand().equals("오뎅기계")) {
+				System.out.println("오뎅기계");
+				if(odengNo<4) {
+					Music buttonEnteredMusic = new Music("cook1.mp3",false);
+					buttonEnteredMusic.start();
+					if(tableLv[2]==1 && odengNo<1) {
+						judgeLv("오뎅",equips);					
+					}else if(tableLv[2]==2 && odengNo<2) {
+						judgeLv("오뎅",equips);			
+					}else if(tableLv[2]==3 && odengNo<3) {
+						judgeLv("오뎅",equips);	
+					}else if(tableLv[2]==4 && odengNo<4) {
+						judgeLv("오뎅",equips);	
+					}
+				}else {
+					System.out.println("오뎅이 최대 충전입니다.");
+				}
+				refreshMenuTable();
+				System.out.println("오뎅 충전 잔여 개수"+tbkNo);
+			}
+			if(e.getActionCommand().equals("라면기계")) {
+				System.out.println("라면기계");
+				if(ramenNo<4) {
+					Music buttonEnteredMusic = new Music("cook1.mp3",false);
+					buttonEnteredMusic.start();
+					if(tableLv[3]==1 && ramenNo<1) {
+						judgeLv("라면",equips);					
+					}else if(tableLv[3]==2 && ramenNo<2) {
+						judgeLv("라면",equips);			
+					}else if(tableLv[3]==3 && ramenNo<3) {
+						judgeLv("라면",equips);	
+					}else if(tableLv[3]==4 && ramenNo<4) {
+						judgeLv("라면",equips);	
+					}
+				}else {
+					System.out.println("라면이 최대 충전입니다.");
+				}
+				refreshMenuTable();
+				System.out.println("라면 충전 잔여 개수"+tbkNo);
+			}
+
 
 			//MenuPanel ActionListener
 			int temp;
+			if(e.getActionCommand().equals("음료수")) {
+				if(drinksNo>0) {
+					if((temp=orderDao.searchOrder(new MenuOrder("음료수")))>=0) {
+						Music buttonEnteredMusic = new Music("decision11.mp3",false);
+						buttonEnteredMusic.start();
+						System.out.println("temp:"+temp);
+						cm.deleteLabel(temp);
+						drinksNo--;
+						System.out.println("음료수 잔여 개수 : " + drinksNo);
+						refreshMenuTable();
+					}else {
+						System.out.println("주문된 음료수가 없습니다.");
+					}
+				}else {
+					System.out.println("음료수가 없습니다.");
+				}
+			}
 			if(e.getActionCommand().equals("떡볶이")) {
 				if(tbkNo>0) {
 					if((temp=orderDao.searchOrder(new MenuOrder("떡볶이")))>=0) {
@@ -259,7 +314,7 @@ public class GameView extends JPanel{
 						cm.deleteLabel(temp);
 						tbkNo--;
 						System.out.println("떡볶이 잔여 개수 : " + tbkNo);
-						mP.setting(mP,drinksNo,tbkNo,friedNo);
+						refreshMenuTable();
 					}else {
 						System.out.println("주문된 떡볶이가 없습니다.");
 					}
@@ -275,7 +330,7 @@ public class GameView extends JPanel{
 						cm.deleteLabel(temp);
 						friedNo--;
 						System.out.println("튀김 잔여 개수 : " + friedNo);
-						mP.setting(mP,drinksNo,tbkNo,friedNo);
+						refreshMenuTable();
 					}else {
 						System.out.println("주문된 튀김이 없습니다.");
 					}
@@ -283,46 +338,57 @@ public class GameView extends JPanel{
 					System.out.println("튀김이 없습니다.");
 				}
 			}
-			if(e.getActionCommand().equals("음료수")) {
-				if(drinksNo>0) {
-					if((temp=orderDao.searchOrder(new MenuOrder("음료수")))>=0) {
+			if(e.getActionCommand().equals("오뎅")) {
+				if(odengNo>0) {
+					if((temp=orderDao.searchOrder(new MenuOrder("오뎅")))>=0) {
 						Music buttonEnteredMusic = new Music("decision11.mp3",false);
 						buttonEnteredMusic.start();
 						System.out.println("temp:"+temp);
 						cm.deleteLabel(temp);
-						drinksNo--;
-						System.out.println("음료수 잔여 개수 : " + drinksNo);
-						mP.setting(mP,drinksNo,tbkNo,friedNo);
+						odengNo--;
+						System.out.println("오뎅 잔여 개수 : " + odengNo);
+						refreshMenuTable();
 					}else {
-						System.out.println("주문된 음료수가 없습니다.");
+						System.out.println("주문된 오뎅이 없습니다.");
 					}
 				}else {
-					System.out.println("음료수가 없습니다.");
+					System.out.println("오뎅이 없습니다.");
 				}
 			}
 		}
 	}
+
 	public void refreshMenuTable() {
 		//자판기, 떡볶이, 튀김
-		mP.setting(mP,drinksNo,tbkNo,friedNo);
+		mP.setting(mP,drinksNo,tbkNo,friedNo,odengNo,ramenNo);
 	}
 
 	public void judgeLv(String menuName,JButton[] equips) {
-		if(menuName.equals("떡볶이")) {
+		if(menuName.equals("음료수")) {
+			equips[0].setEnabled(false);
+			cookTimer = new CookingTime(equips[0],5,"음료수");
+			gView.add(cookTimer);
+			drinksNo++;
+		}else if(menuName.equals("떡볶이")) {
 			equips[1].setEnabled(false);
 			cookTimer = new CookingTime(equips[1],6,"떡볶이");
 			gView.add(cookTimer);
-			tbkNo++;		
-		}else if(menuName.equals("음료수")) {
-			equips[2].setEnabled(false);
-			cookTimer = new CookingTime(equips[2],5,"음료수");
-			gView.add(cookTimer);
-			drinksNo++;
+			tbkNo++;	
 		}else if(menuName.equals("튀김")) {
-			equips[0].setEnabled(false);
-			cookTimer = new CookingTime(equips[0],10,"튀김");
+			equips[2].setEnabled(false);
+			cookTimer = new CookingTime(equips[2],10,"튀김");
 			gView.add(cookTimer);
 			friedNo++;
+		}else if(menuName.equals("오뎅")) {
+			equips[3].setEnabled(false);
+			cookTimer = new CookingTime(equips[3],8,"오뎅");
+			gView.add(cookTimer);
+			odengNo++;
+		}else if(menuName.equals("라면")) {
+			equips[4].setEnabled(false);
+			cookTimer = new CookingTime(equips[4],15,"라면");
+			gView.add(cookTimer);
+			ramenNo++;
 		}
 	}
 }

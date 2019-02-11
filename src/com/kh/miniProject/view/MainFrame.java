@@ -1,17 +1,15 @@
 package com.kh.miniProject.view;
 
 import java.awt.Color;
-import java.util.ArrayList;
 
 import javax.swing.JFrame;
 
-import com.kh.miniProject.model.vo.member.Member;
 import com.kh.miniProject.music.*;
 import com.kh.miniProject.run.Run;
 
 public class MainFrame extends JFrame{
 	
-	private Music titleMusic;
+	public Music titleMusic;
 
 	public MainFrame() {
 		/*trackList.add(new Track("cursor7.mp3","cursor7"));*/
@@ -40,7 +38,6 @@ public class MainFrame extends JFrame{
 	}
 
 	public void setTitleMusic(String string, boolean b) {
-		// TODO Auto-generated method stub
 		if(b==true) {
 			new Music(string,b).start();			
 		}else {
