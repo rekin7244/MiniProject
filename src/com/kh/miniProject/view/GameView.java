@@ -170,8 +170,6 @@ public class GameView extends JPanel{
 			//¹ÂÁ÷ Á¾·á
 			music.close();
 			
-			Dialog dialog = new Dialog(mf);
-			dialog.setBounds(150,150,200,200);
 			JOptionPane.showMessageDialog(mf, "GAME OVER!!");
 			ChangePanel.changePanel(mf, gView, new StageView(mf,m));
 			return;
