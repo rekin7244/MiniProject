@@ -13,6 +13,7 @@ import javax.swing.JPanel;
 
 import com.kh.miniProject.controller.CookingTime;
 import com.kh.miniProject.controller.CustomerManager;
+import com.kh.miniProject.controller.HCustomerManager;
 import com.kh.miniProject.model.dao.MemberDao;
 import com.kh.miniProject.model.dao.OrderDao;
 import com.kh.miniProject.model.vo.member.Member;
@@ -90,8 +91,12 @@ public class GameView extends JPanel{
 		//고객매니저 실행
 		if(stageLv<3) {
 			cm = new CustomerManager(this,gP,orderDao,2,stageLv);
-		}else {
+		}else if(stageLv<=5){
 			cm = new CustomerManager(this,gP,orderDao,3,stageLv);
+		}else if(stageLv<8) {
+			cm = new HCustomerManager(this,gP,orderDao,3,stageLv);
+		}else if(stageLv<10) {
+			cm = new HCustomerManager(this,gP,orderDao,4,stageLv);
 		}
 		//스테이지 Timer
 		gameTimer = new StageTimer(gP,cm,this);
@@ -401,7 +406,7 @@ public class GameView extends JPanel{
 			odengNo++;
 		}else if(menuName.equals("라면")) {
 			equips[4].setEnabled(false);
-			cookTimer = new CookingTime(equips[4],15-equipLv[3]*2,"라면");
+			cookTimer = new CookingTime(equips[4],12-equipLv[3]*2,"라면");
 			gView.add(cookTimer);
 			ramenNo++;
 		}

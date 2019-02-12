@@ -110,6 +110,30 @@ public class StageView extends JPanel{
 					System.out.println("라면기계가 필요합니다.");
 				}
 			}
+			if(e.getActionCommand().equals("STAGE 5")) {
+					new ChangePanel().changePanel(mf,sView,new GameView(mf,m,5));
+					music.close();
+			}
+			if(e.getActionCommand().equals("STAGE 6")) {
+				new ChangePanel().changePanel(mf,sView,new GameView(mf,m,6));
+				music.close();
+			}
+			if(e.getActionCommand().equals("STAGE 7")) {
+				new ChangePanel().changePanel(mf,sView,new GameView(mf,m,7));
+				music.close();
+			}
+			if(e.getActionCommand().equals("STAGE 8")) {
+				new ChangePanel().changePanel(mf,sView,new GameView(mf,m,8));
+				music.close();
+			}
+			if(e.getActionCommand().equals("STAGE 9")) {
+				new ChangePanel().changePanel(mf,sView,new GameView(mf,m,9));
+				music.close();
+			}
+			if(e.getActionCommand().equals("STAGE 10")) {
+				new ChangePanel().changePanel(mf,sView,new GameView(mf,m,10));
+				music.close();
+			}
 			
 			if(e.getActionCommand().equals("상점으로")) {
 				new ChangePanel().changePanel(mf, sView, mPanel=new MarketPanel(mf,m));

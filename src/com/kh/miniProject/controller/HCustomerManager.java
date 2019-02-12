@@ -13,10 +13,10 @@ import com.kh.miniProject.music.Music;
 import com.kh.miniProject.view.GameView;
 import com.kh.miniProject.view.GuestPanel;
 
-public class CustomerManager {
+public class HCustomerManager extends CustomerManager{
 	private GuestPanel gP;
 	private OrderDao orderDao;
-	public CustomerTimer[] cTimer = new CustomerTimer[3];
+	public CustomerTimer[] cTimer = new CustomerTimer[4];
 	private GameView gView;
 
 	private int stageLv; 						// stageLv
@@ -24,14 +24,15 @@ public class CustomerManager {
 	private int orderNo; 						// 주문 번호
 	private int customerNo = 0; 				// 손님 번호
 	private int count = 0; 						// 히든번호
-	private boolean guest = true;				//히든손님 판별(메뉴가격 2배 결정)
+	private boolean guest = true;				// 히든손님 판별(메뉴가격 2배 결정)
 	private OrderLabel[] orderLabel; 			// 주문 이미지
-	private JLabel[] customer = new JLabel[3]; 	// customer수
-	private int[] customerOrderNo = new int[3]; // customer남은 주문수
-	private int[] customerX = {744,444,144};// customer x 좌표
-	
+	private JLabel[] customer = new JLabel[4]; 	// customer수
+	private int[] customerOrderNo = new int[4]; // customer남은 주문수
+	private int[] customerX = {794,594,394,194};// customer x 좌표
+
 	// cons
-	public CustomerManager(GameView gView, GuestPanel gP, OrderDao orderDao, int maxOrderNo, int stageLv) {
+	public HCustomerManager(GameView gView, GuestPanel gP, OrderDao orderDao, int maxOrderNo, int stageLv) {
+		super(gView,gP,orderDao,maxOrderNo,stageLv);
 		orderLabel = new OrderLabel[100]; // 초기화
 		this.gView = gView;
 		this.gP = gP;
@@ -42,47 +43,42 @@ public class CustomerManager {
 
 	// 손님 생성
 	public void guest() {
-		if(stageLv>4) {
-			if (count == 5) {
-				cTimer[customerNo] = new CustomerTimer(this,(10-(0.5*stageLv))/1.5,customerNo,customerX[customerNo]); // 각 손님별 타이머 설정
-				gP.add(cTimer[customerNo]);
-				Image icon = new ImageIcon("images/Inked히든손님2.jpg").getImage().getScaledInstance(120, 200, 0); // 손님 이미지
-				customer[customerNo] = new JLabel(new ImageIcon(icon)); // 손님라벨
-				count = 0;
-				guest = false;
-			} else {
-				cTimer[customerNo] = new CustomerTimer(this,10-(0.5*stageLv),customerNo,customerX[customerNo]); // 각 손님별 타이머 설정
-				gP.add(cTimer[customerNo]);
-				Image icon = new ImageIcon("images/guest.PNG").getImage().getScaledInstance(120, 200, 0); // 손님 이미지
-				customer[customerNo] = new JLabel(new ImageIcon(icon)); // 손님라벨
-				count++;
-				guest = true;
-			}
-		}else {
-			cTimer[customerNo] = new CustomerTimer(this,10-(0.5*stageLv),customerNo,customerX[customerNo]); // 각 손님별 타이머 설정
+		if (count == 5) {
+			cTimer[customerNo] = new CustomerTimer(this,(12-(0.5*stageLv))/1.5,customerNo,customerX[customerNo]); // 각 손님별 타이머 설정
+			gP.add(cTimer[customerNo]);
+			Image icon = new ImageIcon("images/Inked히든손님2.jpg").getImage().getScaledInstance(120, 200, 0); // 손님 이미지
+			customer[customerNo] = new JLabel(new ImageIcon(icon)); // 손님라벨
+			count = 0;
+			guest = false;
+		} else {
+			cTimer[customerNo] = new CustomerTimer(this,12-(0.5*stageLv),customerNo,customerX[customerNo]); // 각 손님별 타이머 설정
 			gP.add(cTimer[customerNo]);
 			Image icon = new ImageIcon("images/guest.PNG").getImage().getScaledInstance(120, 200, 0); // 손님 이미지
 			customer[customerNo] = new JLabel(new ImageIcon(icon)); // 손님라벨
+			count++;
 			guest = true;
 		}
 
 		customerOrderNo[customerNo] = maxOrderNo;
 		// 음식 주문
-		// 손님 객체 존재시 (1,2,3번 자리 지정)
+		// 손님 객체 존재시 (1,2,3,4번 자리 지정)
 		if (customerNo == 0) {
-			customer[customerNo].setBounds(744, 0, 120, 200); // 손님 위치 설정
-			addOrder(maxOrderNo, 744, guest);
+			customer[customerNo].setBounds(794, 0, 120, 200); // 손님 위치 설정
+			addOrder(maxOrderNo, 794, guest);
 		} else if (customerNo == 1) {
-			customer[customerNo].setBounds(444, 0, 120, 200);
-			addOrder(maxOrderNo, 444, guest);
+			customer[customerNo].setBounds(594, 0, 120, 200);
+			addOrder(maxOrderNo, 594, guest);
+		} else if (customerNo == 2) {
+			customer[customerNo].setBounds(394, 0, 120, 200);
+			addOrder(maxOrderNo, 394, guest);
 		} else {
-			customer[customerNo].setBounds(144, 0, 120, 200);
-			addOrder(maxOrderNo, 144, guest);
+			customer[customerNo].setBounds(194, 0, 120, 200);
+			addOrder(maxOrderNo, 194, guest);
 		}
 		gP.add(customer[customerNo]); // 패널에 손님라벨 추가
 
 		// 손님 No 설정
-		if (customerNo != 2) {
+		if (customerNo != 3) {
 			customerNo++;
 		} else {
 			customerNo = 0;
@@ -153,7 +149,7 @@ public class CustomerManager {
 			gP.add(orderLabel[orderNo]);
 
 			// orderNo설정
-			if (orderNo != maxOrderNo * 3 - 1) {
+			if (orderNo != maxOrderNo * 4 - 1) {
 				orderNo++;
 			} else {
 				orderNo = 0;
@@ -172,6 +168,8 @@ public class CustomerManager {
 			customerOrderNo[1] -= 1;
 		} else if (orderNo < maxOrderNo * 3) {
 			customerOrderNo[2] -= 1;
+		} else if (orderNo < maxOrderNo * 4) {
+			customerOrderNo[3] -= 1;
 		}
 		// 손님 주문 종료시
 		for (int i = 0; i < customerOrderNo.length; i++) {

@@ -20,7 +20,7 @@ public class CustomerTimer extends JPanel{
 	private Timer timer;
 	private double waitingTime;
 	
-	public CustomerTimer(CustomerManager cm,double waitingTime,int customerNo) {
+	public CustomerTimer(CustomerManager cm,double waitingTime,int customerNo,int x) {
 		this.cm = cm;
 		this.waitingTime = waitingTime;
 		this.customerNo = customerNo;
@@ -33,7 +33,7 @@ public class CustomerTimer extends JPanel{
 		timerLabel.setFont(new Font("Elephant", Font.BOLD, 20));
 		this.add(timerLabel);
 		this.setVisible(true);
-		this.setBounds((3-customerNo)*300-56,150,70,40);
+		this.setBounds(x+50,200,70,40);
 
 		timer.start();
 	}

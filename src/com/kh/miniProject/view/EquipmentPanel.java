@@ -17,8 +17,8 @@ public class EquipmentPanel extends JPanel{
 	private String[] name = {"자판기","떡볶이기계","튀김기","오뎅기계","라면기계"};	//장비명
 	//equipsLv 배열 : 			{떡볶이/튀김기/오뎅기계/라면기계}
 	//이미지들 배열
-	private Image[] images = {new ImageIcon("images/equip0.png")
-			.getImage().getScaledInstance(250,panelSize,0),
+	private Image[] images = {new ImageIcon("images/자판기.png")
+			.getImage().getScaledInstance(150,panelSize,0),
 			new ImageIcon("images/equip1.jpg")
 			.getImage().getScaledInstance(250,panelSize,0),
 			new ImageIcon("images/equip2.png")
