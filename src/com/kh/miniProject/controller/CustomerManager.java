@@ -18,6 +18,8 @@ public class CustomerManager {
 	private OrderDao orderDao;
 	public CustomerTimer[] cTimer = new CustomerTimer[3];
 	private GameView gView;
+	public MessageTimer mt;
+
 
 	private int stageLv; 						// stageLv
 	private int maxOrderNo; 					// 주문하는 메뉴의 최대 수
@@ -47,7 +49,9 @@ public class CustomerManager {
 			if (count == 5) {
 				cTimer[customerNo] = new CustomerTimer(this,(11-(0.5*stageLv))/1.5,customerNo,customerX[customerNo]); // 각 손님별 타이머 설정
 				gP.add(cTimer[customerNo]);
-				Image icon = new ImageIcon("images/Inked히든손님2.jpg").getImage().getScaledInstance(120, 200, 0); // 손님 이미지
+				mt = new MessageTimer(this, 1.5);
+				gP.add(mt);
+				Image icon = new ImageIcon("images/Inked히든손님2.png").getImage().getScaledInstance(120, 200, 0); // 손님 이미지
 				customer[customerNo] = new JLabel(new ImageIcon(icon)); // 손님라벨
 				count = 0;
 				guest = false;
@@ -193,6 +197,11 @@ public class CustomerManager {
 		gP.repaint();
 		Music buttonEnteredMusic = new Music("coins_5.mp3", false);
 		buttonEnteredMusic.start();
+	}
+	
+	public void deleteMessage() {
+		gP.remove(mt);
+		gP.repaint();
 	}
 
 	public void deleteCustomer(int customerNo) { // 시간 만료시 주문내역과 손님(+타이머) 삭제
