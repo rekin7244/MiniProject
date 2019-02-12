@@ -50,7 +50,7 @@ public class HCustomerManager extends CustomerManager{
 			gP.add(cTimer[customerNo]);
 			mt = new MessageTimer(this, 1.5);
 			gP.add(mt);
-			Image icon = new ImageIcon("images/Inked히든손님2.jpg").getImage().getScaledInstance(120, 200, 0); // 손님 이미지
+			Image icon = new ImageIcon("images/Inked히든손님2.png").getImage().getScaledInstance(120, 200, 0); // 손님 이미지
 			customer[customerNo] = new JLabel(new ImageIcon(icon)); // 손님라벨
 			count = 0;
 			guest = false;
