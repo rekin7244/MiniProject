@@ -29,7 +29,7 @@ public class CustomerManager {
 	private JLabel[] customer = new JLabel[3]; 	// customer수
 	private int[] customerOrderNo = new int[3]; // customer남은 주문수
 	private int[] customerX = {744,444,144};// customer x 좌표
-	
+
 	// cons
 	public CustomerManager(GameView gView, GuestPanel gP, OrderDao orderDao, int maxOrderNo, int stageLv) {
 		orderLabel = new OrderLabel[100]; // 초기화
@@ -42,6 +42,7 @@ public class CustomerManager {
 
 	// 손님 생성
 	public void guest() {
+		Random rand = new Random();
 		if(stageLv>4) {
 			if (count == 5) {
 				cTimer[customerNo] = new CustomerTimer(this,(10-(0.5*stageLv))/1.5,customerNo,customerX[customerNo]); // 각 손님별 타이머 설정
@@ -53,16 +54,22 @@ public class CustomerManager {
 			} else {
 				cTimer[customerNo] = new CustomerTimer(this,10-(0.5*stageLv),customerNo,customerX[customerNo]); // 각 손님별 타이머 설정
 				gP.add(cTimer[customerNo]);
-				Image icon = new ImageIcon("images/guest.PNG").getImage().getScaledInstance(120, 200, 0); // 손님 이미지
-				customer[customerNo] = new JLabel(new ImageIcon(icon)); // 손님라벨
+				Image[] icon = {new ImageIcon("images/손놈2.png").getImage().getScaledInstance(120, 200, 0),
+						new ImageIcon("images/손놈1.png").getImage().getScaledInstance(120,200,0),
+						new ImageIcon("images/손놈3.png").getImage().getScaledInstance(120,200,0)
+				}; // 손님 이미지
+				customer[customerNo] = new JLabel(new ImageIcon(icon[rand.nextInt(icon.length-1)])); // 손님라벨
 				count++;
 				guest = true;
 			}
 		}else {
 			cTimer[customerNo] = new CustomerTimer(this,10-(0.5*stageLv),customerNo,customerX[customerNo]); // 각 손님별 타이머 설정
 			gP.add(cTimer[customerNo]);
-			Image icon = new ImageIcon("images/guest.PNG").getImage().getScaledInstance(120, 200, 0); // 손님 이미지
-			customer[customerNo] = new JLabel(new ImageIcon(icon)); // 손님라벨
+			Image[] icon = {new ImageIcon("images/손놈2.png").getImage().getScaledInstance(120, 200, 0),
+					new ImageIcon("images/손놈1.png").getImage().getScaledInstance(120,200,0),
+					new ImageIcon("images/손놈3.png").getImage().getScaledInstance(120,200,0)
+			}; // 손님 이미지
+			customer[customerNo] = new JLabel(new ImageIcon(icon[rand.nextInt(icon.length-1)])); // 손님라벨
 			guest = true;
 		}
 
