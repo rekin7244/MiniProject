@@ -25,6 +25,8 @@ public class OrderDao {
 		for (MenuOrder menuOrder : orderList) {
 			if(menuOrder.getMenuName().equals(menu.getMenuName())){
 				removeOrder(menuOrder.getOrderNo());
+				stageGold += menuOrder.getMenuPrice();
+				gameView.updateGold(stageGold);
 				return menuOrder.getOrderNo();
 			}
 		}
@@ -35,8 +37,6 @@ public class OrderDao {
 		for (MenuOrder menuOrder : orderList) {
 			if(menuOrder.getOrderNo()==no) {
 				orderList.remove(menuOrder);
-				stageGold += menuOrder.getMenuPrice();
-				gameView.updateGold(stageGold);
 				return;
 			}
 		}

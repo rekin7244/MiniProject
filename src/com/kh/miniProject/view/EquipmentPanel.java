@@ -15,7 +15,7 @@ public class EquipmentPanel extends JPanel{
 	private int panelSize = 250;			//장비 패널 세로크기
 
 	private String[] name = {"자판기","떡볶이기계","튀김기","오뎅기계","라면기계"};	//장비명
-	//equipsLv 배열 : {떡볶이/튀김기/오뎅기계/라면기계}
+	//equipsLv 배열 : 			{떡볶이/튀김기/오뎅기계/라면기계}
 	//이미지들 배열
 	private Image[] images = {new ImageIcon("images/equip0.png")
 			.getImage().getScaledInstance(250,panelSize,0),

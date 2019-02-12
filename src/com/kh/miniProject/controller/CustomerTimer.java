@@ -10,6 +10,7 @@ import javax.swing.Timer;
 
 import com.kh.miniProject.model.vo.Customer;
 import com.kh.miniProject.model.vo.member.Member;
+import com.kh.miniProject.music.Music;
 import com.kh.miniProject.view.GuestPanel;
 
 public class CustomerTimer extends JPanel{
@@ -49,6 +50,8 @@ public class CustomerTimer extends JPanel{
 			if(gameTime<=0) {
 				cm.deleteCustomer(customerNo);
 				timer.stop();
+				Music buttonEnteredMusic = new Music("¼Õ´Ôµµ¸Á.mp3",false);
+				buttonEnteredMusic.start();
 			}
 			//½Ã°£ Ç¥½Ã
 			if(((int)(gameTime*10))%10==0) {

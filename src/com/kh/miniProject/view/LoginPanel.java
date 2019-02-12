@@ -6,6 +6,8 @@ import java.awt.Graphics;
 import java.awt.Panel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -23,6 +25,7 @@ import javax.swing.JTextField;
 
 import com.kh.miniProject.model.dao.MemberDao;
 import com.kh.miniProject.model.vo.member.Member;
+import com.kh.miniProject.music.Music;
 
 public class LoginPanel extends JPanel {
 	private MainFrame mf;
@@ -39,14 +42,20 @@ public class LoginPanel extends JPanel {
 	Dialog dialog;
 	private MemberDao memberDao;
 	private Member m;
+	private Music titleMusic;
 
 	// 생성자
 	public LoginPanel(MainFrame mf) {
 		this.mf = mf;
 		this.lView = this;
+		
 		memberDao = new MemberDao();		//멤버Dao 실행 (생성자에 의해 저장된 멤버 다 불러옴)
-		//memberDao.removeMember("master", "1234");
+		//test용
+		//memberDao.removeMember("", "");
 		//memberDao.addMember(new Member("test","pass","email"));
+		
+		titleMusic = new Music("TitleMusic.mp3",false);
+		titleMusic.start();
 
 		setSize(1024, 768);
 		// 레이아웃 설정
@@ -102,9 +111,9 @@ public class LoginPanel extends JPanel {
 		this.add(loginbt);
 		this.add(guestbt); 
 		this.add(Joinbt);
-		loginbt.addActionListener(new BtnAction()); 
-		guestbt.addActionListener(new BtnAction());
-		Joinbt.addActionListener(new BtnAction());
+		loginbt.addMouseListener(new BtnAction());; 
+		guestbt.addMouseListener(new BtnAction());
+		Joinbt.addMouseListener(new BtnAction());
 		layeredPane.add(panel);
 		add(layeredPane);
 	}
@@ -115,10 +124,12 @@ public class LoginPanel extends JPanel {
 		}
 	}
 
-	private class BtnAction implements ActionListener {
+	private class BtnAction implements MouseListener {
 		@Override
-		public void actionPerformed(ActionEvent e) {
+		public void mousePressed(MouseEvent e) {
 			if(e.getSource() == loginbt) {
+				Music buttonEnteredMusic = new Music("decision8.mp3",false);
+				buttonEnteredMusic.start();
 				inputId = IDText.getText();
 				inputPass = "";
 				char[] pass = passText.getPassword();
@@ -128,12 +139,13 @@ public class LoginPanel extends JPanel {
 				System.out.println("inputId : "+inputId);
 				System.out.println("inputPass : "+inputPass);
 				if((m=memberDao.loginMember(inputId, inputPass))!=null) {
-					new ChangePanel().changePanel(mf, lView, new StageView(mf,m));					
+					new ChangePanel().changePanel(mf, lView, new StageView(mf,m));		
+					titleMusic.close();				
 				}else {
 					String[] command = {"회원가입","아이디, 비밀번호 찾기"};
 					int result;
 
-					result = JOptionPane.showOptionDialog(null,"아이디, 비밀번호를 확인해주세요","부글부글분식",
+					result = JOptionPane.showOptionDialog(mf,"아이디, 비밀번호를 확인해주세요","부글부글분식",
 							JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE, null, command, command[0]);
 					if(result==0) {
 						ChangePanel.changePanel(mf, lView, new JoinPanel(mf));
@@ -141,23 +153,40 @@ public class LoginPanel extends JPanel {
 						//이메일 입력받는 창
 						//이메일 입력하면 orderDao.searchMember() 수행하여 member객체 불러옴
 						//불러온 member객체로부터 id,pass 출력
-						String str = JOptionPane.showInputDialog("이메일을 입력하세요");
+						String str = JOptionPane.showInputDialog(mf,"이메일을 입력하세요");
 						Member tempM = memberDao.searchMember(str);
 						if(tempM == null) {
-							JOptionPane.showMessageDialog(null, "가입한 회원이 아닙니다.");
+							JOptionPane.showMessageDialog(mf, "가입한 회원이 아닙니다.");
 						} else {
-						JOptionPane.showMessageDialog(null, "아이디 : " + tempM.getMemberId()+ "\n" + "비밀번호 : " + tempM.getMemberPwd());
+						JOptionPane.showMessageDialog(mf, "아이디 : " + tempM.getMemberId()+ "\n" + "비밀번호 : " + tempM.getMemberPwd());
 						}
 					}
 				}
 			}
 			if(e.getSource() == guestbt) {
-				new ChangePanel().changePanel(mf, lView, new StageView(mf,new Member("guest","guestpass","guestemail")));
+				JOptionPane.showMessageDialog(null, "게스트 모드는 저장이 불가는 합니다.");
+				ChangePanel.changePanel(mf, lView, new StageView(mf,new Member("guest","guestpass","guestemail")));
+				titleMusic.close();
 			}
 			if(e.getSource() == Joinbt) {
-				new ChangePanel().changePanel(mf, lView, new JoinPanel(mf));
-				
+				ChangePanel.changePanel(mf, lView, new JoinPanel(mf));
+				titleMusic.close();
 			}
+		}
+
+		@Override
+		public void mouseEntered(MouseEvent e) {
+			Music buttonEnteredMusic = new Music("cursor7.mp3",false);
+			buttonEnteredMusic.start();
+		}
+		@Override
+		public void mouseClicked(MouseEvent e) {
+		}
+		@Override
+		public void mouseReleased(MouseEvent e) {
+		}
+		@Override
+		public void mouseExited(MouseEvent e) {
 		}
 	}
 }
