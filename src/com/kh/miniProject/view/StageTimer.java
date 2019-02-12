@@ -8,14 +8,14 @@ import javax.swing.*;
 
 import com.kh.miniProject.controller.CustomerManager;
 
-public class TimerTest extends JPanel {
+public class StageTimer extends JPanel {
 	private JLabel timerLabel;
 	private Timer timer;
 	private GuestPanel gP;
 	private CustomerManager cm;
 	private GameView gView;
 	
-	public TimerTest(GuestPanel gP,CustomerManager cm,GameView gView) {
+	public StageTimer(GuestPanel gP,CustomerManager cm,GameView gView) {
 		this.gP = gP;
 		this.cm = cm;
 		this.gView = gView;

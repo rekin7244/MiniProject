@@ -11,7 +11,6 @@ import com.kh.miniProject.model.dao.OrderDao;
 
 public class GuestPanel extends JPanel {
 	private Image img;
-	private CustomerManager cm;
 	
 	public GuestPanel(Image img,OrderDao od) {
 		this.img = img;
