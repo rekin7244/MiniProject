@@ -99,7 +99,7 @@ public class GameView extends JPanel{
 			cm = new HCustomerManager(this,gP,orderDao,4,stageLv);
 		}
 		//Ω∫≈◊¿Ã¡ˆ Timer
-		gameTimer = new StageTimer(gP,cm,this);
+		gameTimer = new StageTimer(gP,cm,this,stageLv);
 		gP.add(gameTimer);
 
 		//backButton
@@ -391,22 +391,34 @@ public class GameView extends JPanel{
 			drinksNo++;
 		}else if(menuName.equals("∂±∫∫¿Ã")) {
 			equips[1].setEnabled(false);
-			cookTimer = new CookingTime(equips[1],7-(int)(equipLv[0]*1.5),"∂±∫∫¿Ã");
+			int temp=7;
+			if(equipLv[0]==2) { 	temp=5;
+			}else if(equipLv[0]==3) {temp=3;}
+			cookTimer = new CookingTime(equips[1],temp,"∂±∫∫¿Ã");
 			gView.add(cookTimer);
 			tbkNo++;	
 		}else if(menuName.equals("∆¢±Ë")) {
 			equips[2].setEnabled(false);
-			cookTimer = new CookingTime(equips[2],10-(int)(equipLv[1]*1.5),"∆¢±Ë");
+			int temp=10;
+			if(equipLv[1]==2) { 	temp=7;
+			}else if(equipLv[1]==3) {temp=4;}
+			cookTimer = new CookingTime(equips[2],temp,"∆¢±Ë");
 			gView.add(cookTimer);
 			friedNo++;
 		}else if(menuName.equals("ø¿µ≠")) {
 			equips[3].setEnabled(false);
-			cookTimer = new CookingTime(equips[3],8-(int)(equipLv[2]*1.5),"ø¿µ≠");
+			int temp=8;
+			if(equipLv[2]==2) { 	temp=6;
+			}else if(equipLv[2]==3) {temp=4;}
+			cookTimer = new CookingTime(equips[3],temp,"ø¿µ≠");
 			gView.add(cookTimer);
 			odengNo++;
 		}else if(menuName.equals("∂Û∏È")) {
 			equips[4].setEnabled(false);
-			cookTimer = new CookingTime(equips[4],12-equipLv[3]*2,"∂Û∏È");
+			int temp=12;
+			if(equipLv[3]==2) { 	temp=9;
+			}else if(equipLv[3]==3) {temp=5;}
+			cookTimer = new CookingTime(equips[4],temp,"∂Û∏È");
 			gView.add(cookTimer);
 			ramenNo++;
 		}
