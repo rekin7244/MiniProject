@@ -20,9 +20,8 @@ public class MessageTimer extends JPanel{
 		this.cm = cm;
 		this.time = time;
 		
-		//Message = new JLabel("Hidden");
 		Image icon = new ImageIcon("images/hidden1.png")
-				.getImage().getScaledInstance(100, 70, 0);
+				.getImage().getScaledInstance(100, 120, 0);
 		Message = new JLabel(new ImageIcon(icon));
 		timer = new Timer(100, new TimerStart());
 		
@@ -30,7 +29,7 @@ public class MessageTimer extends JPanel{
 		Message.setFont(new Font("Elephant", Font.BOLD, 40));
 		this.add(Message);
 		this.setVisible(true);
-		this.setBounds(450, 100, 100, 70);
+		this.setBounds(450, 100, 100, 120);
 		
 		timer.start();
 	}

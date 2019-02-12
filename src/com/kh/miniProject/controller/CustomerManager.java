@@ -46,7 +46,7 @@ public class CustomerManager {
 	public void guest() {
 		Random rand = new Random();
 		if(stageLv>4) {
-			if (count == 5) {
+			if (count == 1) {
 				cTimer[customerNo] = new CustomerTimer(this,(11-(0.5*stageLv))/1.5,customerNo,customerX[customerNo]); // 각 손님별 타이머 설정
 				gP.add(cTimer[customerNo]);
 				mt = new MessageTimer(this, 1.5);
