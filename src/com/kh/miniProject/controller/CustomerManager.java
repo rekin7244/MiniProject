@@ -24,6 +24,7 @@ public class CustomerManager {
 	private int orderNo; // 주문 번호
 	private int customerNo = 0; // 손님 번호
 	private int count = 0; // 히든번호
+	private boolean guest = true;	//히든손님 판별(메뉴가격 2배 결정)
 	private OrderLabel[] orderLabel; // 주문 이미지
 	private JLabel[] customer = new JLabel[3]; // customer수
 	private int[] customerOrderNo = new int[3]; // customer남은 주문수
@@ -43,18 +44,18 @@ public class CustomerManager {
 		if (count == 5) {
 			cTimer[customerNo] = new CustomerTimer(this, (12 - (0.5 * stageLv)) / 1.5, customerNo); // 각 손님별 타이머 설정
 			gP.add(cTimer[customerNo]);
-			Image icon = new ImageIcon("images/Inked히든손님2.jpg")
-					.getImage().getScaledInstance(120, 200, 0); // 손님 이미지
+			Image icon = new ImageIcon("images/Inked히든손님2.jpg").getImage().getScaledInstance(120, 200, 0); // 손님 이미지
 			customer[customerNo] = new JLabel(new ImageIcon(icon)); // 손님라벨
 			count = 0;
+			guest = false;
 
 		} else {
 			cTimer[customerNo] = new CustomerTimer(this, 12 - (0.5 * stageLv), customerNo); // 각 손님별 타이머 설정
 			gP.add(cTimer[customerNo]);
-			Image icon = new ImageIcon("images/guest.PNG")
-					.getImage().getScaledInstance(120, 200, 0); // 손님 이미지
+			Image icon = new ImageIcon("images/guest.PNG").getImage().getScaledInstance(120, 200, 0); // 손님 이미지
 			customer[customerNo] = new JLabel(new ImageIcon(icon)); // 손님라벨
 			count++;
+			guest = true;
 		}
 
 		customerOrderNo[customerNo] = maxOrderNo;
@@ -62,13 +63,13 @@ public class CustomerManager {
 		// 손님 객체 존재시 (1,2,3번 자리 지정)
 		if (customerNo == 0) {
 			customer[customerNo].setBounds(744, 0, 120, 200); // 손님 위치 설정
-			addOrder(maxOrderNo, 744);
+			addOrder(maxOrderNo, 744, guest);
 		} else if (customerNo == 1) {
 			customer[customerNo].setBounds(444, 0, 120, 200);
-			addOrder(maxOrderNo, 444);
+			addOrder(maxOrderNo, 444, guest);
 		} else {
 			customer[customerNo].setBounds(144, 0, 120, 200);
-			addOrder(maxOrderNo, 144);
+			addOrder(maxOrderNo, 144, guest);
 		}
 		gP.add(customer[customerNo]); // 패널에 손님라벨 추가
 		int temp = customerNo;
@@ -81,7 +82,7 @@ public class CustomerManager {
 		}
 	}
 
-	public void addOrder(int menuNo, int x) {
+	public void addOrder(int menuNo, int x, boolean guest) {
 		int y = 15; // y축 초기화
 
 		for (int i = 0; i < menuNo; i++) { // 메뉴 개수에 따라 반복
@@ -95,16 +96,31 @@ public class CustomerManager {
 			} else {
 				random = new Random().nextInt(5); // 4스테이지 이후 5가지
 			}
-			if (random == 0) {
-				orderDao.addOrder(new MenuOrder("떡볶이", 2300, orderNo));
-			} else if (random == 1) {
-				orderDao.addOrder(new MenuOrder("음료수", 1000, orderNo));
-			} else if (random == 2) {
-				orderDao.addOrder(new MenuOrder("튀김", 1800, orderNo));
-			} else if (random == 3) {
-				orderDao.addOrder(new MenuOrder("오뎅", 2000, orderNo));
-			} else if (random == 4) {
-				orderDao.addOrder(new MenuOrder("라면", 3500, orderNo));
+
+			if (guest == false) { //히든손님 지불 가격
+				if (random == 0) {
+					orderDao.addOrder(new MenuOrder("떡볶이", 4600, orderNo));
+				} else if (random == 1) {
+					orderDao.addOrder(new MenuOrder("음료수", 2000, orderNo));
+				} else if (random == 2) {
+					orderDao.addOrder(new MenuOrder("튀김", 3600, orderNo));
+				} else if (random == 3) {
+					orderDao.addOrder(new MenuOrder("오뎅", 4000, orderNo));
+				} else if (random == 4) {
+					orderDao.addOrder(new MenuOrder("라면", 7000, orderNo));
+				}
+			} else { //일반손님 지불 가격
+				if (random == 0) {
+					orderDao.addOrder(new MenuOrder("떡볶이", 2300, orderNo));
+				} else if (random == 1) {
+					orderDao.addOrder(new MenuOrder("음료수", 1000, orderNo));
+				} else if (random == 2) {
+					orderDao.addOrder(new MenuOrder("튀김", 1800, orderNo));
+				} else if (random == 3) {
+					orderDao.addOrder(new MenuOrder("오뎅", 2000, orderNo));
+				} else if (random == 4) {
+					orderDao.addOrder(new MenuOrder("라면", 3500, orderNo));
+				}
 			}
 			orderLabel[orderNo] = new OrderLabel(orderNo); // order Label 추가
 
@@ -136,6 +152,7 @@ public class CustomerManager {
 				orderNo = 0;
 			}
 		}
+		
 	}
 
 	public void deleteLabel(int orderNo) { // 주문내역 삭제 및 모든 주문 전달 완료시 손님(+타이머) 삭제
