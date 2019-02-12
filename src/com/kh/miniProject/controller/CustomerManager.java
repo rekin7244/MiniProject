@@ -41,6 +41,7 @@ public class CustomerManager {
 
 	// ¼Õ´Ô »ý¼º
 	public void guest() {
+		Random rand = new Random();
 		if (count == 5) {
 			cTimer[customerNo] = new CustomerTimer(this, (12 - (0.5 * stageLv)) / 1.5, customerNo); // °¢ ¼Õ´Ôº° Å¸ÀÌ¸Ó ¼³Á¤
 			gP.add(cTimer[customerNo]);
@@ -52,8 +53,11 @@ public class CustomerManager {
 		} else {
 			cTimer[customerNo] = new CustomerTimer(this, 12 - (0.5 * stageLv), customerNo); // °¢ ¼Õ´Ôº° Å¸ÀÌ¸Ó ¼³Á¤
 			gP.add(cTimer[customerNo]);
-			Image icon = new ImageIcon("images/guest.PNG").getImage().getScaledInstance(120, 200, 0); // ¼Õ´Ô ÀÌ¹ÌÁö
-			customer[customerNo] = new JLabel(new ImageIcon(icon)); // ¼Õ´Ô¶óº§
+			Image[] icon = {new ImageIcon("images/¼Õ³ð2.png").getImage().getScaledInstance(120, 200, 0),
+							new ImageIcon("images/¼Õ³ð1.png").getImage().getScaledInstance(120,200,0),
+							new ImageIcon("images/¼Õ³ð3.png").getImage().getScaledInstance(120,200,0)
+			}; // ¼Õ´Ô ÀÌ¹ÌÁö
+			customer[customerNo] = new JLabel(new ImageIcon(icon[rand.nextInt(icon.length-1)])); // ¼Õ´Ô¶óº§
 			count++;
 			guest = true;
 		}

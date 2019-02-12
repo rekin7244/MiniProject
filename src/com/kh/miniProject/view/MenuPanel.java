@@ -26,10 +26,10 @@ public class MenuPanel extends JPanel{
 			new ImageIcon("Images/fried3.png").getImage().getScaledInstance(180, PNANEL_HIGHT, 0),	
 			new ImageIcon("Images/fried4.png").getImage().getScaledInstance(180, PNANEL_HIGHT, 0)	};
 	private Image[] odengImage = {
-			new ImageIcon("Images/神記1.png").getImage().getScaledInstance(200, PNANEL_HIGHT, 0),
-			new ImageIcon("Images/神記2.png").getImage().getScaledInstance(200, PNANEL_HIGHT, 0),
-			new ImageIcon("Images/神記3.png").getImage().getScaledInstance(200, PNANEL_HIGHT, 0),
-			new ImageIcon("Images/神記4.png").getImage().getScaledInstance(200, PNANEL_HIGHT, 0)};
+			new ImageIcon("Images/神1.png").getImage().getScaledInstance(200, PNANEL_HIGHT, 0),
+			new ImageIcon("Images/神2.png").getImage().getScaledInstance(200, PNANEL_HIGHT, 0),
+			new ImageIcon("Images/神3.png").getImage().getScaledInstance(200, PNANEL_HIGHT, 0),
+			new ImageIcon("Images/神4.png").getImage().getScaledInstance(200, PNANEL_HIGHT, 0)};
 	private Image[] ramenImage = {
 			new ImageIcon("Images/虞檎1.png").getImage().getScaledInstance(195, PNANEL_HIGHT, 0),
 			new ImageIcon("Images/虞檎2.png").getImage().getScaledInstance(195, PNANEL_HIGHT, 0),
