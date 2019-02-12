@@ -47,7 +47,7 @@ public class CustomerManager {
 		Random rand = new Random();
 		if(stageLv>4) {
 			if (count == 5) {
-				cTimer[customerNo] = new CustomerTimer(this,(11-(0.5*stageLv))/1.5,customerNo,customerX[customerNo]); // 각 손님별 타이머 설정
+				cTimer[customerNo] = new CustomerTimer(this,(11-(0.3*stageLv))/1.5,customerNo,customerX[customerNo]); // 각 손님별 타이머 설정
 				gP.add(cTimer[customerNo]);
 				mt = new MessageTimer(this, 1.5);
 				gP.add(mt);
@@ -56,7 +56,7 @@ public class CustomerManager {
 				count = 0;
 				guest = false;
 			} else {
-				cTimer[customerNo] = new CustomerTimer(this,11-(0.5*stageLv),customerNo,customerX[customerNo]); // 각 손님별 타이머 설정
+				cTimer[customerNo] = new CustomerTimer(this,11-(0.3*stageLv),customerNo,customerX[customerNo]); // 각 손님별 타이머 설정
 				gP.add(cTimer[customerNo]);
 				Image[] icon = {new ImageIcon("images/손놈2.png").getImage().getScaledInstance(120, 200, 0),
 						new ImageIcon("images/손놈1.png").getImage().getScaledInstance(120,200,0),
@@ -67,7 +67,7 @@ public class CustomerManager {
 				guest = true;
 			}
 		}else {
-			cTimer[customerNo] = new CustomerTimer(this,11-(0.5*stageLv),customerNo,customerX[customerNo]); // 각 손님별 타이머 설정
+			cTimer[customerNo] = new CustomerTimer(this,11-(0.3*stageLv),customerNo,customerX[customerNo]); // 각 손님별 타이머 설정
 			gP.add(cTimer[customerNo]);
 			Image[] icon = {new ImageIcon("images/손놈2.png").getImage().getScaledInstance(120, 200, 0),
 					new ImageIcon("images/손놈1.png").getImage().getScaledInstance(120,200,0),
@@ -92,7 +92,7 @@ public class CustomerManager {
 		}
 		gP.add(customer[customerNo]); // 패널에 손님라벨 추가
 
-		// 손님 No 설정
+		// 손님 No 설정 (0~2)
 		if (customerNo != 2) {
 			customerNo++;
 		} else {

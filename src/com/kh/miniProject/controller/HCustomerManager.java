@@ -45,25 +45,35 @@ public class HCustomerManager extends CustomerManager{
 	// 손님 생성
 	public void guest() {
 		Random rand = new Random();
-		if (count == 5) {
-			cTimer[customerNo] = new CustomerTimer(this,(12-(0.5*stageLv))/1.5,customerNo,customerX[customerNo]); // 각 손님별 타이머 설정
+		if(stageLv!=10) {
+			if (count == 5) {
+				cTimer[customerNo] = new CustomerTimer(this,(12-(0.3*stageLv))/1.5,customerNo,customerX[customerNo]); // 각 손님별 타이머 설정
+				gP.add(cTimer[customerNo]);
+				mt = new MessageTimer(this, 1.5);
+				gP.add(mt);
+				Image icon = new ImageIcon("images/Inked히든손님2.png").getImage().getScaledInstance(120, 200, 0); // 손님 이미지
+				customer[customerNo] = new JLabel(new ImageIcon(icon)); // 손님라벨
+				count = 0;
+				guest = false;
+			} else {
+				cTimer[customerNo] = new CustomerTimer(this,12-(0.3*stageLv),customerNo,customerX[customerNo]); // 각 손님별 타이머 설정
+				gP.add(cTimer[customerNo]);
+				Image[] icon = {new ImageIcon("images/손놈2.png").getImage().getScaledInstance(120, 200, 0),
+						new ImageIcon("images/손놈1.png").getImage().getScaledInstance(120,200,0),
+						new ImageIcon("images/손놈3.png").getImage().getScaledInstance(120,200,0)
+				}; // 손님 이미지
+				customer[customerNo] = new JLabel(new ImageIcon(icon[rand.nextInt(icon.length-1)])); // 손님라벨
+				count++;
+				guest = true;
+			}
+		}else {
+			cTimer[customerNo] = new CustomerTimer(this,(12-(0.3*stageLv))/1.5,customerNo,customerX[customerNo]); // 각 손님별 타이머 설정
 			gP.add(cTimer[customerNo]);
 			mt = new MessageTimer(this, 1.5);
 			gP.add(mt);
 			Image icon = new ImageIcon("images/Inked히든손님2.png").getImage().getScaledInstance(120, 200, 0); // 손님 이미지
 			customer[customerNo] = new JLabel(new ImageIcon(icon)); // 손님라벨
-			count = 0;
 			guest = false;
-		} else {
-			cTimer[customerNo] = new CustomerTimer(this,12-(0.5*stageLv),customerNo,customerX[customerNo]); // 각 손님별 타이머 설정
-			gP.add(cTimer[customerNo]);
-			Image[] icon = {new ImageIcon("images/손놈2.png").getImage().getScaledInstance(120, 200, 0),
-					new ImageIcon("images/손놈1.png").getImage().getScaledInstance(120,200,0),
-					new ImageIcon("images/손놈3.png").getImage().getScaledInstance(120,200,0)
-			}; // 손님 이미지
-			customer[customerNo] = new JLabel(new ImageIcon(icon[rand.nextInt(icon.length-1)])); // 손님라벨
-			count++;
-			guest = true;
 		}
 
 		customerOrderNo[customerNo] = maxOrderNo;
@@ -84,7 +94,7 @@ public class HCustomerManager extends CustomerManager{
 		}
 		gP.add(customer[customerNo]); // 패널에 손님라벨 추가
 
-		// 손님 No 설정
+		// 손님 No 설정(0~3)
 		if (customerNo != 3) {
 			customerNo++;
 		} else {
@@ -192,7 +202,7 @@ public class HCustomerManager extends CustomerManager{
 		Music buttonEnteredMusic = new Music("coins_5.mp3", false);
 		buttonEnteredMusic.start();
 	}
-	
+
 	public void deleteMessage() {
 		gP.remove(mt);
 		gP.repaint();
