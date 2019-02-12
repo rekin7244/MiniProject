@@ -48,11 +48,11 @@ public class StageTimer extends JPanel {
 				
 				//guest생성
 				if(stageLv<3) {
-					if(gameTime%5==0&&gameTime!=0) {cm.guest();}
+					if(gameTime%6==0&&gameTime!=0) {cm.guest();}
 				}else if(stageLv<6) {
-					if(gameTime%4==0&&gameTime!=0) {cm.guest();}
+					if(gameTime%5==0&&gameTime!=0) {cm.guest();}
 				}else {
-					if(gameTime%3==0&&gameTime!=0) {cm.guest();}
+					if(gameTime%4==0&&gameTime!=0) {cm.guest();}
 				}
 				
 				//종료
