@@ -49,7 +49,7 @@ public class StageTimer extends JPanel {
 				//guest»ý¼º
 				if(stageLv<3) {
 					if(gameTime%6==0&&gameTime!=0) {cm.guest();}
-				}else if(stageLv<6) {
+				}else if(stageLv<8) {
 					if(gameTime%5==0&&gameTime!=0) {cm.guest();}
 				}else {
 					if(gameTime%4==0&&gameTime!=0) {cm.guest();}
