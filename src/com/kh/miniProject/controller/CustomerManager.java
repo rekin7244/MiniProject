@@ -134,7 +134,7 @@ public class CustomerManager {
 			} else if (random == 2) {
 				food = new ImageIcon("images/friedImage.jpeg").getImage().getScaledInstance(50, 40, 0);
 			} else if (random == 3) {
-				food = new ImageIcon("images/神記Lv1.jpg").getImage().getScaledInstance(50, 40, 0);
+				food = new ImageIcon("images/神記.jpg").getImage().getScaledInstance(50, 40, 0);
 			} else if (random == 4) {
 				food = new ImageIcon("images/ramen.png").getImage().getScaledInstance(50, 40, 0);
 			}
