@@ -14,11 +14,13 @@ public class StageTimer extends JPanel {
 	private GuestPanel gP;
 	private CustomerManager cm;
 	private GameView gView;
+	private int stageLv;
 	
-	public StageTimer(GuestPanel gP,CustomerManager cm,GameView gView) {
+	public StageTimer(GuestPanel gP,CustomerManager cm,GameView gView,int stageLv) {
 		this.gP = gP;
 		this.cm = cm;
 		this.gView = gView;
+		this.stageLv = stageLv;
 		
 		timerLabel = new JLabel("60초");
 		timer = new Timer(1000, new TimerStart());
@@ -45,10 +47,15 @@ public class StageTimer extends JPanel {
 				gameTime--;
 				
 				//guest생성
-				if(gameTime%5==0&&gameTime!=0) {
-				cm.guest();
+				if(stageLv<3) {
+					if(gameTime%5==0&&gameTime!=0) {cm.guest();}
+				}else if(stageLv<6) {
+					if(gameTime%4==0&&gameTime!=0) {cm.guest();}
+				}else {
+					if(gameTime%3==0&&gameTime!=0) {cm.guest();}
 				}
 				
+				//종료
 				if(gameTime<=0) {
 					timer.stop();
 					gView.endStage();

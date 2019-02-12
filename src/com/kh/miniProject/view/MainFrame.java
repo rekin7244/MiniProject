@@ -21,10 +21,6 @@ public class MainFrame extends JFrame{
 		//loginPanel로 이동
 		this.add(new LoginPanel(this));
 		
-		/*test용이므로 StageView를 초기화면으로 해둠
-		this.add(new StageView(this,guest));
-		this.add(new GameView());*/
-		
 		this.setVisible(true);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}	

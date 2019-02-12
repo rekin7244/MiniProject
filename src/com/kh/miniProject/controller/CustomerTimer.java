@@ -31,10 +31,11 @@ public class CustomerTimer extends JPanel{
 
 		timerLabel.setSize(70, 40);
 		timerLabel.setFont(new Font("Elephant", Font.BOLD, 20));
+		timerLabel.setBackground(null);
 		this.add(timerLabel);
 		this.setVisible(true);
 		this.setBounds(x+50,200,70,40);
-
+		
 		timer.start();
 	}
 	public void timerStop() {

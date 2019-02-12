@@ -45,14 +45,14 @@ public class CustomerManager {
 		Random rand = new Random();
 		if(stageLv>4) {
 			if (count == 5) {
-				cTimer[customerNo] = new CustomerTimer(this,(10-(0.5*stageLv))/1.5,customerNo,customerX[customerNo]); // 각 손님별 타이머 설정
+				cTimer[customerNo] = new CustomerTimer(this,(11-(0.5*stageLv))/1.5,customerNo,customerX[customerNo]); // 각 손님별 타이머 설정
 				gP.add(cTimer[customerNo]);
 				Image icon = new ImageIcon("images/Inked히든손님2.jpg").getImage().getScaledInstance(120, 200, 0); // 손님 이미지
 				customer[customerNo] = new JLabel(new ImageIcon(icon)); // 손님라벨
 				count = 0;
 				guest = false;
 			} else {
-				cTimer[customerNo] = new CustomerTimer(this,10-(0.5*stageLv),customerNo,customerX[customerNo]); // 각 손님별 타이머 설정
+				cTimer[customerNo] = new CustomerTimer(this,11-(0.5*stageLv),customerNo,customerX[customerNo]); // 각 손님별 타이머 설정
 				gP.add(cTimer[customerNo]);
 				Image[] icon = {new ImageIcon("images/손놈2.png").getImage().getScaledInstance(120, 200, 0),
 						new ImageIcon("images/손놈1.png").getImage().getScaledInstance(120,200,0),
@@ -63,7 +63,7 @@ public class CustomerManager {
 				guest = true;
 			}
 		}else {
-			cTimer[customerNo] = new CustomerTimer(this,10-(0.5*stageLv),customerNo,customerX[customerNo]); // 각 손님별 타이머 설정
+			cTimer[customerNo] = new CustomerTimer(this,11-(0.5*stageLv),customerNo,customerX[customerNo]); // 각 손님별 타이머 설정
 			gP.add(cTimer[customerNo]);
 			Image[] icon = {new ImageIcon("images/손놈2.png").getImage().getScaledInstance(120, 200, 0),
 					new ImageIcon("images/손놈1.png").getImage().getScaledInstance(120,200,0),
