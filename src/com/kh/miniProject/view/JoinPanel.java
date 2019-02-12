@@ -34,7 +34,6 @@ public class JoinPanel extends JPanel {
 
 	private MainFrame mf;
 	private JPanel jView;
-	private Dialog dialog;
 	private MemberDao memberDao = new MemberDao();
 
 

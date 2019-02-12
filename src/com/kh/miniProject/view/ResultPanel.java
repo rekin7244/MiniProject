@@ -41,9 +41,7 @@ public class ResultPanel extends JPanel{
 			}	
 		});
 		
-		this.add(mainButton);
-		
-		
+		this.add(mainButton);		
 	}
 	
 	

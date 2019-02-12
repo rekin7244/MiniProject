@@ -35,10 +35,10 @@ public class MenuPanel extends JPanel{
 			new ImageIcon("Images/¿Àµ­Lv1.jpg").getImage().getScaledInstance(180, PNANEL_HIGHT, 0)
 	};
 	private Image[] ramenImage = {
-			new ImageIcon("Images/¿Àµ­Lv1.jpg").getImage().getScaledInstance(180, PNANEL_HIGHT, 0),
-			new ImageIcon("Images/¿Àµ­Lv1.jpg").getImage().getScaledInstance(180, PNANEL_HIGHT, 0),
-			new ImageIcon("Images/¿Àµ­Lv1.jpg").getImage().getScaledInstance(180, PNANEL_HIGHT, 0),
-			new ImageIcon("Images/¿Àµ­Lv1.jpg").getImage().getScaledInstance(180, PNANEL_HIGHT, 0)
+			new ImageIcon("Images/¶ó1.jpg").getImage().getScaledInstance(180, PNANEL_HIGHT, 0),
+			new ImageIcon("Images/¶ó2.jpg").getImage().getScaledInstance(180, PNANEL_HIGHT, 0),
+			new ImageIcon("Images/¶ó3.jpg").getImage().getScaledInstance(180, PNANEL_HIGHT, 0),
+			new ImageIcon("Images/¶ó4.jpg").getImage().getScaledInstance(180, PNANEL_HIGHT, 0)
 	};
 	private String[] menu = {"À½·á¼ö","¶±ººÀÌ","Æ¢±è","¿Àµ­","¶ó¸é"};
 
@@ -114,13 +114,13 @@ public class MenuPanel extends JPanel{
 		}
 		
 		if(ramenNo==4) {
-			menuButton[4].setIcon(new ImageIcon(friedImage[3]));
+			menuButton[4].setIcon(new ImageIcon(ramenImage[3]));
 		}else if(ramenNo==3) {
-			menuButton[4].setIcon(new ImageIcon(friedImage[2]));
+			menuButton[4].setIcon(new ImageIcon(ramenImage[2]));
 		}else if(ramenNo==2) {
-			menuButton[4].setIcon(new ImageIcon(friedImage[1]));
+			menuButton[4].setIcon(new ImageIcon(ramenImage[1]));
 		}else if(ramenNo==1) {
-			menuButton[4].setIcon(new ImageIcon(friedImage[0]));
+			menuButton[4].setIcon(new ImageIcon(ramenImage[0]));
 		}else{
 			menuButton[4].setIcon(null);
 		}

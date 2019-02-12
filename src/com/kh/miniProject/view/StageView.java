@@ -21,7 +21,6 @@ public class StageView extends JPanel{
 	private int[] equipsLv;
 	//Music
 	private Music music;
-	private boolean firstPlay = true;
 	
 	public StageView(MainFrame mf,Member m) {
 		this.m = m;

@@ -19,14 +19,14 @@ public class CustomerManager {
 	public CustomerTimer[] cTimer = new CustomerTimer[3];
 	private GameView gView;
 
-	private int stageLv; // stageLv
-	private int maxOrderNo; // 주문하는 메뉴의 최대 수
-	private int orderNo; // 주문 번호
-	private int customerNo = 0; // 손님 번호
-	private int count = 0; // 히든번호
-	private boolean guest = true;	//히든손님 판별(메뉴가격 2배 결정)
-	private OrderLabel[] orderLabel; // 주문 이미지
-	private JLabel[] customer = new JLabel[3]; // customer수
+	private int stageLv; 						// stageLv
+	private int maxOrderNo; 					// 주문하는 메뉴의 최대 수
+	private int orderNo; 						// 주문 번호
+	private int customerNo = 0; 				// 손님 번호
+	private int count = 0; 						// 히든번호
+	private boolean guest = true;				//히든손님 판별(메뉴가격 2배 결정)
+	private OrderLabel[] orderLabel; 			// 주문 이미지
+	private JLabel[] customer = new JLabel[3]; 	// customer수
 	private int[] customerOrderNo = new int[3]; // customer남은 주문수
 
 	// cons

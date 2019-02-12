@@ -164,7 +164,7 @@ public class LoginPanel extends JPanel {
 				}
 			}
 			if(e.getSource() == guestbt) {
-				JOptionPane.showMessageDialog(null, "게스트 모드는 저장이 불가는 합니다.");
+				JOptionPane.showMessageDialog(mf, "게스트 모드는 저장이 불가는 합니다.");
 				ChangePanel.changePanel(mf, lView, new StageView(mf,new Member("guest","guestpass","guestemail")));
 				titleMusic.close();
 			}

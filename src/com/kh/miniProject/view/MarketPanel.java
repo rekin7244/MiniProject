@@ -17,32 +17,32 @@ import com.kh.miniProject.music.Music;
 
 public class MarketPanel extends JPanel {
 
-	// ë°›ì•„ì˜¬ í•„ë“œ
+	// ¹Ş¾Æ¿Ã ÇÊµå
 	MainFrame mf;
 	Member m;
 
-	// ì‚¬ìš© í•„ë“œ
+	// »ç¿ë ÇÊµå
   private Music marketMusic;
-	// ê¸°êµ¬ ì—…ê¸€ë¹„ìš©
+	// ±â±¸ ¾÷±Ûºñ¿ë
 	private int level1 = 25000;
 	private int level2 = 50000;
 	private int level3 = 100000;
-	// íŒ ì—…ê¸€ë¹„ìš©
+	// ÆÇ ¾÷±Ûºñ¿ë
 	private int plevel2 = 30000;
 	private int plevel3 = 60000;
 	private int plevel4 = 100000;
 
-	// ê¸°êµ¬
-	JButton mo = new JButton("ë–¡ë³¶ì´ê¸°êµ¬");
-	JButton mo1 = new JButton("íŠ€ê¹€ê¸°êµ¬");
-	JButton mo2 = new JButton("ì˜¤ë…ê¸°êµ¬");
-	JButton mo3 = new JButton("ë¼ë©´ê¸°êµ¬");
+	// ±â±¸
+	JButton mo = new JButton("¶±ººÀÌ±â±¸");
+	JButton mo1 = new JButton("Æ¢±è±â±¸");
+	JButton mo2 = new JButton("¿Àµ­±â±¸");
+	JButton mo3 = new JButton("¶ó¸é±â±¸");
 
-	// íŒ
-	JButton mo4 = new JButton("ë–¡ë³¶ì´íŒ ì—…ê¸€");
-	JButton mo5 = new JButton("íŠ€ê¹€íŒ ì—…ê¸€");
-	JButton mo6 = new JButton("ì˜¤ë…íŒ ì—…ê¸€");
-	JButton mo7 = new JButton("ë¼ë©´íŒ ì—…ê¸€");
+	// ÆÇ
+	JButton mo4 = new JButton("¶±ººÀÌÆÇ ¾÷±Û");
+	JButton mo5 = new JButton("Æ¢±èÆÇ ¾÷±Û");
+	JButton mo6 = new JButton("¿Àµ­ÆÇ ¾÷±Û");
+	JButton mo7 = new JButton("¶ó¸éÆÇ ¾÷±Û");
 
 	MarketPanel mPanel;
 	JButton gold;
@@ -50,50 +50,51 @@ public class MarketPanel extends JPanel {
 	private int[] tableLv;
 	private EquipSetting e;
 
-	// ë–¡ë³¶ì´ ê¸°êµ¬
-	private Image[] equipsImages = { new ImageIcon("images/ë–¡2.jpg").getImage().getScaledInstance(200, 200, 0),
-			new ImageIcon("images/ë–¡3.jpg").getImage().getScaledInstance(200, 200, 0),
+	// ¶±ººÀÌ ±â±¸
+	private Image[] equipsImages = { new ImageIcon("images/¶±2.jpg").getImage().getScaledInstance(200, 200, 0),
+			new ImageIcon("images/¶±3.jpg").getImage().getScaledInstance(200, 200, 0),
 			new ImageIcon("images/MAX.jpg").getImage().getScaledInstance(200, 200, 0) };
-	// íŠ€ê¹€ ê¸°êµ¬
-	private Image[] equipsImages1 = { new ImageIcon("images/íŠ€1.jpg").getImage().getScaledInstance(200, 200, 0),
-			new ImageIcon("images/íŠ€2.jpg").getImage().getScaledInstance(200, 200, 0),
-			new ImageIcon("images/íŠ€3.jpg").getImage().getScaledInstance(200, 200, 0),
+	// Æ¢±è ±â±¸
+	private Image[] equipsImages1 = { new ImageIcon("images/Æ¢1.jpg").getImage().getScaledInstance(200, 200, 0),
+			new ImageIcon("images/Æ¢2.jpg").getImage().getScaledInstance(200, 200, 0),
+			new ImageIcon("images/Æ¢3.jpg").getImage().getScaledInstance(200, 200, 0),
 			new ImageIcon("images/MAX.jpg").getImage().getScaledInstance(200, 200, 0) };
-	// ì˜¤ë… ê¸°êµ¬
-	private Image[] equipsImages2 = { new ImageIcon("images/ì˜¤1.jpg").getImage().getScaledInstance(200, 200, 0),
-			new ImageIcon("images/ì˜¤2.jpg").getImage().getScaledInstance(200, 200, 0),
-			new ImageIcon("images/ì˜¤3.jpg").getImage().getScaledInstance(200, 200, 0),
+	// ¿Àµ­ ±â±¸
+	private Image[] equipsImages2 = { new ImageIcon("images/¿À1.jpg").getImage().getScaledInstance(200, 200, 0),
+			new ImageIcon("images/¿À2.jpg").getImage().getScaledInstance(200, 200, 0),
+			new ImageIcon("images/¿À3.jpg").getImage().getScaledInstance(200, 200, 0),
 			new ImageIcon("images/MAX.jpg").getImage().getScaledInstance(200, 200, 0) };
-	// ë¼ë©´ ê¸°êµ¬
-	private Image[] equipsImages3 = { new ImageIcon("images/ë¼1.jpg").getImage().getScaledInstance(200, 200, 0),
-			new ImageIcon("images/ë¼2.jpg").getImage().getScaledInstance(200, 200, 0),
-			new ImageIcon("images/ë¼3.jpg").getImage().getScaledInstance(200, 200, 0),
+	// ¶ó¸é ±â±¸
+	private Image[] equipsImages3 = { new ImageIcon("images/¶ó1.jpg").getImage().getScaledInstance(200, 200, 0),
+			new ImageIcon("images/¶ó2.jpg").getImage().getScaledInstance(200, 200, 0),
+			new ImageIcon("images/¶ó3.jpg").getImage().getScaledInstance(200, 200, 0),
 			new ImageIcon("images/MAX.jpg").getImage().getScaledInstance(200, 200, 0) };
 
-	// ë–¡ë³¶ì´ íŒ
-	private Image[] tableImages = { new ImageIcon("images/ë–¡2.jpg").getImage().getScaledInstance(200, 200, 0),
-			new ImageIcon("images/ë–¡3.jpg").getImage().getScaledInstance(200, 200, 0),
-			new ImageIcon("images/ë–¡4.jpg").getImage().getScaledInstance(200, 200, 0),
+	// ¶±ººÀÌ ÆÇ
+	private Image[] tableImages = { new ImageIcon("images/¶±2.jpg").getImage().getScaledInstance(200, 200, 0),
+			new ImageIcon("images/¶±3.jpg").getImage().getScaledInstance(200, 200, 0),
+			new ImageIcon("images/¶±4.jpg").getImage().getScaledInstance(200, 200, 0),
 			new ImageIcon("images/MAX.jpg").getImage().getScaledInstance(200, 200, 0), };
 
-	// íŠ€ê¹€ íŒ
-	private Image[] tableImages1 = { new ImageIcon("images/íŠ€2.jpg").getImage().getScaledInstance(200, 200, 0),
-			new ImageIcon("images/íŠ€3.jpg").getImage().getScaledInstance(200, 200, 0),
-			new ImageIcon("images/íŠ€4.jpg").getImage().getScaledInstance(200, 200, 0),
+	// Æ¢±è ÆÇ
+	private Image[] tableImages1 = { new ImageIcon("images/Æ¢2.jpg").getImage().getScaledInstance(200, 200, 0),
+			new ImageIcon("images/Æ¢3.jpg").getImage().getScaledInstance(200, 200, 0),
+			new ImageIcon("images/Æ¢4.jpg").getImage().getScaledInstance(200, 200, 0),
 			new ImageIcon("images/MAX.jpg").getImage().getScaledInstance(200, 200, 0) };
 
-	// ì˜¤ë… íŒ
-	private Image[] tableImages2 = { new ImageIcon("images/ì˜¤2.jpg").getImage().getScaledInstance(200, 200, 0),
-			new ImageIcon("images/ì˜¤3.jpg").getImage().getScaledInstance(200, 200, 0),
-			new ImageIcon("images/ì˜¤4.jpg").getImage().getScaledInstance(200, 200, 0),
+	// ¿Àµ­ ÆÇ
+	private Image[] tableImages2 = { new ImageIcon("images/¿À2.jpg").getImage().getScaledInstance(200, 200, 0),
+			new ImageIcon("images/¿À3.jpg").getImage().getScaledInstance(200, 200, 0),
+			new ImageIcon("images/¿À4.jpg").getImage().getScaledInstance(200, 200, 0),
 			new ImageIcon("images/MAX.jpg").getImage().getScaledInstance(200, 200, 0) };
 
-	// ë¼ë©´ íŒ
-	private Image[] tableImages3 = { new ImageIcon("images/ë¼2.jpg").getImage().getScaledInstance(200, 200, 0),
-			new ImageIcon("images/ë¼3.jpg").getImage().getScaledInstance(200, 200, 0),
-			new ImageIcon("images/ë¼4.jpg").getImage().getScaledInstance(200, 200, 0),
+	// ¶ó¸é ÆÇ
+	private Image[] tableImages3 = { new ImageIcon("images/¶ó2.jpg").getImage().getScaledInstance(200, 200, 0),
+			new ImageIcon("images/¶ó3.jpg").getImage().getScaledInstance(200, 200, 0),
+			new ImageIcon("images/¶ó4.jpg").getImage().getScaledInstance(200, 200, 0),
 			new ImageIcon("images/MAX.jpg").getImage().getScaledInstance(200, 200, 0) };
-
+	
+	//cons
 	public MarketPanel(MainFrame mf, Member m) {
 		e = new EquipSetting();
 		this.mf = mf;
@@ -108,29 +109,28 @@ public class MarketPanel extends JPanel {
 		marketMusic = new Music("intro3.mp3",false);
 		marketMusic.start();
 
-		// ê³¨ë“œ ì¶œë ¥
-		gold = new JButton("ê³¨ë“œ");
+		// °ñµå Ãâ·Â
+		gold = new JButton("°ñµå");
 		gold.setEnabled(false);
 		gold.setBackground(Color.yellow);
 		gold.setBounds(0, 0, 200, 30);
 
-		// ëŒì•„ê°€ê¸°
-		JButton returnBtn = new JButton("ëŒì•„ê°€ê¸°");
+		// µ¹¾Æ°¡±â
+		JButton returnBtn = new JButton("µ¹¾Æ°¡±â");
 		returnBtn.setBounds(660, 620, 140, 30);
 		this.add(returnBtn);
 		returnBtn.addActionListener(e);
 
-		// ìƒì  ë²„íŠ¼ ë° ê¸°ëŠ¥ êµ¬í˜„
 		mPanel = this;
-		// setting(mPanel);
 	}// marketpanel
 
+	// »óÁ¡ ¹öÆ° ¹× ±â´É ±¸Çö
 	public void setting(MarketPanel mPanel) {
-		// ê³¨ë“œ ì¶œë ¥
-		gold.setText("ì†Œì§€ê¸ˆ: " + m.getGold() + "G");
+		// °ñµå Ãâ·Â
+		gold.setText("¼ÒÁö±İ: " + m.getGold() + "G");
 		mPanel.add(gold);
 
-		// ë–¡ë³¶ì´ ê¸°êµ¬
+		// ¶±ººÀÌ ±â±¸
 		if (equipsLv[0] == 1) {
 			mo.setIcon(new ImageIcon(equipsImages[0]));
 		} else if (equipsLv[0] == 2) {
@@ -143,7 +143,7 @@ public class MarketPanel extends JPanel {
 		mo.removeActionListener(e);
 		mo.addActionListener(e);
 
-		// íŠ€ê¹€ ê¸°êµ¬
+		// Æ¢±è ±â±¸
 		mo1.setVisible(false);
 		if (equipsLv[0] >= 2) {
 			mo1.setVisible(true);
@@ -162,7 +162,7 @@ public class MarketPanel extends JPanel {
 		mo1.removeActionListener(e);
 		mo1.addActionListener(e);
 
-		// ì˜¤ë… ê¸°êµ¬
+		// ¿Àµ­ ±â±¸
 		mo2.setVisible(false);
 		if (equipsLv[1] >= 1) {
 			mo2.setVisible(true);
@@ -181,7 +181,7 @@ public class MarketPanel extends JPanel {
 		mo2.removeActionListener(e);
 		mo2.addActionListener(e);
 
-		// ë¼ë©´ ê¸°êµ¬
+		// ¶ó¸é ±â±¸
 		mo3.setVisible(false);
 		if (equipsLv[2] >= 1) {
 			mo3.setVisible(true);
@@ -200,15 +200,15 @@ public class MarketPanel extends JPanel {
 		mo3.removeActionListener(e);
 		mo3.addActionListener(e);
 
-		// ë–¡ë³¶ì´íŒ
+		// ¶±ººÀÌÆÇ
 		if (tableLv[0] == 1) {
-			mo4.setIcon(new ImageIcon(tableImages[0])); // íŒë ™2 ë ™2ì´ë¯¸ì§€
+			mo4.setIcon(new ImageIcon(tableImages[0])); // ÆÇ·¾2 ·¾2ÀÌ¹ÌÁö
 		} else if (tableLv[0] == 2) {
-			mo4.setIcon(new ImageIcon(tableImages[1])); // íŒë ™3 ë ™3ì´ë¯¸ì§€
+			mo4.setIcon(new ImageIcon(tableImages[1])); // ÆÇ·¾3 ·¾3ÀÌ¹ÌÁö
 		} else if (tableLv[0] == 3) {
-			mo4.setIcon(new ImageIcon(tableImages[2])); // íŒë ™4 ë ™4ì´ë¯¸ì§€
+			mo4.setIcon(new ImageIcon(tableImages[2])); // ÆÇ·¾4 ·¾4ÀÌ¹ÌÁö
 		} else {
-			mo4.setIcon(new ImageIcon(tableImages[3])); // ë§Œë ™ì´ë¯¸ì§€
+			mo4.setIcon(new ImageIcon(tableImages[3])); // ¸¸·¾ÀÌ¹ÌÁö
 			mo4.setEnabled(false);
 		}
 
@@ -216,19 +216,19 @@ public class MarketPanel extends JPanel {
 		mo4.removeActionListener(e);
 		mo4.addActionListener(e);
 
-		// íŠ€ê¹€ íŒ
+		// Æ¢±è ÆÇ
 		mo5.setVisible(false);
 		if (equipsLv[1] > 0) {
 			mo5.setVisible(true);
 		}
 		if (tableLv[1] == 1) {
-			mo5.setIcon(new ImageIcon(tableImages1[0])); // íŒë ™2 ë ™2ì´ë¯¸ì§€
+			mo5.setIcon(new ImageIcon(tableImages1[0])); // ÆÇ·¾2 ·¾2ÀÌ¹ÌÁö
 		} else if (tableLv[1] == 2) {
-			mo5.setIcon(new ImageIcon(tableImages1[1])); // íŒë ™3 ë ™3ì´ë¯¸ì§€
+			mo5.setIcon(new ImageIcon(tableImages1[1])); // ÆÇ·¾3 ·¾3ÀÌ¹ÌÁö
 		} else if (tableLv[1] == 3) {
-			mo5.setIcon(new ImageIcon(tableImages1[2])); // íŒë ™4 ë ™4ì´ë¯¸ì§€
+			mo5.setIcon(new ImageIcon(tableImages1[2])); // ÆÇ·¾4 ·¾4ÀÌ¹ÌÁö
 		} else {
-			mo5.setIcon(new ImageIcon(tableImages1[3])); // ë§Œë ™ì´ë¯¸ì§€
+			mo5.setIcon(new ImageIcon(tableImages1[3])); // ¸¸·¾ÀÌ¹ÌÁö
 			mo5.setEnabled(false);
 		}
 
@@ -236,19 +236,19 @@ public class MarketPanel extends JPanel {
 		mo5.removeActionListener(e);
 		mo5.addActionListener(e);
 
-		// ì˜¤ë… íŒ
+		// ¿Àµ­ ÆÇ
 		mo6.setVisible(false);
 		if (equipsLv[2] > 0) {
 			mo6.setVisible(true);
 		}
 		if (tableLv[2] == 1) {
-			mo6.setIcon(new ImageIcon(tableImages2[0])); // íŒë ™2 ë ™2ì´ë¯¸ì§€
+			mo6.setIcon(new ImageIcon(tableImages2[0])); // ÆÇ·¾2 ·¾2ÀÌ¹ÌÁö
 		} else if (tableLv[2] == 2) {
-			mo6.setIcon(new ImageIcon(tableImages2[1])); // íŒë ™3 ë ™3ì´ë¯¸ì§€
+			mo6.setIcon(new ImageIcon(tableImages2[1])); // ÆÇ·¾3 ·¾3ÀÌ¹ÌÁö
 		} else if (tableLv[2] == 3) {
-			mo6.setIcon(new ImageIcon(tableImages2[2])); // íŒë ™4 ë ™4ì´ë¯¸ì§€
+			mo6.setIcon(new ImageIcon(tableImages2[2])); // ÆÇ·¾4 ·¾4ÀÌ¹ÌÁö
 		} else {
-			mo6.setIcon(new ImageIcon(tableImages2[3])); // ë§Œë ™ì´ë¯¸ì§€
+			mo6.setIcon(new ImageIcon(tableImages2[3])); // ¸¸·¾ÀÌ¹ÌÁö
 			mo6.setEnabled(false);
 		}
 
@@ -256,19 +256,19 @@ public class MarketPanel extends JPanel {
 		mo6.removeActionListener(e);
 		mo6.addActionListener(e);
 
-		// ë¼ë©´ íŒ
+		// ¶ó¸é ÆÇ
 		mo7.setVisible(false);
 		if (equipsLv[3] > 0) {
 			mo7.setVisible(true);
 		}
 		if (tableLv[3] == 1) {
-			mo7.setIcon(new ImageIcon(tableImages3[0])); // íŒë ™2 ë ™2ì´ë¯¸ì§€
+			mo7.setIcon(new ImageIcon(tableImages3[0])); // ÆÇ·¾2 ·¾2ÀÌ¹ÌÁö
 		} else if (tableLv[3] == 2) {
-			mo7.setIcon(new ImageIcon(tableImages3[1])); // íŒë ™3 ë ™3ì´ë¯¸ì§€
+			mo7.setIcon(new ImageIcon(tableImages3[1])); // ÆÇ·¾3 ·¾3ÀÌ¹ÌÁö
 		} else if (tableLv[3] == 3) {
-			mo7.setIcon(new ImageIcon(tableImages3[2])); // íŒë ™4 ë ™4ì´ë¯¸ì§€
+			mo7.setIcon(new ImageIcon(tableImages3[2])); // ÆÇ·¾4 ·¾4ÀÌ¹ÌÁö
 		} else {
-			mo7.setIcon(new ImageIcon(tableImages3[3])); // ë§Œë ™ì´ë¯¸ì§€
+			mo7.setIcon(new ImageIcon(tableImages3[3])); // ¸¸·¾ÀÌ¹ÌÁö
 			mo7.setEnabled(false);
 		}
 
@@ -285,15 +285,15 @@ public class MarketPanel extends JPanel {
 		mPanel.add(mo6);
 		mPanel.add(mo7);
 
-		// ë¼ë²¨
-		// ë–¡ë³¶ì´ ë¼ë²¨
+		// ¶óº§
+		// ¶±ººÀÌ ¶óº§
 		JLabel label = new JLabel();
-		label.setText("ë–¡ë³¶ì´ ì—…ê·¸ë ˆì´ë“œ");
+		label.setText("¶±ººÀÌ ¾÷±×·¹ÀÌµå");
 		label.setBounds(50, 160, 200, 200);
 
 		JLabel tbkwon1 = new JLabel();
 		if (equipsLv[0] == 1) {
-			tbkwon1.setText("50,000ì›");
+			tbkwon1.setText("50,000¿ø");
 		} else {
 			tbkwon1.setVisible(false);
 		}
@@ -301,7 +301,7 @@ public class MarketPanel extends JPanel {
 
 		JLabel tbkwon2 = new JLabel();
 		if (equipsLv[0] == 2) {
-			tbkwon2.setText("100,000ì›");
+			tbkwon2.setText("100,000¿ø");
 		} else {
 			tbkwon2.setVisible(false);
 		}
@@ -311,18 +311,18 @@ public class MarketPanel extends JPanel {
 		mPanel.add(tbkwon1);
 		mPanel.add(tbkwon2);
 
-		// íŠ€ê¹€ ë¼ë²¨
+		// Æ¢±è ¶óº§
 		JLabel label1 = new JLabel();
 		label1.setVisible(false);
 		if (equipsLv[0] > 1) {
 			label1.setVisible(true);
 
-			label1.setText("íŠ€ê¹€ ì—…ê·¸ë ˆì´ë“œ");
+			label1.setText("Æ¢±è ¾÷±×·¹ÀÌµå");
 			label1.setBounds(250, 160, 200, 200);
 
 			JLabel tkwon = new JLabel();
 			if (equipsLv[1] == 0) {
-				tkwon.setText("25,000ì›");
+				tkwon.setText("25,000¿ø");
 			} else {
 				tkwon.setVisible(false);
 			}
@@ -330,7 +330,7 @@ public class MarketPanel extends JPanel {
 
 			JLabel tkwon1 = new JLabel();
 			if (equipsLv[1] == 1) {
-				tkwon1.setText("50,000ì›");
+				tkwon1.setText("50,000¿ø");
 			} else {
 				tkwon1.setVisible(false);
 			}
@@ -338,7 +338,7 @@ public class MarketPanel extends JPanel {
 
 			JLabel tkwon2 = new JLabel();
 			if (equipsLv[1] == 2) {
-				tkwon2.setText("100,000ì›");
+				tkwon2.setText("100,000¿ø");
 			} else {
 				tkwon2.setVisible(false);
 			}
@@ -350,18 +350,18 @@ public class MarketPanel extends JPanel {
 			mPanel.add(tkwon2);
 		}
 
-		// ì˜¤ë… ë¼ë²¨
+		// ¿Àµ­ ¶óº§
 		JLabel label2 = new JLabel();
 		label2.setVisible(false);
 		if (equipsLv[1] > 0) {
 			label2.setVisible(true);
 
-			label2.setText("ì˜¤ë… ì—…ê·¸ë ˆì´ë“œ");
+			label2.setText("¿Àµ­ ¾÷±×·¹ÀÌµå");
 			label2.setBounds(450, 160, 200, 200);
 
 			JLabel odwon = new JLabel();
 			if (equipsLv[2] == 0) {
-				odwon.setText("25,000ì›");
+				odwon.setText("25,000¿ø");
 			} else {
 				odwon.setVisible(false);
 			}
@@ -369,7 +369,7 @@ public class MarketPanel extends JPanel {
 
 			JLabel odwon1 = new JLabel();
 			if (equipsLv[2] == 1) {
-				odwon1.setText("50,000ì›");
+				odwon1.setText("50,000¿ø");
 			} else {
 				odwon1.setVisible(false);
 			}
@@ -377,7 +377,7 @@ public class MarketPanel extends JPanel {
 
 			JLabel odwon2 = new JLabel();
 			if (equipsLv[2] == 2) {
-				odwon2.setText("100,000ì›");
+				odwon2.setText("100,000¿ø");
 			} else {
 				odwon2.setVisible(false);
 			}
@@ -389,18 +389,18 @@ public class MarketPanel extends JPanel {
 			mPanel.add(odwon2);
 		}
 
-		// ë¼ë©´ ë¼ë²¨
+		// ¶ó¸é ¶óº§
 		JLabel label3 = new JLabel();
 		label3.setVisible(false);
 		if (equipsLv[2] > 0) {
 			label3.setVisible(true);
 
-			label3.setText("ë¼ë©´ ì—…ê·¸ë ˆì´ë“œ");
+			label3.setText("¶ó¸é ¾÷±×·¹ÀÌµå");
 			label3.setBounds(630, 160, 200, 200);
 
 			JLabel rmwon = new JLabel();
 			if (equipsLv[3] == 0) {
-				rmwon.setText("25,000ì›");
+				rmwon.setText("25,000¿ø");
 			} else {
 				rmwon.setVisible(false);
 			}
@@ -408,7 +408,7 @@ public class MarketPanel extends JPanel {
 
 			JLabel rmwon1 = new JLabel();
 			if (equipsLv[3] == 1) {
-				rmwon1.setText("50,000ì›");
+				rmwon1.setText("50,000¿ø");
 			} else {
 				rmwon1.setVisible(false);
 			}
@@ -416,7 +416,7 @@ public class MarketPanel extends JPanel {
 
 			JLabel rmwon2 = new JLabel();
 			if (equipsLv[3] == 2) {
-				rmwon2.setText("100,000ì›");
+				rmwon2.setText("100,000¿ø");
 			} else {
 				rmwon2.setVisible(false);
 			}
@@ -428,14 +428,14 @@ public class MarketPanel extends JPanel {
 			mPanel.add(rmwon2);
 		}
 
-		// ë–¡ë³¶ì´íŒ ë¼ë²¨
+		// ¶±ººÀÌÆÇ ¶óº§
 		JLabel label4 = new JLabel();
-		label4.setText("ë–¡ë³¶ì´íŒ ì—…ê·¸ë ˆì´ë“œ");
+		label4.setText("¶±ººÀÌÆÇ ¾÷±×·¹ÀÌµå");
 		label4.setBounds(50, 460, 200, 200);
 
 		JLabel tbkupwon1 = new JLabel();
 		if (tableLv[0] == 1) {
-			tbkupwon1.setText("30,000ì›");
+			tbkupwon1.setText("30,000¿ø");
 		} else {
 			tbkupwon1.setVisible(false);
 		}
@@ -443,7 +443,7 @@ public class MarketPanel extends JPanel {
 
 		JLabel tbkupwon2 = new JLabel();
 		if (tableLv[0] == 2) {
-			tbkupwon2.setText("60,000ì›");
+			tbkupwon2.setText("60,000¿ø");
 		} else {
 			tbkupwon2.setVisible(false);
 		}
@@ -451,7 +451,7 @@ public class MarketPanel extends JPanel {
 
 		JLabel tbkupwon3 = new JLabel();
 		if (tableLv[0] == 3) {
-			tbkupwon3.setText("100,000ì›");
+			tbkupwon3.setText("100,000¿ø");
 		} else {
 			tbkupwon3.setVisible(false);
 		}
@@ -462,17 +462,17 @@ public class MarketPanel extends JPanel {
 		mPanel.add(tbkupwon2);
 		mPanel.add(tbkupwon3);
 
-		// íŠ€ê¹€íŒ ë¼ë²¨
+		// Æ¢±èÆÇ ¶óº§
 		JLabel label5 = new JLabel();
 		label5.setVisible(false);
 		if (equipsLv[1] > 0) {
 			label5.setVisible(true);
-			label5.setText("íŠ€ê¹€íŒ ì—…ê·¸ë ˆì´ë“œ");
+			label5.setText("Æ¢±èÆÇ ¾÷±×·¹ÀÌµå");
 			label5.setBounds(250, 460, 200, 200);
 
 			JLabel tkupwon1 = new JLabel();
 			if (tableLv[1] == 1) {
-				tkupwon1.setText("30,000ì›");
+				tkupwon1.setText("30,000¿ø");
 			} else {
 				tkupwon1.setVisible(false);
 			}
@@ -480,7 +480,7 @@ public class MarketPanel extends JPanel {
 
 			JLabel tkupwon2 = new JLabel();
 			if (tableLv[1] == 2) {
-				tkupwon2.setText("60,000ì›");
+				tkupwon2.setText("60,000¿ø");
 			} else {
 				tkupwon2.setVisible(false);
 			}
@@ -488,7 +488,7 @@ public class MarketPanel extends JPanel {
 
 			JLabel tkupwon3 = new JLabel();
 			if (tableLv[1] == 3) {
-				tkupwon3.setText("100,000ì›");
+				tkupwon3.setText("100,000¿ø");
 			} else {
 				tkupwon3.setVisible(false);
 			}
@@ -501,17 +501,17 @@ public class MarketPanel extends JPanel {
 
 		}
 
-		// ì˜¤ë…íŒ ë¼ë²¨
+		// ¿Àµ­ÆÇ ¶óº§
 		JLabel label6 = new JLabel();
 		label6.setVisible(false);
 		if (equipsLv[2] > 0) {
 			label6.setVisible(true);
-			label6.setText("ì˜¤ë…íŒ ì—…ê·¸ë ˆì´ë“œ");
+			label6.setText("¿Àµ­ÆÇ ¾÷±×·¹ÀÌµå");
 			label6.setBounds(440, 460, 200, 200);
 
 			JLabel odupwon1 = new JLabel();
 			if (tableLv[2] == 1) {
-				odupwon1.setText("30,000ì›");
+				odupwon1.setText("30,000¿ø");
 			} else {
 				odupwon1.setVisible(false);
 			}
@@ -519,7 +519,7 @@ public class MarketPanel extends JPanel {
 
 			JLabel odupwon2 = new JLabel();
 			if (tableLv[2] == 2) {
-				odupwon2.setText("60,000ì›");
+				odupwon2.setText("60,000¿ø");
 			} else {
 				odupwon2.setVisible(false);
 			}
@@ -527,7 +527,7 @@ public class MarketPanel extends JPanel {
 
 			JLabel odupwon3 = new JLabel();
 			if (tableLv[2] == 3) {
-				odupwon3.setText("100,000ì›");
+				odupwon3.setText("100,000¿ø");
 			} else {
 				odupwon3.setVisible(false);
 			}
@@ -540,17 +540,17 @@ public class MarketPanel extends JPanel {
 
 		}
 
-		// ë¼ë©´íŒ ë¼ë²¨
+		// ¶ó¸éÆÇ ¶óº§
 		JLabel label7 = new JLabel();
 		label7.setVisible(false);
 		if (equipsLv[3] > 0) {
 			label7.setVisible(true);
-			label7.setText("ë¼ë©´íŒ ì—…ê·¸ë ˆì´ë“œ");
+			label7.setText("¶ó¸éÆÇ ¾÷±×·¹ÀÌµå");
 			label7.setBounds(630, 460, 200, 200);
 
 			JLabel rmupwon1 = new JLabel();
 			if (tableLv[3] == 1) {
-				rmupwon1.setText("30,000ì›");
+				rmupwon1.setText("30,000¿ø");
 			} else {
 				rmupwon1.setVisible(false);
 			}
@@ -558,7 +558,7 @@ public class MarketPanel extends JPanel {
 
 			JLabel rmupwon2 = new JLabel();
 			if (tableLv[3] == 2) {
-				rmupwon2.setText("60,000ì›");
+				rmupwon2.setText("60,000¿ø");
 			} else {
 				rmupwon2.setVisible(false);
 			}
@@ -566,7 +566,7 @@ public class MarketPanel extends JPanel {
 
 			JLabel rmupwon3 = new JLabel();
 			if (tableLv[3] == 3) {
-				rmupwon3.setText("100,000ì›");
+				rmupwon3.setText("100,000¿ø");
 			} else {
 				rmupwon3.setVisible(false);
 			}
@@ -586,30 +586,30 @@ public class MarketPanel extends JPanel {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 
-			// ë–¡ë³¶ì´ê¸°êµ¬ ì•¡ì…˜ë¦¬ìŠ¤ë„ˆ
-			if (e.getActionCommand().equals("ë–¡ë³¶ì´ê¸°êµ¬")) {
+			// ¶±ººÀÌ±â±¸ ¾×¼Ç¸®½º³Ê
+			if (e.getActionCommand().equals("¶±ººÀÌ±â±¸")) {
 				System.out.println("tbk");
 				if (equipsLv[0] == 1) {
 					if (m.getGold() >= level2) {
 						equipsLv[0] += 1;
 						m.setGold(m.getGold() - level2);
 					} else {
-						JOptionPane.showMessageDialog(null, "ê·¸ ëˆìœ¼ë¡  ì–´ë¦¼ì—†ì§€~");
+						JOptionPane.showMessageDialog(null, "±× µ·À¸·Ğ ¾î¸²¾øÁö~");
 					}
 				} else if (equipsLv[0] == 2) {
 					if (m.getGold() >= level3) {
 						equipsLv[0] += 1;
 						m.setGold(m.getGold() - level3);
 					} else {
-						JOptionPane.showMessageDialog(null, "ê·¸ ëˆìœ¼ë¡  ì–´ë¦¼ì—†ì§€~");
+						JOptionPane.showMessageDialog(null, "±× µ·À¸·Ğ ¾î¸²¾øÁö~");
 					}
 				} else {
-					System.out.println("ë ˆë²¨ ë§Œë•…~");
+					System.out.println("·¹º§ ¸¸¶¥~");
 				}
 			}
 
-			// íŠ€ê¹€ê¸°êµ¬ ì•¡ì…˜ë¦¬ìŠ¤ë„ˆ
-			if (e.getActionCommand().equals("íŠ€ê¹€ê¸°êµ¬")) {
+			// Æ¢±è±â±¸ ¾×¼Ç¸®½º³Ê
+			if (e.getActionCommand().equals("Æ¢±è±â±¸")) {
 				System.out.println("tk");
 
 				if (equipsLv[1] == 0) {
@@ -617,29 +617,29 @@ public class MarketPanel extends JPanel {
 						equipsLv[1] += 1;
 						m.setGold(m.getGold() - level1);
 					} else {
-						JOptionPane.showMessageDialog(null, "ê·¸ ëˆìœ¼ë¡  ì–´ë¦¼ì—†ì§€~");
+						JOptionPane.showMessageDialog(null, "±× µ·À¸·Ğ ¾î¸²¾øÁö~");
 					}
 				} else if (equipsLv[1] == 1) {
 					if (m.getGold() >= level2) {
 						equipsLv[1] += 1;
 						m.setGold(m.getGold() - level2);
 					} else {
-						JOptionPane.showMessageDialog(null, "ê·¸ ëˆìœ¼ë¡  ì–´ë¦¼ì—†ì§€~");
+						JOptionPane.showMessageDialog(null, "±× µ·À¸·Ğ ¾î¸²¾øÁö~");
 					}
 				} else if (equipsLv[1] == 2) {
 					if (m.getGold() >= level3) {
 						equipsLv[1] += 1;
 						m.setGold(m.getGold() - level3);
 					} else {
-						JOptionPane.showMessageDialog(null, "ê·¸ ëˆìœ¼ë¡  ì–´ë¦¼ì—†ì§€~");
+						JOptionPane.showMessageDialog(null, "±× µ·À¸·Ğ ¾î¸²¾øÁö~");
 					}
 				} else {
-					System.out.println("ë ˆë²¨ ë§Œë•…~");
+					System.out.println("·¹º§ ¸¸¶¥~");
 				}
 			}
 
-			// ì˜¤ë…ê¸°êµ¬ ì•¡ì…˜ë¦¬ìŠ¤ë„ˆ
-			if (e.getActionCommand().equals("ì˜¤ë…ê¸°êµ¬")) {
+			// ¿Àµ­±â±¸ ¾×¼Ç¸®½º³Ê
+			if (e.getActionCommand().equals("¿Àµ­±â±¸")) {
 				System.out.println("od");
 
 				if (equipsLv[2] == 0) {
@@ -647,29 +647,29 @@ public class MarketPanel extends JPanel {
 						equipsLv[2] += 1;
 						m.setGold(m.getGold() - level1);
 					} else {
-						JOptionPane.showMessageDialog(null, "ê·¸ ëˆìœ¼ë¡  ì–´ë¦¼ì—†ì§€~");
+						JOptionPane.showMessageDialog(null, "±× µ·À¸·Ğ ¾î¸²¾øÁö~");
 					}
 				} else if (equipsLv[2] == 1) {
 					if (m.getGold() >= level2) {
 						equipsLv[2] += 1;
 						m.setGold(m.getGold() - level2);
 					} else {
-						JOptionPane.showMessageDialog(null, "ê·¸ ëˆìœ¼ë¡  ì–´ë¦¼ì—†ì§€~");
+						JOptionPane.showMessageDialog(null, "±× µ·À¸·Ğ ¾î¸²¾øÁö~");
 					}
 				} else if (equipsLv[2] == 2) {
 					if (m.getGold() >= level3) {
 						equipsLv[2] += 1;
 						m.setGold(m.getGold() - level3);
 					} else {
-						JOptionPane.showMessageDialog(null, "ê·¸ ëˆìœ¼ë¡  ì–´ë¦¼ì—†ì§€~");
+						JOptionPane.showMessageDialog(null, "±× µ·À¸·Ğ ¾î¸²¾øÁö~");
 					}
 				} else {
-					System.out.println("ë ˆë²¨ ë§Œë•…~");
+					System.out.println("·¹º§ ¸¸¶¥~");
 				}
 			}
 
-			// ë¼ë©´ê¸°êµ¬ ì•¡ì…˜ë¦¬ìŠ¤ë„ˆ
-			if (e.getActionCommand().equals("ë¼ë©´ê¸°êµ¬")) {
+			// ¶ó¸é±â±¸ ¾×¼Ç¸®½º³Ê
+			if (e.getActionCommand().equals("¶ó¸é±â±¸")) {
 				System.out.println("rm");
 
 				if (equipsLv[3] == 0) {
@@ -677,36 +677,36 @@ public class MarketPanel extends JPanel {
 						equipsLv[3] += 1;
 						m.setGold(m.getGold() - level1);
 					} else {
-						JOptionPane.showMessageDialog(null, "ê·¸ ëˆìœ¼ë¡  ì–´ë¦¼ì—†ì§€~");
+						JOptionPane.showMessageDialog(null, "±× µ·À¸·Ğ ¾î¸²¾øÁö~");
 					}
 				} else if (equipsLv[3] == 1) {
 					if (m.getGold() >= level2) {
 						equipsLv[3] += 1;
 						m.setGold(m.getGold() - level2);
 					} else {
-						JOptionPane.showMessageDialog(null, "ê·¸ ëˆìœ¼ë¡  ì–´ë¦¼ì—†ì§€~");
+						JOptionPane.showMessageDialog(null, "±× µ·À¸·Ğ ¾î¸²¾øÁö~");
 					}
 				} else if (equipsLv[3] == 2) {
 					if (m.getGold() >= level3) {
 						equipsLv[3] += 1;
 						m.setGold(m.getGold() - level3);
 					} else {
-						JOptionPane.showMessageDialog(null, "ê·¸ ëˆìœ¼ë¡  ì–´ë¦¼ì—†ì§€~");
+						JOptionPane.showMessageDialog(null, "±× µ·À¸·Ğ ¾î¸²¾øÁö~");
 					}
 				} else {
-					System.out.println("ë ˆë²¨ ë§Œë•…~");
+					System.out.println("·¹º§ ¸¸¶¥~");
 				}
 			}
 
-			// ë–¡ë³¶ì´íŒ ì•¡ì…˜ë¦¬ìŠ¤ë„ˆ
-			if (e.getActionCommand().equals("ë–¡ë³¶ì´íŒ ì—…ê¸€")) {
+			// ¶±ººÀÌÆÇ ¾×¼Ç¸®½º³Ê
+			if (e.getActionCommand().equals("¶±ººÀÌÆÇ ¾÷±Û")) {
 				System.out.println("tbkup");
 				if (tableLv[0] == 1) {
 					if (m.getGold() >= plevel2) {
 						tableLv[0] += 1;
 						m.setGold(m.getGold() - plevel2);
 					} else {
-						JOptionPane.showMessageDialog(null, "ê·¸ ëˆìœ¼ë¡  ì–´ë¦¼ì—†ì§€~");
+						JOptionPane.showMessageDialog(null, "±× µ·À¸·Ğ ¾î¸²¾øÁö~");
 					}
 
 				} else if (tableLv[0] == 2) {
@@ -714,30 +714,30 @@ public class MarketPanel extends JPanel {
 						tableLv[0] += 1;
 						m.setGold(m.getGold() - plevel3);
 					} else {
-						JOptionPane.showMessageDialog(null, "ê·¸ ëˆìœ¼ë¡  ì–´ë¦¼ì—†ì§€~");
+						JOptionPane.showMessageDialog(null, "±× µ·À¸·Ğ ¾î¸²¾øÁö~");
 					}
 				} else if (tableLv[0] == 3) {
 					if (m.getGold() >= plevel4) {
 						tableLv[0] += 1;
 						m.setGold(m.getGold() - plevel4);
 					} else {
-						JOptionPane.showMessageDialog(null, "ê·¸ ëˆìœ¼ë¡  ì–´ë¦¼ì—†ì§€~");
+						JOptionPane.showMessageDialog(null, "±× µ·À¸·Ğ ¾î¸²¾øÁö~");
 					}
 				} else {
-					System.out.println("ë ˆë²¨ ë§Œë•…~");
+					System.out.println("·¹º§ ¸¸¶¥~");
 
 				}
 			}
 
-			// íŠ€ê¹€íŒ ì•¡ì…˜ë¦¬ìŠ¤ë„ˆ
-			if (e.getActionCommand().equals("íŠ€ê¹€íŒ ì—…ê¸€")) {
+			// Æ¢±èÆÇ ¾×¼Ç¸®½º³Ê
+			if (e.getActionCommand().equals("Æ¢±èÆÇ ¾÷±Û")) {
 				System.out.println("tkup");
 				if (tableLv[1] == 1) {
 					if (m.getGold() >= plevel2) {
 						tableLv[1] += 1;
 						m.setGold(m.getGold() - plevel2);
 					} else {
-						JOptionPane.showMessageDialog(null, "ê·¸ ëˆìœ¼ë¡  ì–´ë¦¼ì—†ì§€~");
+						JOptionPane.showMessageDialog(null, "±× µ·À¸·Ğ ¾î¸²¾øÁö~");
 					}
 
 				} else if (tableLv[1] == 2) {
@@ -745,80 +745,80 @@ public class MarketPanel extends JPanel {
 						tableLv[1] += 1;
 						m.setGold(m.getGold() - plevel3);
 					} else {
-						JOptionPane.showMessageDialog(null, "ê·¸ ëˆìœ¼ë¡  ì–´ë¦¼ì—†ì§€~");
+						JOptionPane.showMessageDialog(null, "±× µ·À¸·Ğ ¾î¸²¾øÁö~");
 					}
 				} else if (tableLv[1] == 3) {
 					if (m.getGold() >= plevel4) {
 						tableLv[1] += 1;
 						m.setGold(m.getGold() - plevel4);
 					} else {
-						JOptionPane.showMessageDialog(null, "ê·¸ ëˆìœ¼ë¡  ì–´ë¦¼ì—†ì§€~");
+						JOptionPane.showMessageDialog(null, "±× µ·À¸·Ğ ¾î¸²¾øÁö~");
 					}
 				} else {
-					System.out.println("ë ˆë²¨ ë§Œë•…~");
+					System.out.println("·¹º§ ¸¸¶¥~");
 
 				}
 			}
 
-			// ì˜¤ë…íŒ ì•¡ì…˜ë¦¬ìŠ¤ë„ˆ
-			if (e.getActionCommand().equals("ì˜¤ë…íŒ ì—…ê¸€")) {
+			// ¿Àµ­ÆÇ ¾×¼Ç¸®½º³Ê
+			if (e.getActionCommand().equals("¿Àµ­ÆÇ ¾÷±Û")) {
 				System.out.println("odup");
 				if (tableLv[2] == 1) {
 					if (m.getGold() >= plevel2) {
 						tableLv[2] += 1;
 						m.setGold(m.getGold() - plevel2);
 					} else {
-						JOptionPane.showMessageDialog(null, "ê·¸ ëˆìœ¼ë¡  ì–´ë¦¼ì—†ì§€~");
+						JOptionPane.showMessageDialog(null, "±× µ·À¸·Ğ ¾î¸²¾øÁö~");
 					}
 				} else if (tableLv[2] == 2) {
 					if (m.getGold() >= plevel3) {
 						tableLv[2] += 1;
 						m.setGold(m.getGold() - plevel3);
 					} else {
-						JOptionPane.showMessageDialog(null, "ê·¸ ëˆìœ¼ë¡  ì–´ë¦¼ì—†ì§€~");
+						JOptionPane.showMessageDialog(null, "±× µ·À¸·Ğ ¾î¸²¾øÁö~");
 					}
 				} else if (tableLv[2] == 3) {
 					if (m.getGold() >= plevel4) {
 						tableLv[2] += 1;
 						m.setGold(m.getGold() - plevel4);
 					} else {
-						JOptionPane.showMessageDialog(null, "ê·¸ ëˆìœ¼ë¡  ì–´ë¦¼ì—†ì§€~");
+						JOptionPane.showMessageDialog(null, "±× µ·À¸·Ğ ¾î¸²¾øÁö~");
 					}
 				} else {
-					System.out.println("ë ˆë²¨ ë§Œë•…~");
+					System.out.println("·¹º§ ¸¸¶¥~");
 				}
 			}
 
-			// ë¼ë©´íŒ ì•¡ì…˜ë¦¬ìŠ¤ë„ˆ
-			if (e.getActionCommand().equals("ë¼ë©´íŒ ì—…ê¸€")) {
+			// ¶ó¸éÆÇ ¾×¼Ç¸®½º³Ê
+			if (e.getActionCommand().equals("¶ó¸éÆÇ ¾÷±Û")) {
 				System.out.println("rmup");
 				if (tableLv[3] == 1) {
 					if (m.getGold() >= plevel2) {
 						tableLv[3] += 1;
 						m.setGold(m.getGold() - plevel2);
 					} else {
-						JOptionPane.showMessageDialog(null, "ê·¸ ëˆìœ¼ë¡  ì–´ë¦¼ì—†ì§€~");
+						JOptionPane.showMessageDialog(null, "±× µ·À¸·Ğ ¾î¸²¾øÁö~");
 					}
 				} else if (tableLv[3] == 2) {
 					if (m.getGold() >= plevel3) {
 						tableLv[3] += 1;
 						m.setGold(m.getGold() - plevel3);
 					} else {
-						JOptionPane.showMessageDialog(null, "ê·¸ ëˆìœ¼ë¡  ì–´ë¦¼ì—†ì§€~");
+						JOptionPane.showMessageDialog(null, "±× µ·À¸·Ğ ¾î¸²¾øÁö~");
 					}
 				} else if (tableLv[3] == 3) {
 					if (m.getGold() >= plevel4) {
 						tableLv[3] += 1;
 						m.setGold(m.getGold() - plevel4);
 					} else {
-						JOptionPane.showMessageDialog(null, "ê·¸ ëˆìœ¼ë¡  ì–´ë¦¼ì—†ì§€~");
+						JOptionPane.showMessageDialog(null, "±× µ·À¸·Ğ ¾î¸²¾øÁö~");
 					}
 				} else {
-					System.out.println("ë ˆë²¨ ë§Œë•…~");
+					System.out.println("·¹º§ ¸¸¶¥~");
 				}
 			}
 			refresh();
-			if (e.getActionCommand().equals("ëŒì•„ê°€ê¸°")) {
+			if (e.getActionCommand().equals("µ¹¾Æ°¡±â")) {
 				marketMusic.close();
 				marketMusic.interrupt();
 				ChangePanel.changePanel(mf, mPanel, new StageView(mf, m));

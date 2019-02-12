@@ -1,7 +1,6 @@
 package com.kh.miniProject.view;
 
 import java.awt.Color;
-import java.awt.Dialog;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -31,7 +30,7 @@ public class GameView extends JPanel{
 	//타이머 클래스 & Back 버튼
 	private CookingTime cookTimer;
 	private JPanel gView;
-	private TimerTest gameTimer;
+	private StageTimer gameTimer;
 	private JButton backButton;
 	private Image backButtonImage;
 	//Music
@@ -95,7 +94,7 @@ public class GameView extends JPanel{
 			cm = new CustomerManager(this,gP,orderDao,3,stageLv);
 		}
 		//스테이지 Timer
-		gameTimer = new TimerTest(gP,cm,this);
+		gameTimer = new StageTimer(gP,cm,this);
 		gP.add(gameTimer);
 
 		//backButton
@@ -155,11 +154,14 @@ public class GameView extends JPanel{
 			menuButton[i].addActionListener(new Event_Cook());
 		}
 	}
+	
+	//골드 갱신
 	public void updateGold(int stageGold) {
 		this.stageGold = stageGold;
 		gold.setText(stageGold + "원");
 	}
-	public void gameOver() {
+	
+	public void gameOver() {	//실행될때마다 하트 감소
 		credit--;
 		gP.remove(heart[credit]);
 		//하트 3개 소진시 gameover
@@ -174,10 +176,11 @@ public class GameView extends JPanel{
 			ChangePanel.changePanel(mf, gView, new StageView(mf,m));
 			return;
 		}
-		//gP.repaint();
 	}
+
+	//타이머 종료로 스테이지 종료
 	public void endStage() {
-		//저장
+		//멤버 정보 저장
 		m.setStageGold(stageGold);
 		m.setGold(m.getGold()+stageGold);
 		if(m.getMaxStage()==stageLv) {
@@ -348,6 +351,23 @@ public class GameView extends JPanel{
 					}
 				}else {
 					System.out.println("오뎅이 없습니다.");
+				}
+			}
+			if(e.getActionCommand().equals("라면")) {
+				if(ramenNo>0) {
+					if((temp=orderDao.searchOrder(new MenuOrder("라면")))>=0) {
+						Music buttonEnteredMusic = new Music("decision11.mp3",false);
+						buttonEnteredMusic.start();
+						System.out.println("temp:"+temp);
+						cm.deleteLabel(temp);
+						ramenNo--;
+						System.out.println("라면 잔여 개수 : " + ramenNo);
+						refreshMenuTable();
+					}else {
+						System.out.println("주문된 라면이 없습니다.");
+					}
+				}else {
+					System.out.println("라면이 없습니다.");
 				}
 			}
 		}
