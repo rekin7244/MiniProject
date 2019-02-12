@@ -14,32 +14,27 @@ public class MenuPanel extends JPanel{
 	private Image[] drinksImage = {
 			new ImageIcon("Images/drink1.jpg").getImage().getScaledInstance(150, PNANEL_HIGHT, 0),
 			new ImageIcon("Images/drink2.jpg").getImage().getScaledInstance(150, PNANEL_HIGHT, 0),
-			new ImageIcon("Images/drink3.jpg").getImage().getScaledInstance(150, PNANEL_HIGHT, 0)	
-	};
+			new ImageIcon("Images/drink3.jpg").getImage().getScaledInstance(150, PNANEL_HIGHT, 0)	};
 	private Image[] tbkImage = {
 			new ImageIcon("Images/tbk1.png").getImage().getScaledInstance(250, PNANEL_HIGHT, 0),
 			new ImageIcon("Images/tbk2.png").getImage().getScaledInstance(250, PNANEL_HIGHT, 0),
 			new ImageIcon("Images/tbk3.png").getImage().getScaledInstance(250, PNANEL_HIGHT, 0),	
-			new ImageIcon("Images/tbk4.png").getImage().getScaledInstance(250, PNANEL_HIGHT, 0)	
-	};
+			new ImageIcon("Images/tbk4.png").getImage().getScaledInstance(250, PNANEL_HIGHT, 0)	};
 	private Image[] friedImage = {
 			new ImageIcon("Images/fried1.png").getImage().getScaledInstance(180, PNANEL_HIGHT, 0),
 			new ImageIcon("Images/fried2.png").getImage().getScaledInstance(180, PNANEL_HIGHT, 0),
 			new ImageIcon("Images/fried3.png").getImage().getScaledInstance(180, PNANEL_HIGHT, 0),	
-			new ImageIcon("Images/fried4.png").getImage().getScaledInstance(180, PNANEL_HIGHT, 0)	
-	};
+			new ImageIcon("Images/fried4.png").getImage().getScaledInstance(180, PNANEL_HIGHT, 0)	};
 	private Image[] odengImage = {
-			new ImageIcon("Images/¿Àµ­Lv1.jpg").getImage().getScaledInstance(180, PNANEL_HIGHT, 0),
-			new ImageIcon("Images/¿Àµ­Lv1.jpg").getImage().getScaledInstance(180, PNANEL_HIGHT, 0),
-			new ImageIcon("Images/¿Àµ­Lv1.jpg").getImage().getScaledInstance(180, PNANEL_HIGHT, 0),
-			new ImageIcon("Images/¿Àµ­Lv1.jpg").getImage().getScaledInstance(180, PNANEL_HIGHT, 0)
-	};
+			new ImageIcon("Images/¿Àµ­1.png").getImage().getScaledInstance(200, PNANEL_HIGHT, 0),
+			new ImageIcon("Images/¿Àµ­2.png").getImage().getScaledInstance(200, PNANEL_HIGHT, 0),
+			new ImageIcon("Images/¿Àµ­3.png").getImage().getScaledInstance(200, PNANEL_HIGHT, 0),
+			new ImageIcon("Images/¿Àµ­4.png").getImage().getScaledInstance(200, PNANEL_HIGHT, 0)};
 	private Image[] ramenImage = {
-			new ImageIcon("Images/¶ó1.jpg").getImage().getScaledInstance(180, PNANEL_HIGHT, 0),
-			new ImageIcon("Images/¶ó2.jpg").getImage().getScaledInstance(180, PNANEL_HIGHT, 0),
-			new ImageIcon("Images/¶ó3.jpg").getImage().getScaledInstance(180, PNANEL_HIGHT, 0),
-			new ImageIcon("Images/¶ó4.jpg").getImage().getScaledInstance(180, PNANEL_HIGHT, 0)
-	};
+			new ImageIcon("Images/¶ó¸é1.png").getImage().getScaledInstance(195, PNANEL_HIGHT, 0),
+			new ImageIcon("Images/¶ó¸é2.png").getImage().getScaledInstance(195, PNANEL_HIGHT, 0),
+			new ImageIcon("Images/¶ó¸é3.png").getImage().getScaledInstance(195, PNANEL_HIGHT, 0),
+			new ImageIcon("Images/¶ó¸é4.png").getImage().getScaledInstance(195, PNANEL_HIGHT, 0)};
 	private String[] menu = {"À½·á¼ö","¶±ººÀÌ","Æ¢±è","¿Àµ­","¶ó¸é"};
 
 	private int[] imageLocation = {Run.SCREEN_WIDTH-150,200,500,0,Run.SCREEN_WIDTH-345};
@@ -53,14 +48,12 @@ public class MenuPanel extends JPanel{
 		this.setLayout(null);
 		this.setBounds(0,318,Run.SCREEN_WIDTH,PNANEL_HIGHT);
 		this.setBackground(Color.DARK_GRAY);
-		/*System.out.println(menuButton.length);*/	
 
 		for(int i=0; i<menuButton.length;i++) {
 			menuButton[i] = new JButton(menu[i]);
 			menuButton[i].setIcon(null);
 			menuButton[i].setBounds(imageLocation[i],0, buttonSize[i], PNANEL_HIGHT);
 			menuButton[i].setContentAreaFilled(false);
-			/*	menuButton[i].setBackground(Color.GREEN);*/
 			this.add(menuButton[i]);
 		}
 	}

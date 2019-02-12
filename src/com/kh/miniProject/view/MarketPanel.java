@@ -143,11 +143,7 @@ public class MarketPanel extends JPanel {
 		mo.removeActionListener(e);
 		mo.addActionListener(e);
 
-		// Æ¢±è ±â±¸
-		mo1.setVisible(false);
-		if (equipsLv[0] >= 2) {
-			mo1.setVisible(true);
-		}
+		
 		if (equipsLv[1] == 0) {
 			mo1.setIcon(new ImageIcon(equipsImages1[0]));
 		} else if (equipsLv[1] == 1) {
@@ -314,7 +310,7 @@ public class MarketPanel extends JPanel {
 		// Æ¢±è ¶óº§
 		JLabel label1 = new JLabel();
 		label1.setVisible(false);
-		if (equipsLv[0] > 1) {
+		if (equipsLv[0] >= 1) {
 			label1.setVisible(true);
 
 			label1.setText("Æ¢±è ¾÷±×·¹ÀÌµå");
