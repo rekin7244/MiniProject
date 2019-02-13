@@ -48,6 +48,7 @@ public class GameView extends JPanel{
 	private JButton gold;
 	private int credit=3;		//목숨
 	private JLabel[] heart=new JLabel[3];
+	private JLabel goldLabel;
 	//주문 내역 관리
 	private OrderDao orderDao;
 	//Member 정보 입출력위해

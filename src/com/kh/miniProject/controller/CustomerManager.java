@@ -197,12 +197,12 @@ public class CustomerManager {
 					cTimer[i].timerStop();
 					gP.remove(cTimer[i]);
 					gP.remove(customer[i]);
+					Music buttonEnteredMusic = new Music("coins_5.mp3", false);
+					buttonEnteredMusic.start();
 				}
 			}
 		}
 		gP.repaint();
-		Music buttonEnteredMusic = new Music("coins_5.mp3", false);
-		buttonEnteredMusic.start();
 	}
 	
 	public void deleteMessage() {
