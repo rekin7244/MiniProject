@@ -228,168 +228,90 @@ public class GameView extends JPanel{
 	class Event_Cook implements ActionListener{
 		@Override
 		public void actionPerformed(ActionEvent e) {
+			Music buttonEnteredMusic=null;
+			
 			//Equips Panel ActionListener
 			JButton[] equips = eP.getEquips();
 			if(e.getActionCommand().equals("ÀÚÆÇ±â")) {
-				System.out.println("ÀÚÆÇ±â");
-				Music buttonEnteredMusic = new Music("decision9.mp3",false);
-				buttonEnteredMusic.start();
-				if(drinksNo<3) {
-					judgeLv("À½·á¼ö",equips);	
-				}else {
-					System.out.println("À½·á¼ö°¡ ÃÖ´ë ÃæÀüÀÔ´Ï´Ù.");
-				}
-				refreshMenuTable();
-				System.out.println("À½·á¼ö ÃæÀü ÀÜ¿© °³¼ö"+drinksNo);
+				buttonEnteredMusic = new Music("decision9.mp3",false);
+				if(drinksNo<3) {judgeLv("À½·á¼ö",equips);}
 			}
 			if(e.getActionCommand().equals("¶±ººÀÌ±â°è")) {
-				System.out.println("¶±ººÀÌ±â°è");
 				if(tbkNo<4) {
-					Music buttonEnteredMusic = new Music("cook1.mp3",false);
-					buttonEnteredMusic.start();
-					if(tbkNo<tableLv[0]) {
-						judgeLv("¶±ººÀÌ",equips);	
-					}
-				}else {
-					System.out.println("¶±ººÀÌ°¡ ÃÖ´ë ÃæÀüÀÔ´Ï´Ù.");
+					buttonEnteredMusic = new Music("cook1.mp3",false);
+					if(tbkNo<tableLv[0]) {judgeLv("¶±ººÀÌ",equips);}
 				}
-				refreshMenuTable();
-				System.out.println("¶±ººÀÌ ÃæÀü ÀÜ¿© °³¼ö"+tbkNo);
 			}
 			if(e.getActionCommand().equals("Æ¢±è±â")) {
-				System.out.println("Æ¢±è±â");
 				if(friedNo<4) {
-					Music buttonEnteredMusic = new Music("fried.mp3",false);
-					buttonEnteredMusic.start();
-					if(friedNo<tableLv[1]) {
-						judgeLv("Æ¢±è",equips);
-					}
-				}else {
-					System.out.println("Æ¢±èÀÌ ÃÖ´ë ÃæÀüÀÔ´Ï´Ù.");
+					buttonEnteredMusic = new Music("fried.mp3",false);
+					if(friedNo<tableLv[1]) {judgeLv("Æ¢±è",equips);}
 				}
-				refreshMenuTable();
-				System.out.println("Æ¢±è ÃæÀü ÀÜ¿© °³¼ö"+friedNo);
 			}
 			if(e.getActionCommand().equals("¿Àµ­±â°è")) {
-				System.out.println("¿Àµ­±â°è");
 				if(odengNo<4) {
-					Music buttonEnteredMusic = new Music("cook1.mp3",false);
-					buttonEnteredMusic.start();
-					if(odengNo<tableLv[2]) {
-						judgeLv("¿Àµ­",equips);
-					}
-				}else {
-					System.out.println("¿Àµ­ÀÌ ÃÖ´ë ÃæÀüÀÔ´Ï´Ù.");
+					buttonEnteredMusic = new Music("cook1.mp3",false);
+					if(odengNo<tableLv[2]) {judgeLv("¿Àµ­",equips);}
 				}
-				refreshMenuTable();
-				System.out.println("¿Àµ­ ÃæÀü ÀÜ¿© °³¼ö"+tbkNo);
 			}
 			if(e.getActionCommand().equals("¶ó¸é±â°è")) {
-				System.out.println("¶ó¸é±â°è");
 				if(ramenNo<4) {
-					Music buttonEnteredMusic = new Music("cook1.mp3",false);
-					buttonEnteredMusic.start();
-					if(ramenNo<tableLv[3]) {
-						judgeLv("¶ó¸é",equips);
-					}
-				}else {
-					System.out.println("¶ó¸éÀÌ ÃÖ´ë ÃæÀüÀÔ´Ï´Ù.");
+					buttonEnteredMusic = new Music("cook1.mp3",false);
+					if(ramenNo<tableLv[3]) {judgeLv("¶ó¸é",equips);}
 				}
-				refreshMenuTable();
-				System.out.println("¶ó¸é ÃæÀü ÀÜ¿© °³¼ö"+tbkNo);
 			}
 
 
 			//MenuPanel ActionListener
-			int temp;
+			int temp=-1;
 			if(e.getActionCommand().equals("À½·á¼ö")) {
 				if(drinksNo>0) {
 					if((temp=orderDao.searchOrder(new MenuOrder("À½·á¼ö")))>=0) {
-						Music buttonEnteredMusic = new Music("decision11.mp3",false);
-						buttonEnteredMusic.start();
-						System.out.println("temp:"+temp);
-						cm.deleteLabel(temp);
+						buttonEnteredMusic = new Music("decision11.mp3",false);
 						drinksNo--;
-						System.out.println("À½·á¼ö ÀÜ¿© °³¼ö : " + drinksNo);
-						refreshMenuTable();
-					}else {
-						System.out.println("ÁÖ¹®µÈ À½·á¼ö°¡ ¾ø½À´Ï´Ù.");
 					}
-				}else {
-					System.out.println("À½·á¼ö°¡ ¾ø½À´Ï´Ù.");
 				}
 			}
 			if(e.getActionCommand().equals("¶±ººÀÌ")) {
 				if(tbkNo>0) {
 					if((temp=orderDao.searchOrder(new MenuOrder("¶±ººÀÌ")))>=0) {
-						Music buttonEnteredMusic = new Music("cancel4.mp3",false);
-						buttonEnteredMusic.start();
-						cm.deleteLabel(temp);
+						buttonEnteredMusic = new Music("cancel4.mp3",false);
 						tbkNo--;
-						System.out.println("¶±ººÀÌ ÀÜ¿© °³¼ö : " + tbkNo);
-						refreshMenuTable();
-					}else {
-						System.out.println("ÁÖ¹®µÈ ¶±ººÀÌ°¡ ¾ø½À´Ï´Ù.");
 					}
-				}else {
-					System.out.println("¶±ººÀÌ°¡ ¾ø½À´Ï´Ù.");
 				}
 			}
 			if(e.getActionCommand().equals("Æ¢±è")) {
 				if(friedNo>0) {
 					if((temp=orderDao.searchOrder(new MenuOrder("Æ¢±è")))>=0) {
-						Music buttonEnteredMusic = new Music("cancel4.mp3",false);
-						buttonEnteredMusic.start();
-						cm.deleteLabel(temp);
+						buttonEnteredMusic = new Music("cancel4.mp3",false);
 						friedNo--;
-						System.out.println("Æ¢±è ÀÜ¿© °³¼ö : " + friedNo);
-						refreshMenuTable();
-					}else {
-						System.out.println("ÁÖ¹®µÈ Æ¢±èÀÌ ¾ø½À´Ï´Ù.");
 					}
-				}else {
-					System.out.println("Æ¢±èÀÌ ¾ø½À´Ï´Ù.");
 				}
 			}
 			if(e.getActionCommand().equals("¿Àµ­")) {
 				if(odengNo>0) {
 					if((temp=orderDao.searchOrder(new MenuOrder("¿Àµ­")))>=0) {
-						Music buttonEnteredMusic = new Music("decision11.mp3",false);
-						buttonEnteredMusic.start();
-						System.out.println("temp:"+temp);
-						cm.deleteLabel(temp);
+						buttonEnteredMusic = new Music("decision11.mp3",false);
 						odengNo--;
-						System.out.println("¿Àµ­ ÀÜ¿© °³¼ö : " + odengNo);
-						refreshMenuTable();
-					}else {
-						System.out.println("ÁÖ¹®µÈ ¿Àµ­ÀÌ ¾ø½À´Ï´Ù.");
 					}
-				}else {
-					System.out.println("¿Àµ­ÀÌ ¾ø½À´Ï´Ù.");
 				}
 			}
 			if(e.getActionCommand().equals("¶ó¸é")) {
 				if(ramenNo>0) {
 					if((temp=orderDao.searchOrder(new MenuOrder("¶ó¸é")))>=0) {
-						Music buttonEnteredMusic = new Music("decision11.mp3",false);
-						buttonEnteredMusic.start();
-						System.out.println("temp:"+temp);
-						cm.deleteLabel(temp);
+						buttonEnteredMusic = new Music("decision11.mp3",false);
 						ramenNo--;
-						System.out.println("¶ó¸é ÀÜ¿© °³¼ö : " + ramenNo);
-						refreshMenuTable();
-					}else {
-						System.out.println("ÁÖ¹®µÈ ¶ó¸éÀÌ ¾ø½À´Ï´Ù.");
 					}
-				}else {
-					System.out.println("¶ó¸éÀÌ ¾ø½À´Ï´Ù.");
 				}
 			}
+			if(temp!=-1) {cm.deleteLabel(temp);}
+			if(buttonEnteredMusic!=null) {buttonEnteredMusic.start();}
+			refreshMenuTable();
 		}
 	}
 
 	public void refreshMenuTable() {
-		//ÀÚÆÇ±â, ¶±ººÀÌ, Æ¢±è
+		//¸Þ´º Å×ÀÌºí °¹¼ö °»½Å
 		mP.setting(mP,drinksNo,tbkNo,friedNo,odengNo,ramenNo);
 	}
 
