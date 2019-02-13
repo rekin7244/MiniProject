@@ -49,7 +49,7 @@ public class CustomerManager {
 			if (count == 5) {
 				cTimer[customerNo] = new CustomerTimer(this,(11-(0.3*stageLv))/1.5,customerNo,customerX[customerNo]); // 각 손님별 타이머 설정
 				gP.add(cTimer[customerNo]);
-				mt = new MessageTimer(this, 1.5);
+				mt = new MessageTimer(this, 1.5, customerX[customerNo]);
 				gP.add(mt);
 				Image icon = new ImageIcon("images/Inked히든손님2.png").getImage().getScaledInstance(120, 200, 0); // 손님 이미지
 				customer[customerNo] = new JLabel(new ImageIcon(icon)); // 손님라벨
