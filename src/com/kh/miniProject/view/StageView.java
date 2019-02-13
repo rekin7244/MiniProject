@@ -23,7 +23,7 @@ public class StageView extends JPanel{
 	private JButton toMarket;
 	//Music
 	private Music music;
-	
+	private int[] equipsLv; 
 	//Image
 	private Image[] btnImg = { new ImageIcon("images/one (1).png").getImage().getScaledInstance(165, 150, 0),
 			new ImageIcon("images/two.png").getImage().getScaledInstance(165, 150, 0),
@@ -35,19 +35,20 @@ public class StageView extends JPanel{
 			new ImageIcon("images/eight.png").getImage().getScaledInstance(165, 150, 0),
 			new ImageIcon("images/nine.png").getImage().getScaledInstance(165, 150, 0),
 			new ImageIcon("images/zero.png").getImage().getScaledInstance(165, 150, 0)
-			
+
 	};
-	
+
 	public StageView(MainFrame mf,Member m) {
 		this.m = m;
 		this.mf = mf;
+		this.equipsLv = m.getEquipsLv();
 
 		this.setLayout(null);
 		this.setSize(Run.SCREEN_WIDTH,Run.SCREEN_HEIGHT);
-		
+
 		music = new Music("inGameMusic.mp3",false);
 		music.start();
-		
+
 		//스테이지1~5
 		for(int i=0;i<5;i++) {
 			stageBtn[i] = new JButton("STAGE "+ (i+1));
@@ -107,25 +108,47 @@ public class StageView extends JPanel{
 
 		@Override
 		public void mousePressed(MouseEvent e) {
-			// TODO Auto-generated method stub
 			Music buttonEnteredMusic = new Music("decision8.mp3",false);
 			buttonEnteredMusic.start();
-				for(int i=1;i<=10;i++) {
-					if(e.getSource()==stageBtn[(i-1)]) {
+			for(int i=1;i<=10;i++) {
+				if(e.getSource()==stageBtn[(i-1)]) {
+					if(i==2) {
+						if(equipsLv[1]>=1) {
+							ChangePanel.changePanel(mf,sView,new GameView(mf,m,i));
+							music.close();						
+						}else {
+							JOptionPane.showMessageDialog(mf, "튀김기가 필요합니다!");
+						}
+					}else if(i==3) {
+						if(equipsLv[2]>=1) {
+							ChangePanel.changePanel(mf,sView,new GameView(mf,m,i));
+							music.close();	
+						}else {
+							JOptionPane.showMessageDialog(mf, "오뎅기계가 필요합니다!");
+						}
+					}else if(i==4) {
+						if(equipsLv[3]>=1) {
+							ChangePanel.changePanel(mf,sView,new GameView(mf,m,i));
+							music.close();	
+						}else {
+							JOptionPane.showMessageDialog(mf, "라면기계가 필요합니다!");
+						}
+					}else if(i>4) {
 						ChangePanel.changePanel(mf,sView,new GameView(mf,m,i));
-						music.close();						
+						music.close();
 					}
-				}	
-				
-				if(e.getSource()==toMarket) {
-					new ChangePanel().changePanel(mf, sView, mPanel=new MarketPanel(mf,m));
-					mPanel.marketMusic();
-					mPanel.setting(mPanel);
-					music.close();
-				}else if(e.getSource()==save_Ranking) {
-					new ChangePanel().changePanel(mf, sView, new RankingPanel(mf));
-					music.close();
 				}
+			}	
+
+			if(e.getSource()==toMarket) {
+				new ChangePanel().changePanel(mf, sView, mPanel=new MarketPanel(mf,m));
+				mPanel.marketMusic();
+				mPanel.setting(mPanel);
+				music.close();
+			}else if(e.getSource()==save_Ranking) {
+				new ChangePanel().changePanel(mf, sView, new RankingPanel(mf));
+				music.close();
+			}
 		}
 
 		@Override
