@@ -8,6 +8,7 @@ import javax.swing.JLabel;
 import javax.swing.Timer;
 
 import com.kh.miniProject.music.Music;
+import com.kh.miniProject.view.GuestPanel;
 
 public class CustomerTimer extends JLabel{
 	private JLabel timerLabel;

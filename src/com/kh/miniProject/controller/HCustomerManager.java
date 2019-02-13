@@ -1,11 +1,16 @@
 package com.kh.miniProject.controller;
 
 import java.awt.Image;
+import java.awt.Point;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Random;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.Timer;
 
+import com.kh.miniProject.controller.CustomerManager.GuestTimer;
 import com.kh.miniProject.model.dao.OrderDao;
 import com.kh.miniProject.model.vo.OrderLabel;
 import com.kh.miniProject.model.vo.menu.MenuOrder;
@@ -29,7 +34,9 @@ public class HCustomerManager extends CustomerManager{
 	private OrderLabel[] orderLabel; 			// 주문 이미지
 	private JLabel[] customer = new JLabel[4]; 	// customer수
 	private int[] customerOrderNo = new int[4]; // customer남은 주문수
-	private int[] customerX = {794,594,394,194};// customer x 좌표
+	private int[] customerX = {798,594,396,198};// customer x 좌표
+	private Timer guestTimer;
+	private CustomerManager cm;
 
 	// cons
 	public HCustomerManager(GameView gView, GuestPanel gP, OrderDao orderDao, int maxOrderNo, int stageLv) {
@@ -40,6 +47,7 @@ public class HCustomerManager extends CustomerManager{
 		this.orderDao = orderDao;
 		this.maxOrderNo = maxOrderNo;
 		this.stageLv = stageLv;
+		this.cm = this;
 	}
 
 	// 손님 생성
@@ -56,8 +64,7 @@ public class HCustomerManager extends CustomerManager{
 				count = 0;
 				guest = false;
 			} else {
-				cTimer[customerNo] = new CustomerTimer(this,12-(0.3*stageLv),customerNo,customerX[customerNo]); // 각 손님별 타이머 설정
-				gP.add(cTimer[customerNo]);
+				
 				Image[] icon = {new ImageIcon("images/손놈2.png").getImage().getScaledInstance(120, 200, 0),
 						new ImageIcon("images/손놈1.png").getImage().getScaledInstance(120,200,0),
 						new ImageIcon("images/손놈3.png").getImage().getScaledInstance(120,200,0)
@@ -79,11 +86,24 @@ public class HCustomerManager extends CustomerManager{
 		customerOrderNo[customerNo] = maxOrderNo;
 		// 음식 주문
 		// 손님 객체 존재시 (1,2,3,4번 자리 지정)
-		customer[customerNo].setBounds(customerX[customerNo], 105, 120, 200); // 손님 위치 설정
+		customer[customerNo].setSize(120,200);
+		
+		if(guest)
+		customer[customerNo].setLocation(0, 105);
+		else {
+		customer[customerNo].setLocation(customerX[customerNo],105);
 		addOrder(maxOrderNo, customerX[customerNo], guest);
+		}
+		
 
 		gP.add(customer[customerNo]); // 패널에 손님라벨 추가
-
+		
+		
+		if(guest)
+		time();
+		
+		
+		
 		// 손님 No 설정(0~3)
 		if (customerNo != 3) {
 			customerNo++;
@@ -91,7 +111,11 @@ public class HCustomerManager extends CustomerManager{
 			customerNo = 0;
 		}
 	}
-
+	public void time() {
+		guestTimer = new Timer(20,new GuestTimer());
+		guestTimer.start();
+	}
+	
 	public void addOrder(int menuNo, int x, boolean guest) {
 		int y = 15; // y축 초기화
 
@@ -164,6 +188,8 @@ public class HCustomerManager extends CustomerManager{
 		}
 
 	}
+	
+	
 
 	public void deleteLabel(int orderNo) { // 주문내역 삭제 및 모든 주문 전달 완료시 손님(+타이머) 삭제
 		gP.remove(orderLabel[orderNo]);
@@ -217,6 +243,25 @@ public class HCustomerManager extends CustomerManager{
 			if (cTimer[i] != null) {
 				cTimer[i].timerStop();
 			}
+		}
+	}
+	
+	class GuestTimer implements ActionListener{
+		private int cNo = customerNo;
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			Point point = customer[cNo].getLocation();
+			System.out.println(point.getX());
+			customer[cNo].setLocation((point.x+6),(point.y));
+			gP.repaint();
+			if((point.x)==customerX[cNo]) {
+				guestTimer.stop();
+				addOrder(maxOrderNo, customerX[cNo], guest);
+				cTimer[cNo] = new CustomerTimer(cm,11-(0.3*stageLv),cNo,customerX[cNo]); // 각 손님별 타이머 설정
+				gP.add(cTimer[cNo]);
+			}
+			
 		}
 	}
 }

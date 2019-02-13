@@ -13,7 +13,7 @@ public class GuestPanel extends JPanel {
 	
 	public GuestPanel(Image img,OrderDao od) {
 		this.img = img;
-		
+
 	}
 
 	@Override
