@@ -67,12 +67,12 @@ public class EquipmentPanel extends JPanel{
 			}else {
 				equips[i].setIcon(new ImageIcon(images[i]));				
 			}
-			panel.add(equips[i]);
 			if(i>0) {
+				if(equipsLv[i-1]!=0) {panel.add(equips[i]);}
 				if(equipsLv[i-1]==0) {
 					equips[i].setEnabled(false);
 				}
-			}
+			}else {panel.add(equips[i]);}
 		}
 	}
 	//btn getter

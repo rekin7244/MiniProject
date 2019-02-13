@@ -318,8 +318,7 @@ public class GameView extends JPanel{
 	public void judgeLv(String menuName,JButton[] equips) {
 		if(menuName.equals("À½·á¼ö")) {
 			equips[0].setEnabled(false);
-			cookTimer = new CookingTime(equips[0],4,"À½·á¼ö");
-			gView.add(cookTimer);
+			cookTimer = new CookingTime(equips[0],4,"À½·á¼ö");	//Á¶¸® Å¸ÀÌ¸Ó
 			drinksNo++;
 		}else if(menuName.equals("¶±ººÀÌ")) {
 			equips[1].setEnabled(false);
@@ -327,15 +326,13 @@ public class GameView extends JPanel{
 			if(equipLv[0]==2) { 	temp=5;
 			}else if(equipLv[0]==3) {temp=3;}
 			cookTimer = new CookingTime(equips[1],temp,"¶±ººÀÌ");
-			gView.add(cookTimer);
-			tbkNo++;	
+			tbkNo++;
 		}else if(menuName.equals("Æ¢±è")) {
 			equips[2].setEnabled(false);
 			int temp=10;
 			if(equipLv[1]==2) { 	temp=7;
 			}else if(equipLv[1]==3) {temp=4;}
 			cookTimer = new CookingTime(equips[2],temp,"Æ¢±è");
-			gView.add(cookTimer);
 			friedNo++;
 		}else if(menuName.equals("¿Àµ­")) {
 			equips[3].setEnabled(false);
@@ -343,16 +340,14 @@ public class GameView extends JPanel{
 			if(equipLv[2]==2) { 	temp=6;
 			}else if(equipLv[2]==3) {temp=4;}
 			cookTimer = new CookingTime(equips[3],temp,"¿Àµ­");
-			gView.add(cookTimer);
 			odengNo++;
 		}else if(menuName.equals("¶ó¸é")) {
 			equips[4].setEnabled(false);
 			int temp=12;
-			if(equipLv[3]==2) { 	temp=9;
-			}else if(equipLv[3]==3) {temp=5;}
+			if(equipLv[3]==2) { 	temp=11;
+			}else if(equipLv[3]==3) {temp=10;}
 			cookTimer = new CookingTime(equips[4],temp,"¶ó¸é");
-			gView.add(cookTimer);
-			ramenNo++;
+			ramenNo+=equipLv[3];
 		}
 	}
 }
