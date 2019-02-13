@@ -1,10 +1,12 @@
 package com.kh.miniProject.controller;
 
+import java.awt.Color;
 import java.awt.Image;
 import java.util.Random;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 import com.kh.miniProject.model.dao.OrderDao;
 import com.kh.miniProject.model.vo.OrderLabel;
@@ -46,7 +48,7 @@ public class CustomerManager {
 	public void guest() {
 		Random rand = new Random();
 		if(stageLv>4) {	//5stage부터 히든 출현
-			if (count == 5) {
+			if (count == 1) {
 				cTimer[customerNo] = new CustomerTimer(this,(11-(0.3*stageLv))/1.5,customerNo,customerX[customerNo]); // 각 손님별 타이머 설정
 				gP.add(cTimer[customerNo]);
 				mt = new MessageTimer(this, 1.5, customerX[customerNo]);
@@ -191,6 +193,7 @@ public class CustomerManager {
 		Music buttonEnteredMusic = new Music("coins_5.mp3", false);
 		buttonEnteredMusic.start();
 	}
+	
 
 	public void deleteMessage() {
 		gP.remove(mt);
