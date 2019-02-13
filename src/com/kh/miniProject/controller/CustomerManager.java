@@ -22,8 +22,8 @@ public class CustomerManager {
 	private OrderDao orderDao;
 	private CustomerTimer[] cTimer = new CustomerTimer[3];
 	private GameView gView;
-	private MessageTimer mt;
 	private CustomerManager cm;
+	private Message m;
 
 
 	private int stageLv; 						// stageLv
@@ -55,10 +55,9 @@ public class CustomerManager {
 		Random rand = new Random();
 		if(stageLv>4) {	//5stage부터 히든 출현
 			if (count == 5) {	//count0부터 시작해서 5에 히든손님 출현 
+				m = new Message(this, gP);
 				cTimer[customerNo] = new CustomerTimer(this,(11-(0.3*stageLv))/1.5,customerNo,customerX[customerNo]); // 각 손님별 타이머 설정
 				gP.add(cTimer[customerNo]);
-				mt = new MessageTimer(this, 1.5, customerX[customerNo]);
-				gP.add(mt);
 				Image icon = new ImageIcon("images/Inked히든손님2.png").getImage().getScaledInstance(190, 250, 0);		// 히든손님 이미지
 				customer[customerNo] = new JLabel(new ImageIcon(icon)); 											// 히든손님 라벨
 				addOrder(maxOrderNo, customerX[customerNo], guest);
@@ -205,10 +204,9 @@ public class CustomerManager {
 		buttonEnteredMusic.start();
 	}
 	
-	public void deleteMessage() {
-		gP.remove(mt);
-		gP.repaint();
-	}
+	/*
+	 * public void deleteMessage() { gP.repaint(); }
+	 */
 
 	public void deleteCustomer(int customerNo) { // 시간 만료시 주문내역과 손님(+타이머) 삭제
 		for (int i = maxOrderNo * customerNo; i < maxOrderNo * customerNo + maxOrderNo; i++) {
