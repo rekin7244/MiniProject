@@ -9,27 +9,29 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.Timer;
 
+import com.kh.miniProject.view.GuestPanel;
+
 public class MessageTimer extends JLabel{
-	private JLabel Message;
 	private CustomerManager cm;
 	private Timer timer;
-	private double time;
+	double time;
+	JLabel message;
 	
 	public MessageTimer(CustomerManager cm, double time, int x) {
 		this.cm = cm;
 		this.time = time;
 		
 		//Message = new JLabel("Hidden");
-		Image icon = new ImageIcon("images/hiddenwarning.png")
-				.getImage().getScaledInstance(100, 100, 0);
-		Message = new JLabel(new ImageIcon(icon));
+		Image icon = new ImageIcon("images/message.png")
+				.getImage().getScaledInstance(250, 150, 0);
+		message = new JLabel(new ImageIcon(icon));
 		timer = new Timer(100, new TimerStart());
 		
-		Message.setSize(100,100);
-		Message.setFont(new Font("Elephant", Font.BOLD, 40));
-		this.add(Message);
+		message.setSize(250,150);
+		message.setFont(new Font("Elephant", Font.BOLD, 40));
+		this.add(message);
 		this.setVisible(true);
-		this.setBounds(x + 10, 10, 100, 100);
+		this.setBounds(/*x + 10*/400, 100, 250, 150);
 		
 		timer.start();
 	}
@@ -39,16 +41,15 @@ public class MessageTimer extends JLabel{
 	}*/
 	
 	class TimerStart implements ActionListener {
-		
 		@Override
 		public void actionPerformed(ActionEvent e) {
+			
 			time -= 0.1;
 			
 			if(time <= 0) {
 				cm.deleteMessage();
 				timer.stop();
 			}
-			
 		}
 		
 	}
