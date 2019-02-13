@@ -81,13 +81,19 @@ public class GameView extends JPanel{
 		this.add(gP);
 
 		//하트 설정
-		for (int i = 0; i < heart.length; i++) {
-			heart[i]=new JLabel(new ImageIcon(new ImageIcon("images/heart.png")
-					.getImage().getScaledInstance(40, 40, 0)));
-			heart[i].setBounds(40+i*45,270,40,40);
-			gP.add(heart[i]);
+		if(stageLv!=10) {
+			for (int i = 0; i < heart.length; i++) {
+				heart[i]=new JLabel(new ImageIcon(new ImageIcon("images/heart.png")
+						.getImage().getScaledInstance(40, 40, 0)));
+				heart[i].setBounds(40+i*45,270,40,40);
+				gP.add(heart[i]);
+			}
+		}else {
+			heart[0]=new JLabel(new ImageIcon(new ImageIcon("images/heart.png").getImage().getScaledInstance(80, 80, 0)));
+			heart[0].setBounds(50,220,80,80);
+			gP.add(heart[0]);
 		}
-		
+
 		//고객매니저 실행
 		if(stageLv<3) {
 			cm = new CustomerManager(this,gP,orderDao,2,stageLv);
@@ -96,6 +102,8 @@ public class GameView extends JPanel{
 		}else if(stageLv<8) {
 			cm = new HCustomerManager(this,gP,orderDao,3,stageLv);
 		}else if(stageLv<10) {
+			cm = new HCustomerManager(this,gP,orderDao,4,stageLv);
+		}else {
 			cm = new HCustomerManager(this,gP,orderDao,4,stageLv);
 		}
 		//스테이지 Timer
@@ -159,27 +167,29 @@ public class GameView extends JPanel{
 			menuButton[i].addActionListener(new Event_Cook());
 		}
 	}
-	
+
 	//골드 갱신
 	public void updateGold(int stageGold) {
 		this.stageGold = stageGold;
 		gold.setText(stageGold + "원");
 	}
-	
+
 	public void gameOver() {	//실행될때마다 하트 감소
-		credit--;
-		gP.remove(heart[credit]);
-		//하트 3개 소진시 gameover
-		if(credit==0) {
-			//게임 종료
-			gameTimer.timerStop();
-			cm.endCustomer();
-			//뮤직 종료
-			music.close();
-			
-			JOptionPane.showMessageDialog(mf, "GAME OVER!!");
-			ChangePanel.changePanel(mf, gView, new StageView(mf,m));
-			return;
+		if(stageLv!=10) {
+			credit--;
+			gP.remove(heart[credit]);
+			//하트 3개 소진시 gameover
+			if(credit==0) {
+				//게임 종료
+				gameTimer.timerStop();
+				cm.endCustomer();
+				//뮤직 종료
+				music.close();
+
+				JOptionPane.showMessageDialog(mf, "GAME OVER!!");
+				ChangePanel.changePanel(mf, gView, new StageView(mf,m));
+				return;
+			}
 		}
 	}
 
@@ -188,7 +198,7 @@ public class GameView extends JPanel{
 		//멤버 정보 저장
 		m.setStageGold(stageGold);
 		m.setGold(m.getGold()+stageGold);
-		if(m.getMaxStage()==stageLv) {
+		if(m.getMaxStage()==stageLv&&stageLv!=10) {
 			m.setMaxStage(stageLv+1);
 		}
 		//게임 종료
@@ -386,7 +396,7 @@ public class GameView extends JPanel{
 	public void judgeLv(String menuName,JButton[] equips) {
 		if(menuName.equals("음료수")) {
 			equips[0].setEnabled(false);
-			cookTimer = new CookingTime(equips[0],5,"음료수");
+			cookTimer = new CookingTime(equips[0],4,"음료수");
 			gView.add(cookTimer);
 			drinksNo++;
 		}else if(menuName.equals("떡볶이")) {
