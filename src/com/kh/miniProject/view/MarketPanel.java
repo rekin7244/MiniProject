@@ -831,10 +831,14 @@ public class MarketPanel extends JPanel {
 			MarketPanel temp;
 			new ChangePanel().changePanel(mf, mPanel, temp = new MarketPanel(mf, m));
 			temp.setting(temp);
+			temp.setMarketMusic(marketMusic);
 			mPanel = temp;
 		}
 	}
 	public Music getMarketMusic() {
 		return marketMusic;
+	}
+	public void setMarketMusic(Music music) {
+		this.marketMusic = music;
 	}
 }// class
