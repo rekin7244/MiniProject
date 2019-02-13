@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
@@ -90,12 +91,22 @@ public class LoginPanel extends JPanel {
 
 		// 로그인버튼 추가
 		loginbt = new JButton("로그인");
+		loginbt.setContentAreaFilled(false);
+		loginbt.setBorderPainted(false);
+		loginbt.setIcon(new ImageIcon("images/loginButton.png"));
 		loginbt.setBounds(400, 460, 200, 30);
 
 		guestbt= new JButton("guest");
+		guestbt.setContentAreaFilled(false);
+		/*Image temp = new ImageIcon("images/게스트버튼.png").getImage().getScaledInstance(width, height, hints)*/
+		guestbt.setIcon(new ImageIcon("images/게스트버튼.png"));
+		guestbt.setBorderPainted(false);
 		guestbt.setBounds(510, 510, 90, 30); 
 
 		Joinbt = new JButton("회원가입");
+		/*guestbt.setIcon(new ImageIcon("images/회원가입버튼.png"));*/
+		Joinbt.setContentAreaFilled(false);
+		Joinbt.setBorderPainted(false);
 		Joinbt.setBounds(400, 510, 90, 30);
 
 		// 마지막 추가들

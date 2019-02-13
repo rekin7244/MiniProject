@@ -106,9 +106,6 @@ public class MarketPanel extends JPanel {
 		this.setBounds(110, 50, 800, 650);
 		this.setBackground(Color.orange);
 
-		marketMusic = new Music("intro3.mp3",false);
-		marketMusic.start();
-
 		// 골드 출력
 		gold = new JButton("골드");
 		gold.setEnabled(false);
@@ -123,6 +120,11 @@ public class MarketPanel extends JPanel {
 
 		mPanel = this;
 	}// marketpanel
+	
+	public void marketMusic() {
+		marketMusic = new Music("intro3.mp3",false);
+		marketMusic.start();
+	}
 
 	// 상점 버튼 및 기능 구현
 	public void setting(MarketPanel mPanel) {
