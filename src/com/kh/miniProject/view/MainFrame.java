@@ -4,7 +4,6 @@ import java.awt.Color;
 
 import javax.swing.JFrame;
 
-import com.kh.miniProject.music.*;
 import com.kh.miniProject.run.Run;
 
 public class MainFrame extends JFrame{

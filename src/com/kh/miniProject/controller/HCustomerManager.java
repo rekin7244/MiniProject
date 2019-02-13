@@ -66,7 +66,7 @@ public class HCustomerManager extends CustomerManager{
 				count++;
 				guest = true;
 			}
-		}else {
+		}else {	//10stage는 히든만 출현!!!
 			cTimer[customerNo] = new CustomerTimer(this,(12-(0.3*stageLv))/1.5,customerNo,customerX[customerNo]); // 각 손님별 타이머 설정
 			gP.add(cTimer[customerNo]);
 			mt = new MessageTimer(this, 1.5);
@@ -79,19 +79,9 @@ public class HCustomerManager extends CustomerManager{
 		customerOrderNo[customerNo] = maxOrderNo;
 		// 음식 주문
 		// 손님 객체 존재시 (1,2,3,4번 자리 지정)
-		if (customerNo == 0) {
-			customer[customerNo].setBounds(794, 0, 120, 200); // 손님 위치 설정
-			addOrder(maxOrderNo, 794, guest);
-		} else if (customerNo == 1) {
-			customer[customerNo].setBounds(594, 0, 120, 200);
-			addOrder(maxOrderNo, 594, guest);
-		} else if (customerNo == 2) {
-			customer[customerNo].setBounds(394, 0, 120, 200);
-			addOrder(maxOrderNo, 394, guest);
-		} else {
-			customer[customerNo].setBounds(194, 0, 120, 200);
-			addOrder(maxOrderNo, 194, guest);
-		}
+		customer[customerNo].setBounds(customerX[customerNo], 0, 120, 200); // 손님 위치 설정
+		addOrder(maxOrderNo, customerX[customerNo], guest);
+
 		gP.add(customer[customerNo]); // 패널에 손님라벨 추가
 
 		// 손님 No 설정(0~3)

@@ -30,7 +30,7 @@ public class CustomerManager {
 	private OrderLabel[] orderLabel; 			// 주문 이미지
 	private JLabel[] customer = new JLabel[3]; 	// customer수
 	private int[] customerOrderNo = new int[3]; // customer남은 주문수
-	private int[] customerX = {744,444,144};// customer x 좌표
+	private int[] customerX = {744,444,144};	// customer x 좌표
 
 	// cons
 	public CustomerManager(GameView gView, GuestPanel gP, OrderDao orderDao, int maxOrderNo, int stageLv) {
@@ -45,7 +45,7 @@ public class CustomerManager {
 	// 손님 생성
 	public void guest() {
 		Random rand = new Random();
-		if(stageLv>4) {
+		if(stageLv>4) {	//5stage부터 히든 출현
 			if (count == 5) {
 				cTimer[customerNo] = new CustomerTimer(this,(11-(0.3*stageLv))/1.5,customerNo,customerX[customerNo]); // 각 손님별 타이머 설정
 				gP.add(cTimer[customerNo]);
@@ -80,16 +80,9 @@ public class CustomerManager {
 		customerOrderNo[customerNo] = maxOrderNo;
 		// 음식 주문
 		// 손님 객체 존재시 (1,2,3번 자리 지정)
-		if (customerNo == 0) {
-			customer[customerNo].setBounds(744, 0, 120, 200); // 손님 위치 설정
-			addOrder(maxOrderNo, 744, guest);
-		} else if (customerNo == 1) {
-			customer[customerNo].setBounds(444, 0, 120, 200);
-			addOrder(maxOrderNo, 444, guest);
-		} else {
-			customer[customerNo].setBounds(144, 0, 120, 200);
-			addOrder(maxOrderNo, 144, guest);
-		}
+		customer[customerNo].setBounds(customerX[customerNo], 0, 120, 200); // 손님 위치 설정
+		addOrder(maxOrderNo, customerX[customerNo], guest);
+
 		gP.add(customer[customerNo]); // 패널에 손님라벨 추가
 
 		// 손님 No 설정 (0~2)
@@ -198,7 +191,7 @@ public class CustomerManager {
 		Music buttonEnteredMusic = new Music("coins_5.mp3", false);
 		buttonEnteredMusic.start();
 	}
-	
+
 	public void deleteMessage() {
 		gP.remove(mt);
 		gP.repaint();

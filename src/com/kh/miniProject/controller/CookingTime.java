@@ -9,7 +9,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
-import com.kh.miniProject.model.vo.member.Member;
 import com.kh.miniProject.run.Run;
 
 public class CookingTime extends JPanel{

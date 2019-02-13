@@ -7,10 +7,9 @@ import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.Timer;
 
-public class MessageTimer extends JPanel{
+public class MessageTimer extends JLabel{
 	private JLabel Message;
 	private CustomerManager cm;
 	private Timer timer;
@@ -21,16 +20,16 @@ public class MessageTimer extends JPanel{
 		this.time = time;
 		
 		//Message = new JLabel("Hidden");
-		Image icon = new ImageIcon("images/hidden1.png")
-				.getImage().getScaledInstance(100, 70, 0);
+		Image icon = new ImageIcon("images/hiddenwarning.png")
+				.getImage().getScaledInstance(100, 100, 0);
 		Message = new JLabel(new ImageIcon(icon));
 		timer = new Timer(100, new TimerStart());
 		
-		Message.setSize(100,50);
+		Message.setSize(100,100);
 		Message.setFont(new Font("Elephant", Font.BOLD, 40));
 		this.add(Message);
 		this.setVisible(true);
-		this.setBounds(450, 100, 100, 70);
+		this.setBounds(450, 170, 100, 100);
 		
 		timer.start();
 	}

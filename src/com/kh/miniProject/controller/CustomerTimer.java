@@ -5,26 +5,22 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.Timer;
 
-import com.kh.miniProject.model.vo.Customer;
-import com.kh.miniProject.model.vo.member.Member;
 import com.kh.miniProject.music.Music;
-import com.kh.miniProject.view.GuestPanel;
 
-public class CustomerTimer extends JPanel{
+public class CustomerTimer extends JLabel{
 	private JLabel timerLabel;
 	private int customerNo;
 	private CustomerManager cm;
 	private Timer timer;
 	private double waitingTime;
-	
+
 	public CustomerTimer(CustomerManager cm,double waitingTime,int customerNo,int x) {
 		this.cm = cm;
 		this.waitingTime = waitingTime;
 		this.customerNo = customerNo;
-		
+
 		//게스트 타이머 시작
 		timerLabel = new JLabel();
 		timer = new Timer(100, new TimerStart());
@@ -35,7 +31,7 @@ public class CustomerTimer extends JPanel{
 		this.add(timerLabel);
 		this.setVisible(true);
 		this.setBounds(x+50,200,70,40);
-		
+
 		timer.start();
 	}
 	public void timerStop() {
@@ -47,7 +43,7 @@ public class CustomerTimer extends JPanel{
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			gameTime-=0.1;
-			
+
 			if(gameTime<=0) {
 				cm.deleteCustomer(customerNo);
 				timer.stop();
@@ -55,9 +51,10 @@ public class CustomerTimer extends JPanel{
 				buttonEnteredMusic.start();
 			}
 			//시간 표시
-			if(((int)(gameTime*10))%10==0) {
-				timerLabel.setText(((int)(gameTime*10))/10+"초");
-			}
+			double temp=0;
+			temp = (int)(gameTime*10);
+			temp/=10;
+			timerLabel.setText(temp+"초");
 
 		}
 	}

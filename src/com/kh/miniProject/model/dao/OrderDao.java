@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import com.kh.miniProject.model.vo.menu.MenuOrder;
 import com.kh.miniProject.view.GameView;
-import com.kh.miniProject.view.GuestPanel;
 
 public class OrderDao {
 	private ArrayList<MenuOrder> orderList;	//LinkedList로 바꾸자 (속도 개선의 효과를 보기위해)

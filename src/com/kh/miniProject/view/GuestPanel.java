@@ -5,7 +5,6 @@ import java.awt.Image;
 
 import javax.swing.JPanel;
 
-import com.kh.miniProject.controller.CustomerManager;
 import com.kh.miniProject.model.dao.OrderDao;
 
 
