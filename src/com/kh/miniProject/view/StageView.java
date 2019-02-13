@@ -1,8 +1,11 @@
 package com.kh.miniProject.view;
 
 import java.awt.Color;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.*;
 
@@ -19,8 +22,24 @@ public class StageView extends JPanel{
 	private JButton[] stageBtn = new JButton[10];	//1~10스테이지 버튼
 	private Member m;
 	private int[] equipsLv;
+	JButton save_Ranking = new JButton("랭킹 출력 및 종료");
+	JButton toMarket = new JButton("상점으로");
 	//Music
 	private Music music;
+	
+	//Image
+	private Image[] btnImg = { new ImageIcon("images/one (1).png").getImage().getScaledInstance(165, 150, 0),
+			new ImageIcon("images/two.png").getImage().getScaledInstance(165, 150, 0),
+			new ImageIcon("images/three.png").getImage().getScaledInstance(165, 150, 0),
+			new ImageIcon("images/four.png").getImage().getScaledInstance(165, 150, 0),
+			new ImageIcon("images/five.png").getImage().getScaledInstance(165, 150, 0),
+			new ImageIcon("images/six.png").getImage().getScaledInstance(165, 150, 0),
+			new ImageIcon("images/seven.png").getImage().getScaledInstance(165, 150, 0),
+			new ImageIcon("images/eight.png").getImage().getScaledInstance(165, 150, 0),
+			new ImageIcon("images/nine.png").getImage().getScaledInstance(165, 150, 0),
+			new ImageIcon("images/zero.png").getImage().getScaledInstance(165, 150, 0)
+			
+	};
 	
 	public StageView(MainFrame mf,Member m) {
 		this.m = m;
@@ -37,12 +56,18 @@ public class StageView extends JPanel{
 		for(int i=0;i<5;i++) {
 			stageBtn[i] = new JButton("STAGE "+ (i+1));
 			stageBtn[i].setBounds(50+stagexSize*i,50,stagexSize,stageySize);
+			stageBtn[i].setIcon(new ImageIcon(btnImg[i]));
+			stageBtn[i].setContentAreaFilled(false);
+			stageBtn[i].setBorderPainted(false);
 			this.add(stageBtn[i]);
 		}
 		//스테이지6~10
 		for(int i=5;i<10;i++) {
 			stageBtn[i] = new JButton("STAGE "+ (i+1));
 			stageBtn[i].setBounds(50+stagexSize*(i-5),80+stageySize,stagexSize,stageySize);
+			stageBtn[i].setIcon(new ImageIcon(btnImg[i]));
+			stageBtn[i].setContentAreaFilled(false);
+			stageBtn[i].setBorderPainted(false);
 			this.add(stageBtn[i]);
 		}
 		for (int i = m.getMaxStage(); i < 10; i++) {
@@ -50,13 +75,12 @@ public class StageView extends JPanel{
 		}
 
 		//상점으로
-		JButton toMarket = new JButton("상점으로");
+	/*	JButton toMarket = new JButton("상점으로");*/
 		toMarket.setBounds(700,450,200,70);
 		this.add(toMarket);
 
 		//저장 후 (회원이면)랭킹 출력
 		/*if(Member)*/	//회원인지 판별
-		JButton save_Ranking = new JButton("랭킹 출력 및 종료");
 		save_Ranking.setBounds(700,550,200,70);
 		this.add(save_Ranking);
 
@@ -72,79 +96,62 @@ public class StageView extends JPanel{
 
 		//스테이지1 번 버튼 선택 시 GameView로 changePanel 실행
 		for (int i = 0; i < stageBtn.length; i++) {
-			stageBtn[i].addActionListener(new MyAction());
+			stageBtn[i].addMouseListener(new MyAction());
 		}
 		//상점으로 버튼
-		toMarket.addActionListener(new MyAction());
+		toMarket.addMouseListener(new MyAction());
 		//저장 및 랭킹 버튼
-		save_Ranking.addActionListener(new MyAction());
+		save_Ranking.addMouseListener(new MyAction());
 	}	
-	class MyAction implements ActionListener {
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			if(e.getActionCommand().equals("STAGE 1")) {
-				new ChangePanel().changePanel(mf,sView,new GameView(mf,m,1));
-				music.close();
-			}
-			if(e.getActionCommand().equals("STAGE 2")) {
-				if(equipsLv[1]>0) {
-					new ChangePanel().changePanel(mf,sView,new GameView(mf,m,2));
-					music.close();
-				}else {
-					System.out.println("튀김기가 필요합니다.");
-				}
-			}
-			if(e.getActionCommand().equals("STAGE 3")) {
-				if(equipsLv[2]>0) {
-					new ChangePanel().changePanel(mf,sView,new GameView(mf,m,3));
-					music.close();
-				}else {
-					System.out.println("오뎅기계가 필요합니다.");
-				}
-			}
-			if(e.getActionCommand().equals("STAGE 4")) {
-				if(equipsLv[3]>0) {
-					new ChangePanel().changePanel(mf,sView,new GameView(mf,m,4));
-					music.close();
-				}else {
-					System.out.println("라면기계가 필요합니다.");
-				}
-			}
-			if(e.getActionCommand().equals("STAGE 5")) {
-					new ChangePanel().changePanel(mf,sView,new GameView(mf,m,5));
-					music.close();
-			}
-			if(e.getActionCommand().equals("STAGE 6")) {
-				new ChangePanel().changePanel(mf,sView,new GameView(mf,m,6));
-				music.close();
-			}
-			if(e.getActionCommand().equals("STAGE 7")) {
-				new ChangePanel().changePanel(mf,sView,new GameView(mf,m,7));
-				music.close();
-			}
-			if(e.getActionCommand().equals("STAGE 8")) {
-				new ChangePanel().changePanel(mf,sView,new GameView(mf,m,8));
-				music.close();
-			}
-			if(e.getActionCommand().equals("STAGE 9")) {
-				new ChangePanel().changePanel(mf,sView,new GameView(mf,m,9));
-				music.close();
-			}
-			if(e.getActionCommand().equals("STAGE 10")) {
-				new ChangePanel().changePanel(mf,sView,new GameView(mf,m,10));
-				music.close();
-			}
-			
-			if(e.getActionCommand().equals("상점으로")) {
-				new ChangePanel().changePanel(mf, sView, mPanel=new MarketPanel(mf,m));
-				mPanel.setting(mPanel);
-				music.close();
+	class MyAction implements MouseListener {
 
-			}
-			if(e.getActionCommand().equals("랭킹 출력 및 종료")) {
-				new ChangePanel().changePanel(mf, sView, new RankingPanel(mf));
-				music.close();
-			}
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
 		}
+
+		@Override
+		public void mousePressed(MouseEvent e) {
+			// TODO Auto-generated method stub
+			Music buttonEnteredMusic = new Music("decision8.mp3",false);
+			buttonEnteredMusic.start();
+				for(int i=1;i<=10;i++) {
+					if(e.getSource()==stageBtn[(i-1)]) {
+						ChangePanel.changePanel(mf,sView,new GameView(mf,m,i));
+						music.close();						
+					}
+				}	
+				
+				if(e.getSource()==toMarket) {
+					new ChangePanel().changePanel(mf, sView, mPanel=new MarketPanel(mf,m));
+					mPanel.marketMusic();
+					mPanel.setting(mPanel);
+					music.close();
+				}else if(e.getSource()==save_Ranking) {
+					new ChangePanel().changePanel(mf, sView, new RankingPanel(mf));
+					music.close();
+				}
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseEntered(MouseEvent e) {
+			// TODO Auto-generated method stub
+			Music buttonEnteredMusic = new Music("cursor7.mp3",false);
+			buttonEnteredMusic.start();
+		}
+
+		@Override
+		public void mouseExited(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+		
 	}
 }

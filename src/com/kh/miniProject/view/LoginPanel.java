@@ -3,6 +3,10 @@ package com.kh.miniProject.view;
 import java.awt.Color;
 import java.awt.Dialog;
 import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Panel;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
@@ -10,7 +14,9 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
@@ -50,6 +56,9 @@ public class LoginPanel extends JPanel {
 		//memberDao.addMember(new Member("test","pass","email"));
 		
 		titleMusic = new Music("TitleMusic.mp3",false);
+		
+		/*for(int i=0;i<titleMusic.getTime();i++)*/
+		System.out.println(titleMusic.getTime());
 		titleMusic.start();
 
 		setSize(1024, 768);
@@ -90,12 +99,23 @@ public class LoginPanel extends JPanel {
 
 		// 로그인버튼 추가
 		loginbt = new JButton("로그인");
+		loginbt.setContentAreaFilled(false);
+		loginbt.setBorderPainted(false);
+		loginbt.setIcon(new ImageIcon("images/loginButton.png"));
 		loginbt.setBounds(400, 460, 200, 30);
 
 		guestbt= new JButton("guest");
+		guestbt.setContentAreaFilled(false);
+		/*Image temp = new ImageIcon("images/게스트버튼.png").getImage().getScaledInstance(width, height, hints)*/
+		guestbt.setIcon(new ImageIcon("images/게스트버튼.png"));
+		guestbt.setBorderPainted(false);
 		guestbt.setBounds(510, 510, 90, 30); 
+		
 
 		Joinbt = new JButton("회원가입");
+		/*guestbt.setIcon(new ImageIcon("images/회원가입버튼.png"));*/
+		Joinbt.setContentAreaFilled(false);
+		Joinbt.setBorderPainted(false);
 		Joinbt.setBounds(400, 510, 90, 30);
 
 		// 마지막 추가들
@@ -111,6 +131,7 @@ public class LoginPanel extends JPanel {
 		Joinbt.addMouseListener(new BtnAction());
 		layeredPane.add(panel);
 		add(layeredPane);
+		System.out.println(titleMusic.getTime());
 	}
 
 	class MyPanel extends JPanel {

@@ -12,9 +12,10 @@ public class MenuPanel extends JPanel{
 	private static final int PNANEL_HIGHT = 200;
 
 	private Image[] drinksImage = {
-			new ImageIcon("Images/drink1.jpg").getImage().getScaledInstance(150, PNANEL_HIGHT, 0),
-			new ImageIcon("Images/drink2.jpg").getImage().getScaledInstance(150, PNANEL_HIGHT, 0),
-			new ImageIcon("Images/drink3.jpg").getImage().getScaledInstance(150, PNANEL_HIGHT, 0)	};
+			new ImageIcon("Images/drink1.png").getImage().getScaledInstance(150, PNANEL_HIGHT, 0),
+			new ImageIcon("Images/drink2.png").getImage().getScaledInstance(150, PNANEL_HIGHT, 0),
+			new ImageIcon("Images/drink3.png").getImage().getScaledInstance(150, PNANEL_HIGHT, 0),	
+			new ImageIcon("Images/drink4.png").getImage().getScaledInstance(150, PNANEL_HIGHT, 0)};
 	private Image[] tbkImage = {
 			new ImageIcon("Images/tbk1.png").getImage().getScaledInstance(250, PNANEL_HIGHT, 0),
 			new ImageIcon("Images/tbk2.png").getImage().getScaledInstance(250, PNANEL_HIGHT, 0),
@@ -36,6 +37,7 @@ public class MenuPanel extends JPanel{
 			new ImageIcon("Images/¶ó¸é3.png").getImage().getScaledInstance(195, PNANEL_HIGHT, 0),
 			new ImageIcon("Images/¶ó¸é4.png").getImage().getScaledInstance(195, PNANEL_HIGHT, 0)};
 	private String[] menu = {"À½·á¼ö","¶±ººÀÌ","Æ¢±è","¿Àµ­","¶ó¸é"};
+	private Image myTable;
 
 	private int[] imageLocation = {Run.SCREEN_WIDTH-150,200,500,0,Run.SCREEN_WIDTH-345};
 	private int[] buttonSize = {150,250,180,200,195};
@@ -45,21 +47,30 @@ public class MenuPanel extends JPanel{
 
 	public MenuPanel(Member m) {
 		menuButton = new JButton[menu.length];
+		myTable = new ImageIcon("images/ÆÐ³ÎÅ×ÀÌºí.png").getImage();
 		this.setLayout(null);
 		this.setBounds(0,318,Run.SCREEN_WIDTH,PNANEL_HIGHT);
-		this.setBackground(Color.DARK_GRAY);
 
 		for(int i=0; i<menuButton.length;i++) {
 			menuButton[i] = new JButton(menu[i]);
 			menuButton[i].setIcon(null);
 			menuButton[i].setBounds(imageLocation[i],0, buttonSize[i], PNANEL_HIGHT);
 			menuButton[i].setContentAreaFilled(false);
+			menuButton[i].setBorderPainted(false);
 			this.add(menuButton[i]);
 		}
+		this.repaint();
+	}
+	
+	@Override
+	public void paintComponent(Graphics g) {
+		g.drawImage(myTable, 0, 0, null);
+		repaint();
+		
 	}
 
 	public void setting(JPanel mp, int drinksNo,int tbkNo,int friedNo,int odengNo,int ramenNo) {
-
+		
 		if(drinksNo==3) {
 			menuButton[0].setIcon(new ImageIcon(drinksImage[2]));
 		}else if(drinksNo==2) {
@@ -93,7 +104,7 @@ public class MenuPanel extends JPanel{
 		}else{
 			menuButton[2].setIcon(null);
 		}
-
+		
 		if(odengNo==4) {
 			menuButton[3].setIcon(new ImageIcon(odengImage[3]));
 		}else if(odengNo==3) {
@@ -105,7 +116,7 @@ public class MenuPanel extends JPanel{
 		}else{
 			menuButton[3].setIcon(null);
 		}
-
+		
 		if(ramenNo==4) {
 			menuButton[4].setIcon(new ImageIcon(ramenImage[3]));
 		}else if(ramenNo==3) {
@@ -117,6 +128,7 @@ public class MenuPanel extends JPanel{
 		}else{
 			menuButton[4].setIcon(null);
 		}
+		this.repaint();
 	}
 
 
