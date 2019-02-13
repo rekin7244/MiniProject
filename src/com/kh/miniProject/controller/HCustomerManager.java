@@ -245,7 +245,6 @@ public class HCustomerManager extends CustomerManager{
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			Point point = customer[cNo].getLocation();
-			System.out.println(point.getX());
 			customer[cNo].setLocation((point.x+6),(point.y));
 			gP.repaint();
 			if((point.x)==customerX[cNo]) {
