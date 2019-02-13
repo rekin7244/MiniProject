@@ -1,12 +1,14 @@
 package com.kh.miniProject.controller;
 
-import java.awt.Color;
 import java.awt.Image;
+import java.awt.Point;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Random;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
+import javax.swing.Timer;
 
 import com.kh.miniProject.model.dao.OrderDao;
 import com.kh.miniProject.model.vo.OrderLabel;
@@ -18,9 +20,10 @@ import com.kh.miniProject.view.GuestPanel;
 public class CustomerManager {
 	private GuestPanel gP;
 	private OrderDao orderDao;
-	public CustomerTimer[] cTimer = new CustomerTimer[3];
+	private CustomerTimer[] cTimer = new CustomerTimer[3];
 	private GameView gView;
-	public MessageTimer mt;
+	private MessageTimer mt;
+	private CustomerManager cm;
 
 
 	private int stageLv; 						// stageLv
@@ -28,12 +31,14 @@ public class CustomerManager {
 	private int orderNo; 						// 주문 번호
 	private int customerNo = 0; 				// 손님 번호
 	private int count = 0; 						// 히든번호
-	private boolean guest = true;				//히든손님 판별(메뉴가격 2배 결정)
+	private boolean guest = true;				// 히든손님 판별(메뉴가격 2배 결정)
 	private OrderLabel[] orderLabel; 			// 주문 이미지
 	private JLabel[] customer = new JLabel[3]; 	// customer수
 	private int[] customerOrderNo = new int[3]; // customer남은 주문수
 	private int[] customerX = {744,444,144};	// customer x 좌표
-
+	private Timer guestTimer;					// 손님 들어오는 타이머
+	private int combo;							// 콤보	(손님 나가면 리셋)
+	
 	// cons
 	public CustomerManager(GameView gView, GuestPanel gP, OrderDao orderDao, int maxOrderNo, int stageLv) {
 		orderLabel = new OrderLabel[100]; // 초기화
@@ -42,39 +47,35 @@ public class CustomerManager {
 		this.orderDao = orderDao;
 		this.maxOrderNo = maxOrderNo;
 		this.stageLv = stageLv;
+		this.cm = this;
 	}
 
 	// 손님 생성
 	public void guest() {
 		Random rand = new Random();
 		if(stageLv>4) {	//5stage부터 히든 출현
-			if (count == 1) {
+			if (count == 5) {	//count0부터 시작해서 5에 히든손님 출현 
 				cTimer[customerNo] = new CustomerTimer(this,(11-(0.3*stageLv))/1.5,customerNo,customerX[customerNo]); // 각 손님별 타이머 설정
 				gP.add(cTimer[customerNo]);
 				mt = new MessageTimer(this, 1.5, customerX[customerNo]);
 				gP.add(mt);
-				Image icon = new ImageIcon("images/Inked히든손님2.png").getImage().getScaledInstance(120, 200, 0); // 손님 이미지
-				customer[customerNo] = new JLabel(new ImageIcon(icon)); // 손님라벨
+				Image icon = new ImageIcon("images/Inked히든손님2.png").getImage().getScaledInstance(190, 250, 0);		// 히든손님 이미지
+				customer[customerNo] = new JLabel(new ImageIcon(icon)); 											// 히든손님 라벨
+				addOrder(maxOrderNo, customerX[customerNo], guest);
 				count = 0;
 				guest = false;
 			} else {
-				cTimer[customerNo] = new CustomerTimer(this,11-(0.3*stageLv),customerNo,customerX[customerNo]); // 각 손님별 타이머 설정
-				gP.add(cTimer[customerNo]);
-				Image[] icon = {new ImageIcon("images/손놈2.png").getImage().getScaledInstance(120, 200, 0),
-						new ImageIcon("images/손놈1.png").getImage().getScaledInstance(120,200,0),
-						new ImageIcon("images/손놈3.png").getImage().getScaledInstance(120,200,0)
-				}; // 손님 이미지
-				customer[customerNo] = new JLabel(new ImageIcon(icon[rand.nextInt(icon.length-1)])); // 손님라벨
+				Image[] icon = {new ImageIcon("images/손놈2.png").getImage().getScaledInstance(190, 250, 0),
+						new ImageIcon("images/손놈1.png").getImage().getScaledInstance(190, 250, 0),
+						new ImageIcon("images/손놈3.png").getImage().getScaledInstance(190, 250, 0)}; 	// 손님 이미지
+				customer[customerNo] = new JLabel(new ImageIcon(icon[rand.nextInt(icon.length-1)])); 	// 손님라벨
 				count++;
 				guest = true;
 			}
-		}else {
-			cTimer[customerNo] = new CustomerTimer(this,11-(0.3*stageLv),customerNo,customerX[customerNo]); // 각 손님별 타이머 설정
-			gP.add(cTimer[customerNo]);
-			Image[] icon = {new ImageIcon("images/손놈2.png").getImage().getScaledInstance(120, 200, 0),
-					new ImageIcon("images/손놈1.png").getImage().getScaledInstance(120,200,0),
-					new ImageIcon("images/손놈3.png").getImage().getScaledInstance(120,200,0)
-			}; // 손님 이미지
+		}else {	//1~4스테이지 히든 없이 진행
+			Image[] icon = {new ImageIcon("images/손놈2.png").getImage().getScaledInstance(190, 250, 0),
+					new ImageIcon("images/손놈1.png").getImage().getScaledInstance(190, 250, 0),
+					new ImageIcon("images/손놈3.png").getImage().getScaledInstance(190, 250, 0)};	 // 손님 이미지
 			customer[customerNo] = new JLabel(new ImageIcon(icon[rand.nextInt(icon.length-1)])); // 손님라벨
 			guest = true;
 		}
@@ -82,10 +83,15 @@ public class CustomerManager {
 		customerOrderNo[customerNo] = maxOrderNo;
 		// 음식 주문
 		// 손님 객체 존재시 (1,2,3번 자리 지정)
-		customer[customerNo].setBounds(customerX[customerNo], 105, 120, 200); // 손님 위치 설정
-		addOrder(maxOrderNo, customerX[customerNo], guest);
-
-		gP.add(customer[customerNo]); // 패널에 손님라벨 추가
+		customer[customerNo].setSize(150,220);					//손님라벨 사이즈
+		
+		if(guest) {customer[customerNo].setLocation(0, 105);	//손님라벨 위치
+		}else {customer[customerNo].setLocation(customerX[customerNo], 105);}
+		
+		gP.add(customer[customerNo]); 		// 패널에 손님라벨 추가
+		
+		
+		if(guest) {time();}		//일반손님 출현시 이동하는 메소드 실행
 
 		// 손님 No 설정 (0~2)
 		if (customerNo != 2) {
@@ -93,6 +99,11 @@ public class CustomerManager {
 		} else {
 			customerNo = 0;
 		}
+	}
+	
+	public void time() {
+		guestTimer = new Timer(20,new GuestTimer());
+		guestTimer.start();
 	}
 
 	public void addOrder(int menuNo, int x, boolean guest) {
@@ -141,21 +152,21 @@ public class CustomerManager {
 			// 랜덤값에 따라 떡볶이,음료수,튀김,오뎅,라면
 			Image food = null;
 			if (random == 0) {
-				food = new ImageIcon("images/떡볶이순대.jpg").getImage().getScaledInstance(60, 50, 0);
+				food = new ImageIcon("images/tbk1.png").getImage().getScaledInstance(50, 50, 0);
 			} else if (random == 1) {
-				food = new ImageIcon("images/drinkImage.jpg").getImage().getScaledInstance(60, 50, 0);
+				food = new ImageIcon("images/drink1.png").getImage().getScaledInstance(50, 40, 0);
 			} else if (random == 2) {
-				food = new ImageIcon("images/friedImage.jpeg").getImage().getScaledInstance(60, 50, 0);
+				food = new ImageIcon("images/fried1.png").getImage().getScaledInstance(50, 50, 0);
 			} else if (random == 3) {
-				food = new ImageIcon("images/오뎅.jpg").getImage().getScaledInstance(60, 50, 0);
+				food = new ImageIcon("images/오뎅.jpg").getImage().getScaledInstance(50, 50, 0);
 			} else if (random == 4) {
-				food = new ImageIcon("images/ramen.png").getImage().getScaledInstance(60, 50, 0);
+				food = new ImageIcon("images/ramen.png").getImage().getScaledInstance(50, 50, 0);
 			}
 
 			// 위치 설정
 			orderLabel[orderNo].setIcon(new ImageIcon(food));
-			orderLabel[orderNo].setBounds(x + 120, y + 120, 100, 30);
-			y += 40;
+			orderLabel[orderNo].setBounds(x + 150, y + 120, 70, 50);
+			y += 50;
 			gP.add(orderLabel[orderNo]);
 
 			// orderNo설정
@@ -194,7 +205,6 @@ public class CustomerManager {
 		buttonEnteredMusic.start();
 	}
 	
-
 	public void deleteMessage() {
 		gP.remove(mt);
 		gP.repaint();
@@ -218,6 +228,23 @@ public class CustomerManager {
 		for (int i = 0; i < cTimer.length; i++) {
 			if (cTimer[i] != null) {
 				cTimer[i].timerStop();
+			}
+		}
+	}
+	
+	class GuestTimer implements ActionListener{
+		private int cNo = customerNo;
+		private boolean notHidden = guest;
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			Point point = customer[cNo].getLocation();
+			customer[cNo].setLocation((point.x+6),(point.y));
+			gP.repaint();
+			if((point.x)>=customerX[cNo]) {
+				guestTimer.stop();
+				addOrder(maxOrderNo, customerX[cNo], notHidden);
+				cTimer[cNo] = new CustomerTimer(cm,11-(0.3*stageLv),cNo,customerX[cNo]); // 각 손님별 타이머 설정
+				gP.add(cTimer[cNo]);
 			}
 		}
 	}

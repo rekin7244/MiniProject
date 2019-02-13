@@ -133,7 +133,7 @@ public class StageView extends JPanel{
 						}else {
 							JOptionPane.showMessageDialog(mf, "라면기계가 필요합니다!");
 						}
-					}else if(i>4) {
+					}else if(i==1||i>4) {
 						ChangePanel.changePanel(mf,sView,new GameView(mf,m,i));
 						music.close();
 					}
