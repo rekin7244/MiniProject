@@ -232,29 +232,29 @@ public class GameView extends JPanel{
 			
 			//Equips Panel ActionListener
 			JButton[] equips = eP.getEquips();
-			if(e.getActionCommand().equals("자판기")) {
+			if(e.getSource()==equips[0]) {
 				buttonEnteredMusic = new Music("decision9.mp3",false);
-				if(drinksNo<3) {judgeLv("음료수",equips);}
+				if(drinksNo<4) {judgeLv("음료수",equips);}
 			}
-			if(e.getActionCommand().equals("떡볶이기계")) {
+			if(e.getSource()==equips[1]) {
 				if(tbkNo<4) {
 					buttonEnteredMusic = new Music("cook1.mp3",false);
 					if(tbkNo<tableLv[0]) {judgeLv("떡볶이",equips);}
 				}
 			}
-			if(e.getActionCommand().equals("튀김기")) {
+			if(e.getSource()==equips[2]) {
 				if(friedNo<4) {
 					buttonEnteredMusic = new Music("fried.mp3",false);
 					if(friedNo<tableLv[1]) {judgeLv("튀김",equips);}
 				}
 			}
-			if(e.getActionCommand().equals("오뎅기계")) {
+			if(e.getSource()==equips[3]) {
 				if(odengNo<4) {
 					buttonEnteredMusic = new Music("cook1.mp3",false);
 					if(odengNo<tableLv[2]) {judgeLv("오뎅",equips);}
 				}
 			}
-			if(e.getActionCommand().equals("라면기계")) {
+			if(e.getSource()==equips[4]) {
 				if(ramenNo<4) {
 					buttonEnteredMusic = new Music("cook1.mp3",false);
 					if(ramenNo<tableLv[3]) {judgeLv("라면",equips);}
@@ -315,7 +315,7 @@ public class GameView extends JPanel{
 		mP.setting(mP,drinksNo,tbkNo,friedNo,odengNo,ramenNo);
 	}
 
-	public void judgeLv(String menuName,JButton[] equips) {
+	public void judgeLv(String menuName,JButton[] equips) {		//조리 시작 전달
 		if(menuName.equals("음료수")) {
 			equips[0].setEnabled(false);
 			cookTimer = new CookingTime(equips[0],4,"음료수");	//조리 타이머
