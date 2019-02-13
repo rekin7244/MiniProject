@@ -80,7 +80,7 @@ public class CustomerManager {
 		customerOrderNo[customerNo] = maxOrderNo;
 		// À½½Ä ÁÖ¹®
 		// ¼Õ´Ô °´Ã¼ Á¸Àç½Ã (1,2,3¹ø ÀÚ¸® ÁöÁ¤)
-		customer[customerNo].setBounds(customerX[customerNo], 0, 120, 200); // ¼Õ´Ô À§Ä¡ ¼³Á¤
+		customer[customerNo].setBounds(customerX[customerNo], 105, 120, 200); // ¼Õ´Ô À§Ä¡ ¼³Á¤
 		addOrder(maxOrderNo, customerX[customerNo], guest);
 
 		gP.add(customer[customerNo]); // ÆÐ³Î¿¡ ¼Õ´Ô¶óº§ Ãß°¡
@@ -139,20 +139,20 @@ public class CustomerManager {
 			// ·£´ý°ª¿¡ µû¶ó ¶±ººÀÌ,À½·á¼ö,Æ¢±è,¿Àµ­,¶ó¸é
 			Image food = null;
 			if (random == 0) {
-				food = new ImageIcon("images/¶±ººÀÌ¼ø´ë.jpg").getImage().getScaledInstance(50, 40, 0);
+				food = new ImageIcon("images/¶±ººÀÌ¼ø´ë.jpg").getImage().getScaledInstance(60, 50, 0);
 			} else if (random == 1) {
-				food = new ImageIcon("images/drinkImage.jpg").getImage().getScaledInstance(50, 40, 0);
+				food = new ImageIcon("images/drinkImage.jpg").getImage().getScaledInstance(60, 50, 0);
 			} else if (random == 2) {
-				food = new ImageIcon("images/friedImage.jpeg").getImage().getScaledInstance(50, 40, 0);
+				food = new ImageIcon("images/friedImage.jpeg").getImage().getScaledInstance(60, 50, 0);
 			} else if (random == 3) {
-				food = new ImageIcon("images/¿Àµ­.jpg").getImage().getScaledInstance(50, 40, 0);
+				food = new ImageIcon("images/¿Àµ­.jpg").getImage().getScaledInstance(60, 50, 0);
 			} else if (random == 4) {
-				food = new ImageIcon("images/ramen.png").getImage().getScaledInstance(50, 40, 0);
+				food = new ImageIcon("images/ramen.png").getImage().getScaledInstance(60, 50, 0);
 			}
 
 			// À§Ä¡ ¼³Á¤
 			orderLabel[orderNo].setIcon(new ImageIcon(food));
-			orderLabel[orderNo].setBounds(x + 120, y, 100, 30);
+			orderLabel[orderNo].setBounds(x + 120, y + 120, 100, 30);
 			y += 40;
 			gP.add(orderLabel[orderNo]);
 
