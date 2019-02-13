@@ -22,7 +22,7 @@ public class MessageTimer extends JLabel{
 		this.time = time;
 		
 		//Message = new JLabel("Hidden");
-		Image icon = new ImageIcon("images/message.png")
+		Image icon = new ImageIcon("images/hiddenmessage.png")
 				.getImage().getScaledInstance(250, 150, 0);
 		message = new JLabel(new ImageIcon(icon));
 		timer = new Timer(100, new TimerStart());
@@ -31,7 +31,7 @@ public class MessageTimer extends JLabel{
 		message.setFont(new Font("Elephant", Font.BOLD, 40));
 		this.add(message);
 		this.setVisible(true);
-		this.setBounds(/*x + 10*/400, 100, 250, 150);
+		this.setBounds(500, 100, 250, 150);
 		
 		timer.start();
 	}

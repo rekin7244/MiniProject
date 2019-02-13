@@ -120,7 +120,7 @@ public class GameView extends JPanel{
 				String[] command = {"확인","취소"};
 				int result;
 
-				result = JOptionPane.showOptionDialog(null,
+				result = JOptionPane.showOptionDialog(mf,
 						"정말 그만두시겠습니까 ? ",
 						"부글부글분식",JOptionPane.YES_NO_OPTION, 
 						JOptionPane.INFORMATION_MESSAGE, null, command, command[0]);
@@ -175,11 +175,14 @@ public class GameView extends JPanel{
 	}
 
 	public void gameOver() {	//실행될때마다 하트 감소
-		if(stageLv!=10) {
+		if(stageLv!=10) {		//stage10제외
 			credit--;
 			gP.remove(heart[credit]);
 			//하트 3개 소진시 gameover
 			if(credit==0) {
+				//멤버 정보 저장
+				m.setStageGold(stageGold);
+				m.setGold(m.getGold()+stageGold);
 				//게임 종료
 				gameTimer.timerStop();
 				cm.endCustomer();
@@ -229,7 +232,7 @@ public class GameView extends JPanel{
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			Music buttonEnteredMusic=null;
-			
+
 			//Equips Panel ActionListener
 			JButton[] equips = eP.getEquips();
 			if(e.getSource()==equips[0]) {
@@ -323,31 +326,39 @@ public class GameView extends JPanel{
 		}else if(menuName.equals("떡볶이")) {
 			equips[1].setEnabled(false);
 			int temp=7;
-			if(equipLv[0]==2) { 	temp=5;
-			}else if(equipLv[0]==3) {temp=3;}
+			if(equipLv[0]==2) { 	temp=7;
+			}else if(equipLv[0]==3) {temp=6;}
 			cookTimer = new CookingTime(equips[1],temp,"떡볶이");
-			tbkNo++;
+			if(tbkNo+equipLv[0]<tableLv[0]) {		//개수 증가	
+				tbkNo+=equipLv[0];
+			}else {tbkNo=tableLv[0];}
 		}else if(menuName.equals("튀김")) {
 			equips[2].setEnabled(false);
-			int temp=10;
-			if(equipLv[1]==2) { 	temp=7;
-			}else if(equipLv[1]==3) {temp=4;}
+			int temp=7;
+			if(equipLv[1]==2) { 	temp=8;
+			}else if(equipLv[1]==3) {temp=8;}
 			cookTimer = new CookingTime(equips[2],temp,"튀김");
-			friedNo++;
+			if(friedNo+equipLv[1]<tableLv[1]) {		//개수 증가
+				friedNo+=equipLv[1];
+			}else {friedNo=tableLv[1];}
 		}else if(menuName.equals("오뎅")) {
 			equips[3].setEnabled(false);
 			int temp=8;
-			if(equipLv[2]==2) { 	temp=6;
-			}else if(equipLv[2]==3) {temp=4;}
+			if(equipLv[2]==2) { 	temp=9;
+			}else if(equipLv[2]==3) {temp=8;}
 			cookTimer = new CookingTime(equips[3],temp,"오뎅");
-			odengNo++;
+			if(odengNo+equipLv[2]<tableLv[2]) {		//개수 증가
+				odengNo+=equipLv[2];
+			}else {odengNo=tableLv[2];}
 		}else if(menuName.equals("라면")) {
 			equips[4].setEnabled(false);
-			int temp=12;
-			if(equipLv[3]==2) { 	temp=11;
+			int temp=9;
+			if(equipLv[3]==2) { 	temp=10;
 			}else if(equipLv[3]==3) {temp=10;}
 			cookTimer = new CookingTime(equips[4],temp,"라면");
-			ramenNo+=equipLv[3];
+			if(ramenNo+equipLv[3]<tableLv[3]) {		//개수 증가
+				ramenNo+=equipLv[3];
+			}else {ramenNo=tableLv[3];}
 		}
 	}
 }

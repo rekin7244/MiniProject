@@ -28,9 +28,9 @@ public class MarketPanel extends JPanel {
 	private int level2 = 50000;
 	private int level3 = 100000;
 	// 판 업글비용
-	private int plevel2 = 30000;
-	private int plevel3 = 60000;
-	private int plevel4 = 100000;
+	private int plevel2 = 15000;
+	private int plevel3 = 40000;
+	private int plevel4 = 90000;
 
 	// 기구
 	JButton mo = new JButton("떡볶이기구");
@@ -433,7 +433,7 @@ public class MarketPanel extends JPanel {
 
 		JLabel tbkupwon1 = new JLabel();
 		if (tableLv[0] == 1) {
-			tbkupwon1.setText("30,000원");
+			tbkupwon1.setText("15,000원");
 		} else {
 			tbkupwon1.setVisible(false);
 		}
@@ -441,7 +441,7 @@ public class MarketPanel extends JPanel {
 
 		JLabel tbkupwon2 = new JLabel();
 		if (tableLv[0] == 2) {
-			tbkupwon2.setText("60,000원");
+			tbkupwon2.setText("40,000원");
 		} else {
 			tbkupwon2.setVisible(false);
 		}
@@ -449,7 +449,7 @@ public class MarketPanel extends JPanel {
 
 		JLabel tbkupwon3 = new JLabel();
 		if (tableLv[0] == 3) {
-			tbkupwon3.setText("100,000원");
+			tbkupwon3.setText("90,000원");
 		} else {
 			tbkupwon3.setVisible(false);
 		}
@@ -470,7 +470,7 @@ public class MarketPanel extends JPanel {
 
 			JLabel tkupwon1 = new JLabel();
 			if (tableLv[1] == 1) {
-				tkupwon1.setText("30,000원");
+				tkupwon1.setText("15,000원");
 			} else {
 				tkupwon1.setVisible(false);
 			}
@@ -478,7 +478,7 @@ public class MarketPanel extends JPanel {
 
 			JLabel tkupwon2 = new JLabel();
 			if (tableLv[1] == 2) {
-				tkupwon2.setText("60,000원");
+				tkupwon2.setText("40,000원");
 			} else {
 				tkupwon2.setVisible(false);
 			}
@@ -486,7 +486,7 @@ public class MarketPanel extends JPanel {
 
 			JLabel tkupwon3 = new JLabel();
 			if (tableLv[1] == 3) {
-				tkupwon3.setText("100,000원");
+				tkupwon3.setText("90,000원");
 			} else {
 				tkupwon3.setVisible(false);
 			}
@@ -509,7 +509,7 @@ public class MarketPanel extends JPanel {
 
 			JLabel odupwon1 = new JLabel();
 			if (tableLv[2] == 1) {
-				odupwon1.setText("30,000원");
+				odupwon1.setText("15,000원");
 			} else {
 				odupwon1.setVisible(false);
 			}
@@ -517,7 +517,7 @@ public class MarketPanel extends JPanel {
 
 			JLabel odupwon2 = new JLabel();
 			if (tableLv[2] == 2) {
-				odupwon2.setText("60,000원");
+				odupwon2.setText("40,000원");
 			} else {
 				odupwon2.setVisible(false);
 			}
@@ -525,7 +525,7 @@ public class MarketPanel extends JPanel {
 
 			JLabel odupwon3 = new JLabel();
 			if (tableLv[2] == 3) {
-				odupwon3.setText("100,000원");
+				odupwon3.setText("90,000원");
 			} else {
 				odupwon3.setVisible(false);
 			}
@@ -548,7 +548,7 @@ public class MarketPanel extends JPanel {
 
 			JLabel rmupwon1 = new JLabel();
 			if (tableLv[3] == 1) {
-				rmupwon1.setText("30,000원");
+				rmupwon1.setText("15,000원");
 			} else {
 				rmupwon1.setVisible(false);
 			}
@@ -556,7 +556,7 @@ public class MarketPanel extends JPanel {
 
 			JLabel rmupwon2 = new JLabel();
 			if (tableLv[3] == 2) {
-				rmupwon2.setText("60,000원");
+				rmupwon2.setText("40,000원");
 			} else {
 				rmupwon2.setVisible(false);
 			}
@@ -564,7 +564,7 @@ public class MarketPanel extends JPanel {
 
 			JLabel rmupwon3 = new JLabel();
 			if (tableLv[3] == 3) {
-				rmupwon3.setText("100,000원");
+				rmupwon3.setText("90,000원");
 			} else {
 				rmupwon3.setVisible(false);
 			}
