@@ -30,7 +30,7 @@ public class CustomerTimer extends JLabel{
 		timerLabel.setBackground(null);
 		this.add(timerLabel);
 		this.setVisible(true);
-		this.setBounds(x-5,120,70,40);
+		this.setBounds(x-16,120,70,40);
 
 		timer.start();
 	}

@@ -15,7 +15,7 @@ public class MessageTimer extends JLabel{
 	private Timer timer;
 	private double time;
 	
-	public MessageTimer(CustomerManager cm, double time) {
+	public MessageTimer(CustomerManager cm, double time, int x) {
 		this.cm = cm;
 		this.time = time;
 		
@@ -29,7 +29,7 @@ public class MessageTimer extends JLabel{
 		Message.setFont(new Font("Elephant", Font.BOLD, 40));
 		this.add(Message);
 		this.setVisible(true);
-		this.setBounds(450, 170, 100, 100);
+		this.setBounds(x + 10, 10, 100, 100);
 		
 		timer.start();
 	}
