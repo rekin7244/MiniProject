@@ -51,7 +51,7 @@ public class StageView extends JPanel{
 
 		//스테이지1~5
 		for(int i=0;i<5;i++) {
-			stageBtn[i] = new JButton("STAGE "+ (i+1));
+			stageBtn[i] = new JButton();
 			stageBtn[i].setBounds(50+stagexSize*i,50,stagexSize,stageySize);
 			stageBtn[i].setIcon(new ImageIcon(btnImg[i]));
 			stageBtn[i].setContentAreaFilled(false);
@@ -60,7 +60,7 @@ public class StageView extends JPanel{
 		}
 		//스테이지6~10
 		for(int i=5;i<10;i++) {
-			stageBtn[i] = new JButton("STAGE "+ (i+1));
+			stageBtn[i] = new JButton();
 			stageBtn[i].setBounds(50+stagexSize*(i-5),80+stageySize,stagexSize,stageySize);
 			stageBtn[i].setIcon(new ImageIcon(btnImg[i]));
 			stageBtn[i].setContentAreaFilled(false);
@@ -72,13 +72,19 @@ public class StageView extends JPanel{
 		}
 
 		//상점으로
-		toMarket = new JButton("상점으로");
+		toMarket = new JButton();
+		toMarket.setContentAreaFilled(false);
+		toMarket.setBorderPainted(false);
+		toMarket.setIcon(new ImageIcon(new ImageIcon("images/btnImage/상점으로.png").getImage().getScaledInstance(180, 60, 0)));
 		toMarket.setBounds(700,450,200,70);
 		this.add(toMarket);
 
 		//저장 후 (회원이면)랭킹 출력
 		/*if(Member)*/	//회원인지 판별
-		save_Ranking = new JButton("랭킹 출력 및 종료");
+		save_Ranking = new JButton();
+		save_Ranking.setContentAreaFilled(false);
+		save_Ranking.setBorderPainted(false);
+		save_Ranking.setIcon(new ImageIcon(new ImageIcon("images/btnImage/랭킹출력및종료.png").getImage().getScaledInstance(180, 60, 0)));
 		save_Ranking.setBounds(700,550,200,70);
 		this.add(save_Ranking);
 

@@ -28,23 +28,12 @@ import com.kh.miniProject.model.vo.member.Member;
 
 public class RankingPanel extends JPanel {
 
-
-
-
 	private JTable tb;
-
 	private String[] menu = {"등수","아이디","최고스테이지","소유골드"};
-
-
 	private String rowData2[][] = new String[3][16];
-
 	private JScrollPane scroll;
-
 	private int point;
 	private ArrayList<Member> tempMember = new ArrayList<Member>();
-
-
-
 
 	DefaultTableModel defaultTable;
 
@@ -64,21 +53,17 @@ public class RankingPanel extends JPanel {
 		tb = new JTable();
 		this.add(tb);
 
-
-
 		tb.setBounds(280,200,450,300);
 
 		defaultTable = new DefaultTableModel(menu, tempMember.size());
 
 		tb.setModel(defaultTable);
 
-
 		for(int i=0; i<tempMember.size();i++) {
 			defaultTable.setValueAt(i+1, i, 0);
 			defaultTable.setValueAt(tempMember.get(i).getMemberId(), i, 1);
 			defaultTable.setValueAt(tempMember.get(i).getMaxStage(), i, 2);
 			defaultTable.setValueAt(tempMember.get(i).getGold(), i, 3);
-
 		}
 
 		this.setSize(1024,768);
@@ -101,7 +86,6 @@ public class RankingPanel extends JPanel {
 		a = new JLabel("부글부글 분식");
 		a.setForeground(Color.RED); //얘가 윗것보다 아래에 있어야 함  
 
-
 		a.setSize(500,100);
 		a.setLocation(320,50);
 
@@ -113,11 +97,8 @@ public class RankingPanel extends JPanel {
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		System.out.println("호출?");
 		g.setColor(Color.black);
 		g.drawImage(backImage,0,0, null);
-
-
 	}
 
 	public void sortScore() {
@@ -126,26 +107,18 @@ public class RankingPanel extends JPanel {
 			int result = 0;
 			@Override
 			public int compare (Member m1,Member m2) {
-				if(m1.getMaxStage() > m2.getMaxStage()) {    //m1이 m2보다 높은 스테이지일경우
+				if(m1.getMaxStage() > m2.getMaxStage()) {   		//m1이 m2보다 높은 스테이지일경우
 					result = -1;
-
-
-				}else if(m1.getMaxStage() == m2.getMaxStage()) {//m1이 m2보다 낮은 스테이지일경우
-
-
-					if(m1.getGold() > m2.getGold()) {   //m1점수가 m2점수보다 높을때
+				}else if(m1.getMaxStage() == m2.getMaxStage()) {	//m1이 m2보다 낮은 스테이지일경우
+					if(m1.getGold() > m2.getGold()) {   			//m1점수가 m2점수보다 높을때
 						result = -1;
-
 					}else if(m1.getGold() < m2.getGold()) {
 						result = 1;
-
 					}else {
 						result = 0;
 					}
-
 				}else if(m1.getMaxStage() < m2.getMaxStage()){
 					result = 1;
-
 				}else {
 					result = 1;
 				}
@@ -171,7 +144,7 @@ public class RankingPanel extends JPanel {
 			e.printStackTrace();
 		}
 	}
-	
+
 	class BackBtn implements ActionListener{
 
 		@Override
@@ -180,7 +153,7 @@ public class RankingPanel extends JPanel {
 				new ChangePanel().changePanel(mf, rPanel, new LoginPanel(mf));
 			}
 		}
-		
+
 	}
 }
 

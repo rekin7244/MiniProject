@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
@@ -97,11 +98,17 @@ public class JoinPanel extends JPanel {
 
 		// 가입하기 버튼 추가
 		joinbt = new JButton("가입하기 ");
-		joinbt.setBounds(400, 510, 90, 30);
+		joinbt.setContentAreaFilled(false);
+		joinbt.setBorderPainted(false);
+		joinbt.setIcon(new ImageIcon(new ImageIcon("images/btnImage/가입하기.png").getImage().getScaledInstance(90, 40, 0)));
+		joinbt.setBounds(400, 510, 110, 30);
 
 		// 가입취소 버튼 추가
 		cancelbt = new JButton("가입 취소");
-		cancelbt.setBounds(510, 510, 90, 30);
+		cancelbt.setContentAreaFilled(false);
+		cancelbt.setBorderPainted(false);
+		cancelbt.setIcon(new ImageIcon(new ImageIcon("images/btnImage/가입취소.png").getImage().getScaledInstance(90, 40, 0)));
+		cancelbt.setBounds(510, 510, 110, 30);
 
 		//아이디 중복확인 버튼
 		IDCheck = new JButton("확인");
@@ -172,16 +179,20 @@ public class JoinPanel extends JPanel {
 			//가입하기
 			if (e.getSource() == joinbt) {
 				//아이디 이미 존재하는지 확인
-				if(memberDao.checkMember(IDText.getText(), EmailText.getText())) {
-					String inputPass = "";
-					char[] pass = passText.getPassword();
-					for (int i = 0; i < pass.length; i++) {
-						inputPass += pass[i];
+				if(!IDText.getText().equals("")&&!EmailText.getText().equals("")) {
+					if(memberDao.checkMember(IDText.getText(), EmailText.getText())) {
+						String inputPass = "";
+						char[] pass = passText.getPassword();
+						for (int i = 0; i < pass.length; i++) {
+							inputPass += pass[i];
+						}
+						memberDao.addMember(new Member(IDText.getText(), inputPass, EmailText.getText()));
+						new ChangePanel().changePanel(mf, jView, new LoginPanel(mf));
+					} else {
+						JOptionPane.showMessageDialog(mf, "아이디,이메일을 확인해주세요");
 					}
-					memberDao.addMember(new Member(IDText.getText(), inputPass, EmailText.getText()));
-					new ChangePanel().changePanel(mf, jView, new LoginPanel(mf));
-				} else {
-					JOptionPane.showMessageDialog(mf, "아이디/이메일 중복확인을 해주세요");
+				}else {
+					JOptionPane.showMessageDialog(mf, "아이디,이메일을 확인해주세요");
 				}
 
 			}

@@ -93,21 +93,20 @@ public class LoginPanel extends JPanel {
 		loginbt = new JButton("로그인");
 		loginbt.setContentAreaFilled(false);
 		loginbt.setBorderPainted(false);
-		loginbt.setIcon(new ImageIcon("images/loginButton.png"));
-		loginbt.setBounds(400, 460, 200, 30);
+		loginbt.setIcon(new ImageIcon(new ImageIcon("images/btnImage/LOGIN.png").getImage().getScaledInstance(200, 40, 0)));
+		loginbt.setBounds(400, 460, 220, 40);
 
 		guestbt= new JButton("guest");
 		guestbt.setContentAreaFilled(false);
-		/*Image temp = new ImageIcon("images/게스트버튼.png").getImage().getScaledInstance(width, height, hints)*/
-		guestbt.setIcon(new ImageIcon("images/게스트버튼.png"));
 		guestbt.setBorderPainted(false);
-		guestbt.setBounds(510, 510, 90, 30); 
+		guestbt.setIcon(new ImageIcon(new ImageIcon("images/btnImage/GUEST.png").getImage().getScaledInstance(90, 40, 0)));
+		guestbt.setBounds(510, 520, 110, 40); 
 
 		Joinbt = new JButton("회원가입");
-		/*guestbt.setIcon(new ImageIcon("images/회원가입버튼.png"));*/
 		Joinbt.setContentAreaFilled(false);
 		Joinbt.setBorderPainted(false);
-		Joinbt.setBounds(400, 510, 90, 30);
+		Joinbt.setIcon(new ImageIcon(new ImageIcon("images/btnImage/JOIN.png").getImage().getScaledInstance(90, 40, 0)));
+		Joinbt.setBounds(400, 520, 110, 40);
 
 		// 마지막 추가들
 		this.add(ID);
