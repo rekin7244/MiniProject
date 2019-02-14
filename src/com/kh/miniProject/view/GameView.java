@@ -13,7 +13,6 @@ import javax.swing.JPanel;
 
 import com.kh.miniProject.controller.CookingTime;
 import com.kh.miniProject.controller.CustomerManager;
-import com.kh.miniProject.controller.HCustomerManager;
 import com.kh.miniProject.model.dao.MemberDao;
 import com.kh.miniProject.model.dao.OrderDao;
 import com.kh.miniProject.model.vo.member.Member;
@@ -98,14 +97,10 @@ public class GameView extends JPanel{
 		//°í°´¸Å´ÏÀú ½ÇÇà
 		if(stageLv<3) {
 			cm = new CustomerManager(this,gP,orderDao,2,stageLv);
-		}else if(stageLv<=5){
-			cm = new CustomerManager(this,gP,orderDao,3,stageLv);
 		}else if(stageLv<8) {
-			cm = new HCustomerManager(this,gP,orderDao,3,stageLv);
-		}else if(stageLv<10) {
-			cm = new HCustomerManager(this,gP,orderDao,4,stageLv);
+			cm = new CustomerManager(this,gP,orderDao,3,stageLv);
 		}else {
-			cm = new HCustomerManager(this,gP,orderDao,4,stageLv);
+			cm = new CustomerManager(this,gP,orderDao,4,stageLv);
 		}
 		//½ºÅ×ÀÌÁö Timer
 		gameTimer = new StageTimer(gP,cm,this,stageLv);
@@ -267,48 +262,54 @@ public class GameView extends JPanel{
 
 
 			//MenuPanel ActionListener
-			int temp=-1;
+			int ordertemp = -1;
+			int pricetemp = -1;
 			if(e.getActionCommand().equals("À½·á¼ö")) {
+				MenuOrder menu = new MenuOrder("À½·á¼ö");
 				if(drinksNo>0) {
-					if((temp=orderDao.searchOrder(new MenuOrder("À½·á¼ö")))>=0) {
+					if((pricetemp=orderDao.searchPrice(menu))>=0&&((ordertemp=orderDao.searchOrder(menu))>=0)) {
 						buttonEnteredMusic = new Music("decision11.mp3",false);
 						drinksNo--;
 					}
 				}
 			}
 			if(e.getActionCommand().equals("¶±ººÀÌ")) {
+				MenuOrder menu = new MenuOrder("¶±ººÀÌ");
 				if(tbkNo>0) {
-					if((temp=orderDao.searchOrder(new MenuOrder("¶±ººÀÌ")))>=0) {
+					if((pricetemp=orderDao.searchPrice(menu))>=0&&((ordertemp=orderDao.searchOrder(menu))>=0)) {
 						buttonEnteredMusic = new Music("cancel4.mp3",false);
 						tbkNo--;
 					}
 				}
 			}
 			if(e.getActionCommand().equals("Æ¢±è")) {
+				MenuOrder menu = new MenuOrder("Æ¢±è");
 				if(friedNo>0) {
-					if((temp=orderDao.searchOrder(new MenuOrder("Æ¢±è")))>=0) {
+					if((pricetemp=orderDao.searchPrice(menu))>=0&&((ordertemp=orderDao.searchOrder(menu))>=0)) {
 						buttonEnteredMusic = new Music("cancel4.mp3",false);
 						friedNo--;
 					}
 				}
 			}
 			if(e.getActionCommand().equals("¿Àµ­")) {
+				MenuOrder menu = new MenuOrder("¿Àµ­");
 				if(odengNo>0) {
-					if((temp=orderDao.searchOrder(new MenuOrder("¿Àµ­")))>=0) {
+					if((pricetemp=orderDao.searchPrice(menu))>=0&&((ordertemp=orderDao.searchOrder(menu))>=0)) {
 						buttonEnteredMusic = new Music("decision11.mp3",false);
 						odengNo--;
 					}
 				}
 			}
 			if(e.getActionCommand().equals("¶ó¸é")) {
+				MenuOrder menu = new MenuOrder("¶ó¸é");
 				if(ramenNo>0) {
-					if((temp=orderDao.searchOrder(new MenuOrder("¶ó¸é")))>=0) {
+					if((pricetemp=orderDao.searchPrice(menu))>=0&&((ordertemp=orderDao.searchOrder(menu))>=0)) {
 						buttonEnteredMusic = new Music("decision11.mp3",false);
 						ramenNo--;
 					}
 				}
 			}
-			if(temp!=-1) {cm.deleteLabel(temp);}
+			if(ordertemp!=-1) {cm.deleteLabel(ordertemp,pricetemp);}
 			if(buttonEnteredMusic!=null) {buttonEnteredMusic.start();}
 			refreshMenuTable();
 		}

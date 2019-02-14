@@ -11,26 +11,40 @@ import javax.swing.Timer;
 
 public class GoldLabel extends JLabel{
 	private Timer labelTimer;
-	private JLabel label;
-	private int x,y;
+	private Point point;
+	private GuestPanel gP;
+	private GoldLabel gLabel;
 	
-	public GoldLabel(JLabel label,int gold) {
-		this.label = label;
-		this.x = label.getX();
-		this.y = label.getY();
+	public GoldLabel(GuestPanel gP,Point point,int gold) {
+		this.gP = gP;
+		this.point = point;
 		this.labelTimer = new Timer(10,new LabelTimer());
 		
 		this.setText("+ "+gold+" G");
+		this.setLocation(point);
+		this.setSize(100,20);
 		this.setForeground(Color.yellow);
-		this.setFont(new Font("Elephant",Font.ITALIC,15));
+		this.setFont(new Font("Elephant",Font.BOLD,20));
+		this.setBackground(null);
+		
+		gLabel = this;
+		gP.add(gLabel);
+		
 		labelTimer.start();
 	}
 	
 	class LabelTimer implements ActionListener{
-		private int count = 20;
+		private int count = 40;
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			Point point = label.getLocation();
+			gLabel.setLocation(point.x, point.y+2);
+			gP.repaint();
+			count--;
+			
+			if(count<0) {
+				labelTimer.stop();
+				gP.remove(gLabel);
+			}
 			
 		}
 	}
