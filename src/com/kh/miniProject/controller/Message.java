@@ -5,15 +5,14 @@ import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
+import com.kh.miniProject.music.Music;
 import com.kh.miniProject.view.GuestPanel;
 
 public class Message extends JLabel implements Runnable {
-	private CustomerManager cm;
 	private GuestPanel gP;
 	private JLabel message;
 
 	public Message(CustomerManager cm, GuestPanel gP) {
-		this.cm = cm;
 		this.gP = gP;
 
 		Image icon = new ImageIcon("images/message.png").getImage().getScaledInstance(250, 150, 0);
@@ -25,7 +24,6 @@ public class Message extends JLabel implements Runnable {
 		this.setBounds(0, 100, 250, 150);
 
 		Thread t = new Thread(this);
-		System.out.println("스레드 생성");
 		t.start();
 	}
 
@@ -34,6 +32,8 @@ public class Message extends JLabel implements Runnable {
 		for (int x = message.getX(); x <= 1000; x += 50) {
 			message.setBounds(x, 10, 250, 150);
 			gP.add(message);
+			Music buttonEnteredMusic = new Music("[효과음]경고음,사이렌,싸이렌,경고 (online-audio-converter.com).mp3",false);
+			buttonEnteredMusic.start();
 			repaint();
 			try {
 				Thread.sleep(100);

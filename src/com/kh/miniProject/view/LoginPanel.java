@@ -90,19 +90,19 @@ public class LoginPanel extends JPanel {
 
 
 		// 로그인버튼 추가
-		loginbt = new JButton("로그인");
+		loginbt = new JButton();
 		loginbt.setContentAreaFilled(false);
 		loginbt.setBorderPainted(false);
 		loginbt.setIcon(new ImageIcon(new ImageIcon("images/btnImage/LOGIN.png").getImage().getScaledInstance(200, 40, 0)));
 		loginbt.setBounds(400, 460, 220, 40);
 
-		guestbt= new JButton("guest");
+		guestbt= new JButton();
 		guestbt.setContentAreaFilled(false);
 		guestbt.setBorderPainted(false);
 		guestbt.setIcon(new ImageIcon(new ImageIcon("images/btnImage/GUEST.png").getImage().getScaledInstance(90, 40, 0)));
 		guestbt.setBounds(510, 520, 110, 40); 
 
-		Joinbt = new JButton("회원가입");
+		Joinbt = new JButton();
 		Joinbt.setContentAreaFilled(false);
 		Joinbt.setBorderPainted(false);
 		Joinbt.setIcon(new ImageIcon(new ImageIcon("images/btnImage/JOIN.png").getImage().getScaledInstance(90, 40, 0)));
@@ -174,8 +174,10 @@ public class LoginPanel extends JPanel {
 				titleMusic.close();
 			}
 			if(e.getSource() == Joinbt) {
-				ChangePanel.changePanel(mf, lView, new JoinPanel(mf));
-				titleMusic.close();
+				JoinPanel jp;
+				ChangePanel.changePanel(mf, lView,jp = new JoinPanel(mf));
+				jp.setTitleMusic(titleMusic);
+				/*titleMusic.close();*/
 			}
 		}
 
@@ -194,4 +196,14 @@ public class LoginPanel extends JPanel {
 		public void mouseExited(MouseEvent e) {
 		}
 	}
+
+	public Music getTitleMusic() {
+		return titleMusic;
+	}
+
+	public void setTitleMusic(Music titleMusic) {
+		this.titleMusic = titleMusic;
+	}
+	
+	
 }

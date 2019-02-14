@@ -14,7 +14,7 @@ public class Member implements Serializable{
 	private String memberEmail;
 	private int maxStage=1;				//초기 세팅 1스테이지
 	private int gold;
-	private int stageGold;
+	private transient int stageGold[];
 
 	//조리기구 레벨 초기 세팅 {떡볶이/튀김기/오뎅기계/라면기계}
 	private int[] equipsLv = {1,0,0,0};
@@ -28,6 +28,7 @@ public class Member implements Serializable{
 		this.memberId = memberId;
 		this.memberPwd = memberPwd;
 		this.memberEmail = memberEmail;
+		stageGold = new int[3];
 	}
 
 	//get,set
@@ -73,10 +74,16 @@ public class Member implements Serializable{
 	public void setTableLv(int[] tableLv) {
 		this.tableLv = tableLv;
   }
-	public int getStageGold() {
+
+	
+	
+	
+
+	public int[] getStageGold() {
 		return stageGold;
 	}
-	public void setStageGold(int stageGold) {
+
+	public void setStageGold(int stageGold[]) {
 		this.stageGold = stageGold;
 	}
 

@@ -20,6 +20,7 @@ import javax.swing.JTextField;
 
 import com.kh.miniProject.model.dao.MemberDao;
 import com.kh.miniProject.model.vo.member.Member;
+import com.kh.miniProject.music.Music;
 
 
 public class JoinPanel extends JPanel {
@@ -35,6 +36,8 @@ public class JoinPanel extends JPanel {
 	private MainFrame mf;
 	private JPanel jView;
 	private MemberDao memberDao = new MemberDao();
+	
+	private Music titleMusic;
 
 
 	public JoinPanel(MainFrame mf) {
@@ -97,14 +100,14 @@ public class JoinPanel extends JPanel {
 		EmailText.setBackground(Color.white);
 
 		// 가입하기 버튼 추가
-		joinbt = new JButton("가입하기 ");
+		joinbt = new JButton();
 		joinbt.setContentAreaFilled(false);
 		joinbt.setBorderPainted(false);
 		joinbt.setIcon(new ImageIcon(new ImageIcon("images/btnImage/가입하기.png").getImage().getScaledInstance(90, 40, 0)));
 		joinbt.setBounds(400, 510, 110, 30);
 
 		// 가입취소 버튼 추가
-		cancelbt = new JButton("가입 취소");
+		cancelbt = new JButton();
 		cancelbt.setContentAreaFilled(false);
 		cancelbt.setBorderPainted(false);
 		cancelbt.setIcon(new ImageIcon(new ImageIcon("images/btnImage/가입취소.png").getImage().getScaledInstance(90, 40, 0)));
@@ -137,6 +140,10 @@ public class JoinPanel extends JPanel {
 		EmailCheck.addActionListener(new BtnAction());
 		layeredPane.add(panel);
 		add(layeredPane);
+	}
+	
+	public void setTitleMusic(Music titleMusic) {
+		this.titleMusic = titleMusic;
 	}
 
 	class joinimg extends JPanel {
@@ -188,6 +195,7 @@ public class JoinPanel extends JPanel {
 						}
 						memberDao.addMember(new Member(IDText.getText(), inputPass, EmailText.getText()));
 						new ChangePanel().changePanel(mf, jView, new LoginPanel(mf));
+						titleMusic.close();
 					} else {
 						JOptionPane.showMessageDialog(mf, "아이디,이메일을 확인해주세요");
 					}
@@ -199,6 +207,7 @@ public class JoinPanel extends JPanel {
 			//가입 취소
 			if (e.getSource() == cancelbt) {
 				new ChangePanel().changePanel(mf, jView, new LoginPanel(mf));
+				titleMusic.close();
 			}
 
 		}
