@@ -78,7 +78,7 @@ public class HCustomerManager extends CustomerManager{
 			gP.add(cTimer[customerNo]);
 			Image icon = new ImageIcon("images/InkedÈ÷µç¼Õ´Ô2.png").getImage().getScaledInstance(120, 200, 0); // ¼Õ´Ô ÀÌ¹ÌÁö
 			customer[customerNo] = new JLabel(new ImageIcon(icon)); // ¼Õ´Ô¶óº§
-			guest = false;
+			guest = true;
 		}
 
 		customerOrderNo[customerNo] = maxOrderNo;
