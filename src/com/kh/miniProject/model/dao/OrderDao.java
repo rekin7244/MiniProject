@@ -19,7 +19,14 @@ public class OrderDao {
 	public void addOrder(MenuOrder menu) {
 		orderList.add(menu);
 	}
-	
+	public int searchPrice(MenuOrder menu) {
+		for (MenuOrder menuOrder : orderList) {
+			if(menuOrder.getMenuName().equals(menu.getMenuName())){
+				return menuOrder.getMenuPrice();
+			}
+		}
+		return -1;
+	}
 	public int searchOrder(MenuOrder menu) {
 		for (MenuOrder menuOrder : orderList) {
 			if(menuOrder.getMenuName().equals(menu.getMenuName())){
