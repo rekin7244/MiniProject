@@ -76,9 +76,10 @@ public class CustomerManager {
 			customer[customerNo] = new JLabel(new ImageIcon(icon[rand.nextInt(icon.length-1)])); // 손님라벨
 			notHidden = true;
 		}else if(stageLv==5){	//5stage부터 히든 출현
-			if (count == 1) {	//count0부터 시작해서 5에 히든손님 출현 
+			if (count == 1) {	//count0부터 시작해서 5에 히든손님 출현
 				notHidden = false;
 				m = new Message(this, gP);	//경고메세지 출력
+				System.out.println("히든 시작");
 				cTimer[customerNo] = new CustomerTimer(this,(11-(0.3*stageLv))/1.5,customerNo,customerX[customerNo]); // 각 손님별 타이머 설정
 				gP.add(cTimer[customerNo]);
 				Image icon = new ImageIcon("images/Inked히든손님2.png").getImage().getScaledInstance(190, 250, 0);		// 히든손님 이미지
@@ -98,7 +99,7 @@ public class CustomerManager {
 				notHidden = false;
 				m = new Message(this, gP);
 				cTimer[customerNo] = new CustomerTimer(this,(12-(0.3*stageLv))/1.5,customerNo,customerX[customerNo]); // 각 손님별 타이머 설정
-				gP.add(cTimer[customerNo]);
+				//gP.add(cTimer[customerNo]);
 				Image icon = new ImageIcon("images/Inked히든손님2.png").getImage().getScaledInstance(140, 200, 0); // 손님 이미지
 				customer[customerNo] = new JLabel(new ImageIcon(icon)); // 손님라벨
 				addOrder(maxOrderNo, customerX[customerNo], notHidden);
@@ -155,6 +156,15 @@ public class CustomerManager {
 			} else {
 				customerNo = 0;
 			}}
+	}
+	
+	public synchronized void hidden() {
+		cTimer[customerNo] = new CustomerTimer(this,(11-(0.3*stageLv))/1.5,customerNo,customerX[customerNo]); // 각 손님별 타이머 설정
+		gP.add(cTimer[customerNo]);
+		Image icon = new ImageIcon("images/Inked히든손님2.png").getImage().getScaledInstance(190, 250, 0);		// 히든손님 이미지
+		addOrder(maxOrderNo, customerX[customerNo], notHidden);
+		customer[customerNo] = new JLabel(new ImageIcon(icon)); 											// 히든손님 라벨
+		count = 0;
 	}
 
 	public void time() {

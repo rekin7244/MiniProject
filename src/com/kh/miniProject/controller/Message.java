@@ -9,10 +9,12 @@ import com.kh.miniProject.music.Music;
 import com.kh.miniProject.view.GuestPanel;
 
 public class Message extends JLabel implements Runnable {
+	private CustomerManager cm;
 	private GuestPanel gP;
 	private JLabel message;
 
 	public Message(CustomerManager cm, GuestPanel gP) {
+		this.cm = cm;
 		this.gP = gP;
 
 		Image icon = new ImageIcon("images/message.png").getImage().getScaledInstance(250, 150, 0);
@@ -38,6 +40,7 @@ public class Message extends JLabel implements Runnable {
 				} else if (message.getX() == 1000) {
 					gP.remove(message);
 					repaint();
+					System.out.println("스레드 끝");
 				}
 			} catch (InterruptedException e) {
 				e.printStackTrace();
@@ -45,5 +48,4 @@ public class Message extends JLabel implements Runnable {
 		}
 
 	}
-
 }
