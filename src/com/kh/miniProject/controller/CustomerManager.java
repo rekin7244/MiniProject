@@ -39,7 +39,8 @@ public class CustomerManager {
 	private int[] customerX;					// customer x 좌표
 	private Timer[] guestTimer;					// 손님 들어오는 타이머
 	private int combo;							// 콤보	(손님 나가면 리셋)
-
+	private CoinEffect coin;
+	
 	// cons
 	public CustomerManager(GameView gView, GuestPanel gP, OrderDao orderDao, int maxOrderNo, int stageLv) {
 		orderLabel = new OrderLabel[100]; // 초기화
@@ -67,6 +68,7 @@ public class CustomerManager {
 	// 손님 생성
 	public void guest() {
 		Random rand = new Random();
+		Image money = new ImageIcon("images/coin1.gif").getImage().getScaledInstance(50, 50, 0);
 		if(stageLv<=4) {	//1~4스테이지 히든 없이 진행
 			Image[] icon = {new ImageIcon("images/손놈2.png").getImage().getScaledInstance(190, 250, 0),
 					new ImageIcon("images/손놈1.png").getImage().getScaledInstance(190, 250, 0),
@@ -255,12 +257,32 @@ public class CustomerManager {
 		// 손님에 따라 손님 주문수 감소
 		if (orderNo < maxOrderNo * 1) {
 			customerOrderNo[0] -= 1;
+			if(customerOrderNo[0]==0) {
+				coin = new CoinEffect(cm, gP, 0,customer[0].getX(),customer[0].getY());
+				Music buttonEnteredMusic = new Music("동전 소리 - 사운드 효과를 (1) (1).mp3", false);
+				buttonEnteredMusic.start();
+			}
 		} else if (orderNo < maxOrderNo * 2) {
 			customerOrderNo[1] -= 1;
+			if(customerOrderNo[1]==0) {
+				coin = new CoinEffect(cm, gP, 0,customer[1].getX(),customer[1].getY());
+				Music buttonEnteredMusic = new Music("동전 소리 - 사운드 효과를 (1) (1).mp3", false);
+				buttonEnteredMusic.start();
+			}
 		} else if (orderNo < maxOrderNo * 3) {
 			customerOrderNo[2] -= 1;
+			if(customerOrderNo[2]==0) {
+				coin = new CoinEffect(cm, gP, 0,customer[2].getX(),customer[2].getY());
+				Music buttonEnteredMusic = new Music("동전 소리 - 사운드 효과를 (1) (1).mp3", false);
+				buttonEnteredMusic.start();
+			}
 		} else if (stageLv>5 && orderNo < maxOrderNo * 4) {		//스테이지6부터 4번째 손님 주문정보
 			customerOrderNo[3] -= 1;
+			if(customerOrderNo[3]==0) {
+				coin = new CoinEffect(cm, gP, 0,customer[3].getX(),customer[3].getY());
+				Music buttonEnteredMusic = new Music("동전 소리 - 사운드 효과를 (1) (1).mp3", false);
+				buttonEnteredMusic.start();
+			}
 		}
 		// 손님 주문 종료시
 		for (int i = 0; i < customerOrderNo.length; i++) {
@@ -269,11 +291,6 @@ public class CustomerManager {
 					cTimer[i].timerStop();
 					gP.remove(cTimer[i]);
 					gP.remove(customer[i]);
-					
-					if(i==3) {	//여기 고쳐야함 선우 이펙트로 옮기자
-						Music buttonEnteredMusic = new Music("동전 소리 - 사운드 효과를 (1) (1).mp3", false);
-						buttonEnteredMusic.start();
-					}
 				}
 			}
 		}
