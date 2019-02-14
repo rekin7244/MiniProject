@@ -1,6 +1,7 @@
 package com.kh.miniProject.view;
 
 import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -34,9 +35,8 @@ public class StageView extends JPanel{
 			new ImageIcon("images/seven.png").getImage().getScaledInstance(165, 150, 0),
 			new ImageIcon("images/eight.png").getImage().getScaledInstance(165, 150, 0),
 			new ImageIcon("images/nine.png").getImage().getScaledInstance(165, 150, 0),
-			new ImageIcon("images/zero.png").getImage().getScaledInstance(165, 150, 0)
-
-	};
+			new ImageIcon("images/zero.png").getImage().getScaledInstance(165, 150, 0)};
+	private Image backImage = new ImageIcon("images/LoguinFrame01_01.jpg").getImage();
 
 	public StageView(MainFrame mf,Member m) {
 		this.m = m;
@@ -107,6 +107,12 @@ public class StageView extends JPanel{
 		//저장 및 랭킹 버튼
 		save_Ranking.addMouseListener(new MyAction());
 	}	
+	
+	@Override
+	public void paintComponent(Graphics g) {
+		g.drawImage(backImage, 0, 0, null);
+	}
+	
 	class MyAction implements MouseListener {
 
 		@Override
@@ -114,13 +120,13 @@ public class StageView extends JPanel{
 
 		@Override
 		public void mousePressed(MouseEvent e) {
-			Music buttonEnteredMusic = new Music("decision8.mp3",false);
-			buttonEnteredMusic.start();
 			for(int i=1;i<=10;i++) {
-				if(e.getSource()==stageBtn[(i-1)]) {
+				if(e.getSource()==stageBtn[(i-1)]&&stageBtn[(i-1)].isEnabled()) {
 					if(i==2) {
 						if(equipsLv[1]>=1) {
 							ChangePanel.changePanel(mf,sView,new GameView(mf,m,i));
+							Music buttonEnteredMusic = new Music("decision8.mp3",false);
+							buttonEnteredMusic.start();
 							music.close();						
 						}else {
 							JOptionPane.showMessageDialog(mf, "튀김기가 필요합니다!");
@@ -128,6 +134,8 @@ public class StageView extends JPanel{
 					}else if(i==3) {
 						if(equipsLv[2]>=1) {
 							ChangePanel.changePanel(mf,sView,new GameView(mf,m,i));
+							Music buttonEnteredMusic = new Music("decision8.mp3",false);
+							buttonEnteredMusic.start();
 							music.close();	
 						}else {
 							JOptionPane.showMessageDialog(mf, "오뎅기계가 필요합니다!");
@@ -135,12 +143,16 @@ public class StageView extends JPanel{
 					}else if(i==4) {
 						if(equipsLv[3]>=1) {
 							ChangePanel.changePanel(mf,sView,new GameView(mf,m,i));
+							Music buttonEnteredMusic = new Music("decision8.mp3",false);
+							buttonEnteredMusic.start();
 							music.close();	
 						}else {
 							JOptionPane.showMessageDialog(mf, "라면기계가 필요합니다!");
 						}
 					}else if(i==1||i>4) {
 						ChangePanel.changePanel(mf,sView,new GameView(mf,m,i));
+						Music buttonEnteredMusic = new Music("decision8.mp3",false);
+						buttonEnteredMusic.start();
 						music.close();
 					}
 				}

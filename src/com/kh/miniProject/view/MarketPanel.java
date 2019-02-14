@@ -1,6 +1,7 @@
 package com.kh.miniProject.view;
 
 import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,6 +15,7 @@ import javax.swing.JPanel;
 import com.kh.miniProject.model.dao.MemberDao;
 import com.kh.miniProject.model.vo.member.Member;
 import com.kh.miniProject.music.Music;
+import com.kh.miniProject.run.Run;
 
 public class MarketPanel extends JPanel {
 
@@ -22,7 +24,7 @@ public class MarketPanel extends JPanel {
 	Member m;
 
 	// »ç¿ë ÇÊµå
-  private Music marketMusic;
+	private Music marketMusic;
 	// ±â±¸ ¾÷±Ûºñ¿ë
 	private int level1 = 25000;
 	private int level2 = 50000;
@@ -44,11 +46,13 @@ public class MarketPanel extends JPanel {
 	JButton mo6 = new JButton("¿Àµ­ÆÇ ¾÷±Û");
 	JButton mo7 = new JButton("¶ó¸éÆÇ ¾÷±Û");
 
+	JPanel innerPanel = new JPanel();
 	MarketPanel mPanel;
 	JButton gold;
 	private int[] equipsLv;
 	private int[] tableLv;
 	private EquipSetting e;
+	private Image backgroundImage = new ImageIcon("images/LoguinFrame01_01.jpg").getImage();
 
 	// ¶±ººÀÌ ±â±¸
 	private Image[] equipsImages = { new ImageIcon("images/¶±2.jpg").getImage().getScaledInstance(200, 200, 0),
@@ -98,16 +102,20 @@ public class MarketPanel extends JPanel {
 	
 	//cons
 	public MarketPanel(MainFrame mf, Member m) {
+		this.setBounds(0, 0, Run.SCREEN_WIDTH, Run.SCREEN_HEIGHT);
+		this.setLayout(null);
+		
 		e = new EquipSetting();
 		this.mf = mf;
 		this.m = m;
 		this.equipsLv = m.getEquipsLv();
 		this.tableLv = m.getTableLv();
 
-		this.setLayout(null);
-		this.setBounds(110, 50, 800, 650);
-		this.setBackground(Color.orange);
-
+		
+		innerPanel.setBounds(110, 50, 800, 650);
+		innerPanel.setBackground(Color.ORANGE);
+		this.add(innerPanel);
+		
 		// °ñµå Ãâ·Â
 		gold = new JButton("°ñµå");
 		gold.setEnabled(false);
@@ -115,11 +123,14 @@ public class MarketPanel extends JPanel {
 		gold.setBounds(0, 0, 200, 30);
 
 		// µ¹¾Æ°¡±â
-		returnBtn = new JButton("µ¹¾Æ°¡±â");
-		returnBtn.setBounds(660, 620, 140, 30);
-		this.add(returnBtn);
+		returnBtn = new JButton();
+		returnBtn.setIcon(new ImageIcon(new ImageIcon("images/btnImage/µ¹¾Æ°¡±â.png").getImage().getScaledInstance(140, 40, 0)));
+		returnBtn.setContentAreaFilled(false);
+		returnBtn.setBorderPainted(false);
+		returnBtn.setBounds(640, 600, 140, 50);
 		returnBtn.addActionListener(e);
-
+		
+		innerPanel.add(returnBtn);
 		mPanel = this;
 	}// marketpanel
 	
@@ -132,7 +143,7 @@ public class MarketPanel extends JPanel {
 	public void setting(MarketPanel mPanel) {
 		// °ñµå Ãâ·Â
 		gold.setText("¼ÒÁö±Ý: " + m.getGold() + "G");
-		mPanel.add(gold);
+		innerPanel.add(gold);
 
 		// ¶±ººÀÌ ±â±¸
 		if (equipsLv[0] == 1) {
@@ -276,14 +287,14 @@ public class MarketPanel extends JPanel {
 		mo7.removeActionListener(e);
 		mo7.addActionListener(e);
 
-		mPanel.add(mo);
-		mPanel.add(mo1);
-		mPanel.add(mo2);
-		mPanel.add(mo3);
-		mPanel.add(mo4);
-		mPanel.add(mo5);
-		mPanel.add(mo6);
-		mPanel.add(mo7);
+		innerPanel.add(mo);
+		innerPanel.add(mo1);
+		innerPanel.add(mo2);
+		innerPanel.add(mo3);
+		innerPanel.add(mo4);
+		innerPanel.add(mo5);
+		innerPanel.add(mo6);
+		innerPanel.add(mo7);
 
 		// ¶óº§
 		// ¶±ººÀÌ ¶óº§
@@ -307,9 +318,9 @@ public class MarketPanel extends JPanel {
 		}
 		tbkwon2.setBounds(80, 180, 200, 200);
 
-		mPanel.add(label);
-		mPanel.add(tbkwon1);
-		mPanel.add(tbkwon2);
+		innerPanel.add(label);
+		innerPanel.add(tbkwon1);
+		innerPanel.add(tbkwon2);
 
 		// Æ¢±è ¶óº§
 		JLabel label1 = new JLabel();
@@ -344,10 +355,10 @@ public class MarketPanel extends JPanel {
 			}
 			tkwon2.setBounds(270, 180, 200, 200);
 
-			mPanel.add(label1);
-			mPanel.add(tkwon);
-			mPanel.add(tkwon1);
-			mPanel.add(tkwon2);
+			innerPanel.add(label1);
+			innerPanel.add(tkwon);
+			innerPanel.add(tkwon1);
+			innerPanel.add(tkwon2);
 		}
 
 		// ¿Àµ­ ¶óº§
@@ -383,10 +394,10 @@ public class MarketPanel extends JPanel {
 			}
 			odwon2.setBounds(470, 180, 200, 200);
 
-			mPanel.add(label2);
-			mPanel.add(odwon);
-			mPanel.add(odwon1);
-			mPanel.add(odwon2);
+			innerPanel.add(label2);
+			innerPanel.add(odwon);
+			innerPanel.add(odwon1);
+			innerPanel.add(odwon2);
 		}
 
 		// ¶ó¸é ¶óº§
@@ -422,10 +433,10 @@ public class MarketPanel extends JPanel {
 			}
 			rmwon2.setBounds(650, 180, 200, 200);
 
-			mPanel.add(label3);
-			mPanel.add(rmwon);
-			mPanel.add(rmwon1);
-			mPanel.add(rmwon2);
+			innerPanel.add(label3);
+			innerPanel.add(rmwon);
+			innerPanel.add(rmwon1);
+			innerPanel.add(rmwon2);
 		}
 
 		// ¶±ººÀÌÆÇ ¶óº§
@@ -457,10 +468,10 @@ public class MarketPanel extends JPanel {
 		}
 		tbkupwon3.setBounds(80, 480, 200, 200);
 
-		mPanel.add(label4);
-		mPanel.add(tbkupwon1);
-		mPanel.add(tbkupwon2);
-		mPanel.add(tbkupwon3);
+		innerPanel.add(label4);
+		innerPanel.add(tbkupwon1);
+		innerPanel.add(tbkupwon2);
+		innerPanel.add(tbkupwon3);
 
 		// Æ¢±èÆÇ ¶óº§
 		JLabel label5 = new JLabel();
@@ -494,10 +505,10 @@ public class MarketPanel extends JPanel {
 			}
 			tkupwon3.setBounds(270, 480, 200, 200);
 
-			mPanel.add(label5);
-			mPanel.add(tkupwon1);
-			mPanel.add(tkupwon2);
-			mPanel.add(tkupwon3);
+			innerPanel.add(label5);
+			innerPanel.add(tkupwon1);
+			innerPanel.add(tkupwon2);
+			innerPanel.add(tkupwon3);
 
 		}
 
@@ -533,10 +544,10 @@ public class MarketPanel extends JPanel {
 			}
 			odupwon3.setBounds(460, 480, 200, 200);
 
-			mPanel.add(label6);
-			mPanel.add(odupwon1);
-			mPanel.add(odupwon2);
-			mPanel.add(odupwon3);
+			innerPanel.add(label6);
+			innerPanel.add(odupwon1);
+			innerPanel.add(odupwon2);
+			innerPanel.add(odupwon3);
 
 		}
 
@@ -572,10 +583,10 @@ public class MarketPanel extends JPanel {
 			}
 			rmupwon3.setBounds(650, 480, 200, 200);
 
-			mPanel.add(label7);
-			mPanel.add(rmupwon1);
-			mPanel.add(rmupwon2);
-			mPanel.add(rmupwon3);
+			innerPanel.add(label7);
+			innerPanel.add(rmupwon1);
+			innerPanel.add(rmupwon2);
+			innerPanel.add(rmupwon3);
 
 		}
 
@@ -841,7 +852,7 @@ public class MarketPanel extends JPanel {
 				}
 			}
 			refresh();
-			if (e.getActionCommand().equals("µ¹¾Æ°¡±â")) {
+			if (e.getSource() == returnBtn) {
 				marketMusic.close();
 				marketMusic.interrupt();
 				ChangePanel.changePanel(mf, mPanel, new StageView(mf, m));
@@ -860,6 +871,13 @@ public class MarketPanel extends JPanel {
 			mPanel = temp;
 		}
 	}
+	
+	@Override
+	public void paintComponent(Graphics g) {
+		g.drawImage(backgroundImage, 0, 0, null);
+		repaint();
+	}
+	
 	public Music getMarketMusic() {
 		return marketMusic;
 	}

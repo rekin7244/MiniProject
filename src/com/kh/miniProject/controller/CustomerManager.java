@@ -38,7 +38,6 @@ public class CustomerManager {
 	private int[] customerOrderNo; 				// customer남은 주문수
 	private int[] customerX;					// customer x 좌표
 	private Timer[] guestTimer;					// 손님 들어오는 타이머
-	private int combo;							// 콤보	(손님 나가면 리셋)
 	private CoinEffect coin;
 	
 	// cons
@@ -116,7 +115,7 @@ public class CustomerManager {
 			notHidden = false;
 			cTimer[customerNo] = new CustomerTimer(this,(12-(0.3*stageLv))/1.5,customerNo,customerX[customerNo]); // 각 손님별 타이머 설정
 			gP.add(cTimer[customerNo]);
-			Image icon = new ImageIcon("images/Inked히든손님2.png").getImage().getScaledInstance(120, 200, 0); // 손님 이미지
+			Image icon = new ImageIcon("images/Inked히든손님2.png").getImage().getScaledInstance(140, 200, 0); // 손님 이미지
 			customer[customerNo] = new JLabel(new ImageIcon(icon)); // 손님라벨
 			addOrder(maxOrderNo, customerX[customerNo], notHidden);
 		}

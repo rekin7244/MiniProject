@@ -53,7 +53,7 @@ public class GameView extends JPanel{
 	private int credit=3;		//목숨
 	private JLabel[] heart=new JLabel[3];
 	
-	//콤보&보너스 증가 및 초기화
+	//콤보&보너스 증가 및 초기화 (손님 나가면 리셋)
 	private int combo;
 	private FontMetrics fontMetrics;
 	private JLabel comboLabel;
@@ -193,7 +193,7 @@ public class GameView extends JPanel{
 		if(stageLv!=10) {		//stage10제외
 			credit--;
 			gP.remove(heart[credit]);
-			comboUpdate(true);
+			comboUpdate(true);		//(손님 나가면 콤보리셋)
 			//하트 3개 소진시 gameover
 			if(credit==0) {
 				//멤버 정보 저장
