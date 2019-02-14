@@ -52,7 +52,7 @@ public class StageView extends JPanel{
 		//스테이지1~5
 		for(int i=0;i<5;i++) {
 			stageBtn[i] = new JButton();
-			stageBtn[i].setBounds(50+stagexSize*i,50,stagexSize,stageySize);
+			stageBtn[i].setBounds(50+stagexSize*i,70,stagexSize,stageySize);
 			stageBtn[i].setIcon(new ImageIcon(btnImg[i]));
 			stageBtn[i].setContentAreaFilled(false);
 			stageBtn[i].setBorderPainted(false);
@@ -61,7 +61,7 @@ public class StageView extends JPanel{
 		//스테이지6~10
 		for(int i=5;i<10;i++) {
 			stageBtn[i] = new JButton();
-			stageBtn[i].setBounds(50+stagexSize*(i-5),80+stageySize,stagexSize,stageySize);
+			stageBtn[i].setBounds(50+stagexSize*(i-5),110+stageySize,stagexSize,stageySize);
 			stageBtn[i].setIcon(new ImageIcon(btnImg[i]));
 			stageBtn[i].setContentAreaFilled(false);
 			stageBtn[i].setBorderPainted(false);
