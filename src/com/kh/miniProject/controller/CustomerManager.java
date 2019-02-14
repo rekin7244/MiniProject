@@ -39,6 +39,7 @@ public class CustomerManager {
 	private int[] customerX;					// customer x 좌표
 	private Timer[] guestTimer;					// 손님 들어오는 타이머
 	private int combo;							// 콤보	(손님 나가면 리셋)
+	private CoinEffect coin;
 
 	// cons
 	public CustomerManager(GameView gView, GuestPanel gP, OrderDao orderDao, int maxOrderNo, int stageLv) {
@@ -67,6 +68,9 @@ public class CustomerManager {
 	// 손님 생성
 	public void guest() {
 		Random rand = new Random();
+		Image money = new ImageIcon("images/coin1.gif").getImage().getScaledInstance(50, 50, 0);
+		//coin[customerNo] = new JLabel(new ImageIcon(money));
+		//coin[customerNo].setSize(50, 50);
 		if(stageLv<=4) {	//1~4스테이지 히든 없이 진행
 			Image[] icon = {new ImageIcon("images/손놈2.png").getImage().getScaledInstance(190, 250, 0),
 					new ImageIcon("images/손놈1.png").getImage().getScaledInstance(190, 250, 0),
@@ -74,7 +78,7 @@ public class CustomerManager {
 			customer[customerNo] = new JLabel(new ImageIcon(icon[rand.nextInt(icon.length-1)])); // 손님라벨
 			notHidden = true;
 		}else if(stageLv==5){	//5stage부터 히든 출현
-			if (count == 5) {	//count0부터 시작해서 5에 히든손님 출현 
+			if (count == 1) {	//count0부터 시작해서 5에 히든손님 출현 
 				notHidden = false;
 				m = new Message(this, gP);	//경고메세지 출력
 				cTimer[customerNo] = new CustomerTimer(this,(11-(0.3*stageLv))/1.5,customerNo,customerX[customerNo]); // 각 손님별 타이머 설정
@@ -255,10 +259,19 @@ public class CustomerManager {
 		// 손님에 따라 손님 주문수 감소
 		if (orderNo < maxOrderNo * 1) {
 			customerOrderNo[0] -= 1;
+			if(customerOrderNo[0]==0) {
+				coin = new CoinEffect(cm, gP, 0,customer[0].getX(),customer[0].getY());
+			}
 		} else if (orderNo < maxOrderNo * 2) {
 			customerOrderNo[1] -= 1;
+			if(customerOrderNo[1]==0) {
+				coin = new CoinEffect(cm, gP, 0,customer[1].getX(),customer[1].getY());
+			}
 		} else if (orderNo < maxOrderNo * 3) {
 			customerOrderNo[2] -= 1;
+			if(customerOrderNo[2]==0) {
+				coin = new CoinEffect(cm, gP, 0,customer[2].getX(),customer[2].getY());
+			}
 		} else if (stageLv>5 && orderNo < maxOrderNo * 4) {
 			customerOrderNo[3] -= 1;
 		}
@@ -269,6 +282,8 @@ public class CustomerManager {
 					cTimer[i].timerStop();
 					gP.remove(cTimer[i]);
 					gP.remove(customer[i]);
+					/*coin = new CoinEffect(cm, gP, i,customer[i].getX(),customer[i].getY());
+					System.out.println(customerNo);*/
 					Music buttonEnteredMusic = new Music("coins_5.mp3", false);
 					buttonEnteredMusic.start();
 				}
@@ -316,4 +331,16 @@ public class CustomerManager {
 			}
 		}
 	}
+	
+
+	/*@Override
+	public void run() {
+		// TODO Auto-generated method stub
+		int tempX =  customer[customerNo].getX();
+		coin[customerNo].setLocation(tempX,customer[customerNo].getY()-20);
+		gP.add(coin[customerNo]);
+		
+		
+		
+	}*/
 }
