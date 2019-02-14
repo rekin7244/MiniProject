@@ -99,7 +99,7 @@ public class GameView extends JPanel{
 			cm = new CustomerManager(this,gP,orderDao,2,stageLv);
 		}else if(stageLv<8) {
 			cm = new CustomerManager(this,gP,orderDao,3,stageLv);
-		}else if(stageLv<10) {
+		}else {
 			cm = new CustomerManager(this,gP,orderDao,4,stageLv);
 		}
 		//스테이지 Timer
