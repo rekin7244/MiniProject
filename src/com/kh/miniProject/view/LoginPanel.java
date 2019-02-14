@@ -154,7 +154,8 @@ public class LoginPanel extends JPanel {
 					result = JOptionPane.showOptionDialog(mf,"아이디, 비밀번호를 확인해주세요","부글부글분식",
 							JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE, null, command, command[0]);
 					if(result==0) {
-						ChangePanel.changePanel(mf, lView, new JoinPanel(mf));
+						ChangePanel.changePanel(mf, lView,new JoinPanel(mf));
+						
 					}else if(result==1){
 						//이메일 입력받는 창
 						//이메일 입력하면 orderDao.searchMember() 수행하여 member객체 불러옴
@@ -172,11 +173,13 @@ public class LoginPanel extends JPanel {
 			if(e.getSource() == guestbt) {
 				JOptionPane.showMessageDialog(mf, "게스트 모드는 저장이 불가는 합니다.");
 				ChangePanel.changePanel(mf, lView, new StageView(mf,new Member("guest","guestpass","guestemail")));
-				titleMusic.close();
+		
 			}
 			if(e.getSource() == Joinbt) {
-				ChangePanel.changePanel(mf, lView, new JoinPanel(mf));
-				titleMusic.close();
+				JoinPanel jp;
+				ChangePanel.changePanel(mf, lView,jp = new JoinPanel(mf));
+				jp.setTitleMusic(titleMusic);
+				/*titleMusic.close();*/
 			}
 		}
 
@@ -195,4 +198,14 @@ public class LoginPanel extends JPanel {
 		public void mouseExited(MouseEvent e) {
 		}
 	}
+
+	public Music getTitleMusic() {
+		return titleMusic;
+	}
+
+	public void setTitleMusic(Music titleMusic) {
+		this.titleMusic = titleMusic;
+	}
+	
+	
 }

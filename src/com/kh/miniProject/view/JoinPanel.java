@@ -19,6 +19,7 @@ import javax.swing.JTextField;
 
 import com.kh.miniProject.model.dao.MemberDao;
 import com.kh.miniProject.model.vo.member.Member;
+import com.kh.miniProject.music.Music;
 
 
 public class JoinPanel extends JPanel {
@@ -34,6 +35,8 @@ public class JoinPanel extends JPanel {
 	private MainFrame mf;
 	private JPanel jView;
 	private MemberDao memberDao = new MemberDao();
+	
+	private Music titleMusic;
 
 
 	public JoinPanel(MainFrame mf) {
@@ -131,6 +134,10 @@ public class JoinPanel extends JPanel {
 		layeredPane.add(panel);
 		add(layeredPane);
 	}
+	
+	public void setTitleMusic(Music titleMusic) {
+		this.titleMusic = titleMusic;
+	}
 
 	class joinimg extends JPanel {
 		public void paint(Graphics g) {
@@ -180,6 +187,7 @@ public class JoinPanel extends JPanel {
 					}
 					memberDao.addMember(new Member(IDText.getText(), inputPass, EmailText.getText()));
 					new ChangePanel().changePanel(mf, jView, new LoginPanel(mf));
+					titleMusic.close();
 				} else {
 					JOptionPane.showMessageDialog(mf, "아이디/이메일 중복확인을 해주세요");
 				}
@@ -188,6 +196,7 @@ public class JoinPanel extends JPanel {
 			//가입 취소
 			if (e.getSource() == cancelbt) {
 				new ChangePanel().changePanel(mf, jView, new LoginPanel(mf));
+				titleMusic.close();
 			}
 
 		}

@@ -5,6 +5,7 @@ import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
+import com.kh.miniProject.music.Music;
 import com.kh.miniProject.view.GuestPanel;
 
 public class Message extends JLabel implements Runnable {
@@ -34,6 +35,8 @@ public class Message extends JLabel implements Runnable {
 		for (int x = message.getX(); x <= 1000; x += 50) {
 			message.setBounds(x, 10, 250, 150);
 			gP.add(message);
+			Music buttonEnteredMusic = new Music("[È¿°úÀ½]°æ°íÀ½,»çÀÌ·»,½ÎÀÌ·»,°æ°í (online-audio-converter.com).mp3",false);
+			buttonEnteredMusic.start();
 			repaint();
 			try {
 				Thread.sleep(100);

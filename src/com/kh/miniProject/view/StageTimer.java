@@ -39,7 +39,7 @@ public class StageTimer extends JPanel {
 	}
 	
 	class TimerStart implements ActionListener {
-		private int gameTime = 60;
+		private int gameTime =60;
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				System.out.println(gameTime);
