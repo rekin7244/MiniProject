@@ -16,9 +16,9 @@ public class Member implements Serializable{
 	private int gold;
 	private transient int stageGold[];
 
-	//¡∂∏Æ±‚±∏ ∑π∫ß √ ±‚ ºº∆√ {∂±∫∫¿Ã/∆¢±Ë±‚/ø¿µ≠±‚∞Ë/∂Û∏È±‚∞Ë}
+	//¡∂∏Æ±‚±∏ ∑π∫ß √ ±‚ ºº∆√ {∂±∫∫¿Ã/∆¢±Ë±‚/ø¿µ≠±‚∞Ë/∂Û∏È±‚∞Ë}	//default : 1,0,0,0
 	private int[] equipsLv = {1,0,0,0};
-	//∏ﬁ¥∫≈◊¿Ã∫Ì ∑π∫ß √ ±‚ ºº∆√ {∂±∫∫¿Ã/∆¢±Ë/ø¿µ≠/∂Û∏È}
+	//∏ﬁ¥∫≈◊¿Ã∫Ì ∑π∫ß √ ±‚ ºº∆√ {∂±∫∫¿Ã/∆¢±Ë/ø¿µ≠/∂Û∏È}			//default : 1,1,1,1
 	private int[] tableLv = {1,1,1,1};
 
 

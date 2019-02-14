@@ -46,8 +46,9 @@ public class LoginPanel extends JPanel {
 		this.lView = this;
 		
 		memberDao = new MemberDao();		//멤버Dao 실행 (생성자에 의해 저장된 멤버 다 불러옴)
+	
 		//test용
-		//memberDao.removeMember("", "");
+		//memberDao.removeMember("test", "1234");
 		//memberDao.addMember(new Member("test","pass","email"));
 		
 		titleMusic = new Music("TitleMusic.mp3",false);
