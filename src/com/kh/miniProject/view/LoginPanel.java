@@ -44,13 +44,16 @@ public class LoginPanel extends JPanel {
 	public LoginPanel(MainFrame mf) {
 		this.mf = mf;
 		this.lView = this;
+
+		memberDao = new MemberDao(); // 멤버Dao 실행 (생성자에 의해 저장된 멤버 다 불러옴)
 		
-		memberDao = new MemberDao();		//멤버Dao 실행 (생성자에 의해 저장된 멤버 다 불러옴)
-		//test용
-		//memberDao.removeMember("", "");
-		//memberDao.addMember(new Member("test","pass","email"));
+	
 		
-		titleMusic = new Music("TitleMusic.mp3",false);
+		// test용
+		// memberDao.removeMember("", "");
+		// memberDao.addMember(new Member("test","pass","email"));
+
+		titleMusic = new Music("TitleMusic.mp3", false);
 		titleMusic.start();
 
 		setSize(1024, 768);
@@ -88,7 +91,6 @@ public class LoginPanel extends JPanel {
 		passText.setForeground(Color.BLACK);
 		passText.setBackground(Color.white);
 
-
 		// 로그인버튼 추가
 		loginbt = new JButton("로그인");
 		loginbt.setContentAreaFilled(false);
@@ -96,15 +98,19 @@ public class LoginPanel extends JPanel {
 		loginbt.setIcon(new ImageIcon("images/loginButton.png"));
 		loginbt.setBounds(400, 460, 200, 30);
 
-		guestbt= new JButton("guest");
+		guestbt = new JButton("guest");
 		guestbt.setContentAreaFilled(false);
-		/*Image temp = new ImageIcon("images/게스트버튼.png").getImage().getScaledInstance(width, height, hints)*/
+		/*
+		 * Image temp = new
+		 * ImageIcon("images/게스트버튼.png").getImage().getScaledInstance(width, height,
+		 * hints)
+		 */
 		guestbt.setIcon(new ImageIcon("images/게스트버튼.png"));
 		guestbt.setBorderPainted(false);
-		guestbt.setBounds(510, 510, 90, 30); 
+		guestbt.setBounds(510, 510, 90, 30);
 
 		Joinbt = new JButton("회원가입");
-		/*guestbt.setIcon(new ImageIcon("images/회원가입버튼.png"));*/
+		/* guestbt.setIcon(new ImageIcon("images/회원가입버튼.png")); */
 		Joinbt.setContentAreaFilled(false);
 		Joinbt.setBorderPainted(false);
 		Joinbt.setBounds(400, 510, 90, 30);
@@ -115,9 +121,10 @@ public class LoginPanel extends JPanel {
 		layeredPane.add(IDText);
 		layeredPane.add(passText);
 		this.add(loginbt);
-		this.add(guestbt); 
+		this.add(guestbt);
 		this.add(Joinbt);
-		loginbt.addMouseListener(new BtnAction());; 
+		loginbt.addMouseListener(new BtnAction());
+		;
 		guestbt.addMouseListener(new BtnAction());
 		Joinbt.addMouseListener(new BtnAction());
 		layeredPane.add(panel);
@@ -144,9 +151,17 @@ public class LoginPanel extends JPanel {
 				}
 				System.out.println("inputId : "+inputId);
 				System.out.println("inputPass : "+inputPass);
-				if((m=memberDao.loginMember(inputId, inputPass))!=null) {
-					new ChangePanel().changePanel(mf, lView, new StageView(mf,m));		
-					titleMusic.close();				
+				
+							
+								if((m=memberDao.loginMember(inputId, inputPass))!=null) {
+									if(m.getMaxStage()==1) {
+										new ChangePanel().changePanel(mf, lView, new StoryPanel(mf, m));
+									}else {
+									new ChangePanel().changePanel(mf, lView, new StageView(mf, m));		
+									titleMusic.close();
+									}
+								
+							
 				}else {
 					String[] command = {"회원가입","아이디, 비밀번호 찾기"};
 					int result;
@@ -167,11 +182,20 @@ public class LoginPanel extends JPanel {
 						JOptionPane.showMessageDialog(mf, "아이디 : " + tempM.getMemberId()+ "\n" + "비밀번호 : " + tempM.getMemberPwd());
 						}
 					}
+					
 				}
+				
+							
 			}
+		
+			
+			
+		
+		
 			if(e.getSource() == guestbt) {
 				JOptionPane.showMessageDialog(mf, "게스트 모드는 저장이 불가는 합니다.");
-				ChangePanel.changePanel(mf, lView, new StageView(mf,new Member("guest","guestpass","guestemail")));
+				
+				new ChangePanel().changePanel(mf, lView, new StoryPanel(mf, new Member("guest","guestpass","guestemail")));
 				titleMusic.close();
 			}
 			if(e.getSource() == Joinbt) {
@@ -182,15 +206,18 @@ public class LoginPanel extends JPanel {
 
 		@Override
 		public void mouseEntered(MouseEvent e) {
-			Music buttonEnteredMusic = new Music("cursor7.mp3",false);
+			Music buttonEnteredMusic = new Music("cursor7.mp3", false);
 			buttonEnteredMusic.start();
 		}
+
 		@Override
 		public void mouseClicked(MouseEvent e) {
 		}
+
 		@Override
 		public void mouseReleased(MouseEvent e) {
 		}
+
 		@Override
 		public void mouseExited(MouseEvent e) {
 		}
