@@ -94,6 +94,8 @@ public class MarketPanel extends JPanel {
 			new ImageIcon("images/라4.jpg").getImage().getScaledInstance(200, 200, 0),
 			new ImageIcon("images/MAX.jpg").getImage().getScaledInstance(200, 200, 0) };
 	
+	private JButton returnBtn;
+	
 	//cons
 	public MarketPanel(MainFrame mf, Member m) {
 		e = new EquipSetting();
@@ -113,7 +115,7 @@ public class MarketPanel extends JPanel {
 		gold.setBounds(0, 0, 200, 30);
 
 		// 돌아가기
-		JButton returnBtn = new JButton("돌아가기");
+		returnBtn = new JButton("돌아가기");
 		returnBtn.setBounds(660, 620, 140, 30);
 		this.add(returnBtn);
 		returnBtn.addActionListener(e);
@@ -591,6 +593,7 @@ public class MarketPanel extends JPanel {
 					if (m.getGold() >= level2) {
 						equipsLv[0] += 1;
 						m.setGold(m.getGold() - level2);
+						new Music("동전 소리 - 사운드 효과를 (1) (1).mp3",false).start();
 					} else {
 						JOptionPane.showMessageDialog(mf, "그 돈으론 어림없지~");
 					}
@@ -598,6 +601,7 @@ public class MarketPanel extends JPanel {
 					if (m.getGold() >= level3) {
 						equipsLv[0] += 1;
 						m.setGold(m.getGold() - level3);
+						new Music("동전 소리 - 사운드 효과를 (1) (1).mp3",false).start();
 					} else {
 						JOptionPane.showMessageDialog(mf, "그 돈으론 어림없지~");
 					}
@@ -614,6 +618,7 @@ public class MarketPanel extends JPanel {
 					if (m.getGold() >= level1) {
 						equipsLv[1] += 1;
 						m.setGold(m.getGold() - level1);
+						new Music("동전 소리 - 사운드 효과를 (1) (1).mp3",false).start();
 					} else {
 						JOptionPane.showMessageDialog(mf, "그 돈으론 어림없지~");
 					}
@@ -621,6 +626,7 @@ public class MarketPanel extends JPanel {
 					if (m.getGold() >= level2) {
 						equipsLv[1] += 1;
 						m.setGold(m.getGold() - level2);
+						new Music("동전 소리 - 사운드 효과를 (1) (1).mp3",false).start();
 					} else {
 						JOptionPane.showMessageDialog(mf, "그 돈으론 어림없지~");
 					}
@@ -628,6 +634,7 @@ public class MarketPanel extends JPanel {
 					if (m.getGold() >= level3) {
 						equipsLv[1] += 1;
 						m.setGold(m.getGold() - level3);
+						new Music("동전 소리 - 사운드 효과를 (1) (1).mp3",false).start();
 					} else {
 						JOptionPane.showMessageDialog(mf, "그 돈으론 어림없지~");
 					}
@@ -644,6 +651,7 @@ public class MarketPanel extends JPanel {
 					if (m.getGold() >= level1) {
 						equipsLv[2] += 1;
 						m.setGold(m.getGold() - level1);
+						new Music("동전 소리 - 사운드 효과를 (1) (1).mp3",false).start();
 					} else {
 						JOptionPane.showMessageDialog(mf, "그 돈으론 어림없지~");
 					}
@@ -651,6 +659,7 @@ public class MarketPanel extends JPanel {
 					if (m.getGold() >= level2) {
 						equipsLv[2] += 1;
 						m.setGold(m.getGold() - level2);
+						new Music("동전 소리 - 사운드 효과를 (1) (1).mp3",false).start();
 					} else {
 						JOptionPane.showMessageDialog(mf, "그 돈으론 어림없지~");
 					}
@@ -658,6 +667,7 @@ public class MarketPanel extends JPanel {
 					if (m.getGold() >= level3) {
 						equipsLv[2] += 1;
 						m.setGold(m.getGold() - level3);
+						new Music("동전 소리 - 사운드 효과를 (1) (1).mp3",false).start();
 					} else {
 						JOptionPane.showMessageDialog(mf, "그 돈으론 어림없지~");
 					}
@@ -674,6 +684,7 @@ public class MarketPanel extends JPanel {
 					if (m.getGold() >= level1) {
 						equipsLv[3] += 1;
 						m.setGold(m.getGold() - level1);
+						new Music("동전 소리 - 사운드 효과를 (1) (1).mp3",false).start();
 					} else {
 						JOptionPane.showMessageDialog(mf, "그 돈으론 어림없지~");
 					}
@@ -681,6 +692,7 @@ public class MarketPanel extends JPanel {
 					if (m.getGold() >= level2) {
 						equipsLv[3] += 1;
 						m.setGold(m.getGold() - level2);
+						new Music("동전 소리 - 사운드 효과를 (1) (1).mp3",false).start();
 					} else {
 						JOptionPane.showMessageDialog(mf, "그 돈으론 어림없지~");
 					}
@@ -688,6 +700,7 @@ public class MarketPanel extends JPanel {
 					if (m.getGold() >= level3) {
 						equipsLv[3] += 1;
 						m.setGold(m.getGold() - level3);
+						new Music("동전 소리 - 사운드 효과를 (1) (1).mp3",false).start();
 					} else {
 						JOptionPane.showMessageDialog(mf, "그 돈으론 어림없지~");
 					}
@@ -703,6 +716,7 @@ public class MarketPanel extends JPanel {
 					if (m.getGold() >= plevel2) {
 						tableLv[0] += 1;
 						m.setGold(m.getGold() - plevel2);
+						new Music("동전 소리 - 사운드 효과를 (1) (1).mp3",false).start();
 					} else {
 						JOptionPane.showMessageDialog(mf, "그 돈으론 어림없지~");
 					}
@@ -711,6 +725,7 @@ public class MarketPanel extends JPanel {
 					if (m.getGold() >= plevel3) {
 						tableLv[0] += 1;
 						m.setGold(m.getGold() - plevel3);
+						new Music("동전 소리 - 사운드 효과를 (1) (1).mp3",false).start();
 					} else {
 						JOptionPane.showMessageDialog(mf, "그 돈으론 어림없지~");
 					}
@@ -718,6 +733,7 @@ public class MarketPanel extends JPanel {
 					if (m.getGold() >= plevel4) {
 						tableLv[0] += 1;
 						m.setGold(m.getGold() - plevel4);
+						new Music("동전 소리 - 사운드 효과를 (1) (1).mp3",false).start();
 					} else {
 						JOptionPane.showMessageDialog(mf, "그 돈으론 어림없지~");
 					}
@@ -734,6 +750,7 @@ public class MarketPanel extends JPanel {
 					if (m.getGold() >= plevel2) {
 						tableLv[1] += 1;
 						m.setGold(m.getGold() - plevel2);
+						new Music("동전 소리 - 사운드 효과를 (1) (1).mp3",false).start();
 					} else {
 						JOptionPane.showMessageDialog(mf, "그 돈으론 어림없지~");
 					}
@@ -742,6 +759,7 @@ public class MarketPanel extends JPanel {
 					if (m.getGold() >= plevel3) {
 						tableLv[1] += 1;
 						m.setGold(m.getGold() - plevel3);
+						new Music("동전 소리 - 사운드 효과를 (1) (1).mp3",false).start();
 					} else {
 						JOptionPane.showMessageDialog(mf, "그 돈으론 어림없지~");
 					}
@@ -749,6 +767,7 @@ public class MarketPanel extends JPanel {
 					if (m.getGold() >= plevel4) {
 						tableLv[1] += 1;
 						m.setGold(m.getGold() - plevel4);
+						new Music("동전 소리 - 사운드 효과를 (1) (1).mp3",false).start();
 					} else {
 						JOptionPane.showMessageDialog(mf, "그 돈으론 어림없지~");
 					}
@@ -765,6 +784,7 @@ public class MarketPanel extends JPanel {
 					if (m.getGold() >= plevel2) {
 						tableLv[2] += 1;
 						m.setGold(m.getGold() - plevel2);
+						new Music("동전 소리 - 사운드 효과를 (1) (1).mp3",false).start();
 					} else {
 						JOptionPane.showMessageDialog(mf, "그 돈으론 어림없지~");
 					}
@@ -772,6 +792,7 @@ public class MarketPanel extends JPanel {
 					if (m.getGold() >= plevel3) {
 						tableLv[2] += 1;
 						m.setGold(m.getGold() - plevel3);
+						new Music("동전 소리 - 사운드 효과를 (1) (1).mp3",false).start();
 					} else {
 						JOptionPane.showMessageDialog(mf, "그 돈으론 어림없지~");
 					}
@@ -779,6 +800,7 @@ public class MarketPanel extends JPanel {
 					if (m.getGold() >= plevel4) {
 						tableLv[2] += 1;
 						m.setGold(m.getGold() - plevel4);
+						new Music("동전 소리 - 사운드 효과를 (1) (1).mp3",false).start();
 					} else {
 						JOptionPane.showMessageDialog(mf, "그 돈으론 어림없지~");
 					}
@@ -794,6 +816,7 @@ public class MarketPanel extends JPanel {
 					if (m.getGold() >= plevel2) {
 						tableLv[3] += 1;
 						m.setGold(m.getGold() - plevel2);
+						new Music("동전 소리 - 사운드 효과를 (1) (1).mp3",false).start();
 					} else {
 						JOptionPane.showMessageDialog(mf, "그 돈으론 어림없지~");
 					}
@@ -801,6 +824,7 @@ public class MarketPanel extends JPanel {
 					if (m.getGold() >= plevel3) {
 						tableLv[3] += 1;
 						m.setGold(m.getGold() - plevel3);
+						new Music("동전 소리 - 사운드 효과를 (1) (1).mp3",false).start();
 					} else {
 						JOptionPane.showMessageDialog(mf, "그 돈으론 어림없지~");
 					}
@@ -808,6 +832,7 @@ public class MarketPanel extends JPanel {
 					if (m.getGold() >= plevel4) {
 						tableLv[3] += 1;
 						m.setGold(m.getGold() - plevel4);
+						new Music("동전 소리 - 사운드 효과를 (1) (1).mp3",false).start();
 					} else {
 						JOptionPane.showMessageDialog(mf, "그 돈으론 어림없지~");
 					}

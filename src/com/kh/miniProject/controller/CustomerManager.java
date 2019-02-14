@@ -214,7 +214,7 @@ public class CustomerManager {
 			} else if (random == 3) {
 				food = new ImageIcon("images/오1.png").getImage().getScaledInstance(50, 50, 0);
 			} else if (random == 4) {
-				food = new ImageIcon("images/ramen.png").getImage().getScaledInstance(50, 50, 0);
+				food = new ImageIcon("images/라면1.png").getImage().getScaledInstance(50, 50, 0);
 			}
 			if(stageLv<6) {
 				// 위치 설정
@@ -259,7 +259,7 @@ public class CustomerManager {
 			customerOrderNo[1] -= 1;
 		} else if (orderNo < maxOrderNo * 3) {
 			customerOrderNo[2] -= 1;
-		} else if (stageLv>5 && orderNo < maxOrderNo * 4) {
+		} else if (stageLv>5 && orderNo < maxOrderNo * 4) {		//스테이지6부터 4번째 손님 주문정보
 			customerOrderNo[3] -= 1;
 		}
 		// 손님 주문 종료시
@@ -269,8 +269,11 @@ public class CustomerManager {
 					cTimer[i].timerStop();
 					gP.remove(cTimer[i]);
 					gP.remove(customer[i]);
-					Music buttonEnteredMusic = new Music("coins_5.mp3", false);
-					buttonEnteredMusic.start();
+					
+					if(i==3) {	//여기 고쳐야함 선우 이펙트로 옮기자
+						Music buttonEnteredMusic = new Music("동전 소리 - 사운드 효과를 (1) (1).mp3", false);
+						buttonEnteredMusic.start();
+					}
 				}
 			}
 		}
