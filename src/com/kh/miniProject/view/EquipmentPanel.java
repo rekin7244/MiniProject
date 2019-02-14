@@ -19,34 +19,38 @@ public class EquipmentPanel extends JPanel{
 	private String[] name = {"¿⁄∆«±‚","∂±∫∫¿Ã±‚∞Ë","∆¢±Ë±‚","ø¿µ≠±‚∞Ë","∂Û∏È±‚∞Ë"};	//¿Â∫Ò∏Ì
 	//equipsLv πËø≠ : 			{∂±∫∫¿Ã/∆¢±Ë±‚/ø¿µ≠±‚∞Ë/∂Û∏È±‚∞Ë}
 	//¿ÃπÃ¡ˆµÈ πËø≠
-	private Image[] images = {new ImageIcon("images/¿⁄∆«±‚.png")
-			.getImage().getScaledInstance(150,panelSize,0),
-			new ImageIcon("images/equip1.jpg")
-			.getImage().getScaledInstance(220,equipSize,0),
-			new ImageIcon("images/equip2.png")
-			.getImage().getScaledInstance(200,equipSize,0),
-			new ImageIcon("images/equip3.jpg")
-			.getImage().getScaledInstance(200,equipSize,0),
-			new ImageIcon("images/equip4.png")
-			.getImage().getScaledInstance(180,equipSize,0)};
-	private Image[] tbkImage = {new ImageIcon("images/∂±∫∫¿Ã∆«1.jpg")
+	private Image drinkImage = new ImageIcon("images/equipImage/¿⁄∆«±‚.png")
+			.getImage().getScaledInstance(150,panelSize,0);
+	private Image[] tbkImage = {new ImageIcon("images/equipImage/∂±∫∫¿Ã∆«1.jpg")
 			.getImage().getScaledInstance(205,equipSize,0),
-			new ImageIcon("images/∂±∫∫¿Ã∆«2.jpg")
+			new ImageIcon("images/equipImage/∂±∫∫¿Ã∆«2.jpg")
 			.getImage().getScaledInstance(205,equipSize,0),
-			new ImageIcon("images/∂±∫∫¿Ã∆«3.jpg")
+			new ImageIcon("images/equipImage/∂±∫∫¿Ã∆«3.jpg")
 			.getImage().getScaledInstance(205,equipSize,0)};
-	private Image[] friedImage = {new ImageIcon("images/∆¢±Ë±‚1.jpg")
+	private Image[] friedImage = {new ImageIcon("images/equipImage/∆¢±Ë±‚1.jpg")
 			.getImage().getScaledInstance(120,equipSize,0),
-			new ImageIcon("images/∆¢±Ë±‚2.jpg")
+			new ImageIcon("images/equipImage/∆¢±Ë±‚2.jpg")
 			.getImage().getScaledInstance(180,equipSize,0),
-			new ImageIcon("images/∆¢±Ë±‚3.jpg")
+			new ImageIcon("images/equipImage/∆¢±Ë±‚3.jpg")
 			.getImage().getScaledInstance(180,equipSize,0)};
+	private Image[] odengImage = {new ImageIcon("images/equipImage/ø¿µ≠1.jpg")
+			.getImage().getScaledInstance(200,equipSize,0),
+			new ImageIcon("images/equipImage/ø¿µ≠2.jpg")
+			.getImage().getScaledInstance(200,equipSize,0),
+			new ImageIcon("images/equipImage/ø¿µ≠2.jpg")
+			.getImage().getScaledInstance(200,equipSize,0)};
+	private Image[] ramenImage = {new ImageIcon("images/equipImage/∂Û∏È±‚∞Ë1.png")
+			.getImage().getScaledInstance(260,230,0),
+			new ImageIcon("images/equipImage/∂Û∏È±‚∞Ë1.png")
+			.getImage().getScaledInstance(260,230,0),
+			new ImageIcon("images/equipImage/∂Û∏È±‚∞Ë4.png")
+			.getImage().getScaledInstance(260,230,0)};
 	private JButton[] equips = new JButton[name.length];
 	private Image tableImage = new ImageIcon("images/equiptable2.png").getImage().getScaledInstance(Run.SCREEN_WIDTH, panelSize, 0);
 	//πˆ∆∞ x¡¬«•
-	private int[] xlocation = {Run.SCREEN_WIDTH-150,205,415,0,Run.SCREEN_WIDTH-345};
+	private int[] xlocation = {Run.SCREEN_WIDTH-150,205,415,0,Run.SCREEN_WIDTH-445};
 	//πˆ∆∞ x≈©±‚
-	private int[] xSize = {150,210,180,200,195};
+	private int[] xSize = {150,210,180,200,295};
 
 	//cons
 	public EquipmentPanel() {
@@ -58,19 +62,20 @@ public class EquipmentPanel extends JPanel{
 	public void equipsSetting(JPanel panel,Member m) {
 		int[] equipsLv = m.getEquipsLv();
 		//Equipments setting
-		for (int i = 0; i < images.length; i++) {
+		for (int i = 0; i < name.length; i++) {
 			equips[i] = new JButton();
 			if(i!=0) {
 				if(i==2) {
-					if(equipsLv[1]==1) {
+					if(equipsLv[1]==1) {	//∆¢±Ë±‚
 						equips[i].setBounds(xlocation[i],0,xSize[i]-60,equipSize);
 					}else {
 						equips[i].setBounds(xlocation[i],0,xSize[i],equipSize);
 					}
-				}else {
+				}else if(i==4){				//∂Û∏È±‚∞Ë
+					equips[i].setBounds(xlocation[i],0,xSize[i],equipSize+90);
+				}else						//∂±∫∫¿Ã,ø¿µ≠
 					equips[i].setBounds(xlocation[i],0,xSize[i],equipSize);
-				}
-			}else {
+			}else {							//¿⁄∆«±‚
 				equips[i].setBounds(xlocation[i],0,xSize[i],panelSize);
 			}
 			equips[i].setContentAreaFilled(false);
@@ -81,8 +86,12 @@ public class EquipmentPanel extends JPanel{
 			}else if(i==2) {
 				if(equipsLv[1]>0)
 				equips[i].setIcon(new ImageIcon(friedImage[equipsLv[1]-1]));
-			}else {
-				equips[i].setIcon(new ImageIcon(images[i]));				
+			}else if(i==3){
+				equips[i].setIcon(new ImageIcon(odengImage[equipsLv[2]-1]));				
+			}else if(i==4) {
+				equips[i].setIcon(new ImageIcon(ramenImage[equipsLv[3]-1]));			
+			}else {	//¿⁄∆«±‚
+				equips[i].setIcon(new ImageIcon(drinkImage));
 			}
 			if(i>0) {
 				if(equipsLv[i-1]!=0) {panel.add(equips[i]);}

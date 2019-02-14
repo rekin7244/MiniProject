@@ -212,7 +212,7 @@ public class CustomerManager {
 			} else if (random == 2) {
 				food = new ImageIcon("images/fried1.png").getImage().getScaledInstance(50, 50, 0);
 			} else if (random == 3) {
-				food = new ImageIcon("images/¿Àµ­.jpg").getImage().getScaledInstance(50, 50, 0);
+				food = new ImageIcon("images/¿À1.png").getImage().getScaledInstance(50, 50, 0);
 			} else if (random == 4) {
 				food = new ImageIcon("images/ramen.png").getImage().getScaledInstance(50, 50, 0);
 			}
