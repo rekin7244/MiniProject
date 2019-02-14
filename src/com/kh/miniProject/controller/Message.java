@@ -17,11 +17,7 @@ public class Message extends JLabel implements Runnable {
 
 		Image icon = new ImageIcon("images/message.png").getImage().getScaledInstance(250, 150, 0);
 		message = new JLabel(new ImageIcon(icon));
-
-		message.setSize(250, 150);
-		this.add(message);
-		this.setVisible(true);
-		this.setBounds(0, 100, 250, 150);
+		message.setBounds(0, 100, 250, 150);
 
 		Thread t = new Thread(this);
 		t.start();
@@ -42,7 +38,6 @@ public class Message extends JLabel implements Runnable {
 				} else if (message.getX() == 1000) {
 					gP.remove(message);
 					repaint();
-					break;
 				}
 			} catch (InterruptedException e) {
 				e.printStackTrace();

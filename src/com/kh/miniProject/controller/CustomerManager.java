@@ -76,7 +76,7 @@ public class CustomerManager {
 			customer[customerNo] = new JLabel(new ImageIcon(icon[rand.nextInt(icon.length-1)])); // 손님라벨
 			notHidden = true;
 		}else if(stageLv==5){	//5stage부터 히든 출현
-			if (count == 5) {	//count0부터 시작해서 5에 히든손님 출현 
+			if (count == 1) {	//count0부터 시작해서 5에 히든손님 출현 
 				notHidden = false;
 				m = new Message(this, gP);	//경고메세지 출력
 				cTimer[customerNo] = new CustomerTimer(this,(11-(0.3*stageLv))/1.5,customerNo,customerX[customerNo]); // 각 손님별 타이머 설정
