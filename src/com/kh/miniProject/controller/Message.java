@@ -11,9 +11,14 @@ import com.kh.miniProject.view.GuestPanel;
 public class Message extends JLabel implements Runnable {
 	private GuestPanel gP;
 	private JLabel message;
+	private CustomerManager cm;
+	
+	private int no;
 
-	public Message(CustomerManager cm, GuestPanel gP) {
+	public Message(CustomerManager cm, GuestPanel gP, int no) {
 		this.gP = gP;
+		this.cm = cm;
+		this.no = no;
 
 		Image icon = new ImageIcon("images/message.png").getImage().getScaledInstance(250, 150, 0);
 		message = new JLabel(new ImageIcon(icon));
@@ -38,6 +43,8 @@ public class Message extends JLabel implements Runnable {
 				} else if (message.getX() == 1000) {
 					gP.remove(message);
 					repaint();
+					System.out.println("스레드 끝");
+					cm.hidden(no);
 				}
 			} catch (InterruptedException e) {
 				e.printStackTrace();
