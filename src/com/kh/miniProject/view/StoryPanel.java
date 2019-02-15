@@ -53,7 +53,7 @@ public class StoryPanel extends JPanel {
       
 
       try {
-         img = ImageIO.read(new File("images/편지지2_2.jpg"));
+         img = ImageIO.read(new File(/*"images/편지지2_2.jpg"*/"images/stroyImage.jpg"));
       } catch (IOException e) {
          System.out.println("이미지 불러오기 실패");
 
