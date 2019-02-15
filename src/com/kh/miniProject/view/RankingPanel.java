@@ -84,8 +84,14 @@ public class RankingPanel extends JPanel {
 	    
 		tb = new JTable();
 		tb.setBounds(175,200,700,230);
-		defaultTable = new DefaultTableModel(menu, tempMember.size());
+		defaultTable = new DefaultTableModel(menu, tempMember.size()) {
+			public boolean isCellEditable(int rowIndex,int colIndex) {
+				return false;
+			}
+		};
 		tb.setModel(defaultTable);
+		tb.getTableHeader().setReorderingAllowed(false);
+		tb.getTableHeader().setResizingAllowed(false);
 
 		int max =0;
 		
@@ -133,7 +139,7 @@ public class RankingPanel extends JPanel {
 		table.setBounds(175,200,650,230);
 		table.setOpaque(false);
 		tb.setOpaque(false);
-		
+
 		
 
 		this.add(table);
