@@ -11,6 +11,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+import com.kh.miniProject.view.EquipmentPanel;
+
 public class CookingTime extends JPanel{
 	private JLabel loadingLabel;
 	private Image loadingImage 
@@ -19,20 +21,24 @@ public class CookingTime extends JPanel{
 	private Timer timer;
 	private int cooktime;
 	private JButton btn;
-
-	public CookingTime(JButton btn,int cooktime,String menuName) {
+	private EquipmentPanel eP;
+	private String menuName;
+	
+	public CookingTime(EquipmentPanel eP,JButton btn,int cooktime,String menuName) {
 		this.btn = btn;
 		this.cooktime = cooktime;
+		this.eP = eP;
+		this.menuName = menuName;
 		
 		timerLabel = new JLabel();
 		timer = new Timer(100, new TimerStart());
 		timerLabel.setFont(new Font("Elephant", Font.BOLD, 16));
-		timerLabel.setBounds(btn.getWidth()/2,0,220,220);
+		timerLabel.setBounds(btn.getX()+(btn.getWidth()/2),(btn.getHeight()/4),220,220);
 
 		loadingLabel = new JLabel(new ImageIcon(loadingImage));
 		loadingLabel.setBounds(btn.getX()+10,0,180,180);
 		
-		btn.add(timerLabel);
+		btn.add(timerLabel,btn.CENTER);
 		btn.add(loadingLabel,btn.CENTER);
 		
 		this.setVisible(true);
@@ -46,6 +52,7 @@ public class CookingTime extends JPanel{
 	
 	class TimerStart implements ActionListener {
 		private double gameTime = cooktime;
+		private String menuname = menuName;
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			gameTime-=0.1;
@@ -59,7 +66,13 @@ public class CookingTime extends JPanel{
 			double temp=0;
 			temp = (int)(gameTime*10);
 			temp/=10;
-			timerLabel.setText(""+temp);
+			if(menuname.equals("À½·á¼ö")) {
+				timerLabel.setText("ing..."+temp);
+			}else if(menuname.equals("Æ¢±è")) {
+				timerLabel.setText("ing....."+temp);
+			}else{
+				timerLabel.setText("cooking."+temp);
+			}
 		}
 	}
 }

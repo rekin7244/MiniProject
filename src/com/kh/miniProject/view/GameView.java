@@ -55,11 +55,9 @@ public class GameView extends JPanel{
 	
 	//콤보&보너스 증가 및 초기화 (손님 나가면 리셋)
 	private int combo;
-	private FontMetrics fontMetrics;
 	private JLabel comboLabel;
 	private int bonus;
 	  
-	private JLabel goldLabel;
 	//주문 내역 관리
 	private OrderDao orderDao;
 	//Member 정보 입출력위해
@@ -350,14 +348,14 @@ public class GameView extends JPanel{
 	public void judgeLv(String menuName,JButton[] equips) {		//조리 시작 전달
 		if(menuName.equals("음료수")) {
 			equips[0].setEnabled(false);
-			cookTimer = new CookingTime(equips[0],4,"음료수");	//조리 타이머
+			cookTimer = new CookingTime(eP,equips[0],4,"음료수");	//조리 타이머
 			drinksNo++;
 		}else if(menuName.equals("떡볶이")) {
 			equips[1].setEnabled(false);
 			int temp=7;
 			if(equipLv[0]==2) { 	temp=7;
 			}else if(equipLv[0]==3) {temp=6;}
-			cookTimer = new CookingTime(equips[1],temp,"떡볶이");
+			cookTimer = new CookingTime(eP,equips[1],temp,"떡볶이");
 			if(tbkNo+equipLv[0]<tableLv[0]) {		//개수 증가	
 				tbkNo+=equipLv[0];
 			}else {tbkNo=tableLv[0];}
@@ -366,7 +364,7 @@ public class GameView extends JPanel{
 			int temp=7;
 			if(equipLv[1]==2) { 	temp=8;
 			}else if(equipLv[1]==3) {temp=8;}
-			cookTimer = new CookingTime(equips[2],temp,"튀김");
+			cookTimer = new CookingTime(eP,equips[2],temp,"튀김");
 			if(friedNo+equipLv[1]<tableLv[1]) {		//개수 증가
 				friedNo+=equipLv[1];
 			}else {friedNo=tableLv[1];}
@@ -375,7 +373,7 @@ public class GameView extends JPanel{
 			int temp=8;
 			if(equipLv[2]==2) { 	temp=9;
 			}else if(equipLv[2]==3) {temp=8;}
-			cookTimer = new CookingTime(equips[3],temp,"오뎅");
+			cookTimer = new CookingTime(eP,equips[3],temp,"오뎅");
 			if(odengNo+equipLv[2]<tableLv[2]) {		//개수 증가
 				odengNo+=equipLv[2];
 			}else {odengNo=tableLv[2];}
@@ -384,7 +382,7 @@ public class GameView extends JPanel{
 			int temp=9;
 			if(equipLv[3]==2) { 	temp=10;
 			}else if(equipLv[3]==3) {temp=10;}
-			cookTimer = new CookingTime(equips[4],temp,"라면");
+			cookTimer = new CookingTime(eP,equips[4],temp,"라면");
 			if(ramenNo+equipLv[3]<tableLv[3]) {		//개수 증가
 				ramenNo+=equipLv[3];
 			}else {ramenNo=tableLv[3];}
