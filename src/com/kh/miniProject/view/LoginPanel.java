@@ -144,9 +144,17 @@ public class LoginPanel extends JPanel {
 				}
 				System.out.println("inputId : "+inputId);
 				System.out.println("inputPass : "+inputPass);
-				if((m=memberDao.loginMember(inputId, inputPass))!=null) {
-					new ChangePanel().changePanel(mf, lView, new StageView(mf,m));		
-					titleMusic.close();				
+				
+							
+								if((m=memberDao.loginMember(inputId, inputPass))!=null) {
+									if(m.getMaxStage()==1) {
+										new ChangePanel().changePanel(mf, lView, new StoryPanel(mf, m));
+									}else {
+									new ChangePanel().changePanel(mf, lView, new StageView(mf, m));		
+									titleMusic.close();
+									}
+								
+							
 				}else {
 					String[] command = {"회원가입","아이디, 비밀번호 찾기"};
 					int result;
@@ -171,7 +179,8 @@ public class LoginPanel extends JPanel {
 			}
 			if(e.getSource() == guestbt) {
 				JOptionPane.showMessageDialog(mf, "게스트 모드는 저장이 불가는 합니다.");
-				ChangePanel.changePanel(mf, lView, new StageView(mf,new Member("guest","guestpass","guestemail")));
+				
+				new ChangePanel().changePanel(mf, lView, new StoryPanel(mf, new Member("guest","guestpass","guestemail")));
 				titleMusic.close();
 			}
 			if(e.getSource() == Joinbt) {
