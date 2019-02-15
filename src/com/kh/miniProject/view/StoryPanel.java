@@ -26,6 +26,8 @@ public class StoryPanel extends JPanel {
    private Member m;
    
    
+   
+   
    BufferedImage img = null;
 
    JButton bag;
