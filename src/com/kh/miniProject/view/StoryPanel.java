@@ -17,6 +17,7 @@ import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
+import com.kh.miniProject.controller.Story;
 import com.kh.miniProject.model.vo.member.Member;
 
 public class StoryPanel extends JPanel {
@@ -24,7 +25,8 @@ public class StoryPanel extends JPanel {
    private MainFrame mf;
    private StoryPanel lView;
    private Member m;
-   
+  /* private String[] story = {"¾È","³ç","ÇÏ","¼¼","¿ä","\n","¹Ý"," "," ","°©"};*/
+   private Story st;
    
    
    
@@ -52,6 +54,8 @@ public class StoryPanel extends JPanel {
       bag.setBorderPainted(false);
       bag.addMouseListener(new BtnAction());
       this.add(bag);
+      
+      st = new Story(this/*, story*/);
       
 
       try {
