@@ -39,7 +39,7 @@ public class CustomerManager {
 	private int[] customerX;					// customer x 좌표
 	private Timer[] guestTimer;					// 손님 들어오는 타이머
 	private CoinEffect coin;
-	
+
 	// cons
 	public CustomerManager(GameView gView, GuestPanel gP, OrderDao orderDao, int maxOrderNo, int stageLv) {
 		orderLabel = new OrderLabel[100]; // 초기화
@@ -77,13 +77,24 @@ public class CustomerManager {
 		}else if(stageLv==5){	//5stage부터 히든 출현
 			if (count == 5) {	//count0부터 시작해서 5에 히든손님 출현 
 				notHidden = false;
-				m = new Message(this, gP);	//경고메세지 출력
-				cTimer[customerNo] = new CustomerTimer(this,(11-(0.3*stageLv))/1.5,customerNo,customerX[customerNo]); // 각 손님별 타이머 설정
-				gP.add(cTimer[customerNo]);
-				Image icon = new ImageIcon("images/Inked히든손님2.png").getImage().getScaledInstance(190, 250, 0);		// 히든손님 이미지
-				addOrder(maxOrderNo, customerX[customerNo], notHidden);
-				customer[customerNo] = new JLabel(new ImageIcon(icon)); 											// 히든손님 라벨
+				m = new Message(this, gP, customerNo);	//경고메세지 출력
 				count = 0;
+				if(stageLv<6) {
+					// 손님 No 설정 (0~2)
+					if (customerNo != 2) {
+						this.customerNo++;
+					} else {
+						this.customerNo = 0;
+					}
+				}else {
+					// 손님 No 설정(0~3)
+					if (customerNo != 3) {
+						this.customerNo++;
+					} else {
+						this.customerNo = 0;
+					}
+				}
+				return;
 			} else {
 				Image[] icon = {new ImageIcon("images/손놈2.png").getImage().getScaledInstance(190, 250, 0),
 						new ImageIcon("images/손놈1.png").getImage().getScaledInstance(190, 250, 0),
@@ -95,13 +106,24 @@ public class CustomerManager {
 		}else if(stageLv<10) {
 			if (count == 5) {	//count0부터 시작해서 5에 히든손님 출현
 				notHidden = false;
-				m = new Message(this, gP);
-				cTimer[customerNo] = new CustomerTimer(this,(12-(0.3*stageLv))/1.5,customerNo,customerX[customerNo]); // 각 손님별 타이머 설정
-				gP.add(cTimer[customerNo]);
-				Image icon = new ImageIcon("images/Inked히든손님2.png").getImage().getScaledInstance(140, 200, 0); // 손님 이미지
-				customer[customerNo] = new JLabel(new ImageIcon(icon)); // 손님라벨
-				addOrder(maxOrderNo, customerX[customerNo], notHidden);
+				m = new Message(this, gP, customerNo);	//경고메세지 출력
 				count = 0;
+				if(stageLv<6) {
+					// 손님 No 설정 (0~2)
+					if (customerNo != 2) {
+						this.customerNo++;
+					} else {
+						this.customerNo = 0;
+					}
+				}else {
+					// 손님 No 설정(0~3)
+					if (customerNo != 3) {
+						this.customerNo++;
+					} else {
+						this.customerNo = 0;
+					}
+				}
+				return;
 			} else {
 				Image[] icon = {new ImageIcon("images/손놈2.png").getImage().getScaledInstance(140, 200, 0),
 						new ImageIcon("images/손놈1.png").getImage().getScaledInstance(140,200,0),
@@ -112,33 +134,42 @@ public class CustomerManager {
 				notHidden = true;
 			}
 		}else {	//10stage는 히든만 출현!!
-			notHidden = false;
-			cTimer[customerNo] = new CustomerTimer(this,(12-(0.3*stageLv))/1.5,customerNo,customerX[customerNo]); // 각 손님별 타이머 설정
-			gP.add(cTimer[customerNo]);
-			Image icon = new ImageIcon("images/Inked히든손님2.png").getImage().getScaledInstance(140, 200, 0); // 손님 이미지
-			customer[customerNo] = new JLabel(new ImageIcon(icon)); // 손님라벨
-			addOrder(maxOrderNo, customerX[customerNo], notHidden);
+			hidden(customerNo);
+			count = 0;
+			if(stageLv<6) {
+				// 손님 No 설정 (0~2)
+				if (customerNo != 2) {
+					this.customerNo++;
+				} else {
+					this.customerNo = 0;
+				}
+			}else {
+				// 손님 No 설정(0~3)
+				if (customerNo != 3) {
+					this.customerNo++;
+				} else {
+					this.customerNo = 0;
+				}
+			}
+			return;
 		}
 
 		customerOrderNo[customerNo] = maxOrderNo;
 		// 음식 주문
 		// 손님 객체 존재시 (1,2,3번 자리 지정)
+		// 히든손님 아닐시
 		if(stageLv<6) {								//손님라벨 사이즈
-			customer[customerNo].setSize(150,220);	
-		}else {
-			customer[customerNo].setSize(130,200);
-		}
-
-		if(notHidden) {									//손님라벨 위치
+			customer[customerNo].setSize(150,220);
 			customer[customerNo].setLocation(0, 105);
 		}else {
-			customer[customerNo].setLocation(customerX[customerNo], 105);
+			customer[customerNo].setSize(130,200);
+			customer[customerNo].setLocation(0, 105);
 		}
-
 		gP.add(customer[customerNo]); 		// 패널에 손님라벨 추가
 
 
-		if(notHidden) {time();}		//일반손님 출현시 이동하는 메소드 실행
+
+		time();		//일반손님 출현시 이동하는 메소드 실행
 
 		if(stageLv<6) {
 			// 손님 No 설정 (0~2)
@@ -154,6 +185,26 @@ public class CustomerManager {
 			} else {
 				customerNo = 0;
 			}}
+	}
+
+	//히든출현
+	public synchronized void hidden(int customerNo) {
+		System.out.println("히든 출현");
+		cTimer[customerNo] = new CustomerTimer(this,(11-(0.3*stageLv))/1.5,customerNo,customerX[customerNo]); // 각 손님별 타이머 설정
+		gP.add(cTimer[customerNo]);
+		Image icon = new ImageIcon("images/Inked히든손님2.png").getImage().getScaledInstance(190, 250, 0);		// 히든손님 이미지
+		addOrder(maxOrderNo, customerX[customerNo], false);
+		customer[customerNo] = new JLabel(new ImageIcon(icon)); 											// 히든손님 라벨
+		customerOrderNo[customerNo] = maxOrderNo;
+		if(stageLv<6) {								//손님라벨 사이즈
+			customer[customerNo].setSize(150,220);
+			customer[customerNo].setLocation(customerX[customerNo], 105);
+		}else {
+			customer[customerNo].setSize(130,200);
+			customer[customerNo].setLocation(customerX[customerNo], 105);
+		}
+		gP.add(customer[customerNo]);
+		gP.repaint();
 	}
 
 	public void time() {
