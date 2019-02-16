@@ -325,9 +325,14 @@ public class MarketPanel extends JPanel {
 		label1.setVisible(false);
 		if (equipsLv[0] >= 1) {
 			label1.setVisible(true);
-
+			
+			if(equipsLv[1]==0) {
 			label1.setText("튀김기기 구매");
-			label1.setBounds(250, 160, 200, 200);			
+			label1.setBounds(250, 160, 200, 200);
+			}else {
+				label1.setText("튀김기기 업그레이드");
+				label1.setBounds(240, 160, 200, 200);
+			}
 
 			JLabel tkwon = new JLabel();
 			JLabel tkwonn=new JLabel();
@@ -379,9 +384,14 @@ public class MarketPanel extends JPanel {
 		label2.setVisible(false);
 		if (equipsLv[1] > 0) {
 			label2.setVisible(true);
-
+			
+			if(equipsLv[2]==0) {
 			label2.setText("오뎅기기 구매");
 			label2.setBounds(450, 160, 200, 200);
+			}else {
+				label2.setText("오뎅기기 업그레이드");
+				label2.setBounds(430, 160, 200, 200);
+			}
 
 			JLabel odwon = new JLabel();
 			JLabel odwonn=new JLabel();
@@ -434,8 +444,13 @@ public class MarketPanel extends JPanel {
 		if (equipsLv[2] > 0) {
 			label3.setVisible(true);
 
+			if(equipsLv[3]==0) {
 			label3.setText("라면기기 구매");
 			label3.setBounds(630, 160, 200, 200);
+			}else {
+				label3.setText("라면기기 업그레이드");
+				label3.setBounds(610, 160, 200, 200);
+			}
 
 			JLabel rmwon = new JLabel();
 			JLabel rmwonn=new JLabel();
