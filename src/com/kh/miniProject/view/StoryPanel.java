@@ -13,109 +13,98 @@ import java.util.EventObject;
 
 import javax.imageio.ImageIO;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
+import com.kh.miniProject.controller.LastStory;
+import com.kh.miniProject.controller.Letter;
 import com.kh.miniProject.controller.Story;
 import com.kh.miniProject.model.vo.member.Member;
 
 public class StoryPanel extends JPanel {
 
-   private MainFrame mf;
-   private StoryPanel lView;
-   private Member m;
-  /* private String[] story = {"안","녕","하","세","요","\n","반"," "," ","갑"};*/
-   private Story st;
-   
-   
-   
-   BufferedImage img = null;
+	private MainFrame mf;
+	private StoryPanel lView;
+	private Member m;
+	private int count = 0;
+	private StoryPanel sp;
+	private JLabel[] Jb = new JLabel[3];
+	private Story st;
+	private Letter le;
+	private LastStory ls;
 
-   JButton bag;
+	BufferedImage img = null;
 
-   public StoryPanel(MainFrame mf, Member m ) {
-      this.mf = mf;
-      this.m=m;
-      this.lView = this;
+	JButton bag;
 
-      setSize(1024, 768);
-      setLayout(null);
-      JLayeredPane layeredPane = new JLayeredPane();
-      layeredPane.setBounds(0, 0, 1024, 768);
-      layeredPane.setLayout(null);
-      
-      bag =new JButton(); 
-      bag.setBounds(0, 0, 1024, 768);
-      bag.setIcon(null);
-      bag.setBackground(null);
-      bag.setOpaque(false);
-      bag.setContentAreaFilled(false);
-      bag.setBorderPainted(false);
-      bag.addMouseListener(new BtnAction());
-      this.add(bag);
-      
-      st = new Story(this/*, story*/);
-      
+	public StoryPanel(MainFrame mf, Member m) {
+		this.mf = mf;
+		this.m = m;
+		this.lView = this;
 
-      try {
-         img = ImageIO.read(new File(/*"images/편지지2_2.jpg"*/"images/stroyImage.jpg"));
-      } catch (IOException e) {
-         System.out.println("이미지 불러오기 실패");
+		setSize(1024, 768);
+		setLayout(null);
+		JLayeredPane layeredPane = new JLayeredPane();
+		layeredPane.setBounds(0, 0, 1024, 768);
+		layeredPane.setLayout(null);
 
-         System.exit(0);
-      }
+		bag = new JButton();
+		bag.setBounds(0, 0, 1024, 768);
+		bag.setIcon(null);
+		bag.setBackground(null);
+		bag.setOpaque(false);
+		bag.setContentAreaFilled(false);
+		bag.setBorderPainted(false);
+		bag.addActionListener(new BtnAction());
+		this.add(bag);
 
-      // 이미지 추가 패널
+		st = new Story(this);
 
-    /*  StoryImage panel = new StoryImage();*/
-      this.setBounds(0, 0, 1024, 768);
-   
+		try {
+			img = ImageIO.read(new File("images/stroyImage.jpg"));
+		} catch (IOException e) {
+			System.out.println("이미지 불러오기 실패");
 
-   }
+			System.exit(0);
+		}
 
-   @Override
-      public void paintComponent(Graphics g) {
-         g.drawImage(img, 0, 0, null);
-      }
-    
-   
-   private class BtnAction implements MouseListener{
+		// 이미지 추가 패널
+		this.setBounds(0, 0, 1024, 768);
 
-      public void actionPerformed(MouseListener e) {
-         if(((EventObject) e).getSource()==bag) {
-            new ChangePanel().changePanel(mf, lView, new StageView(mf,m));
-         }
-      }
+		this.sp = this;
 
-	@Override
-	public void mouseClicked(MouseEvent e) {
-		 new ChangePanel().changePanel(mf, lView, new StageView(mf,m));
+	}
+
+	
+
+	public void letter() {
+
 	}
 
 	@Override
-	public void mouseEntered(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
+	public void paintComponent(Graphics g) {
+		g.drawImage(img, 0, 0, null);
 	}
 
-	@Override
-	public void mouseExited(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
+	private class BtnAction implements ActionListener {
 
-	@Override
-	public void mousePressed(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			if (e.getSource() == bag) {
+				if (count == 0) {
+					st.stop();
+					le = new Letter(sp);
+					count++;
+				}else if (count == 1) {
+					le.stop();
+					ls = new LastStory(sp);
+					count++;
+				} else {
+					new ChangePanel().changePanel(mf, sp, new StageView(mf,m));
+				}
+			}
+		}
 	}
-
-	@Override
-	public void mouseReleased(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-   }
 }
-
