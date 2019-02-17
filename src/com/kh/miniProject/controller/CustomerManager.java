@@ -201,7 +201,7 @@ public class CustomerManager {
 				if (random == 0) {
 					orderDao.addOrder(new MenuOrder("¶±ººÀÌ", 4600, orderNo));
 				} else if (random == 1) {
-					orderDao.addOrder(new MenuOrder("À½·á¼ö", 2000, orderNo));
+					orderDao.addOrder(new MenuOrder("À½·á¼ö", 3000, orderNo));
 				} else if (random == 2) {
 					orderDao.addOrder(new MenuOrder("Æ¢±è", 3600, orderNo));
 				} else if (random == 3) {
@@ -213,7 +213,7 @@ public class CustomerManager {
 				if (random == 0) {
 					orderDao.addOrder(new MenuOrder("¶±ººÀÌ", 2300, orderNo));
 				} else if (random == 1) {
-					orderDao.addOrder(new MenuOrder("À½·á¼ö", 1000, orderNo));
+					orderDao.addOrder(new MenuOrder("À½·á¼ö", 1500, orderNo));
 				} else if (random == 2) {
 					orderDao.addOrder(new MenuOrder("Æ¢±è", 1800, orderNo));
 				} else if (random == 3) {
