@@ -9,13 +9,10 @@ import com.kh.miniProject.run.Run;
 public class MainFrame extends JFrame{
 	
 	public MainFrame() {
-		/*trackList.add(new Track("cursor7.mp3","cursor7"));*/
-		
 		this.setSize(Run.SCREEN_WIDTH,Run.SCREEN_HEIGHT);
 		this.setTitle("부글부글 분식");
 		this.setResizable(false);
 		this.setBackground(Color.pink);
-		
 		
 		//loginPanel로 이동
 		this.add(new LoginPanel(this));

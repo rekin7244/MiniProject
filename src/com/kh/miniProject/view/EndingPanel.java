@@ -114,8 +114,6 @@ public class EndingPanel extends JPanel {
 		private Thread t;
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
-		/*	time --;*/
 			
 			if(y<=-300) {
 				try {
@@ -137,10 +135,6 @@ public class EndingPanel extends JPanel {
 				System.out.println(y);
 				
 			}
-				
-		//	repaint();
-			
-			
 		}
 		
 		@Override
@@ -157,7 +151,6 @@ public class EndingPanel extends JPanel {
 					myLb[i].setVisible(false);
 				}
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 	

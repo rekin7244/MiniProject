@@ -101,7 +101,7 @@ public class StageView extends JPanel{
 
 		this.sView = this;
 
-		testButton=new JButton("테스트)엔딩");
+		/*testButton=new JButton("테스트)엔딩");
 		testButton.setBackground(Color.white);
 		
 		testButton.setBounds(450, 430, 200, 200);
@@ -109,14 +109,13 @@ public class StageView extends JPanel{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
 				ChangePanel.changePanel(mf, sView, new EndingPanel(mf));
 				music.close();
 			}
 			
 		});
 		
-		this.add(testButton);
+		this.add(testButton);*/
 
 		//스테이지 버튼 선택 시 GameView로 changePanel 실행
 		for (int i = 0; i < stageBtn.length; i++) {

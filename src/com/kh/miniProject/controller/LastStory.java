@@ -8,8 +8,6 @@ import com.kh.miniProject.view.GuestPanel;
 import com.kh.miniProject.view.StoryPanel;
 
 public class LastStory extends JLabel implements Runnable {
-	private JLabel message;
-	private Walkking w;
 
 	private String temp = "";
 	private StoryPanel sp;
@@ -59,7 +57,7 @@ public class LastStory extends JLabel implements Runnable {
 			}
 			if(count == 3) {
 				if(b) {
-				w = new Walkking(sp);
+				new Walkking(sp);
 				b = false;
 				} 
 			}

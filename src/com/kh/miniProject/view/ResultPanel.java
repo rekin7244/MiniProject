@@ -99,7 +99,6 @@ public class ResultPanel extends JPanel{
 		g.setFont(new Font("Dialog",Font.BOLD,25));
 		g.setColor(Color.WHITE);
 		g.drawString(stageGold[1] + "Combo", 580, 360);
-		//stageGold[1] + "Combo | "
 		
 		
 		g.drawImage(flareImage, 340, 120,null);		
@@ -111,7 +110,6 @@ public class ResultPanel extends JPanel{
 		private Random rand = new Random();
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
 			timer--;
 			if(timer>0) {
 				tempGold = rand.nextInt(stageGold[0]);
@@ -120,7 +118,6 @@ public class ResultPanel extends JPanel{
 				tempGold = stageGold[0];
 				resultTimer.stop();
 				rPage.repaint();
-				/*rPage.add(mainButton);*/
 			}
 		}
 		

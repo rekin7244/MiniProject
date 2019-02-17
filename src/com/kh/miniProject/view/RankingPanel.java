@@ -106,10 +106,6 @@ public class RankingPanel extends JPanel {
 		
 			}
 			
-			/*if(tempMember.get(i).getMemberId().length()>max) {
-				max = tempMember.get(i).getMemberId().length();
-				System.out.println("max : " + max);
-			}*/
 			tb.setRowHeight(i, 40);		
 		}
 		for(int i=0;i<4;i++) {
@@ -247,10 +243,7 @@ public class RankingPanel extends JPanel {
 		private int time = 3;
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
-			/*DefaultTableCellRenderer celAlignCenter = new DefaultTableCellRenderer();   
-			celAlignCenter.setHorizontalAlignment(JLabel.CENTER);//가운데정렬
-*/			
+			
 			if(time==0) {
 				rangTimer.stop();
 			}else {
@@ -260,10 +253,6 @@ public class RankingPanel extends JPanel {
 				defaultTable.setValueAt(tempMember.get(rangIndex).getGold(), rangIndex, 3);
 				tb.getColumnModel().getColumn(0).setCellRenderer(rankingRenderer[rangIndex]);
 			
-				//tb.getCellRenderer(0, 0)
-				
-				//getCellRenderer ;
-				
 			rangIndex--;
 			time--;
 			}

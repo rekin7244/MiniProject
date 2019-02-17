@@ -44,13 +44,13 @@ public class LoginPanel extends JPanel {
 	public LoginPanel(MainFrame mf) {
 		this.mf = mf;
 		this.lView = this;
-		
+
 		memberDao = new MemberDao();		//멤버Dao 실행 (생성자에 의해 저장된 멤버 다 불러옴)
-	
+
 		//test용
 		//memberDao.removeMember("test", "1234");
 		//memberDao.addMember(new Member("test","pass","email"));
-		
+
 		titleMusic = new Music("TitleMusic.mp3",false);
 		titleMusic.start();
 
@@ -144,17 +144,17 @@ public class LoginPanel extends JPanel {
 				}
 				System.out.println("inputId : "+inputId);
 				System.out.println("inputPass : "+inputPass);
-				
-							
-								if((m=memberDao.loginMember(inputId, inputPass))!=null) {
-									if(m.getMaxStage()==1) {
-										new ChangePanel().changePanel(mf, lView, new StoryPanel(mf, m));
-									}else {
-									new ChangePanel().changePanel(mf, lView, new StageView(mf, m));		
-									titleMusic.close();
-									}
-								
-							
+
+
+				if((m=memberDao.loginMember(inputId, inputPass))!=null) {
+					if(m.getMaxStage()==1) {
+						new ChangePanel().changePanel(mf, lView, new StoryPanel(mf, m));
+					}else {
+						new ChangePanel().changePanel(mf, lView, new StageView(mf, m));		
+						titleMusic.close();
+					}
+
+
 				}else {
 					String[] command = {"회원가입","아이디, 비밀번호 찾기"};
 					int result;
@@ -172,14 +172,14 @@ public class LoginPanel extends JPanel {
 						if(tempM == null) {
 							JOptionPane.showMessageDialog(mf, "가입한 회원이 아닙니다.");
 						} else {
-						JOptionPane.showMessageDialog(mf, "아이디 : " + tempM.getMemberId()+ "\n" + "비밀번호 : " + tempM.getMemberPwd());
+							JOptionPane.showMessageDialog(mf, "아이디 : " + tempM.getMemberId()+ "\n" + "비밀번호 : " + tempM.getMemberPwd());
 						}
 					}
 				}
 			}
 			if(e.getSource() == guestbt) {
 				JOptionPane.showMessageDialog(mf, "게스트 모드는 저장이 불가는 합니다.");
-				
+
 				new ChangePanel().changePanel(mf, lView, new StoryPanel(mf, new Member("guest","guestpass","guestemail")));
 				titleMusic.close();
 			}
@@ -187,7 +187,6 @@ public class LoginPanel extends JPanel {
 				JoinPanel jp;
 				ChangePanel.changePanel(mf, lView,jp = new JoinPanel(mf));
 				jp.setTitleMusic(titleMusic);
-				/*titleMusic.close();*/
 			}
 		}
 
@@ -214,6 +213,6 @@ public class LoginPanel extends JPanel {
 	public void setTitleMusic(Music titleMusic) {
 		this.titleMusic = titleMusic;
 	}
-	
-	
+
+
 }

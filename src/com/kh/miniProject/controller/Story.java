@@ -55,21 +55,6 @@ public class Story extends JLabel implements Runnable {
 	public void run() {
 		int count =0;
 		for (int i = 0; i < story.length(); i++) {
-			/*if (!linech) {
-				temp += story.charAt(i);
-				la[cont].setText(temp);
-				la[0].setFont(new Font("Elephant", Font.ITALIC, 40));
-				repaint();
-				
-			} else {
-				temp1 += la[i];
-				la[1].setText(temp1);
-				la[1].setFont(new Font("Elephant", Font.ITALIC, 40));
-				repaint();
-			}
-			if (temp1.equals("\n")) {
-				linech = true; 
-				cont+=1;*/
 			temp += story.charAt(i);
 			la[count].setText(temp);
 			la[count].setFont(new Font("±¼¸²", Font.ITALIC, 40));

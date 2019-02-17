@@ -52,12 +52,12 @@ public class GameView extends JPanel{
 	private JButton gold;
 	private int credit=3;		//목숨
 	private JLabel[] heart=new JLabel[3];
-	
+
 	//콤보&보너스 증가 및 초기화 (손님 나가면 리셋)
 	private int combo;
 	private JLabel comboLabel;
 	private int bonus;
-	  
+
 	//주문 내역 관리
 	private OrderDao orderDao;
 	//Member 정보 입출력위해
@@ -91,7 +91,7 @@ public class GameView extends JPanel{
 		gP.setLayout(null);
 		gP.setSize(Run.SCREEN_WIDTH,318);
 		this.add(gP);
-		
+
 		comboLabel = new JLabel("Combo");
 		comboLabel.setBounds(70, 230, 170, 30);
 		comboLabel.setFont(new Font("Dialog",Font.BOLD,30));
@@ -225,21 +225,25 @@ public class GameView extends JPanel{
 		//뮤직 종료
 		music.close();
 
-		String[] command = {"결과보기","스테이지로 이동"};
-		int result;
-		result = JOptionPane.showOptionDialog(mf,
-				"STAGE "+stageLv+" CLEAR!!\n Earned Gold : "+stageGold[0],
-				"부글부글분식",JOptionPane.YES_NO_OPTION, 
-				JOptionPane.INFORMATION_MESSAGE, null, command, command[0]);
+		if(stageLv!=10) {	//1~9스테이지 종료
+			String[] command = {"결과보기","스테이지로 이동"};
+			int result;
+			result = JOptionPane.showOptionDialog(mf,
+					"STAGE "+stageLv+" CLEAR!!\n Earned Gold : "+stageGold[0],
+					"부글부글분식",JOptionPane.YES_NO_OPTION, 
+					JOptionPane.INFORMATION_MESSAGE, null, command, command[0]);
 
-		if(result==0) {
-			ChangePanel.changePanel(mf, gView, new ResultPanel(mf,m));
-			MemberDao mDao = new MemberDao();
-			mDao.saveMember(m);
-		}else {
-			ChangePanel.changePanel(mf, gView, new StageView(mf,m));
-			MemberDao mDao = new MemberDao();
-			mDao.saveMember(m);
+			if(result==0) {
+				ChangePanel.changePanel(mf, gView, new ResultPanel(mf,m));
+				MemberDao mDao = new MemberDao();
+				mDao.saveMember(m);
+			}else {
+				ChangePanel.changePanel(mf, gView, new StageView(mf,m));
+				MemberDao mDao = new MemberDao();
+				mDao.saveMember(m);
+			}
+		}else {			//10스테이지 종료
+			ChangePanel.changePanel(mf, gView, new EndingPanel(mf));
 		}
 	}
 
@@ -388,31 +392,31 @@ public class GameView extends JPanel{
 			}else {ramenNo=tableLv[3];}
 		}
 	}
-	
-	
+
+
 	public void comboUpdate(boolean isFail) {
 		if(!isFail) {
 			combo++;
-			
+
 			if(combo==10) {
 				bonus += 5000;
 				stageGold[0]+=bonus;
 				Music comboMusic = new Music("콤보증가.mp3",false);
 				comboMusic.start();
-				
+
 			}else if(combo==20) {
 				bonus += 7000;
 				stageGold[0]+=bonus;
 				Music comboMusic = new Music("콤보증가.mp3",false);
 				comboMusic.start();
-				
+
 			}else if(combo==40) {
 				bonus += 10000;
 				stageGold[0]+=bonus;
 				Music comboMusic = new Music("콤보증가.mp3",false);
 				comboMusic.start();
 			}
-			
+
 			comboLabel.setText(combo + " Combo");
 		}else {
 			combo =0;
@@ -427,7 +431,7 @@ public class GameView extends JPanel{
 	public void setCombo(int combo) {
 		this.combo = combo;
 	}
-	
-	
-	
+
+
+
 }

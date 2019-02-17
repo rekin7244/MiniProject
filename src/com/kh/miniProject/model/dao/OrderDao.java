@@ -12,7 +12,7 @@ public class OrderDao {
 	
 	//cons
 	public OrderDao(GameView gameView) {
-		orderList = new ArrayList();
+		orderList = new ArrayList<MenuOrder>();
 		this.gameView = gameView;
 	}
 	
