@@ -102,8 +102,9 @@ public class StageView extends JPanel{
 		this.sView = this;
 
 		testButton=new JButton("테스트)엔딩");
+		testButton.setBackground(Color.white);
 		
-		testButton.setBounds(700, 500, 200, 200);
+		testButton.setBounds(450, 430, 200, 200);
 		testButton.addActionListener(new ActionListener() {
 
 			@Override

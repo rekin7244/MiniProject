@@ -13,9 +13,9 @@ import com.kh.miniProject.music.Music;
 import com.kh.miniProject.run.Run;
 
 public class EndingPanel extends JPanel {
-	JLabel endingLabel;
-	JLabel credit;
-	String story = "[...찰칵]\r\n" + 
+	private JLabel endingLabel;
+	private JLabel credit;
+	private String story = "[...찰칵]\r\n" + 
 			"\r\n" + 
 			"이 날이 이렇게 빨리 올줄은 몰랐다. \r\n" + 
 			"그동안 우리 가게를 다시 일으켜야겠다는 생각 하나로,\r\n" + 
@@ -32,8 +32,25 @@ public class EndingPanel extends JPanel {
 			"\r\n" + 
 			"이걸 일생의 모토로 삼아 앞으로도 더욱 열심히 살아가며 엄마와 행복하게 살고 싶다.";
 	
+	private String name = "--------  만든이  ---------\r\n" + 
+			"\r\n" + 
+			"감독 : 정회륜\r\n" + 
+			"\r\n" + 
+			"제작자 : 신소연\r\n" + 
+			"\r\n" + 
+			"연출자 : 이선우\r\n" + 
+			"\r\n" + 
+			"작가 : 육소라\r\n" + 
+			"\r\n" + 
+			"프로게이머 : 강형석\r\n" + 
+			"\r\n" + 
+			"그리고 마지막....\r\n" + 
+			"★★투자자 : 양상모 \r\n" + 
+			"";
+	
 	private int x=30;
-	private int y=Run.SCREEN_HEIGHT-100;
+	private int y=Run.SCREEN_HEIGHT-300;
+	private int nameY = Run.SCREEN_HEIGHT-300;
 	private Timer endingTimer;
 	private JLabel[] myLb;
 	private EndingPanel endingPanel;
@@ -49,7 +66,6 @@ public class EndingPanel extends JPanel {
 	};
 	
 	//b6abab
-	
 	public EndingPanel(MainFrame mf) {
 		this.setLayout(null);
 		this.setBounds(0, 0, Run.SCREEN_WIDTH,Run.SCREEN_HEIGHT);
@@ -60,14 +76,20 @@ public class EndingPanel extends JPanel {
 		music.start();
 		
 		Font font = new Font("휴먼엑스포",Font.BOLD,16);
-		
-		
+		Font creditFont = new Font("휴먼엑스포",Font.BOLD,30);
 		
 		endingLabel = new JLabel();
 		endingLabel.setText("<html>" + story.replaceAll("<","&lt;").replaceAll(">", "&gt;").replaceAll("\n", "<br/>") + "</html>");
 		endingLabel.setBounds(x,y,1000,1000);
 		endingLabel.setFont(font);
 		endingLabel.setForeground(Color.WHITE);
+		
+		credit = new JLabel();
+		credit.setText("<html>" + name.replaceAll("<","&lt;").replaceAll(">", "&gt;").replaceAll("\n", "<br/>") + "</html>");
+		credit.setBounds(110, nameY, 1000, 1000);
+		credit.setFont(creditFont);
+		credit.setForeground(Color.WHITE);
+		credit.setVisible(false);
 		
 		endingTimer = new Timer(500,new MyTimer());
 		endingTimer.start();
@@ -78,23 +100,14 @@ public class EndingPanel extends JPanel {
 			myLb[i].setBounds(100, 200, 800, 300);
 		}
 
-		/*syLb.setIcon(new ImageIcon(img));*/
 		this.add(endingLabel);
-		/*this.add(syLb);*/
+		this.add(credit);
+		
+		
+		
+		
 		mf.add(this);
-		
-		
-		
-	
 	}
-	
-	/*public void paint(Graphics g) {
-		g.setFont(new Font("휴먼엑스포",Font.BOLD,30));
-		g.setColor(Color.WHITE);
-		
-		g.drawString(story, x, y);
-		
-	}*/
 	
 	class MyTimer implements ActionListener,Runnable{
 		private int time = 30;
@@ -104,14 +117,21 @@ public class EndingPanel extends JPanel {
 			// TODO Auto-generated method stub
 		/*	time --;*/
 			
-			if(y<=100) {
+			if(y<=-300) {
+				try {
+					Thread.sleep(10000);
+				} catch (InterruptedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				t = new Thread(this);
 				endingLabel.setVisible(false);
 				t.start();
 				System.out.println("쓰레드 호출함");
-				y=0;
+				endingTimer.stop();
+				
 			}else {
-				y-=40;
+				y-=30;
 				endingLabel.setBounds(x, y,1000,1000);
 				time--;
 				System.out.println(y);
@@ -133,16 +153,45 @@ public class EndingPanel extends JPanel {
 					
 					endingPanel.add(myLb[i]);
 					endingPanel.repaint();
-					t.sleep(6000);
+					Thread.sleep(6000);
 					myLb[i].setVisible(false);
 				}
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+	
+			
+			Timer nameTimer = new Timer(500,new NameTimer());
+			nameTimer.start();
 			}
 			
-		/*}*/
+		
+	}
+	
+	class NameTimer implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			credit.setVisible(true);
+			// TODO Auto-generated method stub
+			//	credit.setBounds(x,nameY,1000,1000);
+			System.out.println("NameTimer : " + nameY);
+			if(nameY<=-200) {
+				try {
+					Thread.sleep(10000);
+					System.exit(0);
+				} catch (InterruptedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}else {			
+				credit.setBounds(110, nameY,1000,1000);
+				System.out.println();
+				nameY-=30;
+				endingPanel.repaint();
+			}
+		}
 		
 	}
 	
