@@ -2,6 +2,7 @@
 package com.kh.miniProject.view;
 
 import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -15,6 +16,7 @@ import javax.swing.JPanel;
 import com.kh.miniProject.model.dao.MemberDao;
 import com.kh.miniProject.model.vo.member.Member;
 import com.kh.miniProject.music.Music;
+import com.kh.miniProject.run.Run;
 
 public class MarketPanel extends JPanel {
 
@@ -23,7 +25,8 @@ public class MarketPanel extends JPanel {
 	Member m;
 
 	// »ç¿ë ÇÊµå
-  private Music marketMusic;
+	private Music marketMusic;
+	private JPanel panel;
 	// ±â±¸ ¾÷±Ûºñ¿ë
 	private int level1 = 25000;
 	private int level2 = 50000;
@@ -104,8 +107,12 @@ public class MarketPanel extends JPanel {
 		this.tableLv = m.getTableLv();
 
 		this.setLayout(null);
-		this.setBounds(110, 50, 800, 650);
-		this.setBackground(Color.PINK);
+		this.setSize(Run.SCREEN_WIDTH,Run.SCREEN_HEIGHT);
+		
+		panel = new JPanel();
+		panel.setLayout(null);
+		panel.setBounds(110, 50, 800, 650);
+		panel.setBackground(Color.PINK);
 
 		// °ñµå Ãâ·Â
 		gold = new JButton("°ñµå");
@@ -116,9 +123,10 @@ public class MarketPanel extends JPanel {
 		// µ¹¾Æ°¡±â
 		JButton returnBtn = new JButton("µ¹¾Æ°¡±â");
 		returnBtn.setBounds(660, 620, 140, 30);
-		this.add(returnBtn);
+		panel.add(returnBtn);
 		returnBtn.addActionListener(e);
 
+		this.add(panel);
 		mPanel = this;
 	}// marketpanel
 	
@@ -275,14 +283,14 @@ public class MarketPanel extends JPanel {
 		mo7.removeActionListener(e);
 		mo7.addActionListener(e);
 
-		mPanel.add(mo);
-		mPanel.add(mo1);
-		mPanel.add(mo2);
-		mPanel.add(mo3);
-		mPanel.add(mo4);
-		mPanel.add(mo5);
-		mPanel.add(mo6);
-		mPanel.add(mo7);
+		panel.add(mo);
+		panel.add(mo1);
+		panel.add(mo2);
+		panel.add(mo3);
+		panel.add(mo4);
+		panel.add(mo5);
+		panel.add(mo6);
+		panel.add(mo7);
 
 		// ¶óº§
 		// ¶±ººÀÌ ¶óº§
@@ -314,11 +322,11 @@ public class MarketPanel extends JPanel {
 		tbkwon2.setBounds(80, 200, 200, 200);
 		tbkwon22.setBounds(30,180,200,200);
 
-		mPanel.add(label);
-		mPanel.add(tbkwon1);
-		mPanel.add(tbkwon11);
-		mPanel.add(tbkwon2);
-		mPanel.add(tbkwon22);
+		panel.add(label);
+		panel.add(tbkwon1);
+		panel.add(tbkwon11);
+		panel.add(tbkwon2);
+		panel.add(tbkwon22);
 
 		// Æ¢±è ¶óº§
 		JLabel label1 = new JLabel();
@@ -370,13 +378,13 @@ public class MarketPanel extends JPanel {
 			tkwon2.setBounds(270, 200, 200, 200);
 			tkwon22.setBounds(220,180,200,200);
 
-			mPanel.add(label1);
-			mPanel.add(tkwon);
-			mPanel.add(tkwonn);
-			mPanel.add(tkwon1);
-			mPanel.add(tkwon11);
-			mPanel.add(tkwon2);
-			mPanel.add(tkwon22);
+			panel.add(label1);
+			panel.add(tkwon);
+			panel.add(tkwonn);
+			panel.add(tkwon1);
+			panel.add(tkwon11);
+			panel.add(tkwon2);
+			panel.add(tkwon22);
 		}
 
 		// ¿Àµ­ ¶óº§
@@ -429,13 +437,13 @@ public class MarketPanel extends JPanel {
 			odwon2.setBounds(470, 200, 200, 200);
 			odwon22.setBounds(410,180,200,200);
 
-			mPanel.add(label2);
-			mPanel.add(odwon);
-			mPanel.add(odwonn);
-			mPanel.add(odwon1);
-			mPanel.add(odwon11);
-			mPanel.add(odwon2);
-			mPanel.add(odwon22);
+			panel.add(label2);
+			panel.add(odwon);
+			panel.add(odwonn);
+			panel.add(odwon1);
+			panel.add(odwon11);
+			panel.add(odwon2);
+			panel.add(odwon22);
 		}
 
 		// ¶ó¸é ¶óº§
@@ -488,13 +496,13 @@ public class MarketPanel extends JPanel {
 			rmwon2.setBounds(650, 200, 200, 200);
 			rmwon22.setBounds(600,180,200,200);
 
-			mPanel.add(label3);
-			mPanel.add(rmwon);
-			mPanel.add(rmwonn);
-			mPanel.add(rmwon1);
-			mPanel.add(rmwon11);
-			mPanel.add(rmwon2);
-			mPanel.add(rmwon22);
+			panel.add(label3);
+			panel.add(rmwon);
+			panel.add(rmwonn);
+			panel.add(rmwon1);
+			panel.add(rmwon11);
+			panel.add(rmwon2);
+			panel.add(rmwon22);
 		}
 
 		// ¶±ººÀÌÆÇ ¶óº§
@@ -538,13 +546,13 @@ public class MarketPanel extends JPanel {
 		tbkupwon3.setBounds(80, 500, 200, 200);
 		tbkupwon33.setBounds(50,480,200,200);
 
-		mPanel.add(label4);
-		mPanel.add(tbkupwon1);
-		mPanel.add(tbkupwon11);
-		mPanel.add(tbkupwon2);
-		mPanel.add(tbkupwon22);
-		mPanel.add(tbkupwon3);
-		mPanel.add(tbkupwon33);
+		panel.add(label4);
+		panel.add(tbkupwon1);
+		panel.add(tbkupwon11);
+		panel.add(tbkupwon2);
+		panel.add(tbkupwon22);
+		panel.add(tbkupwon3);
+		panel.add(tbkupwon33);
 
 		// Æ¢±èÆÇ ¶óº§
 		JLabel label5 = new JLabel();		
@@ -590,13 +598,13 @@ public class MarketPanel extends JPanel {
 			tkupwon3.setBounds(270, 500, 200, 200);
 			tkupwon33.setBounds(250,480,200,200);
 
-			mPanel.add(label5);
-			mPanel.add(tkupwon1);
-			mPanel.add(tkupwon11);
-			mPanel.add(tkupwon2);
-			mPanel.add(tkupwon22);
-			mPanel.add(tkupwon3);
-			mPanel.add(tkupwon33);
+			panel.add(label5);
+			panel.add(tkupwon1);
+			panel.add(tkupwon11);
+			panel.add(tkupwon2);
+			panel.add(tkupwon22);
+			panel.add(tkupwon3);
+			panel.add(tkupwon33);
 
 		}
 
@@ -644,13 +652,13 @@ public class MarketPanel extends JPanel {
 			odupwon3.setBounds(460, 500, 200, 200);
 			odupwon33.setBounds(440, 480, 200, 200);
 
-			mPanel.add(label6);
-			mPanel.add(odupwon1);
-			mPanel.add(odupwon11);
-			mPanel.add(odupwon2);
-			mPanel.add(odupwon22);
-			mPanel.add(odupwon3);
-			mPanel.add(odupwon33);
+			panel.add(label6);
+			panel.add(odupwon1);
+			panel.add(odupwon11);
+			panel.add(odupwon2);
+			panel.add(odupwon22);
+			panel.add(odupwon3);
+			panel.add(odupwon33);
 
 		}
 
@@ -698,13 +706,13 @@ public class MarketPanel extends JPanel {
 			rmupwon3.setBounds(650, 500, 200, 200);
 			rmupwon33.setBounds(630, 480, 200, 200);
 
-			mPanel.add(label7);
-			mPanel.add(rmupwon1);
-			mPanel.add(rmupwon11);
-			mPanel.add(rmupwon2);
-			mPanel.add(rmupwon22);
-			mPanel.add(rmupwon3);
-			mPanel.add(rmupwon33);
+			panel.add(label7);
+			panel.add(rmupwon1);
+			panel.add(rmupwon11);
+			panel.add(rmupwon2);
+			panel.add(rmupwon22);
+			panel.add(rmupwon3);
+			panel.add(rmupwon33);
 
 		}
 
@@ -1035,6 +1043,12 @@ public class MarketPanel extends JPanel {
 			temp.setMarketMusic(marketMusic);
 			mPanel = temp;
 		}
+	}
+	@Override
+	public void paintComponent(Graphics g) {
+		Image img = new ImageIcon("images/LoguinFrame01_01.jpg").getImage();
+		g.drawImage(img, 0, 0, null);
+		repaint();
 	}
 	public Music getMarketMusic() {
 		return marketMusic;

@@ -117,7 +117,7 @@ public class StageView extends JPanel{
 		
 		this.add(testButton);
 
-		//스테이지1 번 버튼 선택 시 GameView로 changePanel 실행
+		//스테이지 버튼 선택 시 GameView로 changePanel 실행
 		for (int i = 0; i < stageBtn.length; i++) {
 			stageBtn[i].addMouseListener(new MyAction());
 		}

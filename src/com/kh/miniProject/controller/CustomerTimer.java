@@ -1,5 +1,6 @@
 package com.kh.miniProject.controller;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -40,10 +41,15 @@ public class CustomerTimer extends JLabel{
 
 	class TimerStart implements ActionListener {
 		private double gameTime = waitingTime;
+		private boolean color = true;
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			gameTime-=0.1;
-
+			
+			if(gameTime<4&&color) {
+				timerLabel.setForeground(Color.RED);
+				color=false;
+			}
 			if(gameTime<=0) {
 				cm.deleteCustomer(customerNo);
 				timer.stop();

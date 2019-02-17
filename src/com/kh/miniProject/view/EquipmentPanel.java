@@ -88,10 +88,10 @@ public class EquipmentPanel extends JPanel{
 				equips[i].setIcon(new ImageIcon(friedImage[equipsLv[1]-1]));
 			}else if(i==3){
 				if(equipsLv[2]>0)
-				equips[i].setIcon(new ImageIcon(odengImage[equipsLv[2]-1]));				
+				equips[i].setIcon(new ImageIcon(odengImage[equipsLv[2]-1]));
 			}else if(i==4) {
 				if(equipsLv[3]>0)
-				equips[i].setIcon(new ImageIcon(ramenImage[equipsLv[3]-1]));			
+				equips[i].setIcon(new ImageIcon(ramenImage[equipsLv[3]-1]));
 			}else {	//ÀÚÆÇ±â
 				equips[i].setIcon(new ImageIcon(drinkImage));
 			}
