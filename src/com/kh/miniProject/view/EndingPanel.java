@@ -174,7 +174,6 @@ public class EndingPanel extends JPanel {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			credit.setVisible(true);
-			// TODO Auto-generated method stub
 			//	credit.setBounds(x,nameY,1000,1000);
 			System.out.println("NameTimer : " + nameY);
 			if(nameY<=-200) {
@@ -182,7 +181,6 @@ public class EndingPanel extends JPanel {
 					Thread.sleep(10000);
 					System.exit(0);
 				} catch (InterruptedException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}else {			
