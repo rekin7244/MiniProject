@@ -80,13 +80,7 @@ public class MemberDao {
 		return true;
 	}
 	
-	//실험용 : 저장된 회원 출력
-	public void printMember() {
-		for (Member member : memberList) {
-			System.out.println(member);
-		}
-	}
-	
+	//로그인 기능
 	public Member loginMember(String memberId,String memberPwd) {
 		for (Member member : memberList) {
 			if(member.getMemberId().equals(memberId) && member.getMemberPwd().equals(memberPwd)) {
@@ -96,7 +90,7 @@ public class MemberDao {
 		return null;	//로그인 실패
 	}
 	
-
+	//이메일로 회원정보 찾기
 	public Member searchMember(String memberEmail) {
 		for (Member member : memberList) {
 			if(member.getMemberEmail().equals(memberEmail)) {
@@ -106,16 +100,7 @@ public class MemberDao {
 		return null;	//조회 실패
 	}
 	
-	//임시 구현한 내용 (안해도 됨)
-	public void removeMember(String memberId,String memberPwd) {
-		for (Member member : memberList) {
-			if(member.getMemberId().equals(memberId) && member.getMemberPwd().equals(memberPwd)) {
-				memberList.remove(member);
-				saveMemberList();
-				return;
-			}			//멤버 삭제
-		}
-	}
+	
 	
 	public int getMemberGold(Member m) {
 		for (Member member : memberList) {
@@ -136,6 +121,24 @@ public class MemberDao {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
+		}
+	}
+	
+	
+	//실험용 : 저장된 회원 출력
+	public void printMember() {
+		for (Member member : memberList) {
+			System.out.println(member);
+		}
+	}
+	//임시 구현한 내용 (안해도 됨)
+	public void removeMember(String memberId,String memberPwd) {
+		for (Member member : memberList) {
+			if(member.getMemberId().equals(memberId) && member.getMemberPwd().equals(memberPwd)) {
+				memberList.remove(member);
+				saveMemberList();
+				return;
+			}			//멤버 삭제
 		}
 	}
 }
