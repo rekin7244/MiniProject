@@ -171,7 +171,7 @@ public class EndingPanel extends JPanel {
 			System.out.println("NameTimer : " + nameY);
 			if(nameY<=-200) {
 				try {
-					Thread.sleep(10000);
+					Thread.sleep(12000);
 					System.exit(0);
 				} catch (InterruptedException e1) {
 					e1.printStackTrace();
