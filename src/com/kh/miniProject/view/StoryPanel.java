@@ -17,6 +17,7 @@ import com.kh.miniProject.controller.LastStory;
 import com.kh.miniProject.controller.Letter;
 import com.kh.miniProject.controller.Story;
 import com.kh.miniProject.model.vo.member.Member;
+import com.kh.miniProject.music.Music;
 
 public class StoryPanel extends JPanel {
 
@@ -29,7 +30,8 @@ public class StoryPanel extends JPanel {
 	private Story st;
 	private Letter le;
 	private LastStory ls;
-
+	private Music storyMusic;
+	
 	BufferedImage img = null;
 
 	JButton bag;
@@ -39,6 +41,9 @@ public class StoryPanel extends JPanel {
 		this.m = m;
 		this.lView = this;
 
+		storyMusic = new Music("prologueMusic.mp3",false);
+		storyMusic.start();
+		
 		setSize(1024, 768);
 		setLayout(null);
 		JLayeredPane layeredPane = new JLayeredPane();
@@ -98,6 +103,7 @@ public class StoryPanel extends JPanel {
 					count++;
 				} else {
 					new ChangePanel().changePanel(mf, sp, new StageView(mf,m));
+					storyMusic.close();
 				}
 			}
 		}
