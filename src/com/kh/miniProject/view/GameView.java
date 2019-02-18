@@ -156,7 +156,7 @@ public class GameView extends JPanel{
 		gold.setEnabled(false);
 		gold.setBackground(Color.yellow);
 		gold.setBounds(0,0,200,30);
-		gold.setText(0 + "원");
+		gold.setText(0 + " G");
 		gP.add(gold);
 
 		//메뉴 패널 추가
@@ -184,7 +184,7 @@ public class GameView extends JPanel{
 	//골드 갱신
 	public void updateGold(int stageGold) {
 		this.stageGold[0] = stageGold;
-		gold.setText(stageGold + "원");
+		gold.setText(stageGold + " G");
 	}
 
 	public void gameOver() {	//실행될때마다 하트 감소
