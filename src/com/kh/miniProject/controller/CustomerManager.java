@@ -337,6 +337,9 @@ public class CustomerManager {
 			if (cTimer[i] != null) {
 				cTimer[i].timerStop();
 			}
+			if (guestTimer[i] != null) {
+				guestTimer[i].stop();
+			}
 		}
 	}
 
