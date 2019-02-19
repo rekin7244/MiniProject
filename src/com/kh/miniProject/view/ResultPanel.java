@@ -106,7 +106,7 @@ public class ResultPanel extends JPanel{
 	}
 	
 	class ResultTimerListener implements ActionListener{
-		private int timer = 10;
+		private int timer = 20;
 		private Random rand = new Random();
 		@Override
 		public void actionPerformed(ActionEvent e) {

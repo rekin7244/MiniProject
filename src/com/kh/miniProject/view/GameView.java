@@ -356,7 +356,7 @@ public class GameView extends JPanel{
 			drinksNo++;
 		}else if(menuName.equals("∂±∫∫¿Ã")) {
 			equips[1].setEnabled(false);
-			int temp=7;
+			int temp=5;
 			if(equipLv[0]==2) { 	temp=7;
 			}else if(equipLv[0]==3) {temp=6;}
 			cookTimer = new CookingTime(eP,equips[1],temp,"∂±∫∫¿Ã");
