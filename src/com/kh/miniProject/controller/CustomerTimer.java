@@ -27,7 +27,7 @@ public class CustomerTimer extends JLabel{
 		timer = new Timer(100, new TimerStart());
 
 		timerLabel.setSize(70, 40);
-		timerLabel.setFont(new Font("Elephant", Font.BOLD, 20));
+		timerLabel.setFont(new Font("Arial", Font.BOLD, 20));
 		timerLabel.setBackground(null);
 		this.add(timerLabel);
 		this.setVisible(true);
@@ -60,7 +60,7 @@ public class CustomerTimer extends JLabel{
 			double temp=0;
 			temp = (int)(gameTime*10);
 			temp/=10;
-			timerLabel.setText(temp+"√ ");
+			timerLabel.setText(temp+"");
 
 		}
 	}

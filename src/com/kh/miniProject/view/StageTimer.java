@@ -26,6 +26,7 @@ public class StageTimer extends JPanel {
 		timer = new Timer(1000, new TimerStart());
 
 		timerLabel.setFont(new Font("Elephant", Font.BOLD, 25));
+		timerLabel.setBackground(null);
 		this.add(timerLabel);
 		this.setVisible(true);
 		this.setLocation(0,30);
@@ -61,7 +62,7 @@ public class StageTimer extends JPanel {
 				timer.stop();
 				gView.endStage();
 			}
-			timerLabel.setText(gameTime+"√ ");
+			timerLabel.setText(gameTime+"");
 			gP.repaint();
 		}
 	}
