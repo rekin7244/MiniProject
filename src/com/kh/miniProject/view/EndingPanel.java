@@ -16,7 +16,7 @@ public class EndingPanel extends JPanel {
 	private JLabel endingLabel;
 	private JLabel credit;
 	private String story = "[...찰칵]\r\n" + 
-			"\r\n" + 
+			"\r\n\r\n" + 
 			"이 날이 이렇게 빨리 올줄은 몰랐다. \r\n" + 
 			"그동안 우리 가게를 다시 일으켜야겠다는 생각 하나로,\r\n" + 
 			"꿈에서 한번만이라도 보고싶었던 우리엄마를 만날 날만 기다리며 열심히 일 했을뿐이였는데\r\n" + 
@@ -24,11 +24,11 @@ public class EndingPanel extends JPanel {
 			"\r\n" + 
 			"엄마와 나는 다른 더이상의 말이 필요없었고 서로 꼭 껴안으며 한참을 울었다.\r\n" + 
 			"\r\n" + 
-			"이후 엄마와 나는 그동안에 모은돈으로 , 마세라티를 일시불로 구입하고 이탈리아 로마에 2호점 떡볶이 가게를 오픈하게 되었고  \r\n" + 
+			"이후 엄마와 나는 그동안에 모은돈으로 , 마세라티를 일시불로 구입하고\r\n"+" 이탈리아 로마에 2호점 떡볶이 가게를 "+"오픈하게 되었고  \r\n" + 
 			"그 이후에도 3호점을 영국 런던에 오픈하는등 계속 장사가 번창하며 어엿한 CEO가 되었다.\r\n" + 
 			"\r\n" + 
 			"전화위복.\r\n" + 
-			"어떤 불행한 일이라도 끊임없는 노력과 강인한 의지로 힘쓰면 불행을 행복으로 바꿔 놓을수 있다는 말이다.\r\n" + 
+			"어떤 불행한 일이라도 끊임없는 노력과 강인한 의지로 힘쓰면\r\n"+" 불행을 행복으로 바꿔 놓을수 있다는 말이다.\r\n" + 
 			"\r\n" + 
 			"이걸 일생의 모토로 삼아 앞으로도 더욱 열심히 살아가며 엄마와 행복하게 살고 싶다.";
 	
@@ -75,12 +75,12 @@ public class EndingPanel extends JPanel {
 		Music music = new Music("엔딩.mp3",false);
 		music.start();
 		
-		Font font = new Font("휴먼엑스포",Font.BOLD,16);
+		Font font = new Font("휴먼엑스포",Font.BOLD,20);
 		Font creditFont = new Font("휴먼엑스포",Font.BOLD,30);
 		
 		endingLabel = new JLabel();
 		endingLabel.setText("<html>" + story.replaceAll("<","&lt;").replaceAll(">", "&gt;").replaceAll("\n", "<br/>") + "</html>");
-		endingLabel.setBounds(x,y,1000,1000);
+		endingLabel.setBounds(x,y,970,1000);
 		endingLabel.setFont(font);
 		endingLabel.setForeground(Color.WHITE);
 		
@@ -115,7 +115,7 @@ public class EndingPanel extends JPanel {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			
-			if(y<=-300) {
+			if(y<=-150) {
 				try {
 					Thread.sleep(10000);
 				} catch (InterruptedException e1) {
